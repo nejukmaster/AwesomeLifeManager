@@ -2,13 +2,16 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Mm]emoryCaptures/
+AwesomeLifeManager/[Ll]ibrary/
+AwesomeLifeManager/[Tt]emp/
+AwesomeLifeManager/[Oo]bj/
+AwesomeLifeManager/[Bb]uild/
+AwesomeLifeManager/[Bb]uilds/
+AwesomeLifeManager/[Ll]ogs/
+AwesomeLifeManager/[Pp]ackages/
+AwesomeLifeManager/[Mm]emoryCaptures/
+AwesomeLifeManager/Assets/Textmesh Pro/
+AwesomeLifeManager/Assets/TextMesh Pro.meta
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
