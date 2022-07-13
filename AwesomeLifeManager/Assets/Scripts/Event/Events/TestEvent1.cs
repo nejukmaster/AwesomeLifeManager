@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class TestEvent1 : Event
 {
-    Timer timer;
-
     public TestEvent1(string name, int priority) : base(name, priority){
-        timer = Timer.instance;
+
     }
 
     public override bool ConditionFunc(){

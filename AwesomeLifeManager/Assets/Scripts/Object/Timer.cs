@@ -5,18 +5,20 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
 
+    //타이머 인스턴스 선언
     public static Timer instance;
 
     EventManager theEvent;
 
     public double currentTime;
-    public int time;
+    public int time = 0;
     public bool increase_timer = true;
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         theEvent = FindObjectOfType<EventManager>();
+        theEvent.CheckEvent();
     }
 
     // Update is called once per frame
@@ -27,6 +29,7 @@ public class Timer : MonoBehaviour
             if(currentTime >= 10d){
                 time ++;
                 currentTime -= 10d;
+                //10초당 한번 이벤트 체크
                 theEvent.CheckEvent();
             }
         }

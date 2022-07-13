@@ -2,15 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//추상클래스 Event
 public abstract class Event
 {
+    //대리자 선언
     public delegate bool EventDelegate();
 
+    //이벤트 이름
     public string event_name;
+    //이벤트의 우선순위
     public int event_priority;
+    //조건 함수를 담는 대리자 선언
     public EventDelegate conditionFunc;
+    //이벤트의 작동 함수를 담을 대리자 선언
     public EventDelegate eventFunc;
 
+    //컨스트럭터
     public Event(string name, int priority){
         event_name = name;
         event_priority = priority;
@@ -19,9 +26,13 @@ public abstract class Event
         EventManager.instance.Events.Add(this); 
     }
     
+    //조건 함수로 쓸 추상메소드 선언
     public abstract bool ConditionFunc();
+    //이벤트의 작동 함수로 사용할 추상메소드 선언
     public abstract bool EventFunc();
 
+    //이벤트 리스트에서 최우선순위 이벤트를 찾아주는 함수 생성
+    //우선순위가 같을 경우 랜덤으로 선택
     public static Event FindTopPriorityEvent(List<Event> events){
         List<Event> top_priority = new List<Event>();
         foreach(Event e in events){

@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class TestEvent2 : Event
 {
-    Timer timer;
     StatusManager theStatus;
 
     public TestEvent2(string name, int priority) : base(name, priority){
-        timer = Timer.instance;
         theStatus = GameObject.FindObjectOfType<StatusManager>();
     }
 
     public override bool ConditionFunc(){
-        if(timer.time == 5 && theStatus.GetStatus("str").value > 20)
+        if(Timer.instance.time == 5 && theStatus.GetStatus("str").value > 20)
             return true;
         return false;
     }
@@ -25,6 +23,6 @@ public class TestEvent2 : Event
 
     [RuntimeInitializeOnLoadMethod]
     public static void onStart(){
-        new TestEvent1("test event 2", 0);
+        new TestEvent2("test event 2", 0);
     }
 }
