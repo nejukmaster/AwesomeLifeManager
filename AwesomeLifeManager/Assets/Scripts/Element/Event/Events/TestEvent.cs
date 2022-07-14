@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class TestEvent : Event
 {
+    Timer timer;
     //컨스트럭터
     public TestEvent(string name, int priority) : base(name, priority){
     }
 
     //ConditionFunc재정의
     public override bool ConditionFunc(){
-        if(Timer.instance.time == 3)
+        if(timer == null) timer = Timer.instance;
+        if(timer.time == 3)
             return true;
         return false;
     }
 
     //EventFunc재정의
     public override bool EventFunc(){
-        EventManager.instance.window.gameObject.SetActive(true);
+        EventManager.instance.window.Up("Test Event fired!");
         return true;
     }
 

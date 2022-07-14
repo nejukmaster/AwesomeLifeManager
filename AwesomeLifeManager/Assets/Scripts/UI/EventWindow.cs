@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EventWindow : MonoBehaviour
 {
     Vector3 upPosition;
     Vector3 downPosition;
 
+    TextMeshProUGUI tmp = null;
+
     public int speed = 16;
     bool canClick = false;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         upPosition = Vector3.zero;
         downPosition = new Vector3(0,-1000,0);
@@ -23,6 +26,12 @@ public class EventWindow : MonoBehaviour
             Debug.Log("Close");
             StartCoroutine(Down());
         }
+    }
+
+    public void Up(string text){
+        this.gameObject.SetActive(true);
+        tmp = GetComponentInChildren<TextMeshProUGUI>();
+        tmp.text = text;
     }
 
     public IEnumerator Up(){

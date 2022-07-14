@@ -15,7 +15,7 @@ public class TestEvent1 : Event
     }
 
     public override bool EventFunc(){
-        Debug.Log(base.event_name);
+        EventManager.instance.window.Up("Test Event 1 fired!");
         return true;
     }
 

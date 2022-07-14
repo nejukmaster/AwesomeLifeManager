@@ -11,7 +11,14 @@ public class Status{
     public TextMeshProUGUI tmp = null;
     public string name;
     public int value;
+    public int value_buffed = -1;
 
+    public int GetValue(){
+        if(value_buffed >= 0)
+            return value_buffed;
+        else
+            return value;
+    }
 }
 public class StatusManager : MonoBehaviour
 {
@@ -20,23 +27,34 @@ public class StatusManager : MonoBehaviour
     [SerializeField] Status[] status;
 
     Timer timer;
+    ConvictionManager theConviction;
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < status.Length; i++){
-            //스테이터스 디스플레이 널체크
-            if(status[i].tmp != null){
-                status[i].tmp.text = status[i].name+" : "+status[i].value;
-            }
-        }
-
+        FillStatusBlank();
         timer = Timer.instance;
+        theConviction = FindObjectOfType<ConvictionManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        for(int i = 0; i < status.Length; i ++){
+            ConvictionManager.Conviction conviction = theConviction.GetConviction();
+            if(conviction.HasEquation()){
+                conviction.ConvictionEquation(ref status[i]);
+                FillStatusBlank();
+            }
+        }
+    }
 
+    void FillStatusBlank(){
+        for(int i = 0; i < status.Length; i++){
+            //스테이터스 디스플레이 널체크
+            if(status[i].tmp != null){
+                status[i].tmp.text = status[i].name + " : " + status[i].GetValue();
+            }
+        }
     }
 
     //스테이터스 증가 함수
@@ -45,7 +63,7 @@ public class StatusManager : MonoBehaviour
             if(p_name == status[i].name){
                 status[i].value += p_num;
                 if(status[i].tmp != null)
-                    status[i].tmp.text = status[i].name+" : "+status[i].value;
+                    status[i].tmp.text = status[i].name +  " : " + status[i].GetValue();
             }
     }
 
