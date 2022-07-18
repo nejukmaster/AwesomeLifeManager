@@ -3,42 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ConvictionManager : MonoBehaviour
-{
-    //가치관의 스테이터스 변동식을 저장할 대리자 생성
-    public delegate int EquationDel(int x);
-    //StatusManager를 참조
-    StatusManager theStatus;
+public class Conviction : Variable{
 
-    //가치관을 나타낼 클래스 Conviction선언
-    public class Conviction{
-
-        public string name;
-        //변경할 스테이터스의 이름에 해당 변동식을 매핑
-        public Dictionary<string, EquationDel> equaMap = new Dictionary<string,EquationDel>();
-
-        //컨스트럭터 1
-        public Conviction(string name, Dictionary<string, EquationDel> equaMap){
-            this.name = name;
-            this.equaMap = equaMap;
-        }
-        //컨스트럭터2
-        public Conviction(string name){
-            this.name = name;
-        }
+    public string name;
+    //변경할 스테이터스의 이름에 해당 변동식을 매핑
+    public Dictionary<string, EquationDel> equaMap = new Dictionary<string,EquationDel>();
+    //컨스트럭터 1
+    public Conviction(string name, Dictionary<string, EquationDel> equaMap){
+        this.name = name;
+        this.equaMap = equaMap;
+    }
+    //컨스트럭터2
+    public Conviction(string name){
+        this.name = name;
+    }
         
-        //각 스테이터스를 계산하여 반영할 함수 선언
-        public void ConvictionEquation(ref Status status){
-            if(equaMap.ContainsKey(status.name)){
-                status.value_buffed = equaMap[status.name](status.value);
-            }
-        }
-        //해당 가치관이 스테이터스를 변동시키는지 여부를 확인하는 함수 선언
-        public bool HasEquation(){
-            return equaMap.Count != 0;
+    //각 스테이터스를 계산하여 반영할 함수 선언
+    public void ConvictionEquation(ref Status status){
+        if(equaMap.ContainsKey(status.name)){
+            status.buffs.Add(equaMap[status.name]);
         }
     }
-
+    //해당 가치관이 스테이터스를 변동시키는지 여부를 확인하는 함수 선언
+    public bool HasEquation(){
+        return equaMap.Count != 0;
+    }
+}
+public class ConvictionManager : MonoBehaviour
+{
+    //StatusManager를 참조
+    StatusManager theStatus;
     //기본 가치관
     public string conviction = "None";
     TextMeshProUGUI tmp = null;
@@ -64,7 +58,7 @@ public class ConvictionManager : MonoBehaviour
     //이 부분에서 가치관 등록을 처리
     void mapping(){
         convictionMap.Add("None", new Conviction("없음"));
-        convictionMap.Add("test", new Conviction("테스트",new Dictionary<string, EquationDel>(){
+        convictionMap.Add("test", new Conviction("테스트",new Dictionary<string,Variable.EquationDel>(){
             {"str",x=>x+1}, //변동식은 일반적인 함수로 작성해도 상관X, 하지만 코드가 난잡해질 가능성이 있으므로 왠만해선 람다식 사용
             {"hp",x=>x*2+1}
         }));
@@ -78,6 +72,7 @@ public class ConvictionManager : MonoBehaviour
     //가치관을 변경하는 공용 함수 선언
     public void ChangeConviction(string p_code){
         conviction = p_code;
+        theStatus.Buff();
         tmp.text = convictionMap[conviction].name;
     }
 

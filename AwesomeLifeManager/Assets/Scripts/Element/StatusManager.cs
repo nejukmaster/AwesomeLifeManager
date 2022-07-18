@@ -6,18 +6,23 @@ using TMPro;
 //스테이터스 클래스 선언
 //[System.Serializable]로 선언된 클래스는 유니티 인스펙터창에서 수정 가능
 [System.Serializable]
-public class Status{
+public class Status : Variable{
     //스테이터스의 디스플레이
     public TextMeshProUGUI tmp = null;
     public string name;
     public int value;
-    public int value_buffed = -1;
+    public List<EquationDel> buffs = new List<EquationDel>();
 
     public int GetValue(){
-        if(value_buffed >= 0)
-            return value_buffed;
-        else
+        if(buffs.Count == 0)
             return value;
+        else{
+            float buffed = (float)value;
+            foreach(EquationDel e in buffs){
+                buffed = e(buffed);
+            }
+            return (int)buffed;
+        }
     }
 }
 public class StatusManager : MonoBehaviour
@@ -39,8 +44,13 @@ public class StatusManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    public void Buff(){
         for(int i = 0; i < status.Length; i ++){
-            ConvictionManager.Conviction conviction = theConviction.GetConviction();
+            status[i].buffs.Clear();
+            Conviction conviction = theConviction.GetConviction();
             if(conviction.HasEquation()){
                 conviction.ConvictionEquation(ref status[i]);
                 FillStatusBlank();
