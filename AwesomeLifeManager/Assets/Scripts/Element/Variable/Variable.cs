@@ -5,4 +5,5 @@ using UnityEngine;
 public class Variable
 {
     public delegate float EquationDel(float x);
+    public delegate bool ConditionDel();
 }

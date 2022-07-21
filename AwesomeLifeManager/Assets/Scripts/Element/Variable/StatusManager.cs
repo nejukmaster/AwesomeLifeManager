@@ -33,12 +33,14 @@ public class StatusManager : MonoBehaviour
 
     Timer timer;
     ConvictionManager theConviction;
+    PersonalityManager thePersonality;
     // Start is called before the first frame update
     void Start()
     {
         FillStatusBlank();
         timer = Timer.instance;
         theConviction = FindObjectOfType<ConvictionManager>();
+        thePersonality = FindObjectOfType<PersonalityManager>();
     }
 
     // Update is called once per frame
@@ -47,14 +49,18 @@ public class StatusManager : MonoBehaviour
         
     }
 
+    //버프 갱신
     public void Buff(){
         for(int i = 0; i < status.Length; i ++){
             status[i].buffs.Clear();
-            Conviction conviction = theConviction.GetConviction();
-            if(conviction.HasEquation()){
-                conviction.ConvictionEquation(ref status[i]);
-                FillStatusBlank();
-            }
+            Personality[] personal = thePersonality.GetPersonality();
+            if(personal[0] != null)
+                if(personal[0].HasEquation())
+                    personal[0].PersonalEquation(ref status[i]);
+            if(personal[1] != null)
+                if(personal[1].HasEquation())
+                    personal[1].PersonalEquation(ref status[i]);
+            FillStatusBlank();
         }
     }
 
@@ -75,6 +81,7 @@ public class StatusManager : MonoBehaviour
                 if(status[i].tmp != null)
                     status[i].tmp.text = status[i].name +  " : " + status[i].GetValue();
             }
+        theConviction.CheckCondition();
     }
 
     //Status를 찾는 함수
