@@ -53,8 +53,8 @@ public class ConvictionManager : MonoBehaviour
     void mapping(){
         convictionMap.Add("None", new Conviction("없음"));
         convictionMap.Add("test", new Conviction("테스트",
-         ()=>theStatus.GetStatus("int").value > 11? true : false,
-         ()=>thePersonality.GetCombinationStr() == "기본적인 성격"));
+         ()=>theStatus.GetStatus("int").value > 11,
+         ()=>thePersonality.CheckPersonality(new string[]{"0_basic","1_basic"})));
     }
 
     //현재 가치관을 반환하는 공용 함수 선언

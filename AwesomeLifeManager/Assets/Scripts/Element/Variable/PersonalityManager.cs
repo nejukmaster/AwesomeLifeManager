@@ -5,18 +5,24 @@ using TMPro;
 
 public class Personality : Variable{
     public string name;
-    public bool slot;
-    //변경할 스테이터스의 이름에 해당 변동식을 매핑
+
+    /*//변경할 스테이터스의 이름에 해당 변동식을 매핑
     public Dictionary<string, EquationDel> equaMap = new Dictionary<string,EquationDel>();
+    */
+    //해금 조건 함수의 대리자들을 저장하는 리스트 생성
+    public ConditionDel[] conditions = new ConditionDel[0];
 
     //컨스트럭터 1
-    public Personality(string name, Dictionary<string, EquationDel> equaMap, bool slot){
+    public Personality(string name, /*Dictionary<string, EquationDel> equaMap*/params ConditionDel[] conditions){
         this.name = name;
-        this.equaMap = equaMap;
-        this.slot = slot;
+        this.conditions = conditions;
     }
 
-    //각 스테이터스를 계산하여 반영할 함수 선언
+    public bool equal(Personality other){
+        return other.name == this.name;
+    }
+
+    /*//각 스테이터스를 계산하여 반영할 함수 선언
     public void PersonalEquation(ref Status status){
         if(equaMap.ContainsKey(status.name)){
             status.buffs.Add(equaMap[status.name]);
@@ -26,16 +32,14 @@ public class Personality : Variable{
     //해당 성격이 스테이터스를 변동시키는지 여부를 확인하는 함수 선언
     public bool HasEquation(){
         return equaMap.Count != 0;
-    }
+    }*/
 }
 public class PersonalityManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI first_slot;
-    [SerializeField] TextMeshProUGUI last_slot;
 
     public Dictionary<string, Personality> personalityMap = new Dictionary<string,Personality>();
 
-    public Personality[] currentPersonality = new Personality[2];
+    public List<Personality> personalities = new List<Personality>();
     //StatusManager를 참조
     StatusManager theStatus;
     //ConvictionManager참조
@@ -57,52 +61,51 @@ public class PersonalityManager : MonoBehaviour
     //성격 리스트를 파싱하여 Dictionary에 매핑할 함수 정의
     //이 부분에서 성격 등록을 처리
     void mapping(){
-        personalityMap.Add("0_basic", new Personality("기본적인",new Dictionary<string,Variable.EquationDel>(){
-            {"str",x=>x+1}, //변동식은 일반적인 함수로 작성해도 상관X, 하지만 코드가 난잡해질 가능성이 있으므로 왠만해선 람다식 사용
-            {"hp",x=>x*2+1}
-        }, false));
-        personalityMap.Add("1_basic", new Personality("성격",new Dictionary<string,Variable.EquationDel>(){
-            {"str",x=>x+4}, 
-            {"hp",x=>x*0.3f+2f}
-        }, true));
+        personalityMap.Add("0_basic",new Personality("기본성격1", 
+                ()=>theStatus.GetStatus("str").value > 20));
+        personalityMap.Add("1_basic",new Personality("기본성격2",
+                ()=>theStatus.GetStatus("mp").value >= 40 && theStatus.GetStatus("str").value >= 22));
     }
 
-    //성격을 변경하는 공용 함수 선언
-    public void ChangePersonality(string p_code){
-        Personality t_personal = personalityMap[p_code];
-        if(!t_personal.slot){
-            currentPersonality[0] = t_personal;
-            first_slot.text = currentPersonality[0].name;
+    bool contains_ignore_cases(List<Personality> list, Personality other){
+        bool r = false;
+        foreach(Personality p in list){
+            if(p.equal(other)){
+                r = true;
+                break;
+            }
         }
-        else{
-            currentPersonality[1] = t_personal;
-            last_slot.text = currentPersonality[1].name;
+        return r;
+    }
+
+    public void AddPersonality(string p_code){
+        personalities.Add(personalityMap[p_code]);
+        PersonalityBox.Generate(personalityMap[p_code].name);
+    }
+
+    public bool CheckPersonality(string[] p_code_list){
+        for(int i = 0; i < p_code_list.Length; i ++){
+            if(!contains_ignore_cases(personalities,personalityMap[p_code_list[i]]))
+                return false;
         }
-        theStatus.Buff();
-        theConviction.CheckCondition();
+        return true;
     }
 
-    //현재 성격을 반환하는 공용 함수 선언
-    public Personality[] GetPersonality(){
-        return currentPersonality;
-    }
-
-    //성격조합 문자열을 받아오는 함수 생성
-    public string GetCombinationStr(){
-        string t_str = "";
-        if(currentPersonality[0] != null)
-            t_str += currentPersonality[0].name;
-        t_str += " ";
-        if(currentPersonality[1] != null)
-            t_str += currentPersonality[1].name;
-        return t_str;
-    }
-
-    public void Test1(){
-        ChangePersonality("0_basic");
-    }
-
-    public void Test2(){
-        ChangePersonality("1_basic");
+    public void CheckCondition(){
+        foreach(var pair in personalityMap){
+            bool check = false;
+            Variable.ConditionDel[] t_conditions = pair.Value.conditions;
+            for(int i = 0; i < t_conditions.Length; i ++){
+                if(t_conditions[i]())
+                    check = true;
+                else{
+                    check = false;
+                    break;
+                }
+            }
+            if(check && !CheckPersonality(new string[]{pair.Key})){
+                AddPersonality(pair.Key);
+            }
+        }
     }
 }

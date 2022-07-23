@@ -53,13 +53,13 @@ public class StatusManager : MonoBehaviour
     public void Buff(){
         for(int i = 0; i < status.Length; i ++){
             status[i].buffs.Clear();
-            Personality[] personal = thePersonality.GetPersonality();
+            /*Personality[] personal = thePersonality.GetPersonality();
             if(personal[0] != null)
                 if(personal[0].HasEquation())
                     personal[0].PersonalEquation(ref status[i]);
             if(personal[1] != null)
                 if(personal[1].HasEquation())
-                    personal[1].PersonalEquation(ref status[i]);
+                    personal[1].PersonalEquation(ref status[i]);*/
             FillStatusBlank();
         }
     }
@@ -82,6 +82,7 @@ public class StatusManager : MonoBehaviour
                     status[i].tmp.text = status[i].name +  " : " + status[i].GetValue();
             }
         theConviction.CheckCondition();
+        thePersonality.CheckCondition();
     }
 
     //Status를 찾는 함수
