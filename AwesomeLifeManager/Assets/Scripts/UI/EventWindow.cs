@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/*  이벤트 창임.
+    근데 님들 여긴 진짜 뭐 없음 */
 public class EventWindow : MonoBehaviour
 {
     Vector3 upPosition;

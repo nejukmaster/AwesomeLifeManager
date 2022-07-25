@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*  이벤트의 기본 골자를 담은 클래스예요. 
+    이제 이걸 상속해서 변형해서 이벤트를 새로 만듭니다.
+    만들때 이벤트가 일어난 결과 및 이벤트가 일어날 조건등을 설정하여 만들어요. 
+    이후 자동으로 전체 이벤트 목록에 자동으로 등록합니다.   */
+    
 //추상클래스 Event
 public abstract class Event
 {

@@ -4,6 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/*  이 클래스에서는 가치관을 담당해요. 
+    가치관을 제작하고 등록하는 기능과, 가치관을 게임에 적용하는 기능을 해요. 
+    가치관을 등록할때는 마찬가지로 이 가치관이 등장할 조건을 정의할 수 있어요.  */
+
+
+/*  실제 가치관의 구조를 선언한 클래스예요. 
+    가치관의 이름과 등장할 조건등을 담고 있죠. 
+    이 클래스에 이들을 담아서 매니져에 등록해요.    */
 public class Conviction : Variable{
 
     public string name;
@@ -18,16 +26,23 @@ public class Conviction : Variable{
     public Conviction(string name){
         this.name = name;
     }
+
+    public bool equal(Conviction other){
+        return other.name == this.name;
+    }
+
 }
 
+/*  가치관의 등록과 활성 비활성을 담당할 매니져에요. 
+    이 클래스는 또한, 다른 클래스가 특정 가치관 활성 여부및 
+    가치관의 등장 조건 체크등을 할 수 있도록 도와줘요.  */
 public class ConvictionManager : MonoBehaviour
 {
     //StatusManager를 참조
     StatusManager theStatus;
     //PersonalityManager 참조
     PersonalityManager thePersonality;
-    //기본 가치관
-    public Conviction conviction;
+    public List<Conviction> convictions = new List<Conviction>();
     TextMeshProUGUI tmp = null;
     //가치관 코드와 그에 대응하는 표시형을 담는 Dictionary
     public Dictionary<string, Conviction> convictionMap = new Dictionary<string,Conviction>();
@@ -39,7 +54,6 @@ public class ConvictionManager : MonoBehaviour
         tmp = GetComponentInChildren<TextMeshProUGUI>();
         theStatus = FindObjectOfType<StatusManager>();
         thePersonality = FindObjectOfType<PersonalityManager>();
-        ChangeConviction("None");
     }
 
     // Update is called once per frame
@@ -51,26 +65,33 @@ public class ConvictionManager : MonoBehaviour
     //가치관 리스트를 파싱하여 Dictionary에 매핑할 함수 정의
     //이 부분에서 가치관 등록을 처리
     void mapping(){
-        convictionMap.Add("None", new Conviction("없음"));
         convictionMap.Add("test", new Conviction("테스트",
          ()=>theStatus.GetStatus("int").value > 11,
          ()=>thePersonality.CheckPersonality(new string[]{"0_basic","1_basic"})));
     }
 
-    //현재 가치관을 반환하는 공용 함수 선언
-    public Conviction GetConviction(){
-        return conviction;
+    bool contains_ignore_cases(List<Conviction> list, Conviction other){
+        bool r = false;
+        foreach(Conviction p in list){
+            if(p.equal(other)){
+                r = true;
+                break;
+            }
+        }
+        return r;
     }
 
-    //가치관을 변경하는 공용 함수 선언
-    public void ChangeConviction(string p_code){
-        conviction = convictionMap[p_code];
-        tmp.text = conviction.name;
+    public void AddConviction(string p_code){
+        convictions.Add(convictionMap[p_code]);
+        ConvictionBox.Generate(convictionMap[p_code].name);
     }
 
-    public void ChangeConviction(Conviction p_convic){
-        conviction = p_convic;
-        tmp.text = conviction.name;
+    public bool CheckConviction(string[] p_code_list){
+        for(int i = 0; i < p_code_list.Length; i ++){
+            if(!contains_ignore_cases(convictions,convictionMap[p_code_list[i]]))
+                return false;
+        }
+        return true;
     }
 
     public void CheckCondition(){
@@ -85,8 +106,8 @@ public class ConvictionManager : MonoBehaviour
                     break;
                 }
             }
-            if(check)
-                ChangeConviction(pair.Value);
+            if(check && !CheckConviction(new string[]{pair.Key}))
+                AddConviction(pair.Key);
         }
     }
 }

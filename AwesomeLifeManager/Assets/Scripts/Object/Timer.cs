@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*  10초에 카운트 1을 하는 일반적인 타이머예요. 
+    리소스관리를 위해 왠만하면 여기서만 Update()문을 다룰거예요.    */
 public class Timer : MonoBehaviour
 {
 

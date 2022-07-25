@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*  테스트로 만든 이벤트예요. */
+
 public class TestEvent : Event
 {
     Timer timer;
