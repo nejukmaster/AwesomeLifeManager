@@ -29,18 +29,6 @@ public class Personality : Variable{
     public bool equal(Personality other){
         return other.name == this.name;
     }
-
-    /*//각 스테이터스를 계산하여 반영할 함수 선언
-    public void PersonalEquation(ref Status status){
-        if(equaMap.ContainsKey(status.name)){
-            status.buffs.Add(equaMap[status.name]);
-        }
-    }
-
-    //해당 성격이 스테이터스를 변동시키는지 여부를 확인하는 함수 선언
-    public bool HasEquation(){
-        return equaMap.Count != 0;
-    }*/
 }
 
 /*  성격이 등록되고 관리될 매니져 클래스를 선언해요. 
@@ -75,9 +63,9 @@ public class PersonalityManager : MonoBehaviour
     //이 부분에서 성격 등록을 처리
     void mapping(){
         personalityMap.Add("0_basic",new Personality("기본성격1", 
-                ()=>theStatus.GetStatus("str").value > 20));
+                ()=>theStatus.GetStatus("str").GetValue() > 20));
         personalityMap.Add("1_basic",new Personality("기본성격2",
-                ()=>theStatus.GetStatus("mp").value >= 40 && theStatus.GetStatus("str").value >= 22));
+                ()=>theStatus.GetStatus("mp").GetValue() >= 40 && theStatus.GetStatus("str").GetValue() >= 22));
     }
 
     bool contains_ignore_cases(List<Personality> list, Personality other){
@@ -116,7 +104,7 @@ public class PersonalityManager : MonoBehaviour
                     break;
                 }
             }
-            if(check && !CheckPersonality(new string[]{pair.Key})){
+            if(check){
                 AddPersonality(pair.Key);
             }
         }

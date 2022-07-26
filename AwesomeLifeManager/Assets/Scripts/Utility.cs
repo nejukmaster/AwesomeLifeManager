@@ -18,4 +18,10 @@ public static class Utility
         }
         return list;
     }
+
+    //랜덤 함수
+    public static int RandomValue(){
+        Random r = new Random();
+        return r.Next(0,99);
+    }
 }

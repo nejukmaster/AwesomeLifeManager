@@ -20,6 +20,7 @@ public class Status : Variable{
     public string name;
     public int value;
     public List<EquationDel> buffs = new List<EquationDel>();
+    public int buffed;
 
     public int GetValue(){
         if(buffs.Count == 0)
@@ -45,6 +46,7 @@ public class StatusManager : MonoBehaviour
     Timer timer;
     ConvictionManager theConviction;
     PersonalityManager thePersonality;
+    HistoryManager theHistory;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +54,7 @@ public class StatusManager : MonoBehaviour
         timer = Timer.instance;
         theConviction = FindObjectOfType<ConvictionManager>();
         thePersonality = FindObjectOfType<PersonalityManager>();
+        theHistory = FindObjectOfType<HistoryManager>();
     }
 
     // Update is called once per frame
@@ -64,13 +67,10 @@ public class StatusManager : MonoBehaviour
     public void Buff(){
         for(int i = 0; i < status.Length; i ++){
             status[i].buffs.Clear();
-            /*Personality[] personal = thePersonality.GetPersonality();
-            if(personal[0] != null)
-                if(personal[0].HasEquation())
-                    personal[0].PersonalEquation(ref status[i]);
-            if(personal[1] != null)
-                if(personal[1].HasEquation())
-                    personal[1].PersonalEquation(ref status[i]);*/
+            History t_history = theHistory.historicalBackground;
+            if(t_history.HasEquation()){
+                t_history.HistoryEquation(ref status[i]);
+            }
             FillStatusBlank();
         }
     }
