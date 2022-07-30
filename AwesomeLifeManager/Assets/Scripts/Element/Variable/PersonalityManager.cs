@@ -104,7 +104,7 @@ public class PersonalityManager : MonoBehaviour
                     break;
                 }
             }
-            if(check){
+            if(check && !CheckPersonality(new string[] {pair.Key})){
                 AddPersonality(pair.Key);
             }
         }
