@@ -1,3 +1,5 @@
+using System;
+using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,17 +12,21 @@ public class Timer : MonoBehaviour
     //타이머 인스턴스 선언
     public static Timer instance;
 
+    DateBox dateBox;
     EventManager theEvent;
 
     public double currentTime;
     public int time = 0;
     public bool increase_timer = true;
+    public bool date = true;
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         theEvent = FindObjectOfType<EventManager>();
+        dateBox = FindObjectOfType<DateBox>();
         theEvent.CheckEvent();
+        update_date();
     }
 
     // Update is called once per frame
@@ -31,9 +37,17 @@ public class Timer : MonoBehaviour
             if(currentTime >= 10d){
                 time ++;
                 currentTime -= 10d;
+                update_date();
                 //10초당 한번 이벤트 체크
                 theEvent.CheckEvent();
             }
         }
+    }
+
+    private void update_date(){
+        int _time = Utility.TransferStandardTime(Utility.TransferUnixToTime(),"KO");
+        if(06<=_time&&_time<=18) date = true;
+        else date = false;
+        dateBox.UpdateText(date);
     }
 }
