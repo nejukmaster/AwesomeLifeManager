@@ -11,9 +11,8 @@ public class Timer : MonoBehaviour
 
     //타이머 인스턴스 선언
     public static Timer instance;
-
-    DateBox dateBox;
     EventManager theEvent;
+    CharacterUIManager theCharacterUI;
 
     public double currentTime;
     public int time = 0;
@@ -24,9 +23,8 @@ public class Timer : MonoBehaviour
     {
         instance = this;
         theEvent = FindObjectOfType<EventManager>();
-        dateBox = FindObjectOfType<DateBox>();
+        theCharacterUI = FindObjectOfType<CharacterUIManager>();
         theEvent.CheckEvent();
-        update_date();
     }
 
     // Update is called once per frame
@@ -34,20 +32,7 @@ public class Timer : MonoBehaviour
     {
         if(increase_timer){
             currentTime += Time.deltaTime;
-            if(currentTime >= 10d){
-                time ++;
-                currentTime -= 10d;
-                update_date();
-                //10초당 한번 이벤트 체크
-                theEvent.CheckEvent();
-            }
+            theCharacterUI.SetParam();
         }
-    }
-
-    private void update_date(){
-        int _time = Utility.TransferStandardTime(Utility.TransferUnixToTime(),"KO");
-        if(06<=_time&&_time<=18) date = true;
-        else date = false;
-        dateBox.UpdateText(date);
     }
 }

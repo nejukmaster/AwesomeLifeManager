@@ -83,7 +83,6 @@ public class ConvictionManager : MonoBehaviour
 
     public void AddConviction(string p_code){
         convictions.Add(convictionMap[p_code]);
-        ConvictionBox.Generate(convictionMap[p_code].name);
     }
 
     public bool CheckConviction(string[] p_code_list){

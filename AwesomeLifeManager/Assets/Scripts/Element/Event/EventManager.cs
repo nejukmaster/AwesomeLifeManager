@@ -10,8 +10,6 @@ public class EventManager : MonoBehaviour
 {
     public static EventManager instance;
 
-    public EventWindow window;
-
     public List<Event> Events = new List<Event>();
     public int eventsNum;
 

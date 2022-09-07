@@ -81,7 +81,6 @@ public class PersonalityManager : MonoBehaviour
 
     public void AddPersonality(string p_code){
         personalities.Add(personalityMap[p_code]);
-        PersonalityBox.Generate(personalityMap[p_code].name);
     }
 
     public bool CheckPersonality(string[] p_code_list){

@@ -21,7 +21,6 @@ public class TestEvent : Event
 
     //EventFunc재정의
     public override bool EventFunc(){
-        EventManager.instance.window.Up("Test Event fired!");
         return true;
     }
 

@@ -21,7 +21,6 @@ public class ActionMenu : UI
 
     private double ceta;
     private float trace_distance = 0;
-    private bool snapped = false;
     private Dictionary<int,int> key_maps = new Dictionary<int,int>();
 
     void Awake(){

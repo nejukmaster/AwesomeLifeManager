@@ -6,7 +6,6 @@ public class ContentsBox : MonoBehaviour
 {
     [SerializeField] float firstXPos;
     [SerializeField] float fadedXPos;
-    bool pass_collider = false;
     float speed = 8;
     float dir = -1f;
 
