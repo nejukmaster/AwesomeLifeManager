@@ -26,14 +26,12 @@ public class ObjectPool : MonoBehaviour
 
     public static ObjectPool instance;
 
-    public Queue<GameObject> personality_boxQueue = new Queue<GameObject>();
-    public Queue<GameObject> conviction_boxQueue = new Queue<GameObject>();
+    public Queue<GameObject> planListBoxQueue = new Queue<GameObject>();
 
     void Start()
     {
         instance = this;
-        personality_boxQueue = InsertQueue(objectInfo[0]);
-        conviction_boxQueue = InsertQueue(objectInfo[1]);
+        planListBoxQueue = InsertQueue(objectInfo[0]);
     }
 
     // Update is called once per frame

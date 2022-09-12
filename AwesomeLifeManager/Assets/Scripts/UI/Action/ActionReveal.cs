@@ -20,14 +20,16 @@ public class ActionReveal : UI
     }
 
     public void onClick(){
-        UIManager.instance.externalListenerFired = true;
-        if(UporDown){
-            StartCoroutine(RiseCo());
-        }
-        else{
-            StartCoroutine(DownCo());
-            actionMenu.SetActive(false);
-            actionMenu.keyDown = false;
+        if(canPressButton){
+            UIManager.instance.externalListenerFired = true;
+            if(UporDown){
+                StartCoroutine(RiseCo());
+            }
+            else{
+                StartCoroutine(DownCo());
+                actionMenu.SetActive(false);
+                actionMenu.keyDown = false;
+            }
         }
     }
 
@@ -57,10 +59,10 @@ public class ActionReveal : UI
     IEnumerator DownCo(){
         if(canPressButton){
             while(Vector2.Distance(this.transform.localPosition, Vector2.zero) >= 0.1f){
+                canPressButton = false;
                 this.transform.localPosition = Vector3.Lerp(this.transform.localPosition,
                                                             Vector2.zero,
                                                             speed * Time.deltaTime);
-                canPressButton = false;
                                                         
                 menuContainer.transform.position = this.transform.position;
                 yield return null;

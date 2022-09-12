@@ -87,7 +87,7 @@ public class ActionMenu : UI
 
     public override bool onSwipe(Vector2 sp, Vector2 ep){
         currentSpeed = Vector2.Distance(sp, ep);
-        float dis = sp.x - ep.x;
+        float dis = (sp.x - ep.x) * 0.3f;
         Debug.Log(trace_distance);
         if( currentSpeed != 0 && Math.Abs(trace_distance + dis) < 360){
             trace_distance += dis;

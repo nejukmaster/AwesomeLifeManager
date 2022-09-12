@@ -5,5 +5,16 @@ using UnityEngine;
 public class Turn
 {
     public int turnNum;
-    
+
+    public void OnTurnStart(){
+
+    }
+
+    public void OnTurnRun(){
+
+    }
+
+    public void OnTurnEnd(){
+        
+    }
 }
