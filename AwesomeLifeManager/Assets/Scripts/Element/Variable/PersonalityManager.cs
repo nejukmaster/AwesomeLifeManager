@@ -63,9 +63,9 @@ public class PersonalityManager : MonoBehaviour
     //이 부분에서 성격 등록을 처리
     void mapping(){
         personalityMap.Add("0_basic",new Personality("기본성격1", 
-                ()=>theStatus.GetStatus("str").GetValue() > 20));
+                ()=>theStatus.GetStatus("str").value > 20));
         personalityMap.Add("1_basic",new Personality("기본성격2",
-                ()=>theStatus.GetStatus("mp").GetValue() >= 40 && theStatus.GetStatus("str").GetValue() >= 22));
+                ()=>theStatus.GetStatus("mp").value >= 40 && theStatus.GetStatus("str").value >= 22));
     }
 
     bool contains_ignore_cases(List<Personality> list, Personality other){

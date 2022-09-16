@@ -4,49 +4,54 @@ using UnityEngine;
 
 public class Plan
 {
-    public delegate void rewardDel();
+    public delegate bool rewardDel();
     public delegate bool conditionDel();
 
     public string name;
     public int costFatigue;
     public int costHungry;
-    public float costTime;
+    public float costDay;
     public rewardDel reward;
     public conditionDel condition;
 
-    public Plan(string name, int costFatigue, int costHungry, float costTime){
+    public Plan(string name, int costFatigue, int costHungry, float costDay){
         this.name = name;
         this.costFatigue = costFatigue;
         this.costHungry = costHungry;
-        this.costTime = costTime;
-        this.reward = () => {};
+        this.costDay = costDay;
+        this.reward = () => { return true; };
         this.condition = () => {return true;};
     }
 
-    public Plan(string name, int costFatigue, int costHungry, float costTime, rewardDel reward){
+    public Plan(string name, int costFatigue, int costHungry, float costDay, rewardDel reward){
         this.name = name;
         this.costFatigue = costFatigue;
         this.costHungry = costHungry;
-        this.costTime = costTime;
+        this.costDay = costDay;
         this.reward = reward;
         this.condition = () => {return true;};
     }
 
-    public Plan(string name, int costFatigue, int costHungry, float costTime, conditionDel condition){
+    public Plan(string name, int costFatigue, int costHungry, float costDay, conditionDel condition){
         this.name = name;
         this.costFatigue = costFatigue;
         this.costHungry = costHungry;
-        this.costTime = costTime;
-        this.reward = () => {};
+        this.costDay = costDay;
+        this.reward = () => { return true; };
         this.condition = condition;
     }
 
-    public Plan(string name, int costFatigue, int costHungry, float costTime, rewardDel reward, conditionDel condition){
+    public Plan(string name, int costFatigue, int costHungry, float costDay, rewardDel reward, conditionDel condition){
         this.name = name;
         this.costFatigue = costFatigue;
         this.costHungry = costHungry;
-        this.costTime = costTime;
+        this.costDay = costDay;
         this.reward = reward;
         this.condition = condition;
+    }
+
+    public bool Run()
+    {
+        return reward();
     }
 }

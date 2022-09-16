@@ -19,20 +19,6 @@ public class Status : Variable{
     public TextMeshProUGUI tmp = null;
     public string name;
     public int value;
-    public List<EquationDel> buffs = new List<EquationDel>();
-    public int buffed;
-
-    public int GetValue(){
-        if(buffs.Count == 0)
-            return value;
-        else{
-            float buffed = (float)value;
-            foreach(EquationDel e in buffs){
-                buffed = e(buffed);
-            }
-            return (int)buffed;
-        }
-    }
 }
 
 /*  스테이터스가 등록되고 관리될 매니져 클래스를 선언해요. 
@@ -46,7 +32,6 @@ public class StatusManager : MonoBehaviour
     Timer timer;
     ConvictionManager theConviction;
     PersonalityManager thePersonality;
-    HistoryManager theHistory;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,7 +39,6 @@ public class StatusManager : MonoBehaviour
         timer = Timer.instance;
         theConviction = FindObjectOfType<ConvictionManager>();
         thePersonality = FindObjectOfType<PersonalityManager>();
-        theHistory = FindObjectOfType<HistoryManager>();
     }
 
     // Update is called once per frame
@@ -66,11 +50,6 @@ public class StatusManager : MonoBehaviour
     //버프 갱신
     public void Buff(){
         for(int i = 0; i < status.Length; i ++){
-            status[i].buffs.Clear();
-            History t_history = theHistory.historicalBackground;
-            if(t_history.HasEquation()){
-                t_history.HistoryEquation(ref status[i]);
-            }
             FillStatusBlank();
         }
     }
@@ -79,7 +58,7 @@ public class StatusManager : MonoBehaviour
         for(int i = 0; i < status.Length; i++){
             //스테이터스 디스플레이 널체크
             if(status[i].tmp != null){
-                status[i].tmp.text = status[i].name + " : " + status[i].GetValue();
+                status[i].tmp.text = status[i].name + " : " + status[i].value;
             }
         }
     }
@@ -90,7 +69,7 @@ public class StatusManager : MonoBehaviour
             if(p_name == status[i].name){
                 status[i].value += p_num;
                 if(status[i].tmp != null)
-                    status[i].tmp.text = status[i].name +  " : " + status[i].GetValue();
+                    status[i].tmp.text = status[i].name +  " : " + status[i].value;
             }
         theConviction.CheckCondition();
         thePersonality.CheckCondition();

@@ -7,7 +7,6 @@ public class PlanManager : MonoBehaviour
     public static PlanManager instance;
     
     public Dictionary<string,Plan> planDic = new Dictionary<string,Plan>();
-    public List<Plan> settedPlan = new List<Plan>();
 
     // Start is called before the first frame update
     void Start()
