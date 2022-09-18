@@ -28,7 +28,7 @@ public class PlanList : MonoBehaviour
         else{
             for(int i = 0; i < planListBoxList.Count; i ++){
                 planListBoxList[i].SetActive(false);
-                ObjectPool.instance.planListBoxQueue.Enqueue(planListBoxList[i]);
+                //ObjectPool.instance.planListBoxQueue.Enqueue(planListBoxList[i]);
             }
             planListBoxList.Clear();
             selected.contentPlan = selectedPlan;

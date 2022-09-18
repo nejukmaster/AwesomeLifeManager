@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using System.Data;
 
 //유틸리티 함수를 저장하는 정적 클래스
 public static class Utility
@@ -62,5 +63,14 @@ public static class Utility
             p_check.y >= p_range.z && p_check.y <= p_range.w)
                 return true;
         return false;
+    }
+
+    public static float Mapping(float p_num, Vector2 from, Vector2 to)
+    {
+        if (p_num != 0) {
+            return (to.y - to.x) * p_num / (from.y - from.x) + to.x;
+        }
+        else
+            throw new Exception("p_num value can't be 0");
     }
 }
