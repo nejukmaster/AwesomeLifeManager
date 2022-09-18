@@ -11,15 +11,15 @@ public class PlanListBox : MonoBehaviour
     PlanList planList;
     
     public static GameObject Generate(Plan p_plan, PlanList p_list){
-        GameObject t_box = ObjectPool.instance.planListBoxQueue.Dequeue();
+        /*GameObject t_box = ObjectPool.instance.planListBoxQueue.Dequeue();
         RectTransform rect = t_box.GetComponent<RectTransform>();
         t_box.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,-1 * rect.rect.height * pibot);
         t_box.GetComponent<PlanListBox>().tmp.text = p_plan.name;
         t_box.GetComponent<PlanListBox>().planList = p_list;
         t_box.GetComponent<PlanListBox>().contentPlan = p_plan;
         t_box.SetActive(true);
-        pibot++;
-        return t_box;
+        pibot++;*/
+        return null;
     }
 
     public void Click(){
