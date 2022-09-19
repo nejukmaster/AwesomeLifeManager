@@ -11,7 +11,7 @@ AwesomeLifeManager/[Ll]ogs/
 AwesomeLifeManager/[Pp]ackages/
 AwesomeLifeManager/[Mm]emoryCaptures/
 AwesomeLifeManager/Assets/TextMesh Pro.meta
-*.meta
+AwesomeLifeManager/**/*.meta
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta

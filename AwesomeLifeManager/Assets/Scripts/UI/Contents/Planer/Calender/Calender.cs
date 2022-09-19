@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Calender : MonoBehaviour
 {
-    public RectTransform[] cells = new RectTransform[28];
+    public CalenderCell[] cells = new CalenderCell[28];
     public Vector2 anchoredPos;
     RectTransform uiCanvas;
     // Start is called before the first frame update
@@ -22,7 +22,7 @@ public class Calender : MonoBehaviour
                 t_cell.GetComponent<RectTransform>().anchoredPosition = new Vector2(j * t_cell.GetComponent<RectTransform>().rect.width,
                                                                                     -1 * i * t_cell.GetComponent<RectTransform>().rect.height);
                 t_cell.GetComponentInChildren<TextMeshProUGUI>().text = (i * 7 + j +1).ToString();
-                cells[i * 7 + j] = t_cell.GetComponent<RectTransform>();
+                cells[i * 7 + j] = t_cell.GetComponent<CalenderCell>();
                 t_cell.SetActive(true);
             }
         }

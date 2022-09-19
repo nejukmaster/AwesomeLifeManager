@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:AwesomeLifeManager/Assets/TextMesh Pro/Fonts/NanumBarunGothicBold SDF.asset.meta
 guid: fbafe5bce4ce23143b80a7304139edc7
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
+========
+guid: 89b05ed8ad54bb741a49bcd87123428b
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+>>>>>>>> 17040776352ef7a31a5040ab2a7610a2edba61f9:AwesomeLifeManager/Assets/Scripts/UI/Contents/ContentsBox.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
