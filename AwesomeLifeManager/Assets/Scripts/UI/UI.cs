@@ -12,7 +12,7 @@ public abstract class UI : MonoBehaviour
 
     public abstract bool onSwipe(Vector2 swipeStartp, Vector2 swipeEndp);
 
-    void Start()
+    void Awake()
     {
         theUIManager = UIManager.instance;
     }

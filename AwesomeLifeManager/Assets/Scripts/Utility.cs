@@ -71,6 +71,11 @@ public static class Utility
             return (to.y - to.x) * p_num / (from.y - from.x) + to.x;
         }
         else
-            throw new Exception("p_num value can't be 0");
+            return 0;
+    }
+
+    public static Vector2 Mapping(Vector2 p_vec2, Vector4 from, Vector4 to)
+    {
+        return new Vector2(Mapping(p_vec2.x, new Vector2(from.x, from.y), new Vector2(to.x, to.y)), Mapping(p_vec2.y, new Vector2(from.z, from.w), new Vector2(to.z, to.w)));
     }
 }

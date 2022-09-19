@@ -6,7 +6,8 @@ public class Hand : MonoBehaviour
 {
     public Vector2 anchoredPos;
     RectTransform uiCanvas;
-    List<ActionCard> cards = new List<ActionCard>();
+    ActionCard[] cards = new ActionCard[4];
+    [SerializeField] RectTransform[] handSlot;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,15 @@ public class Hand : MonoBehaviour
 
     public void AddCard(ActionCard p_card)
     {
-        cards.Add(p_card);
+        for(int i = 0; i < cards.Length; i++)
+        {
+            if (cards[i] == null)
+            {
+                cards[i] = p_card;
+                StartCoroutine(p_card.SlideCo(handSlot[i].anchoredPosition));
+                return;
+            }
+        }
+        throw new System.Exception("Hand is FULL!");
     }
 }

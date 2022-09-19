@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
             trace_pos = Input.mousePosition;
             keyDown = true;
             for(int i = 0; i < UI_List.Length; i ++){
-                if(!UI_List[i].gameObject.activeSelf) continue;
+                if(!UI_List[i].gameObject.activeInHierarchy) continue;
                 if(UI_List[i].onClickDown(Input.mousePosition))
                     break;
             }
@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
         if(Input.GetMouseButtonUp(0)){
             keyDown = false;
             for(int i = 0; i < UI_List.Length; i ++){
-                if(!UI_List[i].gameObject.activeSelf) continue;
+                if(!UI_List[i].gameObject.activeInHierarchy) continue;
                 if(externalListenerFired){
                     externalListenerFired = false;
                     break;
@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour
             float dis = Vector2.Distance(trace_pos, Input.mousePosition);
             total_drag_distance += dis;
             for(int i = 0; i < UI_List.Length; i ++){
-                if(!UI_List[i].gameObject.activeSelf) continue;
+                if(!UI_List[i].gameObject.activeInHierarchy) continue;
                 if(UI_List[i].onSwipe(trace_pos, Input.mousePosition))
                     break;
             }
