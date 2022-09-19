@@ -11,8 +11,8 @@ public class ActionCard : UI
     private Vector2 anchoredPos;
     RectTransform uiCanvas;
     Hand hand;
-    [SerializeField] Calender calender;
-
+    
+    public Calender calender;
     public bool activated = false;
     public CalenderCell currentCell;
     // Start is called before the first frame update

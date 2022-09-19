@@ -2,20 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hand : MonoBehaviour
+public class Hand : UI
 {
     public Vector2 anchoredPos;
     RectTransform uiCanvas;
     ActionCard[] cards = new ActionCard[4];
     [SerializeField] RectTransform[] handSlot;
+    [SerializeField] Calender calender;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         uiCanvas = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
         Vector2 t_pos = this.GetComponent<RectTransform>().anchoredPosition;
         t_pos = new Vector2(uiCanvas.rect.width / 2, this.GetComponent<RectTransform>().anchoredPosition.y);
         anchoredPos = t_pos;
+        for(int i = 0; i < cards.Length; i++)
+        {
+            GameObject t_card = ObjectPool.instance.actionCardQueue.Dequeue();
+            UIManager.instance.UI_List.Add(t_card.GetComponent<ActionCard>());
+            t_card.SetActive(true);
+            StartCoroutine(t_card.GetComponent<ActionCard>().SlideCo(handSlot[i].anchoredPosition));
+            t_card.GetComponent<ActionCard>().calender = calender;
+            AddCard(t_card.GetComponent<ActionCard>());
+        }
     }
 
     public void AddCard(ActionCard p_card)
@@ -30,5 +40,20 @@ public class Hand : MonoBehaviour
             }
         }
         throw new System.Exception("Hand is FULL!");
+    }
+
+    public override bool onClickDown(Vector2 clickPos)
+    {
+        return false;
+    }
+
+    public override bool onClickUp(float dragDis, Vector2 clickPos)
+    {
+        return false;
+    }
+
+    public override bool onSwipe(Vector2 swipeStartp, Vector2 swipeEndp)
+    {
+        return false;
     }
 }

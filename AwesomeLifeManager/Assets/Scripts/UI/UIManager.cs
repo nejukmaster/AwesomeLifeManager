@@ -6,7 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
     
-    [SerializeField] UI[] UI_List;
+    [SerializeField] public List<UI> UI_List = new List<UI>();
     public bool canSwipe = true;
     public bool keyDown = false;
     public bool externalListenerFired = false;
@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
       if(Input.GetMouseButtonDown(0)){
             trace_pos = Input.mousePosition;
             keyDown = true;
-            for(int i = 0; i < UI_List.Length; i ++){
+            for(int i = 0; i < UI_List.Count; i ++){
                 if(!UI_List[i].gameObject.activeInHierarchy) continue;
                 if(UI_List[i].onClickDown(Input.mousePosition))
                     break;
@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
         }
         if(Input.GetMouseButtonUp(0)){
             keyDown = false;
-            for(int i = 0; i < UI_List.Length; i ++){
+            for(int i = 0; i < UI_List.Count; i ++){
                 if(!UI_List[i].gameObject.activeInHierarchy) continue;
                 if(externalListenerFired){
                     externalListenerFired = false;
@@ -48,7 +48,7 @@ public class UIManager : MonoBehaviour
         if(keyDown){
             float dis = Vector2.Distance(trace_pos, Input.mousePosition);
             total_drag_distance += dis;
-            for(int i = 0; i < UI_List.Length; i ++){
+            for(int i = 0; i < UI_List.Count; i ++){
                 if(!UI_List[i].gameObject.activeInHierarchy) continue;
                 if(UI_List[i].onSwipe(trace_pos, Input.mousePosition))
                     break;
