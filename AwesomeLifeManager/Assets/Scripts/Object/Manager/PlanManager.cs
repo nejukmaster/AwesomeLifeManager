@@ -16,8 +16,8 @@ public class PlanManager : MonoBehaviour
     }
 
     void mapping(){
-        planDic.Add("00", new Plan("basic00",10,10,2.5f));
-        planDic.Add("01", new Plan("basic01",10,10,8f));
-        planDic.Add("02", new Plan("basic02",10,10,3f));
+        planDic.Add("00", new Plan("basic00",10,10));
+        planDic.Add("01", new Plan("basic01",10,10));
+        planDic.Add("02", new Plan("basic02",10,10));
     }
 }

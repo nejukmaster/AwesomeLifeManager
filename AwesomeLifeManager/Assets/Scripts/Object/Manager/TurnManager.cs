@@ -8,7 +8,6 @@ public class TurnManager : MonoBehaviour
 
     public Turn currentTurn;
     public int currentTurnNum;
-    public List<Plan> settedPlan = new List<Plan>();
     [SerializeField] public GameObject planWindow;
     [SerializeField] public GameObject resultUI;
 
@@ -20,9 +19,19 @@ public class TurnManager : MonoBehaviour
         instance = this;
         planManager = PlanManager.instance;
         currentTurn = new Turn(1);
-        currentTurn.settedPlan.Add(planManager.planDic["00"]);
-        currentTurn.settedPlan.Add(planManager.planDic["01"]);
-        currentTurn.settedPlan.Add(planManager.planDic["02"]);
+    }
+
+    public void ReadCalender(Calender p_calender)
+    {
+        List<Plan> t_planList = new List<Plan>();
+        for(int i = 0; i < p_calender.cells.Length; i++)
+        {
+            if (p_calender.cells[i].insertedPlan != null)
+                t_planList.Add(p_calender.cells[i].insertedPlan);
+            else
+                t_planList.Add(null);
+        }
+        currentTurn.settedPlan = t_planList;
     }
 
     public void RunCurrentTurn()

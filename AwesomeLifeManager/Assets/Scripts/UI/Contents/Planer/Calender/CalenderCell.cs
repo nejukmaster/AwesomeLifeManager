@@ -8,7 +8,7 @@ public class CalenderCell : MonoBehaviour
 {
     public static float width = 122f;
     public static float height = 300f;
-    Plan insertedPlan;
+    public Plan insertedPlan;
 
     [SerializeField] TextMeshProUGUI tmp;
     [SerializeField] GameObject holdMarker;
@@ -19,13 +19,6 @@ public class CalenderCell : MonoBehaviour
     public void Awake()
     {
         calender = GetComponentInParent<Calender>();
-    }
-
-    public void Gen(int p_num, Vector2 p_pos)
-    {
-        this.gameObject.SetActive(true);
-        this.GetComponent<RectTransform>().anchoredPosition = p_pos;
-        tmp.text = p_num.ToString();
     }
 
     public void HoldeOn()

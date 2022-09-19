@@ -40,6 +40,7 @@ public class ActionCard : UI
     {
         if (canClick)
         {
+            FindObjectOfType<PlanerCloseButton>().GetComponent<Button>().enabled = false;
             Vector2 t_pos = new Vector2(Utility.Mapping(clickPos.x, new Vector2(0, Screen.width), new Vector2(0, uiCanvas.rect.width)),
                                         Utility.Mapping(clickPos.y, new Vector2(0, Screen.height), new Vector2(0, uiCanvas.rect.height)))
                              - hand.anchoredPos;
@@ -56,6 +57,7 @@ public class ActionCard : UI
     {
         if (activated)
         {
+            FindObjectOfType<PlanerCloseButton>().GetComponent<Button>().enabled = true;
             activated = false;
             currentCell.InsertPlan(PlanManager.instance.planDic["00"]);
             currentCell.HoldOut();
