@@ -6,8 +6,6 @@ public class CharacterUIManager : MonoBehaviour
 {
     public static CharacterUIManager instance;
 
-    [SerializeField] public AP ap;
-    [SerializeField] public Fatigue fatigue;
 
     public void Start()
     {
@@ -15,7 +13,7 @@ public class CharacterUIManager : MonoBehaviour
     }
 
     public void SetParam(){
-        ap.SetParam();
-        fatigue.SetParam();
+        CharacterManager.instance.ap.SetParam();
+        CharacterManager.instance.fatigue.SetParam();
     }
 }

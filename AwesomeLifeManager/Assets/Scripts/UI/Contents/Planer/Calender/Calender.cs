@@ -28,9 +28,14 @@ public class Calender : MonoBehaviour
                                                                                     -1 * i * t_cell.GetComponent<RectTransform>().rect.height);
                 t_cell.GetComponentInChildren<TextMeshProUGUI>().text = (i * 7 + j +1).ToString();
                 cells[i * 7 + j] = t_cell.GetComponent<CalenderCell>();
+                cells[i * 7 + j].calender = cells[i * 7 + j].GetComponentInParent<Calender>();
                 t_cell.SetActive(true);
             }
         }
+    }
+
+    void OnEnable()
+    {
         energyPreview.SetPreview(accumFatigue, accumAP);
     }
 

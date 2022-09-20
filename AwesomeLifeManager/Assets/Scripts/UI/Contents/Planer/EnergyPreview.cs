@@ -8,17 +8,16 @@ public class EnergyPreview : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI fatiguePrev;
     [SerializeField] TextMeshProUGUI apPrev;
-    CharacterUIManager theCharacterUIManager;
+    CharacterManager theCharacterManager;
 
-    public void Awake()
+    void Awake()
     {
-        theCharacterUIManager = CharacterUIManager.instance;
+        theCharacterManager = CharacterManager.instance;
     }
 
     public void SetPreview(int p_fatigue, int p_ap)
     {
-        Debug.Log(theCharacterUIManager);
-        fatiguePrev.text = (theCharacterUIManager.fatigue.GetMax()-p_fatigue) + "/" + theCharacterUIManager.fatigue.GetMax();
-        apPrev.text = (theCharacterUIManager.ap.GetMax()-p_ap) + "/" + theCharacterUIManager.ap.GetMax();
+        fatiguePrev.text = (theCharacterManager.fatigue.GetMax()-p_fatigue) + "/" + theCharacterManager.fatigue.GetMax();
+        apPrev.text = (theCharacterManager.ap.GetMax()-p_ap) + "/" + theCharacterManager.ap.GetMax();
     }
 }

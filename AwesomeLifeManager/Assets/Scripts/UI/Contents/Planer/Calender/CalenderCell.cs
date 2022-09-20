@@ -9,18 +9,12 @@ public class CalenderCell : MonoBehaviour
     public static float width = 122f;
     public static float height = 300f;
     public Plan insertedPlan;
+    public Calender calender;
 
     [SerializeField] TextMeshProUGUI tmp;
     [SerializeField] GameObject holdMarker;
     [SerializeField] Image planMarker;
-    Calender calender;
-    // Start is called before the first frame update
-
-    public void Awake()
-    {
-        calender = GetComponentInParent<Calender>();
-    }
-
+    
     public void HoldeOn()
     {
         holdMarker.SetActive(true);
