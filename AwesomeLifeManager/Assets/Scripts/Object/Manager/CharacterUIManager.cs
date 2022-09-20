@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class CharacterUIManager : MonoBehaviour
 {
-    [SerializeField] Hungry hungry;
-    [SerializeField] Fatigue fatigue;
+    public static CharacterUIManager instance;
+
+    [SerializeField] public AP ap;
+    [SerializeField] public Fatigue fatigue;
+
+    public void Start()
+    {
+        instance = this;
+    }
 
     public void SetParam(){
-        hungry.SetParam();
+        ap.SetParam();
         fatigue.SetParam();
     }
 }

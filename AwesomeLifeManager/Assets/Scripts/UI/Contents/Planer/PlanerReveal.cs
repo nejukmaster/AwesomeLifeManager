@@ -44,7 +44,9 @@ public class PlanerReveal : ContentsBox
 
     public override void OnEndCoroutine()
     {
+        planerUI.gameObject.SetActive(true);
+        tmp.enabled = true;
+        mask.enabled = true;
         UI.gameObject.SetActive(false);
-        planerUI.gameObject.SetActive(true); ;
     }
 }

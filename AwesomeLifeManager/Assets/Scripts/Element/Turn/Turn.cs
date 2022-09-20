@@ -42,13 +42,16 @@ public class Turn
                 theTurnManager.planWindow.GetComponentInChildren<TextMeshProUGUI>().text = "Free Acting...";
             yield return new WaitForSeconds(5.0f);
             theTurnManager.planWindow.SetActive(false);
-            if (e1.Current.reward())
+            if (e1.Current != null )
             {
-                Debug.Log(e1.Current.name + " Success!");
+                if (e1.Current.reward())
+                    Debug.Log(e1.Current.name + " Success!");
+                else
+                    Debug.Log("Fail...");
             }
             else
             {
-                Debug.Log("Fail...");
+                Debug.Log("Free Act.");
             }
             //Event Fire
             yield return new WaitForSeconds(3.0f);

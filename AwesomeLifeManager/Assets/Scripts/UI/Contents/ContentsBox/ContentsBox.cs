@@ -12,6 +12,8 @@ public abstract class ContentsBox : MonoBehaviour
     {
         RectTransform t_uiRect = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
         RectTransform t_rect = GetComponent<RectTransform>();
+        Vector2 t_size = t_rect.sizeDelta;
+        Vector2 t_pos = t_rect.anchoredPosition;
         OnStartCoroutine();
         while (Vector2.Distance(t_rect.sizeDelta, t_uiRect.sizeDelta + new Vector2(200, 200)) >= 1)
         {
@@ -23,6 +25,8 @@ public abstract class ContentsBox : MonoBehaviour
                                                     6f * Time.deltaTime);
             yield return null;
         }
+        t_rect.sizeDelta = t_size;
+        t_rect.anchoredPosition = t_pos;
         OnEndCoroutine();
     }
 }

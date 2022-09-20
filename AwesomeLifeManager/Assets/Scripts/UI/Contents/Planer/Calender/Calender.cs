@@ -7,7 +7,12 @@ public class Calender : MonoBehaviour
 {
     public CalenderCell[] cells = new CalenderCell[28];
     public Vector2 anchoredPos;
+    public EnergyPreview energyPreview;
+    public int accumFatigue = 0;
+    public int accumAP = 0;
     RectTransform uiCanvas;
+    [SerializeField] GameObject cellInspectorPopup;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,6 +31,7 @@ public class Calender : MonoBehaviour
                 t_cell.SetActive(true);
             }
         }
+        energyPreview.SetPreview(accumFatigue, accumAP);
     }
 
     // Update is called once per frame

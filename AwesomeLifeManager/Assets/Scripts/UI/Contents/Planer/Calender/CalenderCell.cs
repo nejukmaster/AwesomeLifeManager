@@ -35,6 +35,9 @@ public class CalenderCell : MonoBehaviour
     {
         planMarker.enabled = true;
         insertedPlan = p_plan;
+        calender.accumAP += p_plan.costAP;
+        calender.accumFatigue += p_plan.costFatigue;
+        calender.energyPreview.SetPreview(calender.accumFatigue, calender.accumAP);
         return true;
     }
 }
