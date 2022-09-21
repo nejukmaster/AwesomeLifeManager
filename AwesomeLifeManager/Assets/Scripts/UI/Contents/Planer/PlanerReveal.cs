@@ -29,21 +29,19 @@ public class PlanerReveal : ContentsBox
     public void Click(){
         if(toggle){
             StartCoroutine(container.SnapCo(this.GetComponent<RectTransform>(),() => { StartCoroutine(SizeCo()); }));
-            toggle = !toggle;
-        }
-        else{
-            toggle = !toggle;
         }
     }
 
     public override void OnStartCoroutine()
     {
+        toggle = false;
         tmp.enabled = false;
         mask.enabled = false;
     }
 
     public override void OnEndCoroutine()
     {
+        toggle = true;
         planerUI.gameObject.SetActive(true);
         tmp.enabled = true;
         mask.enabled = true;

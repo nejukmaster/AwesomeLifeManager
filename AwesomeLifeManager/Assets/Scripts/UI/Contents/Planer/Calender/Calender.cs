@@ -11,7 +11,7 @@ public class Calender : MonoBehaviour
     public int accumFatigue = 0;
     public int accumAP = 0;
     RectTransform uiCanvas;
-    [SerializeField] GameObject cellInspectorPopup;
+    public CalenderCellWindow cellInspectorPopup;
 
     // Start is called before the first frame update
     void Awake()

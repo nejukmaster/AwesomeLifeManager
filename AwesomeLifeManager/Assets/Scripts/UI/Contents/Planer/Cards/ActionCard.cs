@@ -40,12 +40,12 @@ public class ActionCard : UI
     {
         if (canClick)
         {
-            FindObjectOfType<PlanerCloseButton>().GetComponent<Button>().enabled = false;
             Vector2 t_pos = new Vector2(Utility.Mapping(clickPos.x, new Vector2(0, Screen.width), new Vector2(0, uiCanvas.rect.width)),
                                         Utility.Mapping(clickPos.y, new Vector2(0, Screen.height), new Vector2(0, uiCanvas.rect.height)))
                              - hand.anchoredPos;
             if (Vector2.Distance(GetComponent<RectTransform>().anchoredPosition, t_pos) <= 50)
             {
+                FindObjectOfType<PlanerCloseButton>().GetComponent<Button>().enabled = false;
                 activated = true;
                 return true;
             }

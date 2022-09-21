@@ -10,8 +10,7 @@ public class CalenderCell : MonoBehaviour
     public static float height = 300f;
     public Plan insertedPlan;
     public Calender calender;
-
-    [SerializeField] TextMeshProUGUI tmp;
+    public TextMeshProUGUI tmp;
     [SerializeField] GameObject holdMarker;
     [SerializeField] Image planMarker;
     
@@ -33,5 +32,10 @@ public class CalenderCell : MonoBehaviour
         calender.accumFatigue += p_plan.costFatigue;
         calender.energyPreview.SetPreview(calender.accumFatigue, calender.accumAP);
         return true;
+    }
+    
+    public void OnClick()
+    {
+        calender.cellInspectorPopup.SetActive(true, this);
     }
 }

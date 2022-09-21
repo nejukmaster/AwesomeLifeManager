@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class ContentsBox : MonoBehaviour
 {
-
     public abstract void OnStartCoroutine();
     public abstract void OnEndCoroutine();
 

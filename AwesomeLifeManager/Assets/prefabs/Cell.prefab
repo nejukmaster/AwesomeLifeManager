@@ -245,7 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47bef0c76661b4348946e2b6a394ec48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tmp: {fileID: 0}
+  calender: {fileID: 0}
+  tmp: {fileID: 2258279981225141611}
   holdMarker: {fileID: 6348105742308295263}
   planMarker: {fileID: 7905497976056454946}
 --- !u!114 &2811475432543777305
@@ -291,7 +292,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6176751039602172406}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4753355282585126363}
+        m_TargetAssemblyTypeName: CalenderCell, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7045894604018682513
 GameObject:
   m_ObjectHideFlags: 0
