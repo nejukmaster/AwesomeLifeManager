@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
@@ -8,7 +9,9 @@ public class TurnManager : MonoBehaviour
 
     public Turn currentTurn;
     public int currentTurnNum;
-    [SerializeField] public GameObject planWindow;
+    public GameObject MainUI;
+    public Sprite planAnimeSprite;
+    public TextMeshProUGUI tmp;
     [SerializeField] public GameObject resultUI;
 
     PlanManager planManager;

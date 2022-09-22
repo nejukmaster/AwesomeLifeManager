@@ -30,18 +30,18 @@ public class Turn
     public IEnumerator RunningCo()
     {
         IEnumerator<Plan> e1 = settedPlan.GetEnumerator();
+        int date = 1;
+        theTurnManager.MainUI.SetActive(false);
         while(e1.MoveNext())
         {
-            //Event Fire
-            theTurnManager.planWindow.SetActive(true);
+            theTurnManager.tmp.text = date.ToString();
             if (e1.Current != null)
             {
-                theTurnManager.planWindow.GetComponentInChildren<TextMeshProUGUI>().text = e1.Current.name;
+
             }
-            else
-                theTurnManager.planWindow.GetComponentInChildren<TextMeshProUGUI>().text = "Free Acting...";
+            else;
+
             yield return new WaitForSeconds(5.0f);
-            theTurnManager.planWindow.SetActive(false);
             if (e1.Current != null )
             {
                 if (e1.Current.reward())
