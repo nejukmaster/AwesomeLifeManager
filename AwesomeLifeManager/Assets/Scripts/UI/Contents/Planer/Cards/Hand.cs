@@ -9,6 +9,7 @@ public class Hand : UI
     ActionCard[] cards = new ActionCard[4];
     [SerializeField] RectTransform[] handSlot;
     [SerializeField] Calender calender;
+    [SerializeField] MyDeck myDeck;
 
     // Start is called before the first frame update
     void Awake()
@@ -19,12 +20,7 @@ public class Hand : UI
         anchoredPos = t_pos;
         for(int i = 0; i < cards.Length; i++)
         {
-            GameObject t_card = ObjectPool.instance.actionCardQueue.Dequeue();
-            UIManager.instance.UI_List.Add(t_card.GetComponent<ActionCard>());
-            t_card.SetActive(true);
-            StartCoroutine(t_card.GetComponent<ActionCard>().SlideCo(handSlot[i].anchoredPosition));
-            t_card.GetComponent<ActionCard>().calender = calender;
-            AddCard(t_card.GetComponent<ActionCard>());
+            
         }
     }
 
@@ -40,6 +36,16 @@ public class Hand : UI
             }
         }
         throw new System.Exception("Hand is FULL!");
+    }
+
+    public void Draw()
+    {
+        GameObject t_card = ObjectPool.instance.actionCardQueue.Dequeue();
+        UIManager.instance.UI_List.Add(t_card.GetComponent<ActionCard>());
+        t_card.SetActive(true);
+        //StartCoroutine(t_card.GetComponent<ActionCard>().SlideCo(handSlot[i].anchoredPosition));
+        t_card.GetComponent<ActionCard>().calender = calender;
+        AddCard(t_card.GetComponent<ActionCard>());
     }
 
     public override bool onClickDown(Vector2 clickPos)

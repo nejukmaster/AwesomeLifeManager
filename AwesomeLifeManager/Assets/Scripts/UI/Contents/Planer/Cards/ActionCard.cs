@@ -15,6 +15,7 @@ public class ActionCard : UI
     public Calender calender;
     public bool activated = false;
     public CalenderCell currentCell;
+    public CardInform inform;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +63,7 @@ public class ActionCard : UI
             currentCell.InsertPlan(PlanManager.instance.planDic["00"]);
             currentCell.HoldOut();
             gameObject.SetActive(false);
+            hand.Draw();
             return true;
         }
         else
