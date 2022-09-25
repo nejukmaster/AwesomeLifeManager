@@ -5010,7 +5010,7 @@ MonoBehaviour:
     tfPoolParent: {fileID: 1699058846}
     restore_world_position: 0
   - goPrefab: {fileID: 5429408416476126725, guid: 0321513676bba034d9b07d25ccdc60a9, type: 3}
-    count: 8
+    count: 60
     tfPoolParent: {fileID: 309409413}
     restore_world_position: 0
   - goPrefab: {fileID: 6358751615694110403, guid: 242907b9229a1fa4f98f12d556b8c58a, type: 3}
@@ -5409,12 +5409,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deck: {fileID: 1470913953}
-  cardInform:
-    name: test
-    type: 0
-    description: test
-    illusteName: test
-    resultDescription: test
+  name: 
+  type: 0
+  des: 
+  illusteName: 
+  resultDes: 
+  planCode: 
 --- !u!1 &1408727131
 GameObject:
   m_ObjectHideFlags: 0

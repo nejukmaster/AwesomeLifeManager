@@ -1,7 +1,18 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class Action{
+    public delegate void ActionDel(MonoBehaviour obj);
+
+    public ActionDel actionDel;
+
+    public Action(ActionDel actionDel)
+    {
+        this.actionDel = actionDel;
+    }
+}
 public enum CardType
 {
     Action,
@@ -17,14 +28,16 @@ public class CardInform
     public string description;
     public string illusteName;
     public string resultDescription;
+    public Action actioin;
 
-    public CardInform(string name, CardType type, string description, string illusteName, string resultDescription)
+    public CardInform(string name, CardType type, string description, string illusteName, string resultDescription, Action actioin)
     {
         this.name = name;
         this.type = type;
         this.description = description;
         this.illusteName = illusteName;
         this.resultDescription = resultDescription;
+        this.actioin = actioin;
     }
 
     public string GetIllustePath()

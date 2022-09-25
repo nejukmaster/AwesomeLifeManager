@@ -60,7 +60,7 @@ public class ActionCard : UI
         {
             FindObjectOfType<PlanerCloseButton>().GetComponent<Button>().enabled = true;
             activated = false;
-            currentCell.InsertPlan(PlanManager.instance.planDic["00"]);
+            inform.actioin.actionDel(currentCell);
             currentCell.HoldOut();
             gameObject.SetActive(false);
             hand.Draw();
