@@ -20,7 +20,7 @@ public class Hand : UI
         anchoredPos = t_pos;
         for(int i = 0; i < cards.Length; i++)
         {
-            
+            Draw();
         }
     }
 
@@ -32,6 +32,7 @@ public class Hand : UI
             {
                 cards[i] = p_card;
                 StartCoroutine(p_card.SlideCo(handSlot[i].anchoredPosition));
+                UIManager.instance.UI_List.Add(p_card);
                 return;
             }
         }
@@ -40,12 +41,13 @@ public class Hand : UI
 
     public void Draw()
     {
-        GameObject t_card = ObjectPool.instance.actionCardQueue.Dequeue();
-        UIManager.instance.UI_List.Add(t_card.GetComponent<ActionCard>());
-        t_card.SetActive(true);
-        //StartCoroutine(t_card.GetComponent<ActionCard>().SlideCo(handSlot[i].anchoredPosition));
-        t_card.GetComponent<ActionCard>().calender = calender;
-        AddCard(t_card.GetComponent<ActionCard>());
+        if (myDeck.cardQueue != null && myDeck.cardQueue.Count > 0)
+        {
+            ActionCard t_card = myDeck.cardQueue.Dequeue();
+            t_card.gameObject.SetActive(true);
+            t_card.calender = calender;
+            AddCard(t_card);
+        }
     }
 
     public override bool onClickDown(Vector2 clickPos)
