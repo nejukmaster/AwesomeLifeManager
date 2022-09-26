@@ -37,9 +37,8 @@ public class Turn
             theTurnManager.tmp.text = date.ToString();
             if (e1.Current != null)
             {
-
+                theTurnManager.planAnimeSprite.GetComponent<Animator>().SetTrigger(e1.Current.name);
             }
-            else;
 
             yield return new WaitForSeconds(5.0f);
             if (e1.Current != null )

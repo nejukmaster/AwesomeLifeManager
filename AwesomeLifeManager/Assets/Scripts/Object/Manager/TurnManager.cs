@@ -10,8 +10,8 @@ public class TurnManager : MonoBehaviour
     public Turn currentTurn;
     public int currentTurnNum;
     public GameObject MainUI;
-    public Sprite planAnimeSprite;
-    public TextMeshProUGUI tmp;
+    public SpriteRenderer planAnimeSprite;
+    public TextMeshPro tmp;
     [SerializeField] public GameObject resultUI;
 
     PlanManager planManager;
