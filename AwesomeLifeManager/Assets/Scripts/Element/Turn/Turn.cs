@@ -57,5 +57,7 @@ public class Turn
             yield return new WaitForSeconds(3.0f);
         }
         //TurnManager.instance.resultUI.SetActive(true);
+        theTurnManager.currentTurnNum++;
+        theTurnManager.currentTurn = new Turn(theTurnManager.currentTurnNum);
     }
 }
