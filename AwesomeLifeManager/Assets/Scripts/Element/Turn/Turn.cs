@@ -52,6 +52,7 @@ public class Turn
             {
                 Debug.Log("Free Act.");
             }
+            date++;
             //Event Fire
             yield return new WaitForSeconds(3.0f);
         }

@@ -13,6 +13,6 @@ public class AddCardToDeckButton : MonoBehaviour
     public string planCode;
     public void OnClick()
     {
-        deck.AddCard(new CardInform(name, type, des, illusteName, resultDes,new Action( (cell) => { ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic[planCode]); })));
+        deck.AddCard(new CardInform(name, type, des, illusteName, resultDes,new Action( (cell) => {((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic[planCode]);})));
     }
 }
