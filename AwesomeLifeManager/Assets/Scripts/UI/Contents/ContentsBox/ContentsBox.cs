@@ -5,23 +5,24 @@ using UnityEngine.UI;
 
 public abstract class ContentsBox : MonoBehaviour
 {
+    [SerializeField] RectTransform targetSize;
     public abstract void OnStartCoroutine();
     public abstract void OnEndCoroutine();
 
     public IEnumerator SizeCo()
     {
-        RectTransform t_uiRect = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+        RectTransform t_destRect = targetSize;
         RectTransform t_rect = GetComponent<RectTransform>();
         Vector2 t_size = t_rect.sizeDelta;
         Vector2 t_pos = t_rect.anchoredPosition;
         OnStartCoroutine();
-        while (Vector2.Distance(t_rect.sizeDelta, t_uiRect.sizeDelta + new Vector2(200, 200)) >= 1)
+        while (Vector2.Distance(t_rect.sizeDelta, t_destRect.sizeDelta + new Vector2(200, 200)) >= 1)
         {
             t_rect.sizeDelta = Vector2.Lerp(t_rect.sizeDelta,
-                                            t_uiRect.sizeDelta + new Vector2(200, 200),
+                                            t_destRect.sizeDelta + new Vector2(200, 200),
                                             6f * Time.deltaTime);
             t_rect.anchoredPosition = Vector2.Lerp(t_rect.anchoredPosition,
-                                                    new Vector2(t_rect.anchoredPosition.x, 0),
+                                                    new Vector2(0, t_rect.anchoredPosition.y),
                                                     6f * Time.deltaTime);
             yield return null;
         }

@@ -36,7 +36,6 @@ public class PlanerReveal : ContentsBox
     {
         toggle = false;
         tmp.enabled = false;
-        mask.enabled = false;
     }
 
     public override void OnEndCoroutine()
@@ -44,7 +43,6 @@ public class PlanerReveal : ContentsBox
         toggle = true;
         planerUI.gameObject.SetActive(true);
         tmp.enabled = true;
-        mask.enabled = true;
         UI.gameObject.SetActive(false);
     }
 }

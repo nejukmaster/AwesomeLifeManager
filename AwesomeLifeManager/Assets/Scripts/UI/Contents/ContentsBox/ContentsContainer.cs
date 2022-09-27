@@ -22,14 +22,14 @@ public class ContentsContainer : UI
 
     public override bool onSwipe(Vector2 swipeStartp, Vector2 swipeEndp)
     {
-        boxGroup.GetComponent<RectTransform>().anchoredPosition += new Vector2(-1 * (swipeStartp.x - swipeEndp.x), 0);
+        boxGroup.GetComponent<RectTransform>().anchoredPosition += new Vector2(0, -1 * (swipeStartp.y - swipeEndp.y));
         return true;
     }
 
     public IEnumerator SnapCo(RectTransform p_box, SnapFunc p_snapFunc)
     {
         RectTransform t_rect = boxGroup.GetComponent<RectTransform>();
-        Vector2 t_dest = new Vector2(-1 * p_box.anchoredPosition.x, 0);
+        Vector2 t_dest = new Vector2(0, -1 * p_box.anchoredPosition.y);
         while (Vector2.Distance(t_rect.anchoredPosition,t_dest) >= 0.1)
         {
             t_rect.anchoredPosition = Vector2.Lerp(t_rect.anchoredPosition,
