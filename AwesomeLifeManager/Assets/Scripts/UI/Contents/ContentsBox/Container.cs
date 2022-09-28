@@ -12,6 +12,10 @@ public class Container : MonoBehaviour
     [SerializeField] RectTransform mask;
     [SerializeField] RectTransform upperMaskTarget;
     [SerializeField] RectTransform downerMaskTarget;
+
+    [SerializeField] RectTransform characterUI;
+    [SerializeField] RectTransform upperCharacterTarget;
+    [SerializeField] RectTransform downerCharacterTarget;
     Coroutine co;
 
     public void ZoomIn(bool p_anime)
@@ -42,11 +46,15 @@ public class Container : MonoBehaviour
             mask.sizeDelta = Vector2.Lerp(mask.sizeDelta,
                                                     upperMaskTarget.sizeDelta,
                                                     10f * Time.deltaTime);
+            characterUI.anchoredPosition = Vector2.Lerp(characterUI.anchoredPosition,
+                                                    upperCharacterTarget.anchoredPosition,
+                                                    4f * Time.deltaTime);
             yield return null;
         }
         t_rect.anchoredPosition = upperTarget.anchoredPosition;
         t_rect.sizeDelta = upperTarget.sizeDelta;
         mask.sizeDelta = upperMaskTarget.sizeDelta;
+        characterUI.anchoredPosition = upperCharacterTarget.anchoredPosition;
     }
 
     public IEnumerator ZoomOutCo(bool p_anime)
@@ -63,10 +71,14 @@ public class Container : MonoBehaviour
             mask.sizeDelta = Vector2.Lerp(mask.sizeDelta,
                                                     downerMaskTarget.sizeDelta,
                                                     10f * Time.deltaTime);
+            characterUI.anchoredPosition = Vector2.Lerp(characterUI.anchoredPosition,
+                                                    downerCharacterTarget.anchoredPosition,
+                                                    4f * Time.deltaTime);
             yield return null;
         }
         t_rect.anchoredPosition = downerTarget.anchoredPosition;
         t_rect.sizeDelta = downerTarget.sizeDelta;
         mask.sizeDelta = downerMaskTarget.sizeDelta;
+        characterUI.anchoredPosition = downerCharacterTarget.anchoredPosition;
     }
 }

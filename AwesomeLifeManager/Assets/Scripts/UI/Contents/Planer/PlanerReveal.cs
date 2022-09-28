@@ -13,11 +13,13 @@ public class PlanerReveal : ContentsBox
     [SerializeField] Animator cameraAnime;
 
     ContentsContainer container;
+    UIManager theUIManager;
     bool toggle = true;
     // Start is called before the first frame update
     void Start()
     {
         container = GetComponentInParent<ContentsContainer>();
+        theUIManager = UIManager.instance;
     }
 
     // Update is called once per frame
@@ -28,7 +30,7 @@ public class PlanerReveal : ContentsBox
 
     public override void OnClick(){
         if(toggle){
-
+            theUIManager.externalListenerFired = true;
             Container t_con = GetComponentInParent<Container>();
             t_con.ZoomIn(true);
             StartCoroutine(container.SnapCo(this.GetComponent<RectTransform>(),() => { StartCoroutine(SizeCo()); }));
@@ -44,8 +46,10 @@ public class PlanerReveal : ContentsBox
     public override void OnEndCoroutine()
     {
         toggle = true;
-        planerUI.gameObject.SetActive(true);
+        //planerUI.gameObject.SetActive(true);
         tmp.enabled = true;
-        UI.gameObject.SetActive(false);
+        base.contentsBoxPopup.SetActive(true);
+        theUIManager.uiEnabled = false;
+        //UI.gameObject.SetActive(false);
     }
 }

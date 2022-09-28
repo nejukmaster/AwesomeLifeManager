@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public abstract class ContentsBox : MonoBehaviour
 {
+    [SerializeField] public GameObject contentsBoxPopup;
+
     [SerializeField] RectTransform targetSize;
     public abstract void OnStartCoroutine();
     public abstract void OnEndCoroutine();

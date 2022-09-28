@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//??? UI? ????? ?? ????? ???
 public class UIReplacer : MonoBehaviour
 {
     Vector2 standardUIRect = new Vector2(900f,1600f);
