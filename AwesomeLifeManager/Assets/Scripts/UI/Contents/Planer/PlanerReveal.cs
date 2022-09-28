@@ -26,8 +26,11 @@ public class PlanerReveal : ContentsBox
         
     }
 
-    public void Click(){
+    public override void OnClick(){
         if(toggle){
+
+            Container t_con = GetComponentInParent<Container>();
+            t_con.ZoomIn(true);
             StartCoroutine(container.SnapCo(this.GetComponent<RectTransform>(),() => { StartCoroutine(SizeCo()); }));
         }
     }

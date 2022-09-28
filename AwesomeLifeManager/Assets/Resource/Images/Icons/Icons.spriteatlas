@@ -52,8 +52,16 @@ SpriteAtlas:
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 1214e617b68512b488c75d4af29810b7, type: 3}
+  - {fileID: 21300000, guid: e15e90885a470d54996f3f08cb4c0af3, type: 3}
+  - {fileID: 21300000, guid: f6305d6aa47497f43ba5626a6aedd8a1, type: 3}
+  - {fileID: 21300000, guid: e5c15d6a3bffcb840984a5e6d40cb1cf, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - "\U0001F986 icon _calendar outline_"
+  - "\U0001F986 icon _bar chart_"
+  - "\U0001F986 icon _phone outline_"
+  - "\U0001F986 icon _shopping cart outline_"
   m_RenderDataMap: {}
   m_Tag: Icons
   m_IsVariant: 0
