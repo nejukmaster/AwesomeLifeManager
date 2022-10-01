@@ -52,7 +52,7 @@ public class Container : MonoBehaviour
                                                     4f * Time.deltaTime);
             characterUI.anchoredPosition = Vector2.Lerp(characterUI.anchoredPosition,
                                                     upperCharacterTarget.anchoredPosition,
-                                                    4f * Time.deltaTime);
+                                                    10f * Time.deltaTime);
             characterNameContainer.anchoredPosition = Vector2.Lerp(characterNameContainer.anchoredPosition,
                                                     upperNameTarget.anchoredPosition,
                                                     10f * Time.deltaTime);
@@ -81,7 +81,7 @@ public class Container : MonoBehaviour
                                                     4f * Time.deltaTime);
             characterUI.anchoredPosition = Vector2.Lerp(characterUI.anchoredPosition,
                                                     downerCharacterTarget.anchoredPosition,
-                                                    4f * Time.deltaTime);
+                                                    5f * Time.deltaTime);
             characterNameContainer.anchoredPosition = Vector2.Lerp(characterNameContainer.anchoredPosition,
                                                     downerNameTarget.anchoredPosition,
                                                     10f * Time.deltaTime);

@@ -8,8 +8,9 @@ public class QuickMenuButton : MonoBehaviour
     UIManager theUIManager;
     QuickMenuManager theQuickMenuManager;
     [SerializeField] RectTransform container;
-    [SerializeField] GameObject contentsBoxPopup;
+    [SerializeField] ContentsBoxPopup contentsBoxPopup;
     [SerializeField] Container contentsContainer;
+    [SerializeField] GameObject activationObj;
     bool trig = true;
 
     private void Start()
@@ -25,7 +26,7 @@ public class QuickMenuButton : MonoBehaviour
             if (theQuickMenuManager.activatedButton != null)
                 theQuickMenuManager.activatedButton.OnClick();
             container.sizeDelta = new Vector2(container.rect.width, container.rect.height * 3);
-            contentsBoxPopup.SetActive(true);
+            contentsBoxPopup.SetActive(true,activationObj);
             contentsContainer.ZoomIn(false);
             theQuickMenuManager.activatedButton = this;
             trig = !trig;
@@ -35,7 +36,7 @@ public class QuickMenuButton : MonoBehaviour
             if (theQuickMenuManager.activatedButton == this)
                 theQuickMenuManager.activatedButton = null;
             container.sizeDelta = new Vector2(container.rect.width, container.rect.height / 3);
-            contentsBoxPopup.SetActive(false);
+            contentsBoxPopup.SetActive(false,activationObj);
             contentsContainer.ZoomOut(false);
             trig = !trig;
         }
