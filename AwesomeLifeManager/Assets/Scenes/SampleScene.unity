@@ -5701,7 +5701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4869f03a9ecd9d3418ad0a8b6829eec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toClosePopup: {fileID: 1206245438}
   toOpenPopup: {fileID: 1852607146}
 --- !u!1 &1109868658
 GameObject:
@@ -8902,7 +8901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originSizeRaitio: {x: 1, y: 0.90625}
-  standardRect: {fileID: 0}
+  standardRect: {fileID: 1053710828}
 --- !u!114 &1670324776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9257,7 +9256,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   anchoredPos: {x: 0, y: 0}
-  energyPreview: {fileID: 1215052650}
   accumFatigue: 0
   accumAP: 0
   cellInspectorPopup: {fileID: 1553607645}

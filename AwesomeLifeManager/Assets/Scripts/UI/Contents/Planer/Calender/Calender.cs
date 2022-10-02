@@ -7,7 +7,6 @@ public class Calender : MonoBehaviour
 {
     public CalenderCell[] cells = new CalenderCell[28];
     public Vector2 anchoredPos;
-    public EnergyPreview energyPreview;
     public int accumFatigue = 0;
     public int accumAP = 0;
     RectTransform uiCanvas;
@@ -32,11 +31,6 @@ public class Calender : MonoBehaviour
                 t_cell.SetActive(true);
             }
         }
-    }
-
-    void OnEnable()
-    {
-        energyPreview.SetPreview(accumFatigue, accumAP);
     }
 
     // Update is called once per frame

@@ -30,11 +30,15 @@ public class QuickMenuButton : MonoBehaviour
             contentsContainer.ZoomIn(false);
             theQuickMenuManager.activatedButton = this;
             trig = !trig;
+            theUIManager.uiEnabled = false;
         }
         else
         {
             if (theQuickMenuManager.activatedButton == this)
+            {
+                theUIManager.uiEnabled = true;
                 theQuickMenuManager.activatedButton = null;
+            }
             container.sizeDelta = new Vector2(container.rect.width, container.rect.height / 3);
             contentsBoxPopup.SetActive(false,activationObj);
             contentsContainer.ZoomOut(false);
