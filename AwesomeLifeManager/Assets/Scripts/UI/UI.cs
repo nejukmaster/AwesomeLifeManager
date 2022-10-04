@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class UI : MonoBehaviour
 {
     public UIManager theUIManager;
+    public bool active = true;
 
     public abstract bool onClickDown(Vector2 clickPos);
 
@@ -15,5 +16,13 @@ public abstract class UI : MonoBehaviour
     void Awake()
     {
         theUIManager = UIManager.instance;
+    }
+
+    public static void ToggleSubUI(GameObject p_obj, bool p_bool)
+    {
+        foreach(UI ui in p_obj.GetComponentsInChildren<UI>())
+        {
+            ui.active = p_bool;
+        }
     }
 }

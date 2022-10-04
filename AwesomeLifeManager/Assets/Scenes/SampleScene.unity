@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168fa6061ec10764ea7dfb287e753515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deactiveUI: {fileID: 1193488553}
   container: {fileID: 1656435553}
   contentsBoxPopup: {fileID: 1206245440}
   contentsContainer: {fileID: 1960341807}
@@ -233,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theUIManager: {fileID: 0}
+  active: 1
   revealButton: {fileID: 976047737}
   actionButtons:
   - {fileID: 462685540}
@@ -412,14 +414,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43598263}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1171692108}
-  m_Father: {fileID: 667239284}
-  m_RootOrder: 4
+  m_Father: {fileID: 1670324773}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -1848,6 +1850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theUIManager: {fileID: 0}
+  active: 1
   anchoredPos: {x: 0, y: 0}
   handSlot:
   - {fileID: 1147642296}
@@ -3109,6 +3112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168fa6061ec10764ea7dfb287e753515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deactiveUI: {fileID: 1193488553}
   container: {fileID: 39860260}
   contentsBoxPopup: {fileID: 1206245440}
   contentsContainer: {fileID: 1960341807}
@@ -3745,8 +3749,6 @@ RectTransform:
   - {fileID: 2025591589}
   - {fileID: 1189333820}
   - {fileID: 1215052649}
-  - {fileID: 1396072369}
-  - {fileID: 43598264}
   m_Father: {fileID: 1053710828}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5215,6 +5217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theUIManager: {fileID: 0}
+  active: 1
   actionMenu: {fileID: 6409049}
   menuContainer: {fileID: 2147253251}
   tmp: {fileID: 145446845}
@@ -5365,6 +5368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168fa6061ec10764ea7dfb287e753515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deactiveUI: {fileID: 1193488553}
   container: {fileID: 1493324122}
   contentsBoxPopup: {fileID: 1206245440}
   contentsContainer: {fileID: 1960341807}
@@ -7081,13 +7085,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396072368}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1274810446}
-  m_Father: {fileID: 667239284}
+  m_Father: {fileID: 1670324773}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -8841,6 +8845,8 @@ RectTransform:
   m_Children:
   - {fileID: 1772837598}
   - {fileID: 255351702}
+  - {fileID: 43598264}
+  - {fileID: 1396072369}
   m_Father: {fileID: 1852607147}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9299,6 +9305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theUIManager: {fileID: 0}
+  active: 1
   boxes:
   - {fileID: 292224639}
   - {fileID: 1758616859}
@@ -10326,6 +10333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168fa6061ec10764ea7dfb287e753515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deactiveUI: {fileID: 1193488553}
   container: {fileID: 1191654822}
   contentsBoxPopup: {fileID: 1206245440}
   contentsContainer: {fileID: 1960341807}

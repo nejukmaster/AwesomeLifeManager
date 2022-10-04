@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,16 +26,23 @@ public class ActionCard : UI
 
     CalenderCell CheckHolding()
     {
-        Vector2 t_pos = this.GetComponent<RectTransform>().anchoredPosition + hand.anchoredPos;
-        Vector2 s_pos = new Vector2(calender.anchoredPos.x - calender.GetComponent<RectTransform>().rect.width / 2, calender.anchoredPos.y - calender.GetComponent<RectTransform>().rect.height / 2);
-        Vector2 e_pos = new Vector2(calender.anchoredPos.x + calender.GetComponent<RectTransform>().rect.width / 2, calender.anchoredPos.y + calender.GetComponent<RectTransform>().rect.height / 2);
-        if(t_pos.x >= s_pos.x && t_pos.y >= s_pos.y && t_pos.x <= e_pos.x && t_pos.y <= e_pos.y)
+        try
         {
-            int x_gride = (int)((t_pos.x - s_pos.x) / CalenderCell.width);
-            int y_gride = (int)((e_pos.y - t_pos.y) / CalenderCell.height);
-            return calender.cells[y_gride * 7 + x_gride];
+            Vector2 t_pos = this.GetComponent<RectTransform>().anchoredPosition + hand.anchoredPos;
+            Vector2 s_pos = new Vector2(calender.anchoredPos.x - calender.GetComponent<RectTransform>().rect.width / 2, calender.anchoredPos.y - calender.GetComponent<RectTransform>().rect.height / 2);
+            Vector2 e_pos = new Vector2(calender.anchoredPos.x + calender.GetComponent<RectTransform>().rect.width / 2, calender.anchoredPos.y + calender.GetComponent<RectTransform>().rect.height / 2);
+            if (t_pos.x >= s_pos.x && t_pos.y >= s_pos.y && t_pos.x <= e_pos.x && t_pos.y <= e_pos.y)
+            {
+                int x_gride = (int)((t_pos.x - s_pos.x) / CalenderCell.width);
+                int y_gride = (int)((e_pos.y - t_pos.y) / CalenderCell.height);
+                return calender.cells[y_gride * 7 + x_gride];
+            }
+            return null;
         }
-        return null;
+        catch(IndexOutOfRangeException e)
+        {
+            return null;
+        }
     }
 
     public override bool onClickDown(Vector2 clickPos)
@@ -46,7 +54,7 @@ public class ActionCard : UI
                              - hand.anchoredPos;
             if (Vector2.Distance(GetComponent<RectTransform>().anchoredPosition, t_pos) <= 50)
             {
-                FindObjectOfType<PlanerCloseButton>().GetComponent<Button>().enabled = false;
+                //FindObjectOfType<PlanerCloseButton>().GetComponent<Button>().enabled = false;
                 activated = true;
                 return true;
             }
@@ -58,7 +66,7 @@ public class ActionCard : UI
     {
         if (activated)
         {
-            FindObjectOfType<PlanerCloseButton>().GetComponent<Button>().enabled = true;
+            //FindObjectOfType<PlanerCloseButton>().GetComponent<Button>().enabled = true;
             activated = false;
             inform.actioin.actionDel(currentCell);
             currentCell.HoldOut();

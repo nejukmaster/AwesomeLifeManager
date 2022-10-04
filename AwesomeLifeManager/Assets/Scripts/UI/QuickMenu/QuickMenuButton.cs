@@ -7,6 +7,7 @@ public class QuickMenuButton : MonoBehaviour
 {
     UIManager theUIManager;
     QuickMenuManager theQuickMenuManager;
+    [SerializeField] GameObject deactiveUI;
     [SerializeField] RectTransform container;
     [SerializeField] ContentsBoxPopup contentsBoxPopup;
     [SerializeField] Container contentsContainer;
@@ -30,13 +31,13 @@ public class QuickMenuButton : MonoBehaviour
             contentsContainer.ZoomIn(false);
             theQuickMenuManager.activatedButton = this;
             trig = !trig;
-            theUIManager.uiEnabled = false;
+            UI.ToggleSubUI(deactiveUI, false);
         }
         else
         {
             if (theQuickMenuManager.activatedButton == this)
             {
-                theUIManager.uiEnabled = true;
+                UI.ToggleSubUI(deactiveUI, true);
                 theQuickMenuManager.activatedButton = null;
             }
             container.sizeDelta = new Vector2(container.rect.width, container.rect.height / 3);

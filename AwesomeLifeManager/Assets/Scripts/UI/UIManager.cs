@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
                 for (int i = 0; i < UI_List.Count; i++)
                 {
                     if (!UI_List[i].gameObject.activeInHierarchy) continue;
+                    if (!UI_List[i].active) continue;
                     if (UI_List[i].onClickDown(Input.mousePosition))
                         break;
                 }
@@ -42,6 +43,7 @@ public class UIManager : MonoBehaviour
                 for (int i = 0; i < UI_List.Count; i++)
                 {
                     if (!UI_List[i].gameObject.activeInHierarchy) continue;
+                    if (!UI_List[i].active) continue;
                     if (externalListenerFired)
                     {
                         externalListenerFired = false;
@@ -61,6 +63,7 @@ public class UIManager : MonoBehaviour
                 for (int i = 0; i < UI_List.Count; i++)
                 {
                     if (!UI_List[i].gameObject.activeInHierarchy) continue;
+                    if (!UI_List[i].active) continue;
                     if (UI_List[i].onSwipe(trace_pos, Input.mousePosition))
                         break;
                 }
