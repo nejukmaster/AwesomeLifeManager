@@ -9,5 +9,6 @@ public class DesignPlanBtn : MonoBehaviour
     public void OnClick()
     {
         toOpenPopup.SetActive(true);
+        toOpenPopup.GetComponentInChildren<Calender>().SettingCells();
     }
 }
