@@ -105,13 +105,19 @@ public class Hand : UI
                 if (draging)
                 {
                     draging = false;
+                    if (cards[selectedCardIndex].currentCell == null)
+                    {
+                        cards[selectedCardIndex].Slide(handSlot[selectedCardIndex].anchoredPosition);
+                        selectedCardIndex = -1;
+                        return true;
+                    }
                     cards[selectedCardIndex].inform.actioin.actionDel(cards[selectedCardIndex].currentCell);
                     cards[selectedCardIndex].currentCell.HoldOut();
                     cards[selectedCardIndex].gameObject.SetActive(false);
                     ObjectPool.instance.actionCardQueue.Enqueue(cards[selectedCardIndex].gameObject);
                     cards[selectedCardIndex] = null;
-                    Draw();
                     selectedCardIndex = -1;
+                    Draw();
                     return true;
                 }
                 else
