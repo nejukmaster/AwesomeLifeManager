@@ -10,6 +10,7 @@ public class ActionCard : UI
     private bool canClick = true;
     private float slideSpeed = 9.5f;
     private Vector2 anchoredPos;
+    private Coroutine currentCoroutine;
     RectTransform uiCanvas;
     Hand hand;
     
@@ -24,7 +25,7 @@ public class ActionCard : UI
         uiCanvas = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
     }
 
-    CalenderCell CheckHolding()
+    public CalenderCell CheckHolding()
     {
         try
         {
@@ -45,55 +46,25 @@ public class ActionCard : UI
         }
     }
 
+    public void Slide(Vector2 p_dest)
+    {
+        if(currentCoroutine != null)
+            StopCoroutine(currentCoroutine);
+        currentCoroutine = StartCoroutine(SlideCo(p_dest));
+    }
+
     public override bool onClickDown(Vector2 clickPos)
     {
-        if (canClick)
-        {
-            Vector2 t_pos = new Vector2(Utility.Mapping(clickPos.x, new Vector2(0, Screen.width), new Vector2(0, uiCanvas.rect.width)),
-                                        Utility.Mapping(clickPos.y, new Vector2(0, Screen.height), new Vector2(0, uiCanvas.rect.height)))
-                             - hand.anchoredPos;
-            if (Vector2.Distance(GetComponent<RectTransform>().anchoredPosition, t_pos) <= 50)
-            {
-                //FindObjectOfType<PlanerCloseButton>().GetComponent<Button>().enabled = false;
-                activated = true;
-                return true;
-            }
-        }
         return false;
     }
 
     public override bool onClickUp(float dragDis, Vector2 clickPos)
     {
-        if (activated)
-        {
-            //FindObjectOfType<PlanerCloseButton>().GetComponent<Button>().enabled = true;
-            activated = false;
-            inform.actioin.actionDel(currentCell);
-            currentCell.HoldOut();
-            gameObject.SetActive(false);
-            hand.Draw();
-            return true;
-        }
-        else
-            return false;
+        return false;
     }
 
     public override bool onSwipe(Vector2 swipeStartp, Vector2 swipeEndp)
     {
-        if (activated)
-        {
-            GetComponent<RectTransform>().anchoredPosition = new Vector2(Utility.Mapping(Input.mousePosition.x, new Vector2(0, Screen.width), new Vector2(0, uiCanvas.rect.width)),
-                                                                                Utility.Mapping(Input.mousePosition.y, new Vector2(0, Screen.height), new Vector2(0, uiCanvas.rect.height)))
-                                                                  - hand.anchoredPos;
-            if (CheckHolding() != null && CheckHolding() != currentCell)
-            {
-                if (currentCell != null)
-                    currentCell.HoldOut();
-                currentCell = CheckHolding();
-                currentCell.HoldeOn();
-            }
-            return true;
-        }
         return false;
     }
 

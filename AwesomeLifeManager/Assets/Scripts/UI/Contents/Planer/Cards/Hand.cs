@@ -1,12 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class Hand : UI
 {
     public Vector2 anchoredPos;
     RectTransform uiCanvas;
     ActionCard[] cards = new ActionCard[4];
+    int selectedCardIndex;
+    bool draging = false;
     [SerializeField] RectTransform[] handSlot;
     [SerializeField] Calender calender;
     [SerializeField] MyDeck myDeck;
@@ -22,6 +27,7 @@ public class Hand : UI
         {
             Draw();
         }
+        selectedCardIndex = -1;
     }
 
     public void AddCard(ActionCard p_card)
@@ -31,7 +37,7 @@ public class Hand : UI
             if (cards[i] == null)
             {
                 cards[i] = p_card;
-                StartCoroutine(p_card.SlideCo(handSlot[i].anchoredPosition));
+                p_card.Slide(handSlot[i].anchoredPosition);
                 UIManager.instance.UI_List.Add(p_card);
                 return;
             }
@@ -52,16 +58,111 @@ public class Hand : UI
 
     public override bool onClickDown(Vector2 clickPos)
     {
-        return false;
+        int r = -1;
+        GetClickedCard(clickPos, ref r);
+
+        if (r == -1)
+        {
+            return false;
+        }
+        else
+        {
+            if(selectedCardIndex != r)
+            {
+                return false;
+            }
+            else if(selectedCardIndex == r)
+            {
+                draging = true;
+                return true;
+            }
+            return false;
+        }
     }
 
     public override bool onClickUp(float dragDis, Vector2 clickPos)
     {
-        return false;
+        int r = -1;
+        GetClickedCard(clickPos, ref r);
+
+        if (r == -1)
+        {
+            return false;
+        }
+        else
+        {
+            if(selectedCardIndex != r)
+            {
+                if(selectedCardIndex != -1)
+                {
+                    cards[selectedCardIndex].Slide(handSlot[selectedCardIndex].anchoredPosition);
+                }
+                selectedCardIndex = r;
+                cards[selectedCardIndex].Slide(handSlot[r].anchoredPosition + new Vector2(0, 150));
+            }
+            else
+            {
+                if (draging)
+                {
+                    draging = false;
+                    cards[selectedCardIndex].inform.actioin.actionDel(cards[selectedCardIndex].currentCell);
+                    cards[selectedCardIndex].currentCell.HoldOut();
+                    cards[selectedCardIndex].gameObject.SetActive(false);
+                    ObjectPool.instance.actionCardQueue.Enqueue(cards[selectedCardIndex].gameObject);
+                    cards[selectedCardIndex] = null;
+                    Draw();
+                    selectedCardIndex = -1;
+                    return true;
+                }
+                else
+                    return false;
+            }
+            return true;
+        }
     }
 
     public override bool onSwipe(Vector2 swipeStartp, Vector2 swipeEndp)
     {
+        if (draging)
+        {
+            cards[selectedCardIndex].GetComponent<RectTransform>().anchoredPosition = new Vector2(Utility.Mapping(Input.mousePosition.x, new Vector2(0, Screen.width), new Vector2(0, uiCanvas.rect.width)),
+                                                                                Utility.Mapping(Input.mousePosition.y, new Vector2(0, Screen.height), new Vector2(0, uiCanvas.rect.height)))
+                                                                  - anchoredPos;
+            CalenderCell t_cell = cards[selectedCardIndex].currentCell;
+            if (cards[selectedCardIndex].CheckHolding() != null && cards[selectedCardIndex].CheckHolding() != t_cell)
+            {
+                if (t_cell != null)
+                    t_cell.HoldOut();
+                t_cell = cards[selectedCardIndex].CheckHolding();
+                t_cell.HoldeOn();
+                cards[selectedCardIndex].currentCell = t_cell;
+            }
+            return true;
+        }
         return false;
+    }
+
+    void GetClickedCard(Vector2 clickPos, ref int r)
+    {
+        Vector2 t_pos = new Vector2(Utility.Mapping(clickPos.x, new Vector2(0, Screen.width), new Vector2(0, uiCanvas.rect.width)),
+                                        Utility.Mapping(clickPos.y, new Vector2(0, Screen.height), new Vector2(0, uiCanvas.rect.height)))
+                             - anchoredPos;
+        for (int i = 0; i < cards.Length; i++)
+        {
+            if (cards[i] != null)
+            {
+                if (Vector2.Distance(cards[i].GetComponent<RectTransform>().anchoredPosition, t_pos) < 120)
+                {
+                    if (r == -1)
+                    {
+                        r = i;
+                    }
+                    else if (Vector2.Distance(cards[i].GetComponent<RectTransform>().anchoredPosition, t_pos) < Vector2.Distance(cards[r].GetComponent<RectTransform>().anchoredPosition, t_pos))
+                    {
+                        r = i;
+                    }
+                }
+            }
+        }
     }
 }
