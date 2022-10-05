@@ -78,4 +78,18 @@ public static class Utility
     {
         return new Vector2(Mapping(p_vec2.x, new Vector2(from.x, from.y), new Vector2(to.x, to.y)), Mapping(p_vec2.y, new Vector2(from.z, from.w), new Vector2(to.z, to.w)));
     }
+
+    public static float pathFunction(float p_pos, float p_delta, Vector2 p_range)
+    {
+        float r = p_pos + p_delta;
+        if (p_range.x > r)
+        {
+            r = Mathf.Abs(r) + p_range.x;
+        }
+        else if (p_range.y < r)
+        {
+            r = -1 * Mathf.Abs(r) + p_range.y;
+        }
+        return r;
+    }
 }
