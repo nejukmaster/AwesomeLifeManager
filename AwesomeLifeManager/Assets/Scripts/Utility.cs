@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using System.Data;
+using Unity.Mathematics;
 
 //유틸리티 함수를 저장하는 정적 클래스
 public static class Utility
@@ -67,11 +68,7 @@ public static class Utility
 
     public static float Mapping(float p_num, Vector2 from, Vector2 to)
     {
-        if (p_num != 0) {
-            return (to.y - to.x) * p_num / (from.y - from.x) + to.x;
-        }
-        else
-            return 0;
+        return to.x + (p_num - from.x) * (to.y - to.x) / (from.y - from.x);
     }
 
     public static Vector2 Mapping(Vector2 p_vec2, Vector4 from, Vector4 to)
