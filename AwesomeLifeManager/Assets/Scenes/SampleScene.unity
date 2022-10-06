@@ -763,14 +763,13 @@ GameObject:
   - component: {fileID: 73681793}
   - component: {fileID: 73681792}
   - component: {fileID: 73681791}
-  - component: {fileID: 73681790}
   m_Layer: 5
   m_Name: WeekCard (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &73681789
 RectTransform:
   m_ObjectHideFlags: 0
@@ -791,18 +790,6 @@ RectTransform:
   m_AnchoredPosition: {x: -150, y: 0}
   m_SizeDelta: {x: 600, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &73681790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73681788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fc9167d094e6d3408b324a5e5490bcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &73681791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,6 +802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc9167d094e6d3408b324a5e5490bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentX: 450
 --- !u!114 &73681792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1501,6 +1489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc9167d094e6d3408b324a5e5490bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentX: 0
 --- !u!114 &143141883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1758,7 +1747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &177511746
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1791,6 +1780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc9167d094e6d3408b324a5e5490bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentX: 300
 --- !u!114 &177511748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5984,7 +5974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a43d40593f8754ab04b30bdb68cf75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originSizeRaitio: {x: 0.9111111, y: 0.0875}
+  originSizeRaitio: {x: 0.9111111, y: 0.0625}
   standardRect: {fileID: 1053710828}
 --- !u!114 &1086256052
 MonoBehaviour:
@@ -6196,7 +6186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1161817907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6229,6 +6219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc9167d094e6d3408b324a5e5490bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentX: 150
 --- !u!114 &1161817909
 MonoBehaviour:
   m_ObjectHideFlags: 0

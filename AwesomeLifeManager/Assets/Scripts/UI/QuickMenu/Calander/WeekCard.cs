@@ -5,5 +5,5 @@ using UnityEngine;
 public class WeekCard : MonoBehaviour
 {
 
-    
+    public float currentX;
 }
