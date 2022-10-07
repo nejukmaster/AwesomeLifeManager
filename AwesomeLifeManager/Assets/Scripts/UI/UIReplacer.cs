@@ -19,11 +19,8 @@ public class UIReplacer : MonoBehaviour
 
     public void PreReplacing()
     {
-        if (!replaced)
-        {
             RectTransform UI_rect = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
             this.GetComponent<RectTransform>().anchoredPosition = new Vector2(this.GetComponent<RectTransform>().anchoredPosition.x * (UI_rect.rect.width / standardUIRect.x), this.GetComponent<RectTransform>().anchoredPosition.y * (UI_rect.rect.height / standardUIRect.y));
             replaced=true;
-        }
     }
 }

@@ -34,6 +34,7 @@ public class PlanContainer : UI
     {
         if (dropShadow.activeSelf)
         {
+            weekCards[frontCardIndex].objGroup.gameObject.SetActive(false);
             dropShadow.SetActive(false);
         }
         float dis = swipeEndp.x - swipeStartp.x;
@@ -69,6 +70,7 @@ public class PlanContainer : UI
         dropShadow.transform.SetAsLastSibling();
         weekCards[GetFrontCard()].transform.SetAsLastSibling();
         frontCardIndex = GetFrontCard();
+        weekCards[frontCardIndex].objGroup.gameObject.SetActive(true);
     }
 
     int GetFrontCard()

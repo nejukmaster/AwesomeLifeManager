@@ -17,9 +17,7 @@ public class Calender : MonoBehaviour
     void Awake()
     {
         uiCanvas = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
-        this.GetComponent<RectTransform>().anchoredPosition = new Vector2(uiCanvas.rect.width / 2, uiCanvas.rect.height / 2);
         anchoredPos = this.GetComponent<RectTransform>().anchoredPosition;
-        
     }
 
     public void SettingCells()
