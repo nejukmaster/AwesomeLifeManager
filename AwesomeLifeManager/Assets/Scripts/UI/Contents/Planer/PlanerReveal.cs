@@ -48,6 +48,7 @@ public class PlanerReveal : ContentsBox
         toggle = true;
         //planerUI.gameObject.SetActive(true);
         tmp.enabled = true;
+        container.boxGroup.anchoredPosition = Vector2.zero;
         base.contentsBoxPopup.SetActive(true);
         theUIManager.uiEnabled = false;
         //UI.gameObject.SetActive(false);

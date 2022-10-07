@@ -18,6 +18,7 @@ public abstract class ContentsBox : MonoBehaviour
         RectTransform t_destRect = targetSize;
         RectTransform t_rect = GetComponent<RectTransform>();
         Vector2 t_size = t_rect.sizeDelta;
+        Vector2 t_pos = t_rect.anchoredPosition;
         OnStartCoroutine();
         while (Vector2.Distance(t_rect.sizeDelta, t_destRect.sizeDelta + new Vector2(200, 200)) >= 1)
         {

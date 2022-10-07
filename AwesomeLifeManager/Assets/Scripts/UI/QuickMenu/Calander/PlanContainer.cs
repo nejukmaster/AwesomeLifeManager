@@ -53,10 +53,10 @@ public class PlanContainer : UI
 
     void Snap()
     {
+        float f = weekCards[0].currentX % 75;
         for (int i = 0; i < weekCards.Length; i++)
         {
-            float _f = weekCards[i].currentX - (weekCards[i].currentX % 75);
-            weekCards[i].currentX = _f;
+            weekCards[i].currentX -= f;
             RectTransform t_rect = weekCards[i].GetComponent<RectTransform>();
             float t_pos = Utility.pathFunction(weekCards[i].currentX, 0, weekCardPosRange, 2f, 0);
             t_rect.anchoredPosition = new Vector2(t_pos, t_rect.anchoredPosition.y);

@@ -5,8 +5,8 @@ using UnityEngine;
 public class ContentsContainer : UI
 {
     public delegate void SnapFunc();
+    public RectTransform boxGroup;
     [SerializeField] ContentsBox[] boxes;
-    [SerializeField] RectTransform boxGroup;
     Container container;
 
     public float snapSpeed = 5f;
