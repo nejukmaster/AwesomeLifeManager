@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CalenderCloseButton : MonoBehaviour
 {
+    public GameObject closedPoppup;
+
     [SerializeField] Calender calender;
     [SerializeField] GameObject toClosePopup;
     TurnManager theTurnManager;
@@ -17,5 +19,6 @@ public class CalenderCloseButton : MonoBehaviour
     {
         TurnManager.instance.ReadCalender(calender);
         toClosePopup.SetActive(false);
+        UI.ToggleSubUI(closedPoppup, true);
     }
 }

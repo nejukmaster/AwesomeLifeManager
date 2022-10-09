@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,8 +38,18 @@ public abstract class Scroll : UI
 
     public override bool onSwipe(Vector2 swipeStartp, Vector2 swipeEndp)
     {
+        Vector2[] _end = new Vector2[2];
+        try{
+            _end[0] = objs[objs.Length - 1].GetComponent<RectTransform>().anchoredPosition;
+            _end[1] = objs[objs.Length - 1].GetComponent<RectTransform>().sizeDelta;
+        }
+        catch(IndexOutOfRangeException e)
+        {
+            _end[0] = Vector2.zero;
+            _end[1] = Vector2.zero;
+        }
         if (objGroup.anchoredPosition.y - (swipeStartp.y - swipeEndp.y) >= 0 &&
-            -1 * (objGroup.anchoredPosition.y - (swipeStartp.y - swipeEndp.y)) >= (objs[objs.Length - 1].GetComponent<RectTransform>().anchoredPosition.y + objs[objs.Length - 1].GetComponent<RectTransform>().rect.height / 2 - 25))
+            -1 * (objGroup.anchoredPosition.y - (swipeStartp.y - swipeEndp.y)) >= (_end[0].y + _end[1].y / 2 - 25))
         {
             objGroup.anchoredPosition += new Vector2(0, -1f * (swipeStartp.y - swipeEndp.y));
             if (!startSwipe)

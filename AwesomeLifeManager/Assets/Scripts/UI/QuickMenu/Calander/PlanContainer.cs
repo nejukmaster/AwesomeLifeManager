@@ -7,7 +7,7 @@ public class PlanContainer : UI
 {
     [SerializeField] Vector2 weekCardPosRange = new Vector2(-150, 150);
     [SerializeField] Vector2 weekCardScaleRange = new Vector2(0.7f, 1f);
-    [SerializeField] GameObject dropShadow;
+    public GameObject dropShadow;
     WeekCard[] weekCards = new WeekCard[0];
     int frontCardIndex;
     
