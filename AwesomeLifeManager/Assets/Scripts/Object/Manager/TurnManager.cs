@@ -17,11 +17,11 @@ public class TurnManager : MonoBehaviour
     PlanManager planManager;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         instance = this;
         planManager = PlanManager.instance;
-        currentTurn = new Turn(1);
+        currentTurn = new Turn(0);
     }
 
     public void ReadCalender(Calender p_calender)

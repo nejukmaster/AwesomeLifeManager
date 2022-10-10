@@ -2,19 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class PlanContainer : UI
 {
     [SerializeField] Vector2 weekCardPosRange = new Vector2(-150, 150);
     [SerializeField] Vector2 weekCardScaleRange = new Vector2(0.7f, 1f);
+    [SerializeField] GameObject weekView;
     public GameObject dropShadow;
     WeekCard[] weekCards = new WeekCard[0];
-    int frontCardIndex;
+    int frontCardIndex = 0;
+    TurnManager theTurnManager;
     
 
     private void Awake()
     {
         weekCards = GetComponentsInChildren<WeekCard>();
+        theTurnManager = TurnManager.instance;
+        frontCardIndex = GetFrontCard();
+        weekView.GetComponentInChildren<TextMeshProUGUI>().text = (theTurnManager.currentTurn.turnNum % 12 +1).ToString()+"월 "+(weekCards[frontCardIndex].weekNum+1).ToString()+"주차";
     }
     public override bool onClickDown(Vector2 clickPos)
     {
@@ -23,9 +30,11 @@ public class PlanContainer : UI
 
     public override bool onClickUp(float dragDis, Vector2 clickPos)
     {
-        if(dragDis > 0)
+        Snap();
+        if(dragDis < 20)
         {
-            Snap();
+           weekCards[frontCardIndex].OnClick();
+            return true;
         }
         return false;
     }
@@ -48,6 +57,12 @@ public class PlanContainer : UI
             t_r = Utility.Mapping(t_r, new Vector2(-1, 1), weekCardScaleRange);
             float t_scale = t_r;
             t_rect.localScale = new Vector2(t_scale, t_scale);
+            if(GetFrontCard() != frontCardIndex)
+            {
+                frontCardIndex = GetFrontCard();
+                weekCards[frontCardIndex].transform.SetAsLastSibling();
+                weekView.GetComponentInChildren<TextMeshProUGUI>().text = (theTurnManager.currentTurn.turnNum % 12 +1).ToString()+"월 "+(weekCards[frontCardIndex].weekNum+1).ToString()+"주차";
+            }
         }
         return true;
     }
@@ -71,6 +86,8 @@ public class PlanContainer : UI
         weekCards[GetFrontCard()].transform.SetAsLastSibling();
         frontCardIndex = GetFrontCard();
         weekCards[frontCardIndex].objGroup.gameObject.SetActive(true);
+        weekView.GetComponentInChildren<TextMeshProUGUI>().text = (theTurnManager.currentTurn.turnNum % 12 +1).ToString()+"월 "+(weekCards[frontCardIndex].weekNum+1).ToString()+"주차";
+        weekCards[frontCardIndex].GetComponent<RectTransform>().localScale = Vector2.one;
     }
 
     int GetFrontCard()

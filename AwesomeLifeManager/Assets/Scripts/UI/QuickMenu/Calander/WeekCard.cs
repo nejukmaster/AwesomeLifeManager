@@ -13,6 +13,7 @@ public class WeekCard : Scroll
     TurnManager theTurnManager;
     ObjectPool theObjectPool;
     PlanContainer thePlanContainer;
+    Coroutine co;
 
     private void Awake()
     {
@@ -34,9 +35,10 @@ public class WeekCard : Scroll
                 {
                     GameObject t_box = theObjectPool.weekPlanQueue.Dequeue();
                     t_box.SetActive(true);
-                    t_box.transform.SetParent(this.objGroup);
-                    t_box.GetComponentInChildren<TextMeshProUGUI>().text = (i+1) + "일차: "+ theTurnManager.currentTurn.settedPlan[i].name;
+                    t_box.transform.SetParent(this.objGroup, false);
+                    t_box.GetComponentInChildren<TextMeshProUGUI>().text = (i+1) + "일차: "+ theTurnManager.currentTurn.settedPlan[_i].name;
                     RectTransform t_rect = t_box.GetComponent<RectTransform>();
+                    t_rect.localScale = Vector2.one;
                     t_rect.anchoredPosition = new Vector2(0, -1 * t_rect.rect.height * pibot);
                     pibot++;
                 }
@@ -69,26 +71,31 @@ public class WeekCard : Scroll
 
     public void OnClick()
     {
-        StartCoroutine(FlipCo());
+        if (co != null)
+            StopCoroutine(co);
+        co = StartCoroutine(FlipCo());
     }
 
     public void OnFlipButtonClick()
     {
-        StartCoroutine(UnflipCo());
+        if(co != null)
+            StopCoroutine(co);
+        co = StartCoroutine(UnflipCo());
     }
 
     IEnumerator FlipCo()
     {
         thePlanContainer.dropShadow.SetActive(false);
         thePlanContainer.active = false;
+        Debug.Log(this.GetComponent<RectTransform>().localScale.x);
         while (this.GetComponent<RectTransform>().localScale.x > 0.1)
         {
+            Debug.Log("tlfgod");
             this.GetComponent<RectTransform>().localScale = Vector2.Lerp(this.GetComponent<RectTransform>().localScale,
                                                                          new Vector2(0, this.GetComponent<RectTransform>().localScale.y),
                                                                          3f * Time.deltaTime);
             yield return null;
         }
-        this.GetComponent<Button>().enabled = false;
         while (this.GetComponent<RectTransform>().localScale.x < 0.9)
         {
             this.GetComponent<RectTransform>().localScale = Vector2.Lerp(this.GetComponent<RectTransform>().localScale,
@@ -97,7 +104,9 @@ public class WeekCard : Scroll
             yield return null;
         }
         flipButton.gameObject.SetActive(true);
+        thePlanContainer.dropShadow.SetActive(true);
         this.active = true;
+        this.GetComponent<RectTransform>().localScale = Vector2.one;
         genPlanBox();
     }
 
@@ -121,7 +130,8 @@ public class WeekCard : Scroll
                                                                          3f * Time.deltaTime);
             yield return null;
         }
-        this.GetComponent<Button>().enabled = true;
         thePlanContainer.active = true;
+        thePlanContainer.dropShadow.SetActive(true);
+        this.GetComponent<RectTransform>().localScale = Vector2.one;
     }
 }
