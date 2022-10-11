@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     public bool keyDown = false;
     public bool externalListenerFired = false;
 
+    [SerializeField] float doubleClickDelay;
     private Vector3 trace_pos = Vector3.zero;
     private float total_drag_distance = 0f;
     // Start is called before the first frame update
@@ -49,6 +50,20 @@ public class UIManager : MonoBehaviour
                         externalListenerFired = false;
                         break;
                     }
+                    if (UI_List[i].onDoubleClick(Input.mousePosition, false))
+                    {
+                        if (UI_List[i].clickedDelay == 0) UI_List[i].clickedDelay = 0.01f;
+                        else
+                        {
+                            if (UI_List[i].clickedDelay < doubleClickDelay)
+                            {
+                                UI_List[i].onDoubleClick(Input.mousePosition, true);
+                                UI_List[i].clickedDelay = 0;
+                                break;
+                            }
+                            UI_List[i].clickedDelay = 0;
+                        }
+                    }
                     if (UI_List[i].onClickUp(total_drag_distance, Input.mousePosition))
                     {
                         break;
@@ -68,6 +83,13 @@ public class UIManager : MonoBehaviour
                         break;
                 }
                 trace_pos = Input.mousePosition;
+            }
+            for (int i = 0; i < UI_List.Count; i++)
+            {
+                if (UI_List[i].clickedDelay > 0)
+                {
+                    UI_List[i].clickedDelay += Time.deltaTime;
+                }
             }
         }
     }

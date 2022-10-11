@@ -13,7 +13,12 @@ public class CalenderCell : MonoBehaviour
     public TextMeshProUGUI tmp;
     [SerializeField] GameObject holdMarker;
     [SerializeField] Image planMarker;
-    
+
+    private void Update()
+    {
+        
+    }
+
     public void HoldeOn()
     {
         holdMarker.SetActive(true);
@@ -35,6 +40,7 @@ public class CalenderCell : MonoBehaviour
     
     public void OnClick()
     {
+
         calender.cellInspectorPopup.SetActive(true, this);
     }
 }

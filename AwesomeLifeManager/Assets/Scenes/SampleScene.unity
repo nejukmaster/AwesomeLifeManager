@@ -235,6 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theUIManager: {fileID: 0}
   active: 1
+  clickedDelay: 0
   revealButton: {fileID: 976047737}
   actionButtons:
   - {fileID: 462685540}
@@ -842,6 +843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theUIManager: {fileID: 0}
   active: 1
+  clickedDelay: 0
   objGroup: {fileID: 36457251}
   objs: []
   startSwipe: 0
@@ -1672,6 +1674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theUIManager: {fileID: 0}
   active: 1
+  clickedDelay: 0
   objGroup: {fileID: 1423462165}
   objs: []
   startSwipe: 0
@@ -1973,6 +1976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theUIManager: {fileID: 0}
   active: 1
+  clickedDelay: 0
   objGroup: {fileID: 758370247}
   objs: []
   startSwipe: 0
@@ -2366,6 +2370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theUIManager: {fileID: 0}
   active: 1
+  clickedDelay: 0
   anchoredPos: {x: 0, y: 0}
   handSlot:
   - {fileID: 1147642296}
@@ -6196,6 +6201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theUIManager: {fileID: 0}
   active: 1
+  clickedDelay: 0
   actionMenu: {fileID: 6409049}
   menuContainer: {fileID: 2147253251}
   tmp: {fileID: 145446845}
@@ -6556,10 +6562,12 @@ MonoBehaviour:
   - {fileID: 1161817908}
   - {fileID: 177511747}
   - {fileID: 143141882}
+  - {fileID: 1772837599}
   uiEnabled: 1
   canSwipe: 1
   keyDown: 0
   externalListenerFired: 0
+  doubleClickDelay: 3
 --- !u!1 &1072541516
 GameObject:
   m_ObjectHideFlags: 0
@@ -6942,6 +6950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theUIManager: {fileID: 0}
   active: 1
+  clickedDelay: 0
   objGroup: {fileID: 296737076}
   objs: []
   startSwipe: 0
@@ -8099,6 +8108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theUIManager: {fileID: 0}
   active: 1
+  clickedDelay: 0
   weekCardPosRange: {x: -150, y: 150}
   weekCardScaleRange: {x: 0.6, y: 1}
   weekView: {fileID: 1072541516}
@@ -10251,6 +10261,7 @@ GameObject:
   - component: {fileID: 1670324775}
   - component: {fileID: 1670324774}
   - component: {fileID: 1670324778}
+  - component: {fileID: 1670324779}
   m_Layer: 5
   m_Name: Container
   m_TagString: Untagged
@@ -10360,6 +10371,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &1670324779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670324772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa49094a2e68b64e8d2a5e67b1adca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchored: {x: 0, y: 0}
 --- !u!1 &1688455140
 GameObject:
   m_ObjectHideFlags: 0
@@ -10751,6 +10775,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc67387bdaa80043a717895502b583b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  theUIManager: {fileID: 0}
+  active: 1
+  clickedDelay: 0
   cells:
   - {fileID: 0}
   - {fileID: 0}
@@ -10784,6 +10811,7 @@ MonoBehaviour:
   accumFatigue: 0
   accumAP: 0
   frame: {fileID: 1566766088}
+  Container: {fileID: 0}
   cellInspectorPopup: {fileID: 1553607645}
 --- !u!114 &1772837600
 MonoBehaviour:
@@ -10863,6 +10891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theUIManager: {fileID: 0}
   active: 1
+  clickedDelay: 0
   objGroup: {fileID: 273545881}
   objs: []
   startSwipe: 0

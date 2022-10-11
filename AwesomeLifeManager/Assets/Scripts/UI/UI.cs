@@ -6,12 +6,18 @@ public abstract class UI : MonoBehaviour
 {
     public UIManager theUIManager;
     public bool active = true;
+    public float clickedDelay;
 
     public abstract bool onClickDown(Vector2 clickPos);
 
     public abstract bool onClickUp(float dragDis, Vector2 clickPos);
 
     public abstract bool onSwipe(Vector2 swipeStartp, Vector2 swipeEndp);
+
+    public virtual bool onDoubleClick(Vector2 clickPos, bool isActivate)
+    {
+        return false;
+    }
 
     void Awake()
     {
