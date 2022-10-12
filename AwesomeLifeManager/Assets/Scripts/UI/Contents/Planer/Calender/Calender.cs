@@ -15,7 +15,7 @@ public class Calender : UI
     RectTransform uiCanvas;
     CalenderContainer container;
     float[] weekY;
-    public CalenderCellWindow cellInspectorPopup;
+    public WeekPlanPopup weekPlanPopup;
 
     // Start is called before the first frame update
     void Awake()
@@ -78,6 +78,8 @@ public class Calender : UI
                     }
                 }
                 Debug.Log(r);
+                weekPlanPopup.SetActive(true, r);
+                UI.ToggleSubUI(container.gameObject, false);
             }
             return true;
         }

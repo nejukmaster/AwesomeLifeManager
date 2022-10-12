@@ -31,16 +31,15 @@ public class CalenderCell : MonoBehaviour
 
     public bool InsertPlan(Plan p_plan)
     {
-        planMarker.enabled = true;
-        insertedPlan = p_plan;
-        calender.accumAP += p_plan.costAP;
-        calender.accumFatigue += p_plan.costFatigue;
-        return true;
-    }
-    
-    public void OnClick()
-    {
-
-        calender.cellInspectorPopup.SetActive(true, this);
+        if (insertedPlan == null)
+        {
+            planMarker.enabled = true;
+            insertedPlan = p_plan;
+            calender.accumAP += p_plan.costAP;
+            calender.accumFatigue += p_plan.costFatigue;
+            return true;
+        }
+        else
+            return false;
     }
 }

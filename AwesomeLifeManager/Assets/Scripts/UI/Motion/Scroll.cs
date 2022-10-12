@@ -14,6 +14,11 @@ public abstract class Scroll : UI
 
     private void Awake()
     {
+        updateObjs();
+    }
+
+    public void updateObjs()
+    {
         objs = objGroup.GetComponentsInChildren<RectTransform>();
     }
 
@@ -38,20 +43,19 @@ public abstract class Scroll : UI
 
     public override bool onSwipe(Vector2 swipeStartp, Vector2 swipeEndp)
     {
-        Vector2[] _end = new Vector2[2];
-        try{
-            _end[0] = objs[objs.Length - 1].GetComponent<RectTransform>().anchoredPosition;
-            _end[1] = objs[objs.Length - 1].GetComponent<RectTransform>().sizeDelta;
+        Vector2[] _end = {Vector2.zero,Vector2.zero};
+        for (int i = 0; i < objs.Length; i++) {
+            if (_end[0].y > objs[i].anchoredPosition.y)
+            {
+                _end[0] = objs[i].anchoredPosition;
+                _end[1] = objs[i].sizeDelta;
+            }
         }
-        catch(IndexOutOfRangeException e)
-        {
-            _end[0] = Vector2.zero;
-            _end[1] = Vector2.zero;
-        }
+        Debug.Log(_end[0].y);
         if (objGroup.anchoredPosition.y - (swipeStartp.y - swipeEndp.y) >= 0 &&
             -1 * (objGroup.anchoredPosition.y - (swipeStartp.y - swipeEndp.y)) >= (_end[0].y + _end[1].y / 2 - 25))
         {
-            objGroup.anchoredPosition += new Vector2(0, -1f * (swipeStartp.y - swipeEndp.y));
+            objGroup.anchoredPosition += new Vector2(0, -1.5f * (swipeStartp.y - swipeEndp.y));
             if (!startSwipe)
             {
                 startSwipe = true;
