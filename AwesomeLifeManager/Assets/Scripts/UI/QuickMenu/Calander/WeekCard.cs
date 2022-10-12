@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+//? ?? ??? ????? UI ??
 public class WeekCard : Scroll
 {
     public int weekNum = 0;
@@ -108,6 +109,7 @@ public class WeekCard : Scroll
         this.active = true;
         this.GetComponent<RectTransform>().localScale = Vector2.one;
         genPlanBox();
+        updateObjs();
     }
 
     IEnumerator UnflipCo()

@@ -4,12 +4,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
+//스크롤 기능을 미리구현해둔 UI입니다.
+//이 클래스를 상속받으면 y축 스크롤기능을 사용할 수 있게 됩니다.
 public abstract class Scroll : UI
 {
-
+    //스크롤할 목록을 묶는 변수입니다. 하이어라키창에서 반드시 설정해주어야하며 
+    //상위에 Mask 컴포넌트를 사용하여 스크롤 창을 구현할 시에 이 오브젝트의 크기를 Mask컴포넌트가 달리 오브젝트의 크기와 같게 설정해주시는 편이 좋습니다.
     public RectTransform objGroup;
+    //objGroup하위의 목록들을 저장할 변수입니다.
     public RectTransform[] objs;
+    //???? ????? ????? ??? ?????.
     public bool startSwipe = false;
+    //?? UI? ?? ???? ??? ??? ?????.
     public bool rejactSameTimeActing = true;
 
     private void Awake()
@@ -17,6 +23,7 @@ public abstract class Scroll : UI
         updateObjs();
     }
 
+    //objs? ???????. objGroup??? ????? ??? ? ??? ???? ??????.
     public void updateObjs()
     {
         objs = objGroup.GetComponentsInChildren<RectTransform>();
@@ -51,7 +58,6 @@ public abstract class Scroll : UI
                 _end[1] = objs[i].sizeDelta;
             }
         }
-        Debug.Log(_end[0].y);
         if (objGroup.anchoredPosition.y - (swipeStartp.y - swipeEndp.y) >= 0 &&
             -1 * (objGroup.anchoredPosition.y - (swipeStartp.y - swipeEndp.y)) >= (_end[0].y + _end[1].y / 2 - 25))
         {
@@ -71,7 +77,9 @@ public abstract class Scroll : UI
         else return false;
     }
 
+    //???? ????? ???? ?????.
     public abstract void onStartSwipe();
 
+    //???? ???? ???? ?????.
     public abstract void onEndSwipe();
 }
