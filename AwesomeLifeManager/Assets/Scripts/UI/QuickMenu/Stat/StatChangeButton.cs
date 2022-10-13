@@ -11,7 +11,8 @@ public class StatChangeButton : MonoBehaviour
     public float speed = 15f;
     public float downYPosRate = -50/1600;
     public bool setActivatedButtonThis = false;
-    public GameObject activateStat;
+    public ViewerContainer viewerContainer;
+    public int viewerNum = 0;
 
     [SerializeField] Color deactiveColor;
     [SerializeField] Color activeColor;
@@ -54,7 +55,7 @@ public class StatChangeButton : MonoBehaviour
 
     IEnumerator DeactiveCo()
     {
-        activateStat.SetActive(false);
+        viewerContainer.viewer[viewerNum].GetObj().gameObject.SetActive(false);
         this.GetComponent<Image>().color = deactiveColor;
         RectTransform t_rect = this.GetComponent<RectTransform>();
         while(t_rect.anchoredPosition.y > downYPos)
@@ -63,11 +64,12 @@ public class StatChangeButton : MonoBehaviour
             yield return null;
         }
         t_rect.anchoredPosition = new Vector2(t_rect.anchoredPosition.x, downYPos);
+        viewerContainer.viewer[viewerNum].DeclareBox();
     }
 
     IEnumerator ActiveCo()
     {
-        activateStat.SetActive(true);
+        viewerContainer.viewer[viewerNum].GetObj().gameObject.SetActive(true);
         this.GetComponent<Image>().color = activeColor;
         RectTransform t_rect = this.GetComponent<RectTransform>();
         if(t_rect.anchoredPosition.y < 0)
@@ -76,5 +78,6 @@ public class StatChangeButton : MonoBehaviour
             yield return null;
         }
         t_rect.anchoredPosition = new Vector2(t_rect.anchoredPosition.x, 0);
+        viewerContainer.viewer[viewerNum].GenBox();
     }
 }

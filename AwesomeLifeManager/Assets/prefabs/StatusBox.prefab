@@ -300,6 +300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7240863845327832725}
+  - component: {fileID: -8056137486878715289}
   m_Layer: 5
   m_Name: StatusBox
   m_TagString: Untagged
@@ -330,6 +331,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 175}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &-8056137486878715289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4375028655872293295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879aa537a3dada44e99638b60ebb5306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4925581146640575253
 GameObject:
   m_ObjectHideFlags: 0

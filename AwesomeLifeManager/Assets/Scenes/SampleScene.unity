@@ -3463,6 +3463,7 @@ Transform:
   - {fileID: 2002525872}
   - {fileID: 745443543}
   - {fileID: 1261920700}
+  - {fileID: 875740817}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3967,6 +3968,8 @@ GameObject:
   - component: {fileID: 483229071}
   - component: {fileID: 483229070}
   - component: {fileID: 483229069}
+  - component: {fileID: 483229072}
+  - component: {fileID: 483229073}
   m_Layer: 5
   m_Name: Container
   m_TagString: Untagged
@@ -4047,6 +4050,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483229067}
   m_CullTransparentMesh: 1
+--- !u!114 &483229072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483229067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7f0688c7699580488d689bc87791c27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theUIManager: {fileID: 0}
+  active: 1
+  clickedDelay: 0
+  objGroup: {fileID: 1803292089}
+  objs: []
+  startSwipe: 0
+  rejactSameTimeActing: 1
+--- !u!114 &483229073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483229067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1381ba481da27a546a4122ea272ee0e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &483230333
 GameObject:
   m_ObjectHideFlags: 0
@@ -4593,7 +4627,8 @@ MonoBehaviour:
   speed: 15
   downYPosRate: -0.03125
   setActivatedButtonThis: 1
-  activateStat: {fileID: 1803292088}
+  viewerContainer: {fileID: 483229073}
+  viewerNum: 0
   deactiveColor: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
   activeColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &539905803
@@ -5431,7 +5466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &726641302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6086,6 +6121,55 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &875740816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 875740817}
+  - component: {fileID: 875740818}
+  m_Layer: 0
+  m_Name: StatusManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &875740817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875740816}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 391639476}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &875740818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875740816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3ef6d375c2f60341827d806e8b4c5c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  status:
+  - name: hp
+    value: 100
+    description: 
+    reveal: 1
 --- !u!1 &888941087
 GameObject:
   m_ObjectHideFlags: 0
@@ -8664,7 +8748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1206245439
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8991,6 +9075,10 @@ MonoBehaviour:
   - goPrefab: {fileID: 9111713023165014029, guid: 1c9f1f578247bb546a856a3aa11833c7, type: 3}
     count: 7
     tfPoolParent: {fileID: 758370247}
+    restore_world_position: 0
+  - goPrefab: {fileID: 4375028655872293295, guid: 02efe834d64af924091a91f07e6a99ae, type: 3}
+    count: 50
+    tfPoolParent: {fileID: 1803292089}
     restore_world_position: 0
 --- !u!4 &1271838466
 Transform:
@@ -9430,7 +9518,8 @@ MonoBehaviour:
   speed: 15
   downYPosRate: -0.03125
   setActivatedButtonThis: 0
-  activateStat: {fileID: 2020292307}
+  viewerContainer: {fileID: 483229073}
+  viewerNum: 2
   deactiveColor: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
   activeColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1339656056
@@ -11390,7 +11479,8 @@ MonoBehaviour:
   speed: 15
   downYPosRate: -0.03125
   setActivatedButtonThis: 0
-  activateStat: {fileID: 100486049}
+  viewerContainer: {fileID: 483229073}
+  viewerNum: 1
   deactiveColor: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
   activeColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1579992798

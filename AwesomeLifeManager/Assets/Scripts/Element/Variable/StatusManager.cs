@@ -16,9 +16,10 @@ using TMPro;
 [System.Serializable]
 public class Status : Variable{
     //스테이터스의 디스플레이
-    public TextMeshProUGUI tmp = null;
     public string name;
     public int value;
+    public string description;
+    public bool reveal = true;
 }
 
 /*  스테이터스가 등록되고 관리될 매니져 클래스를 선언해요. 
@@ -26,41 +27,18 @@ public class Status : Variable{
     등록된 스테이터스의 값을 다른 클래스가 참조할 수 있게 도와줘요. */
 public class StatusManager : MonoBehaviour
 {
+    public static StatusManager instance;
     //스테이터스 목록을 저장할 배열 생성
-    [SerializeField] Status[] status;
+    public Status[] status;
 
-    Timer timer;
     ConvictionManager theConviction;
     PersonalityManager thePersonality;
     // Start is called before the first frame update
     void Start()
     {
-        FillStatusBlank();
-        timer = Timer.instance;
         theConviction = FindObjectOfType<ConvictionManager>();
         thePersonality = FindObjectOfType<PersonalityManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    //버프 갱신
-    public void Buff(){
-        for(int i = 0; i < status.Length; i ++){
-            FillStatusBlank();
-        }
-    }
-
-    void FillStatusBlank(){
-        for(int i = 0; i < status.Length; i++){
-            //스테이터스 디스플레이 널체크
-            if(status[i].tmp != null){
-                status[i].tmp.text = status[i].name + " : " + status[i].value;
-            }
-        }
+        instance = this;
     }
 
     //스테이터스 증가 함수
@@ -68,11 +46,9 @@ public class StatusManager : MonoBehaviour
         for(int i = 0; i < status.Length; i++)
             if(p_name == status[i].name){
                 status[i].value += p_num;
-                if(status[i].tmp != null)
-                    status[i].tmp.text = status[i].name +  " : " + status[i].value;
             }
-        theConviction.CheckCondition();
-        thePersonality.CheckCondition();
+        //theConviction.CheckCondition();
+        //thePersonality.CheckCondition();
     }
 
     //Status를 찾는 함수
