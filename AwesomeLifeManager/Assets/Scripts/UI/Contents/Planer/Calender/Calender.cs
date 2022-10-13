@@ -4,17 +4,24 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//캘린더를 구현해놓은 클래스입니다.
 public class Calender : UI
 {
+    //캘린더 날짜 하나하나를 저장해놓은 리스트
     public CalenderCell[] cells = new CalenderCell[28];
+    //초기화시 이 클래스의 anchoredPosition을 저장해놓습니다. 이 클래스는 왠만해선 위치가 바뀌지 않으므로 RectTransform을 매번 참조하는 일을 방지하기위한 처리입니다.
     public Vector2 anchoredPos;
     public int accumFatigue = 0;
     public int accumAP = 0;
+    //CalenderCell을 담을 테두리입니다.
     [SerializeField] RectTransform frame;
     [SerializeField] RectTransform Container;
     RectTransform uiCanvas;
+    //이 캘린더를 담고있는 오브젝트를 저장합니다. 마우스클릭이나 터치를 정규화하고 이를 캘린더 각 위치에 매핑하기 위해서 사용됩니다. 
     CalenderContainer container;
+    //각 주의 y위치를 저장합니다.
     float[] weekY;
+    //각 주를 더블클릭시 나올 팝업창을 설정합니다.
     public WeekPlanPopup weekPlanPopup;
 
     // Start is called before the first frame update
@@ -26,6 +33,7 @@ public class Calender : UI
         weekY = new float[4] { 2f * frame.rect.height / 4, frame.rect.height / 4, -1f * frame.rect.height / 4, -2f * frame.rect.height / 4 };
     }
 
+    //CalenderCell을 세팅하는 함수입니다.
     public void SettingCells()
     {
         for (int i = 0; i < 4; i++)
@@ -77,7 +85,6 @@ public class Calender : UI
                         r = i;
                     }
                 }
-                Debug.Log(r);
                 weekPlanPopup.SetActive(true, r);
                 UI.ToggleSubUI(container.gameObject, false);
             }

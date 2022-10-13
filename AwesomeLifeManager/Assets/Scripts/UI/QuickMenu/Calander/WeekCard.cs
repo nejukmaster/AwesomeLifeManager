@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-//? ?? ??? ????? UI ??
+//각 주의 일정을 확인할 수 있는 UI 입니다.
 public class WeekCard : Scroll
 {
     public int weekNum = 0;

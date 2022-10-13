@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//???? ?? ?? ??
+//quicke menu-calender창에서 캘린더 UI를 실행할 버튼의 소스코드입니다.
 public class DesignPlanBtn : MonoBehaviour
 {
     [SerializeField] GameObject toOpenPopup;

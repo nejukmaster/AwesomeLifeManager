@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-//? ?? ??? ???? ??? UI?? ??? ???? UI? ??
+//quicke menu-calender창에서 각 주의 일정을 확인하는 카드형 UI를 움직이고 관리하는 UI클래스입니다.
 public class PlanContainer : UI
 {
     [SerializeField] Vector2 weekCardPosRange = new Vector2(-150, 150);

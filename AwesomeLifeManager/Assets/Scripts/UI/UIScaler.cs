@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-//??? UI? ????? ?? ???? ??
+//UI크기를 비율에 맞춰 재조정합니다.
 public class UIScaler : MonoBehaviour
 {
     [SerializeField] Vector2 originSizeRaitio;
