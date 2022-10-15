@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StatusViewer : Scroll,Viewer
 {
     ObjectPool theObjectPool;
     StatusManager theStatusManager;
-    private void Start()
+    public void Awake()
     {
         theObjectPool = ObjectPool.instance;
         theStatusManager = StatusManager.instance;
-        this.GetComponent<ViewerContainer>().viewer[0] = this;
     }
 
     void Viewer.GenBox()

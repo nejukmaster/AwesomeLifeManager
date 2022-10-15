@@ -7,12 +7,15 @@ public class DesignPlanBtn : MonoBehaviour
 {
     [SerializeField] GameObject toOpenPopup;
     [SerializeField] GameObject currentPopup;
+    [SerializeField] PlanContainer weekCards;
 
     public void OnClick()
     {
         toOpenPopup.SetActive(true);
         toOpenPopup.GetComponentInChildren<Calender>().SettingCells();
         UI.ToggleSubUI(currentPopup, false);
-        toOpenPopup.GetComponentInChildren<CalenderCloseButton>().closedPoppup = currentPopup;
+        toOpenPopup.GetComponentInChildren<CalenderCloseButton>().closedPopup = currentPopup;
+        if (weekCards.weekCards[weekCards.frontCardIndex].fliped)
+            weekCards.weekCards[weekCards.frontCardIndex].Unflip(false);
     }
 }

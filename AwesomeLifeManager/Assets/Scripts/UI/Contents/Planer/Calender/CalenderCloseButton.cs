@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CalenderCloseButton : MonoBehaviour
 {
-    public GameObject closedPoppup;
+    public GameObject closedPopup;
 
     [SerializeField] Calender calender;
     [SerializeField] GameObject toClosePopup;
@@ -17,8 +17,17 @@ public class CalenderCloseButton : MonoBehaviour
 
     public void OnClick()
     {
-        TurnManager.instance.ReadCalender(calender);
-        toClosePopup.SetActive(false);
-        UI.ToggleSubUI(closedPoppup, true);
+        if (!calender.weekPlanPopup.gameObject.activeInHierarchy)
+        {
+            TurnManager.instance.ReadCalender(calender);
+            toClosePopup.SetActive(false);
+            UI.ToggleSubUI(closedPopup, true);
+        }
+        else
+        {
+            calender.weekPlanPopup.gameObject.SetActive(false);
+            calender.weekPlanPopup.declarePlanBox();
+            UI.ToggleSubUI(calender.container.gameObject, true);
+        }
     }
 }

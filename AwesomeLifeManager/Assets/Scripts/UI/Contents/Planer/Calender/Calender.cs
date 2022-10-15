@@ -9,18 +9,21 @@ public class Calender : UI
 {
     //캘린더 날짜 하나하나를 저장해놓은 리스트
     public CalenderCell[] cells = new CalenderCell[28];
+    public List<int> checkedPlanIndexes = new List<int> ();
     //초기화시 이 클래스의 anchoredPosition을 저장해놓습니다. 이 클래스는 왠만해선 위치가 바뀌지 않으므로 RectTransform을 매번 참조하는 일을 방지하기위한 처리입니다.
     public Vector2 anchoredPos;
     public int accumFatigue = 0;
     public int accumAP = 0;
+    //이 캘린더를 담고있는 오브젝트를 저장합니다. 마우스클릭이나 터치를 정규화하고 이를 캘린더 각 위치에 매핑하기 위해서 사용됩니다. 
+    public CalenderContainer container;
+    public bool cellsSetted;
     //CalenderCell을 담을 테두리입니다.
     [SerializeField] RectTransform frame;
     [SerializeField] RectTransform Container;
     RectTransform uiCanvas;
-    //이 캘린더를 담고있는 오브젝트를 저장합니다. 마우스클릭이나 터치를 정규화하고 이를 캘린더 각 위치에 매핑하기 위해서 사용됩니다. 
-    CalenderContainer container;
     //각 주의 y위치를 저장합니다.
     float[] weekY;
+    ObjectPool theObjectPool;
     //각 주를 더블클릭시 나올 팝업창을 설정합니다.
     public WeekPlanPopup weekPlanPopup;
 
@@ -30,26 +33,41 @@ public class Calender : UI
         uiCanvas = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
         anchoredPos = this.GetComponent<RectTransform>().anchoredPosition;
         container = GetComponentInParent<CalenderContainer>();
+        theObjectPool = ObjectPool.instance;
         weekY = new float[4] { 2f * frame.rect.height / 4, frame.rect.height / 4, -1f * frame.rect.height / 4, -2f * frame.rect.height / 4 };
     }
 
     //CalenderCell을 세팅하는 함수입니다.
     public void SettingCells()
     {
-        for (int i = 0; i < 4; i++)
+        if (!cellsSetted)
         {
-            for (int j = 0; j < 7; j++)
+            for (int i = 0; i < 4; i++)
             {
-                GameObject t_cell = ObjectPool.instance.calenderCellQueue.Dequeue();
-                t_cell.GetComponent<RectTransform>().sizeDelta = new Vector2(frame.rect.width / 7, frame.rect.height / 4);
-                t_cell.GetComponent<RectTransform>().anchoredPosition = new Vector2(j * t_cell.GetComponent<RectTransform>().rect.width,
-                                                                                    -1 * i * t_cell.GetComponent<RectTransform>().rect.height);
-                t_cell.GetComponentInChildren<TextMeshProUGUI>().text = (i * 7 + j + 1).ToString();
-                cells[i * 7 + j] = t_cell.GetComponent<CalenderCell>();
-                cells[i * 7 + j].calender = cells[i * 7 + j].GetComponentInParent<Calender>();
-                t_cell.SetActive(true);
+                for (int j = 0; j < 7; j++)
+                {
+                    GameObject t_cell = theObjectPool.calenderCellQueue.Dequeue();
+                    t_cell.GetComponent<RectTransform>().sizeDelta = new Vector2(frame.rect.width / 7, frame.rect.height / 4);
+                    t_cell.GetComponent<RectTransform>().anchoredPosition = new Vector2(j * t_cell.GetComponent<RectTransform>().rect.width,
+                                                                                        -1 * i * t_cell.GetComponent<RectTransform>().rect.height);
+                    t_cell.GetComponentInChildren<TextMeshProUGUI>().text = (i * 7 + j + 1).ToString();
+                    cells[i * 7 + j] = t_cell.GetComponent<CalenderCell>();
+                    cells[i * 7 + j].calender = cells[i * 7 + j].GetComponentInParent<Calender>();
+                    t_cell.SetActive(true);
+                }
             }
+            cellsSetted = true;
         }
+    }
+
+    public void InitialCells()
+    {
+        for(int i = 0; i < cells.Length; i++)
+        {
+            theObjectPool.calenderCellQueue.Enqueue(cells[i].gameObject);
+            cells[i].gameObject.SetActive(false);
+        }
+        cellsSetted = false;
     }
 
     public override bool onClickDown(Vector2 clickPos)
@@ -91,5 +109,13 @@ public class Calender : UI
             return true;
         }
         return false;
+    }
+
+    public void Check(PlanBox p_planBox, bool p_bool)
+    {
+        if (p_bool)
+            checkedPlanIndexes.Add(p_planBox.planNum);
+        else
+            checkedPlanIndexes.Remove(p_planBox.planNum);
     }
 }

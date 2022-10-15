@@ -43,8 +43,19 @@ public class WeekPlanPopup : Scroll
                 RectTransform t_rect = t_box.GetComponent<RectTransform>();
                 t_rect.localScale = Vector2.one;
                 t_rect.anchoredPosition = new Vector2(0, -1 * t_rect.rect.height * pibot);
+                t_box.GetComponent<PlanBox>().planNum = _i;
+                t_box.GetComponentInChildren<Toggle>().gameObject.SetActive(true);
                 pibot++;
             }
+        }
+    }
+
+    public void declarePlanBox()
+    {
+        for(int i = 0; i < objs.Length; i++)
+        {
+            theObjectPool.weekPlanQueue.Enqueue(objs[i].gameObject);
+            objs[i].gameObject.SetActive(false);
         }
     }
 

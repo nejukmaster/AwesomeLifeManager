@@ -24,15 +24,20 @@ public class StatChangeButton : MonoBehaviour
     {
         UI_rect = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
         downYPos = UI_rect.rect.height * downYPosRate;
-        if(setActivatedButtonThis)
+        viewerContainer.Init();
+        if (setActivatedButtonThis)
+        {
+            OnClick();
             activatedButton = this;
+        }
     }
 
     public void OnClick()
     {
         if(activatedButton != this)
         {
-            activatedButton.Deactive();
+            if(activatedButton != null)
+                activatedButton.Deactive();
             activatedButton = this;
             Active();
             UIManager.instance.externalListenerFired = true;

@@ -9,6 +9,7 @@ public class WeekCard : Scroll
 {
     public int weekNum = 0;
     public float currentX;
+    public bool fliped = false;
 
     [SerializeField] Button flipButton;
     TurnManager theTurnManager;
@@ -41,6 +42,8 @@ public class WeekCard : Scroll
                     RectTransform t_rect = t_box.GetComponent<RectTransform>();
                     t_rect.localScale = Vector2.one;
                     t_rect.anchoredPosition = new Vector2(0, -1 * t_rect.rect.height * pibot);
+                    if(t_box.GetComponentInChildren<Toggle>() != null)
+                        t_box.GetComponentInChildren<Toggle>().gameObject.SetActive(false);
                     pibot++;
                 }
             }
@@ -72,32 +75,41 @@ public class WeekCard : Scroll
 
     public void OnClick()
     {
-        if (co != null)
-            StopCoroutine(co);
-        co = StartCoroutine(FlipCo());
+        Flip(true);
     }
 
     public void OnFlipButtonClick()
     {
-        if(co != null)
-            StopCoroutine(co);
-        co = StartCoroutine(UnflipCo());
+        Unflip(true);
     }
 
-    IEnumerator FlipCo()
+    public void Unflip(bool isActivatedAnime)
+    {
+        if (co != null)
+            StopCoroutine(co);
+        co = StartCoroutine(UnflipCo(isActivatedAnime));
+    }
+
+    public void Flip(bool isActivatedAnime)
+    {
+        if (co != null)
+            StopCoroutine(co);
+        co = StartCoroutine(FlipCo(isActivatedAnime));
+    }
+
+    IEnumerator FlipCo(bool isActivatedAnime)
     {
         thePlanContainer.dropShadow.SetActive(false);
         thePlanContainer.active = false;
         Debug.Log(this.GetComponent<RectTransform>().localScale.x);
-        while (this.GetComponent<RectTransform>().localScale.x > 0.1)
+        while (this.GetComponent<RectTransform>().localScale.x > 0.1 && isActivatedAnime)
         {
-            Debug.Log("tlfgod");
             this.GetComponent<RectTransform>().localScale = Vector2.Lerp(this.GetComponent<RectTransform>().localScale,
                                                                          new Vector2(0, this.GetComponent<RectTransform>().localScale.y),
                                                                          3f * Time.deltaTime);
             yield return null;
         }
-        while (this.GetComponent<RectTransform>().localScale.x < 0.9)
+        while (this.GetComponent<RectTransform>().localScale.x < 0.9 && isActivatedAnime)
         {
             this.GetComponent<RectTransform>().localScale = Vector2.Lerp(this.GetComponent<RectTransform>().localScale,
                                                                          new Vector2(1, this.GetComponent<RectTransform>().localScale.y),
@@ -110,12 +122,14 @@ public class WeekCard : Scroll
         this.GetComponent<RectTransform>().localScale = Vector2.one;
         genPlanBox();
         updateObjs();
+        fliped = true;
+        yield return null;
     }
 
-    IEnumerator UnflipCo()
+    IEnumerator UnflipCo(bool isActivatedAnime)
     {
         thePlanContainer.dropShadow.SetActive(false);
-        while (this.GetComponent<RectTransform>().localScale.x > 0.1)
+        while (this.GetComponent<RectTransform>().localScale.x > 0.1 && isActivatedAnime)
         {
             this.GetComponent<RectTransform>().localScale = Vector2.Lerp(this.GetComponent<RectTransform>().localScale,
                                                                          new Vector2(0, this.GetComponent<RectTransform>().localScale.y),
@@ -125,7 +139,7 @@ public class WeekCard : Scroll
         flipButton.gameObject.SetActive(false);
         this.active = false;
         declarePlanBox();
-        while (this.GetComponent<RectTransform>().localScale.x < 0.9)
+        while (this.GetComponent<RectTransform>().localScale.x < 0.9 && isActivatedAnime)
         {
             this.GetComponent<RectTransform>().localScale = Vector2.Lerp(this.GetComponent<RectTransform>().localScale,
                                                                          new Vector2(1, this.GetComponent<RectTransform>().localScale.y),
@@ -135,5 +149,7 @@ public class WeekCard : Scroll
         thePlanContainer.active = true;
         thePlanContainer.dropShadow.SetActive(true);
         this.GetComponent<RectTransform>().localScale = Vector2.one;
+        fliped = false;
+        yield return null;
     }
 }

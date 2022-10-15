@@ -12,8 +12,8 @@ public class PlanContainer : UI
     [SerializeField] Vector2 weekCardScaleRange = new Vector2(0.7f, 1f);
     [SerializeField] GameObject weekView;
     public GameObject dropShadow;
-    WeekCard[] weekCards = new WeekCard[0];
-    int frontCardIndex = 0;
+    public WeekCard[] weekCards = new WeekCard[0];
+    public int frontCardIndex = 0;
     TurnManager theTurnManager;
     
 
