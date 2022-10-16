@@ -48,6 +48,7 @@ public class WeekCard : Scroll
                 }
             }
         }
+        updateObjs<PlanBox>();
     }
 
     public void declarePlanBox()
@@ -61,6 +62,7 @@ public class WeekCard : Scroll
                 theObjectPool.weekPlanQueue.Enqueue(t_box);
             }
         }
+        updateObjs<PlanBox>();
     }
 
     public override void onEndSwipe()
@@ -121,7 +123,6 @@ public class WeekCard : Scroll
         this.active = true;
         this.GetComponent<RectTransform>().localScale = Vector2.one;
         genPlanBox();
-        updateObjs();
         fliped = true;
         yield return null;
     }
@@ -137,8 +138,9 @@ public class WeekCard : Scroll
             yield return null;
         }
         flipButton.gameObject.SetActive(false);
-        this.active = false;
         declarePlanBox();
+        objGroup.anchoredPosition = new Vector2(objGroup.anchoredPosition.x, 0);
+        this.active = false;
         while (this.GetComponent<RectTransform>().localScale.x < 0.9 && isActivatedAnime)
         {
             this.GetComponent<RectTransform>().localScale = Vector2.Lerp(this.GetComponent<RectTransform>().localScale,

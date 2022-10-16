@@ -25,8 +25,7 @@ public class CalenderCloseButton : MonoBehaviour
         }
         else
         {
-            calender.weekPlanPopup.gameObject.SetActive(false);
-            calender.weekPlanPopup.declarePlanBox();
+            calender.weekPlanPopup.SetActive(false,-1);
             UI.ToggleSubUI(calender.container.gameObject, true);
         }
     }

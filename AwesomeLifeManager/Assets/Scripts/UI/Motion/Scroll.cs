@@ -6,8 +6,9 @@ using UnityEngine;
 
 //스크롤 기능을 미리구현해둔 UI입니다.
 //이 클래스를 상속받으면 y축 스크롤기능을 사용할 수 있게 됩니다.
-public abstract class Scroll : UI
+public abstract class Scroll :UI
 {
+
     //스크롤할 목록을 묶는 변수입니다. 하이어라키창에서 반드시 설정해주어야하며 
     //상위에 Mask 컴포넌트를 사용하여 스크롤 창을 구현할 시에 이 오브젝트의 크기를 Mask컴포넌트가 달리 오브젝트의 크기와 같게 설정해주시는 편이 좋습니다.
     public RectTransform objGroup;
@@ -18,15 +19,15 @@ public abstract class Scroll : UI
     //다른 UI와 동시에 실행될 수 있는지 여부를 나타냅니다.
     public bool rejactSameTimeActing = true;
 
-    private void Awake()
-    {
-        updateObjs();
-    }
-
     //objs를 업데이트합니다. objGroup하위에 목록을 추가한후 반드시 실행시켜주어야합니다.
-    public void updateObjs()
+    public void updateObjs<T>() where T : MonoBehaviour
     {
-        objs = objGroup.GetComponentsInChildren<RectTransform>();
+        T[] _ = objGroup.GetComponentsInChildren<T>();
+        objs = new RectTransform[_.Length];
+        for(int i = 0; i < objs.Length; i++)
+        {
+            objs[i] = _[i].GetComponent<RectTransform>();
+        }
     }
 
     public override bool onClickDown(Vector2 clickPos)

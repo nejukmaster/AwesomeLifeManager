@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class WeekPlanPopup : Scroll
 {
+    public int weekNum;
+
     [SerializeField] GameObject date;
     [SerializeField] GameObject paymentViewer;
     [SerializeField] GameObject planContianer;
@@ -21,10 +23,15 @@ public class WeekPlanPopup : Scroll
             theObjectPool = ObjectPool.instance;
         if (p_bool)
         {
+            weekNum = p_weekNum;
             this.gameObject.SetActive(true);
             date.GetComponentInChildren<TextMeshProUGUI>().text = (theTurnManager.currentTurn.turnNum % 12 + 1).ToString() + "월 " + (p_weekNum + 1).ToString() + "주차";
             genPlanBox(p_weekNum, this.objGroup);
-            updateObjs();
+        }
+        else
+        {
+            declarePlanBox();
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -48,15 +55,17 @@ public class WeekPlanPopup : Scroll
                 pibot++;
             }
         }
+        updateObjs<PlanBox>();
     }
 
     public void declarePlanBox()
     {
-        for(int i = 0; i < objs.Length; i++)
+        for (int i = 0; i < objs.Length; i++)
         {
             theObjectPool.weekPlanQueue.Enqueue(objs[i].gameObject);
             objs[i].gameObject.SetActive(false);
         }
+        updateObjs<PlanBox>();
     }
 
     public override void onStartSwipe()

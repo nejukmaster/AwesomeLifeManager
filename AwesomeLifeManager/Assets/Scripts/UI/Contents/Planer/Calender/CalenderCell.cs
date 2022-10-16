@@ -35,11 +35,17 @@ public class CalenderCell : MonoBehaviour
         {
             planMarker.enabled = true;
             insertedPlan = p_plan;
-            calender.accumAP += p_plan.costAP;
-            calender.accumFatigue += p_plan.costFatigue;
+            //calender.accumAP += p_plan.costAP;
+            //calender.accumFatigue += p_plan.costFatigue;
             return true;
         }
         else
             return false;
+    }
+
+    public void DeletePlan()
+    {
+        planMarker.enabled = false;
+        insertedPlan = null;
     }
 }

@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Unity.VisualScripting;
+using UnityEngine.UI;
+using UnityEditor.SearchService;
 
 //캘린더를 구현해놓은 클래스입니다.
 public class Calender : UI
@@ -117,5 +120,37 @@ public class Calender : UI
             checkedPlanIndexes.Add(p_planBox.planNum);
         else
             checkedPlanIndexes.Remove(p_planBox.planNum);
+    }
+
+    public void PlanDeleteButtonClick()
+    {
+        if (checkedPlanIndexes.Count > 0)
+        {
+            foreach (int i in checkedPlanIndexes)
+            {
+                cells[i].DeletePlan();
+            }
+            if (weekPlanPopup.gameObject.activeInHierarchy)
+            {
+                if (weekPlanPopup.objs.Length > 0)
+                {
+                    for(int i = 0; i < weekPlanPopup.objs.Length; i++)
+                    {
+                        GameObject obj = weekPlanPopup.objs[i].gameObject;
+                        if (obj.GetComponentInChildren<Toggle>().isOn)
+                        {
+                            obj.GetComponentInChildren<Toggle>().isOn = false;
+                            obj.SetActive(false);
+                            for(int j = i +1; j < weekPlanPopup.objs.Length; j++)
+                            {
+                                RectTransform t_rect = weekPlanPopup.objs[j].GetComponent<RectTransform>();
+                                t_rect.anchoredPosition += new Vector2(0, weekPlanPopup.objs[i].rect.height);
+                            }
+                            theObjectPool.weekPlanQueue.Enqueue(obj.gameObject);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

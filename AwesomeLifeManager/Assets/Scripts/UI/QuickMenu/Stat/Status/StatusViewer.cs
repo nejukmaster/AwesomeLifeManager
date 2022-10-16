@@ -29,7 +29,7 @@ public class StatusViewer : Scroll,Viewer
                 _i++;
             }
         }
-        updateObjs();
+        updateObjs<StatusBox>();
     }
 
     void Viewer.DeclareBox()
@@ -39,6 +39,7 @@ public class StatusViewer : Scroll,Viewer
             objs[i].gameObject.SetActive(false);
             theObjectPool.statusBoxQueue.Enqueue(objs[i].gameObject);
         }
+        updateObjs<StatusBox>();
     }
     public override void onEndSwipe()
     {
