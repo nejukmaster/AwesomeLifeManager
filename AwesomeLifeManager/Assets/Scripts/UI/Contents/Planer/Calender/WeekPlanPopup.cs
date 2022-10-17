@@ -68,6 +68,8 @@ public class WeekPlanPopup : Scroll
         updateObjs<PlanBox>();
     }
 
+
+
     public override void onStartSwipe()
     {
         return;

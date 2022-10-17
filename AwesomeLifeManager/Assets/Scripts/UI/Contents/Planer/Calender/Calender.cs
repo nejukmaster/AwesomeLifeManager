@@ -23,6 +23,7 @@ public class Calender : UI
     //CalenderCell을 담을 테두리입니다.
     [SerializeField] RectTransform frame;
     [SerializeField] RectTransform Container;
+    [SerializeField] PlanDeletePopup planDeletePopup;
     RectTransform uiCanvas;
     //각 주의 y위치를 저장합니다.
     float[] weekY;
@@ -124,33 +125,6 @@ public class Calender : UI
 
     public void PlanDeleteButtonClick()
     {
-        if (checkedPlanIndexes.Count > 0)
-        {
-            foreach (int i in checkedPlanIndexes)
-            {
-                cells[i].DeletePlan();
-            }
-            if (weekPlanPopup.gameObject.activeInHierarchy)
-            {
-                if (weekPlanPopup.objs.Length > 0)
-                {
-                    for(int i = 0; i < weekPlanPopup.objs.Length; i++)
-                    {
-                        GameObject obj = weekPlanPopup.objs[i].gameObject;
-                        if (obj.GetComponentInChildren<Toggle>().isOn)
-                        {
-                            obj.GetComponentInChildren<Toggle>().isOn = false;
-                            obj.SetActive(false);
-                            for(int j = i +1; j < weekPlanPopup.objs.Length; j++)
-                            {
-                                RectTransform t_rect = weekPlanPopup.objs[j].GetComponent<RectTransform>();
-                                t_rect.anchoredPosition += new Vector2(0, weekPlanPopup.objs[i].rect.height);
-                            }
-                            theObjectPool.weekPlanQueue.Enqueue(obj.gameObject);
-                        }
-                    }
-                }
-            }
-        }
+        planDeletePopup.SetActive(true, checkedPlanIndexes.Count + "개의 일정을 삭제하시겠습니까?");
     }
 }
