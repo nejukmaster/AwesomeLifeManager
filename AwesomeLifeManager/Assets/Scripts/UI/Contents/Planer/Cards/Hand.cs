@@ -52,6 +52,7 @@ public class Hand : UI
             ActionCard t_card = myDeck.cardQueue.Dequeue();
             t_card.gameObject.SetActive(true);
             t_card.calender = calender;
+            t_card.SettingCard();
             AddCard(t_card);
         }
     }

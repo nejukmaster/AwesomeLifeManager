@@ -52,6 +52,10 @@ public class WeekPlanPopup : Scroll
                 t_rect.anchoredPosition = new Vector2(0, -1 * t_rect.rect.height * pibot);
                 t_box.GetComponent<PlanBox>().planNum = _i;
                 t_box.GetComponentInChildren<Toggle>().gameObject.SetActive(true);
+                if (calender.checkedPlanIndexes.IndexOf(_i) != -1)
+                    t_box.GetComponentInChildren<Toggle>().isOn = true;
+                else
+                    t_box.GetComponentInChildren<Toggle>().isOn = false;
                 pibot++;
             }
         }

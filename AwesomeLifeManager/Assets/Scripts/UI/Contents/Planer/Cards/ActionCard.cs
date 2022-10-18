@@ -1,18 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ActionCard : UI
 {
-    private string cardImagePath = "Images/Action/Illustration";
     private bool canClick = true;
     private float slideSpeed = 9.5f;
     private Vector2 anchoredPos;
     private Coroutine currentCoroutine;
     RectTransform uiCanvas;
     Hand hand;
+
+    [SerializeField] TextMeshProUGUI description;
+    [SerializeField] TextMeshProUGUI nameBlank;
+    [SerializeField] Image illustration;
     
     public Calender calender;
     public bool activated = false;
@@ -51,6 +55,15 @@ public class ActionCard : UI
         if(currentCoroutine != null)
             StopCoroutine(currentCoroutine);
         currentCoroutine = StartCoroutine(SlideCo(p_dest));
+    }
+
+    public void SettingCard()
+    {
+        nameBlank.text = inform.name;
+        description.text = inform.description;
+        Sprite t_sprite = CardManager.instance.illustrationAtlas.GetSprite(inform.illusteName);
+        if (t_sprite != null)
+            illustration.sprite = t_sprite;
     }
 
     public override bool onClickDown(Vector2 clickPos)

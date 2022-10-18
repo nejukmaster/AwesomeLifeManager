@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class Action{
     public delegate void ActionDel(MonoBehaviour obj);
@@ -44,18 +45,27 @@ public class CardInform
     public string GetIllustePath()
     {
         if (type == CardType.Action)
-            return "Action/" + illusteName + ".png";
+            return "Action/" + illusteName;
         else if (type == CardType.Project)
-            return "Project/" + illusteName + ".png";
+            return "Project/" + illusteName;
         else if (type == CardType.Event)
-            return "Event/" + illusteName + ".png";
+            return "Event/" + illusteName;
         else if (type == CardType.Angel)
-            return "Angel/" + illusteName + ".png";
+            return "Angel/" + illusteName;
         else
-            return "Etc/" + illusteName + ".png";
+            return "Etc/" + illusteName;
     }
 }
 public class CardManager : MonoBehaviour
 {
+
+    public static CardManager instance;
+
+    public SpriteAtlas illustrationAtlas;
+
+    private void Start()
+    {
+        instance = this;
+    }
 
 }
