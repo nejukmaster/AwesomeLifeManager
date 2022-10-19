@@ -15,6 +15,7 @@ public class Hand : UI
     [SerializeField] RectTransform[] handSlot;
     [SerializeField] Calender calender;
     [SerializeField] MyDeck myDeck;
+    [SerializeField] CardInfoPopup cardInfoPopup;
 
     // Start is called before the first frame update
     void Awake()
@@ -75,6 +76,7 @@ public class Hand : UI
             else if(selectedCardIndex == r)
             {
                 draging = true;
+                cardInfoPopup.SetActive(false, null);
                 return true;
             }
             return false;
@@ -100,6 +102,7 @@ public class Hand : UI
                 }
                 selectedCardIndex = r;
                 cards[selectedCardIndex].Slide(handSlot[r].anchoredPosition + new Vector2(0, 150));
+                cardInfoPopup.SetActive(true, cards[selectedCardIndex].inform);
             }
             else
             {
