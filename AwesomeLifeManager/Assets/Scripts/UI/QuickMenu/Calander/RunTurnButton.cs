@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class RunTurnButton : MonoBehaviour
 {
+    QuickMenuManager theQuickMenuManager;
+    TurnManager theTurnManager;
+    private void Start()
+    {
+        theQuickMenuManager = QuickMenuManager.instance;
+    }
     public void OnClick()
     {
-
+        theQuickMenuManager.activatedButton.OnClick();
+        theTurnManager.RunCurrentTurn();
     }
 }

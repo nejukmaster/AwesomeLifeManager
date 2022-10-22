@@ -10,10 +10,8 @@ public class TurnManager : MonoBehaviour
     public Turn currentTurn;
     public int currentTurnNum;
     public GameObject MainUI;
-    public SpriteRenderer planAnimeSprite;
-    public TextMeshPro tmp;
-    [SerializeField] public GameObject resultUI;
 
+    [SerializeField] TurnProcessPopup turnProcessPopup;
     PlanManager planManager;
 
     // Start is called before the first frame update
@@ -39,6 +37,7 @@ public class TurnManager : MonoBehaviour
 
     public void RunCurrentTurn()
     {
-        StartCoroutine(currentTurn.RunningCo());
+        turnProcessPopup.gameObject.SetActive(true);
+        StartCoroutine(currentTurn.RunningCo(turnProcessPopup));
     }
 }

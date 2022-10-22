@@ -27,17 +27,17 @@ public class Turn
         
     }
 
-    public IEnumerator RunningCo()
+    public IEnumerator RunningCo(TurnProcessPopup t_popup)
     {
         IEnumerator<Plan> e1 = settedPlan.GetEnumerator();
         int date = 1;
-        theTurnManager.MainUI.SetActive(false);
+        UI.ToggleSubUI(theTurnManager.MainUI, false);
         while(e1.MoveNext())
         {
-            theTurnManager.tmp.text = date.ToString();
+            t_popup.planName.text = date.ToString();
             if (e1.Current != null)
             {
-                theTurnManager.planAnimeSprite.GetComponent<Animator>().SetTrigger(e1.Current.name);
+                t_popup.spriteAnimation.SetTrigger(e1.Current.name);
             }
 
             yield return new WaitForSeconds(5.0f);
