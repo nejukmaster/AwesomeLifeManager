@@ -6,7 +6,7 @@ public class ContentsContainer : Scroll
 {
     public delegate void SnapFunc();
     //public RectTransform boxGroup;
-    //[SerializeField] ContentsBox[] boxes;
+    [SerializeField] RectTransform[] boxes;
     Container container;
 
     public float snapSpeed = 5f;
@@ -16,6 +16,7 @@ public class ContentsContainer : Scroll
     private void Start()
     {
         container = GetComponentInParent<Container>();
+        this.objs = boxes;
     }
 
     public override void onStartSwipe()
@@ -27,47 +28,6 @@ public class ContentsContainer : Scroll
     {
         container.ZoomOut(true);
     }
-
-    /* public override bool onClickDown(Vector2 clickPos)
-     {
-         return false;
-     }
-
-     public override bool onClickUp(float dragDis, Vector2 clickPos)
-     {
-
-         if (boxGroup.anchoredPosition.y <= 0.2)
-         {
-             boxGroup.anchoredPosition = Vector2.zero;
-             if (startSwipe)
-             {
-                 startSwipe = false;
-                 container.ZoomOut(true);
-             }
-         }
-         return false;
-     }
-
-     public override bool onSwipe(Vector2 swipeStartp, Vector2 swipeEndp)
-     {
-         if (boxGroup.anchoredPosition.y - (swipeStartp.y - swipeEndp.y) >= 0 &&
-             -1 * (boxGroup.anchoredPosition.y - (swipeStartp.y - swipeEndp.y)) >= (boxes[boxes.Length - 1].GetComponent<RectTransform>().anchoredPosition.y + boxes[boxes.Length - 1].GetComponent<RectTransform>().rect.height / 2 - 25))
-         {
-             boxGroup.anchoredPosition += new Vector2(0, -1f * (swipeStartp.y - swipeEndp.y));
-             if (!startSwipe)
-             {
-                 startSwipe = true;
-                 container.ZoomIn(true);
-             }
-             return true;
-         }
-         else if (boxGroup.anchoredPosition.y - (swipeStartp.y - swipeEndp.y) < 0)
-         {
-             boxGroup.anchoredPosition = Vector2.zero;
-             return true;
-         }
-         else return false;
-     }*/
 
     public IEnumerator SnapCo(RectTransform p_box, SnapFunc p_snapFunc)
     {

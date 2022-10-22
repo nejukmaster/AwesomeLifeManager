@@ -13369,6 +13369,11 @@ MonoBehaviour:
   objs: []
   startSwipe: 0
   rejactSameTimeActing: 1
+  boxes:
+  - {fileID: 292224633}
+  - {fileID: 1758616855}
+  - {fileID: 938958097}
+  - {fileID: 96595277}
   snapSpeed: 5
 --- !u!1 &1789775731
 GameObject:
