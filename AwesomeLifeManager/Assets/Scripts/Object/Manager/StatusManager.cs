@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Data;
 
 /*  이 클래스에서는 스테이터스를 담당해요. 
     스테이터를 만들고 등록할수 있어요. 
@@ -20,6 +21,22 @@ public class Status : Variable{
     public int value;
     public string description;
     public bool reveal = true;
+
+    public Status(string name, int value, string description, bool reveal)
+    {
+        this.name = name;
+        this.value = value;
+        this.description = description;
+        this.reveal = reveal;
+    }
+
+    public Status(string name, int value, string description)
+    {
+        this.name = name;
+        this.value = value;
+        this.description = description;
+        this.reveal = true;
+    }
 }
 
 /*  스테이터스가 등록되고 관리될 매니져 클래스를 선언해요. 

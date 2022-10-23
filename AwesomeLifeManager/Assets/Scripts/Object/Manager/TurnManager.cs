@@ -10,6 +10,7 @@ public class TurnManager : MonoBehaviour
     public Turn currentTurn;
     public int currentTurnNum;
     public GameObject MainUI;
+    public Calender calender;
 
     [SerializeField] TurnProcessPopup turnProcessPopup;
     PlanManager planManager;

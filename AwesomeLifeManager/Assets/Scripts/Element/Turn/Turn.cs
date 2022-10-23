@@ -59,5 +59,6 @@ public class Turn
         //TurnManager.instance.resultUI.SetActive(true);
         theTurnManager.currentTurnNum++;
         theTurnManager.currentTurn = new Turn(theTurnManager.currentTurnNum);
+        theTurnManager.calender.InitialCells();
     }
 }
