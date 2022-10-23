@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LogScroll : MonoBehaviour
+public class LogScroll : Scroll
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void onEndSwipe()
     {
-        
+        return;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void onStartSwipe()
     {
-        
+        return;
     }
 }

@@ -21,28 +21,19 @@ public class Plan
         this.condition = () => {return true;};
     }
 
-    public Plan(string name, int costFatigue, int costAP, rewardDel reward){
+    #nullable enable
+    public Plan(string name, int costFatigue, int costAP, rewardDel? reward, conditionDel? condition){
         this.name = name;
         this.costFatigue = costFatigue;
         this.costAP = costAP;
-        this.reward = reward;
-        this.condition = () => {return true;};
-    }
-
-    public Plan(string name, int costFatigue, int costAP, conditionDel condition){
-        this.name = name;
-        this.costFatigue = costFatigue;
-        this.costAP = costAP;
-        this.reward = () => { return true; };
-        this.condition = condition;
-    }
-
-    public Plan(string name, int costFatigue, int costAP, rewardDel reward, conditionDel condition){
-        this.name = name;
-        this.costFatigue = costFatigue;
-        this.costAP = costAP;
-        this.reward = reward;
-        this.condition = condition;
+        if (reward != null)
+            this.reward = reward;
+        else
+            this.reward = () => { return true; };
+        if (condition != null)
+            this.condition = condition;
+        else
+            this.condition = () => { return true; };
     }
 
     public bool Run()
