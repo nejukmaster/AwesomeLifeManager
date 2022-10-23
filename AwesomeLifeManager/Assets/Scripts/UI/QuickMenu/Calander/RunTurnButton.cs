@@ -9,6 +9,7 @@ public class RunTurnButton : MonoBehaviour
     private void Start()
     {
         theQuickMenuManager = QuickMenuManager.instance;
+        theTurnManager = TurnManager.instance;
     }
     public void OnClick()
     {

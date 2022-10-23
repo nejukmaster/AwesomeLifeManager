@@ -2326,8 +2326,8 @@ GameObject:
   - component: {fileID: 248184159}
   - component: {fileID: 248184158}
   - component: {fileID: 248184157}
-  - component: {fileID: 248184156}
   - component: {fileID: 248184155}
+  - component: {fileID: 248184161}
   m_Layer: 5
   m_Name: RunTurn
   m_TagString: Untagged
@@ -2400,8 +2400,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248184156}
-        m_TargetAssemblyTypeName: DesignPlanBtn, Assembly-CSharp
+      - m_Target: {fileID: 248184161}
+        m_TargetAssemblyTypeName: RunTurnButton, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -2412,21 +2412,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &248184156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 248184153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4869f03a9ecd9d3418ad0a8b6829eec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toOpenPopup: {fileID: 1852607146}
-  currentPopup: {fileID: 1206245438}
-  weekCards: {fileID: 1299867621}
 --- !u!114 &248184157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2492,6 +2477,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248184153}
   m_CullTransparentMesh: 1
+--- !u!114 &248184161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248184153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33cbc45c9e429e4fbd2ec6665b5fe75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &249307908
 GameObject:
   m_ObjectHideFlags: 0
@@ -5703,7 +5700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &629913812
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6988,7 +6985,7 @@ Animator:
   m_GameObject: {fileID: 870705441}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5bac14f641d812442848f9588ca6fac1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
