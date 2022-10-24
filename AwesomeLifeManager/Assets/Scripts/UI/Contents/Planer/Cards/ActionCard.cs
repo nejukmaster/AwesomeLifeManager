@@ -38,8 +38,8 @@ public class ActionCard : UI
             Vector2 e_pos = new Vector2(calender.anchoredPos.x + calender.GetComponent<RectTransform>().rect.width / 2, calender.anchoredPos.y + calender.GetComponent<RectTransform>().rect.height / 2);
             if (t_pos.x >= s_pos.x && t_pos.y >= s_pos.y && t_pos.x <= e_pos.x && t_pos.y <= e_pos.y)
             {
-                int x_gride = (int)((t_pos.x - s_pos.x) / CalenderCell.width);
-                int y_gride = (int)((e_pos.y - t_pos.y) / CalenderCell.height);
+                int x_gride = (int)((t_pos.x - s_pos.x) / calender.cells[0].GetComponent<RectTransform>().rect.width);
+                int y_gride = (int)((e_pos.y - t_pos.y) / calender.cells[0].GetComponent<RectTransform>().rect.height);
                 return calender.cells[y_gride * 7 + x_gride];
             }
             return null;

@@ -6,8 +6,6 @@ using TMPro;
 
 public class CalenderCell : MonoBehaviour
 {
-    public static float width = 122f;
-    public static float height = 300f;
     public Plan insertedPlan;
     public Calender calender;
     public TextMeshProUGUI tmp;
@@ -47,5 +45,11 @@ public class CalenderCell : MonoBehaviour
     {
         planMarker.enabled = false;
         insertedPlan = null;
+    }
+
+    public void Init()
+    {
+        DeletePlan();
+        HoldOut();
     }
 }

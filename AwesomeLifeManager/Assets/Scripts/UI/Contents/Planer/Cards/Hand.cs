@@ -144,8 +144,15 @@ public class Hand : UI
                 if (t_cell != null)
                     t_cell.HoldOut();
                 t_cell = cards[selectedCardIndex].CheckHolding();
-                t_cell.HoldeOn();
-                cards[selectedCardIndex].currentCell = t_cell;
+                if (t_cell.insertedPlan == null)
+                {
+                    t_cell.HoldeOn();
+                    cards[selectedCardIndex].currentCell = t_cell;
+                }
+                else
+                {
+                    cards[selectedCardIndex].currentCell = null;
+                }
             }
             return true;
         }

@@ -68,10 +68,8 @@ public class Calender : UI
     {
         for(int i = 0; i < cells.Length; i++)
         {
-            theObjectPool.calenderCellQueue.Enqueue(cells[i].gameObject);
-            cells[i].gameObject.SetActive(false);
+            cells[i].Init();
         }
-        cellsSetted = false;
     }
 
     public override bool onClickDown(Vector2 clickPos)
