@@ -56,6 +56,12 @@ public class StatusManager : MonoBehaviour
         theConviction = FindObjectOfType<ConvictionManager>();
         thePersonality = FindObjectOfType<PersonalityManager>();
         instance = this;
+        List<Dictionary<string, object>> status_data = CSVReader.Read("DataSheet/Status");
+        status = new Status[status_data.Count];
+        for(int i = 0; i < status_data.Count; i++)
+        {
+            status[i] = new Status(status_data[i]["name"].ToString(), 0, status_data[i]["description"].ToString(), (status_data[i]["is reveal"].ToString().Equals("o")));
+        }
     }
 
     //스테이터스 증가 함수

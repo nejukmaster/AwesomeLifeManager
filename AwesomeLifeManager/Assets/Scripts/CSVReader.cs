@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
 
 public class CSVReader
 {
@@ -24,6 +25,7 @@ public class CSVReader
         {
 
             var values = Regex.Split(lines[i], SPLIT_RE);
+
             if (values.Length == 0 || values[0] == "") continue;
 
             var entry = new Dictionary<string, object>();
