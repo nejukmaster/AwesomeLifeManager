@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActionCard : UI
+public class ActionCard : MonoBehaviour
 {
     private bool canClick = true;
     private float slideSpeed = 9.5f;
@@ -64,21 +64,6 @@ public class ActionCard : UI
         Sprite t_sprite = CardManager.instance.illustrationAtlas.GetSprite(inform.illusteName);
         if (t_sprite != null)
             illustration.sprite = t_sprite;
-    }
-
-    public override bool onClickDown(Vector2 clickPos)
-    {
-        return false;
-    }
-
-    public override bool onClickUp(float dragDis, Vector2 clickPos)
-    {
-        return false;
-    }
-
-    public override bool onSwipe(Vector2 swipeStartp, Vector2 swipeEndp)
-    {
-        return false;
     }
 
     public IEnumerator SlideCo(Vector2 p_dest)

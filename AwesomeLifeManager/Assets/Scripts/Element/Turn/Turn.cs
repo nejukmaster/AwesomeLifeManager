@@ -40,7 +40,7 @@ public class Turn
                 t_popup.spriteAnimation.SetTrigger(e1.Current.name);
             }
 
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(2.0f);
             if (e1.Current != null )
             {
                 if (e1.Current.reward())
@@ -54,11 +54,12 @@ public class Turn
             }
             date++;
             //Event Fire
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(1.5f);
         }
         //TurnManager.instance.resultUI.SetActive(true);
         theTurnManager.currentTurnNum++;
         theTurnManager.currentTurn = new Turn(theTurnManager.currentTurnNum);
         theTurnManager.calender.InitialCells();
+        t_popup.exitButton.gameObject.SetActive(true);
     }
 }

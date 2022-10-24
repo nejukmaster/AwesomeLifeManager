@@ -39,7 +39,6 @@ public class Hand : UI
             {
                 cards[i] = p_card;
                 p_card.Slide(handSlot[i].anchoredPosition);
-                UIManager.instance.UI_List.Add(p_card);
                 return;
             }
         }
