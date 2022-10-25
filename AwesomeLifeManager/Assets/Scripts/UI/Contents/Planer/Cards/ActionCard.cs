@@ -27,6 +27,9 @@ public class ActionCard : MonoBehaviour
     {
         hand = GetComponentInParent<Hand>();  
         uiCanvas = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+
+        Material MaterialInstance = Instantiate(this.GetComponentInChildren<Image>().material);
+        this.GetComponentInChildren<Image>().material = MaterialInstance;
     }
 
     public CalenderCell CheckHolding()
@@ -79,5 +82,25 @@ public class ActionCard : MonoBehaviour
         }
         GetComponent<RectTransform>().anchoredPosition = p_dest;
         canClick = true;
+    }
+
+    public void Burn()
+    {
+        StartCoroutine(BurningCo());
+    }
+
+    public IEnumerator BurningCo()
+    {
+        float a = 1;
+        Material t_mat = this.GetComponentInChildren<Image>().materialForRendering;
+        while(a - 0.1f > t_mat.GetFloat("_AlphaCut"))
+        {
+            t_mat.SetFloat("_AlphaCut", Vector2.Lerp(new Vector2(0, t_mat.GetFloat("_AlphaCut")),
+                                        new Vector2(0, a + 0.1f),
+                                        1.2f * Time.deltaTime).y);
+            yield return null;
+        }
+        t_mat.SetFloat("_AlphaCut", 1);
+        this.gameObject.SetActive(false);
     }
 }

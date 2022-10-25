@@ -116,7 +116,7 @@ public class Hand : UI
                     }
                     cards[selectedCardIndex].inform.actioin.actionDel(cards[selectedCardIndex].currentCell);
                     cards[selectedCardIndex].currentCell.HoldOut();
-                    cards[selectedCardIndex].gameObject.SetActive(false);
+                    cards[selectedCardIndex].Burn();
                     ObjectPool.instance.actionCardQueue.Enqueue(cards[selectedCardIndex].gameObject);
                     cards[selectedCardIndex] = null;
                     selectedCardIndex = -1;

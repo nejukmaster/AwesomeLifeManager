@@ -4,6 +4,15 @@ Shader "Custom/Test"
 	{
 		_MainTex("Base (RGB) Trans (A)", 2D) = "white" {}
 		_CellSize("Cell Size", Range(0, 2000)) = 2000
+		_AlphaCut("Alpha Cut", Range(0,1)) = 0
+
+			// required for UI.Mask
+		 _StencilComp("Stencil Comparison", Float) = 8
+		 _Stencil("Stencil ID", Float) = 0
+		 _StencilOp("Stencil Operation", Float) = 0
+		 _StencilWriteMask("Stencil Write Mask", Float) = 255
+		 _StencilReadMask("Stencil Read Mask", Float) = 255
+		 _ColorMask("Color Mask", Float) = 15
 	}
 
 		SubShader
@@ -11,6 +20,16 @@ Shader "Custom/Test"
 		Tags {"Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent"}
 		ZWrite Off Lighting Off Cull Off Fog { Mode Off } Blend SrcAlpha OneMinusSrcAlpha
 		LOD 110
+
+			Stencil
+		 {
+			 Ref[_Stencil]
+			 Comp[_StencilComp]
+			 Pass[_StencilOp]
+			 ReadMask[_StencilReadMask]
+			 WriteMask[_StencilWriteMask]
+		 }
+		  ColorMask[_ColorMask]
 
 		Pass
 		{
@@ -24,6 +43,7 @@ Shader "Custom/Test"
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 			float _CellSize;
+			float _AlphaCut;
 
 			struct vin_vct
 			{
@@ -72,7 +92,9 @@ Shader "Custom/Test"
 			{
 				float2 value = i.vertex.xy / _CellSize;
 				fixed4 col = tex2D(_MainTex, i.texcoord) * i.color;
-				float a = col.a * voronoiNoise(value);
+				col.a = voronoiNoise(value);
+				if (col.a <= _AlphaCut) col.a = 0;
+				else col.a = 1;
 				return col;
 			}
 
