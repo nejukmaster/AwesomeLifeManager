@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class QuickMenuButton : MonoBehaviour
 {
+    public GameObject activationObj;
+
     UIManager theUIManager;
     QuickMenuManager theQuickMenuManager;
     [SerializeField] GameObject deactiveUI;
     [SerializeField] RectTransform container;
     [SerializeField] ContentsBoxPopup contentsBoxPopup;
     [SerializeField] Container contentsContainer;
-    [SerializeField] GameObject activationObj;
     bool trig = true;
 
     private void Start()
@@ -30,6 +31,7 @@ public class QuickMenuButton : MonoBehaviour
             contentsBoxPopup.SetActive(true,activationObj);
             contentsContainer.ZoomIn(false);
             theQuickMenuManager.activatedButton = this;
+            OnClickQuickmenu();
             trig = !trig;
             UI.ToggleSubUI(deactiveUI, false);
         }
@@ -43,8 +45,19 @@ public class QuickMenuButton : MonoBehaviour
             container.sizeDelta = new Vector2(container.rect.width, container.rect.height / 3);
             contentsBoxPopup.SetActive(false,activationObj);
             contentsContainer.ZoomOut(false);
+            OnExitQuickmenu();
             trig = !trig;
         }
         theUIManager.externalListenerFired = true;
+    }
+
+    public virtual void OnExitQuickmenu()
+    {
+        return;
+    }
+
+    public virtual void OnClickQuickmenu()
+    {
+        return;
     }
 }

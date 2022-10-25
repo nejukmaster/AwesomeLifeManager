@@ -20,64 +20,67 @@ public class StatChangeButton : MonoBehaviour
     float downYPos;
     Coroutine co;
 
-    public void Start()
+    public void Awake()
     {
         UI_rect = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
         downYPos = UI_rect.rect.height * downYPosRate;
         viewerContainer.Init();
-        if (setActivatedButtonThis)
-        {
-            OnClick();
-            activatedButton = this;
-        }
     }
 
     public void OnClick()
     {
         if(activatedButton != this)
         {
-            if(activatedButton != null)
-                activatedButton.Deactive();
+            if (activatedButton != null)
+            {
+                activatedButton.Deactive(true);
+
+            }
             activatedButton = this;
-            Active();
+            Active(true);
             UIManager.instance.externalListenerFired = true;
         }
     }
 
-    public void Active()
+    public void Active(bool p_bool)
     {
         if (co != null)
             StopCoroutine(co);
-        co = StartCoroutine(ActiveCo());
+        co = StartCoroutine(ActiveCo(p_bool));
     }
 
-    public void Deactive()
+    public void Deactive(bool p_bool)
     {
-        if (co != null)
-            StopCoroutine(co);
-        co = StartCoroutine(DeactiveCo());
+        if (p_bool)
+        {
+            if (co != null)
+                StopCoroutine(co);
+            co = StartCoroutine(DeactiveCo(p_bool));
+        }
+        else
+        {
+            viewerContainer.viewer[viewerNum].DeclareBox();
+        }
     }
 
-    IEnumerator DeactiveCo()
+    IEnumerator DeactiveCo(bool p_bool)
     {
-        viewerContainer.viewer[viewerNum].GetObj().gameObject.SetActive(false);
+        viewerContainer.viewer[viewerNum].DeclareBox();
         this.GetComponent<Image>().color = deactiveColor;
         RectTransform t_rect = this.GetComponent<RectTransform>();
-        while(t_rect.anchoredPosition.y > downYPos)
+        while(t_rect.anchoredPosition.y > downYPos && p_bool)
         {
             t_rect.anchoredPosition = Vector2.Lerp(t_rect.anchoredPosition, new Vector2(t_rect.anchoredPosition.x, downYPos),speed * Time.deltaTime);
             yield return null;
         }
         t_rect.anchoredPosition = new Vector2(t_rect.anchoredPosition.x, downYPos);
-        viewerContainer.viewer[viewerNum].DeclareBox();
     }
 
-    IEnumerator ActiveCo()
+    IEnumerator ActiveCo(bool p_bool)
     {
-        viewerContainer.viewer[viewerNum].GetObj().gameObject.SetActive(true);
         this.GetComponent<Image>().color = activeColor;
         RectTransform t_rect = this.GetComponent<RectTransform>();
-        if(t_rect.anchoredPosition.y < 0)
+        if(t_rect.anchoredPosition.y < 0 && p_bool)
         {
             t_rect.anchoredPosition = Vector2.Lerp(t_rect.anchoredPosition, new Vector2(t_rect.anchoredPosition.x, 0), speed * Time.deltaTime);
             yield return null;

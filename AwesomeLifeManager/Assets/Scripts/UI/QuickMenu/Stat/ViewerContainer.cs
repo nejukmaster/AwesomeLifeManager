@@ -9,5 +9,6 @@ public class ViewerContainer : MonoBehaviour
     public void Init()
     {
         viewer.Add(this.GetComponent<StatusViewer>());
+        viewer.Add(this.GetComponent<PersonalityViewer>());
     }
 }

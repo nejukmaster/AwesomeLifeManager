@@ -170,14 +170,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4098697}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 168fa6061ec10764ea7dfb287e753515, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ddc9c52ef519e348971a0033f30971f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activationObj: {fileID: 726641301}
   deactiveUI: {fileID: 1193488553}
   container: {fileID: 1656435553}
   contentsBoxPopup: {fileID: 1206245440}
   contentsContainer: {fileID: 1960341807}
-  activationObj: {fileID: 726641301}
 --- !u!1 &20348277
 GameObject:
   m_ObjectHideFlags: 0
@@ -4385,6 +4385,7 @@ GameObject:
   - component: {fileID: 483229071}
   - component: {fileID: 483229070}
   - component: {fileID: 483229069}
+  - component: {fileID: 483229074}
   - component: {fileID: 483229072}
   - component: {fileID: 483229073}
   m_Layer: 5
@@ -4499,6 +4500,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1381ba481da27a546a4122ea272ee0e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &483229074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483229067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4719d523132d8c24bbccf33bf2fcc669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theUIManager: {fileID: 0}
+  active: 1
+  clickedDelay: 0
+  objGroup: {fileID: 100486050}
+  objs: []
+  startSwipe: 0
+  rejactSameTimeActing: 1
 --- !u!1 &483230333
 GameObject:
   m_ObjectHideFlags: 0
@@ -4705,11 +4725,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168fa6061ec10764ea7dfb287e753515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activationObj: {fileID: 1662552343}
   deactiveUI: {fileID: 1193488553}
   container: {fileID: 39860260}
   contentsBoxPopup: {fileID: 1206245440}
   contentsContainer: {fileID: 1960341807}
-  activationObj: {fileID: 1662552343}
 --- !u!1 &496728758
 GameObject:
   m_ObjectHideFlags: 0
@@ -8272,7 +8292,7 @@ MonoBehaviour:
   m_text: "\uC131\uACA9"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8dcfb6ff6d52904a90e78da1230c900, type: 2}
-  m_sharedMaterial: {fileID: -8087601657588654560, guid: fbafe5bce4ce23143b80a7304139edc7, type: 2}
+  m_sharedMaterial: {fileID: -2887789660402792322, guid: d8dcfb6ff6d52904a90e78da1230c900, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8335,7 +8355,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &973127615
@@ -8396,11 +8416,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168fa6061ec10764ea7dfb287e753515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activationObj: {fileID: 0}
   deactiveUI: {fileID: 1193488553}
   container: {fileID: 1493324122}
   contentsBoxPopup: {fileID: 1206245440}
   contentsContainer: {fileID: 1960341807}
-  activationObj: {fileID: 0}
 --- !u!1 &1035012416
 GameObject:
   m_ObjectHideFlags: 0
@@ -8700,6 +8720,7 @@ MonoBehaviour:
   - {fileID: 1772837599}
   - {fileID: 580388463}
   - {fileID: 483229072}
+  - {fileID: 483229074}
   - {fileID: 577046221}
   uiEnabled: 1
   canSwipe: 1
@@ -13399,7 +13420,7 @@ MonoBehaviour:
   m_text: "\uC2A4\uD14C\uC774\uD130\uC2A4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8dcfb6ff6d52904a90e78da1230c900, type: 2}
-  m_sharedMaterial: {fileID: -8087601657588654560, guid: fbafe5bce4ce23143b80a7304139edc7, type: 2}
+  m_sharedMaterial: {fileID: -2887789660402792322, guid: d8dcfb6ff6d52904a90e78da1230c900, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13462,7 +13483,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1733804985
@@ -15168,7 +15189,7 @@ MonoBehaviour:
   m_text: "\uAC00\uCE58\uAD00\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8dcfb6ff6d52904a90e78da1230c900, type: 2}
-  m_sharedMaterial: {fileID: -8087601657588654560, guid: fbafe5bce4ce23143b80a7304139edc7, type: 2}
+  m_sharedMaterial: {fileID: -2887789660402792322, guid: d8dcfb6ff6d52904a90e78da1230c900, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15231,7 +15252,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2023251961
@@ -15519,11 +15540,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168fa6061ec10764ea7dfb287e753515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activationObj: {fileID: 0}
   deactiveUI: {fileID: 1193488553}
   container: {fileID: 1191654822}
   contentsBoxPopup: {fileID: 1206245440}
   contentsContainer: {fileID: 1960341807}
-  activationObj: {fileID: 0}
 --- !u!1 &2114946568
 GameObject:
   m_ObjectHideFlags: 0
