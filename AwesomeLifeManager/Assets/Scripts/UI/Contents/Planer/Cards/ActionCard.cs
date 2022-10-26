@@ -22,14 +22,20 @@ public class ActionCard : MonoBehaviour
     public bool activated = false;
     public CalenderCell currentCell;
     public CardInform inform;
+
+    private void Awake()
+    {
+        Material MaterialInstance = Instantiate(this.GetComponentInChildren<Image>().materialForRendering);
+        foreach (Image i in GetComponentsInChildren<Image>())
+        {
+            i.material = MaterialInstance;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         hand = GetComponentInParent<Hand>();  
         uiCanvas = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
-
-        Material MaterialInstance = Instantiate(this.GetComponentInChildren<Image>().material);
-        this.GetComponentInChildren<Image>().material = MaterialInstance;
     }
 
     public CalenderCell CheckHolding()
@@ -47,7 +53,7 @@ public class ActionCard : MonoBehaviour
             }
             return null;
         }
-        catch(IndexOutOfRangeException e)
+        catch(IndexOutOfRangeException)
         {
             return null;
         }
@@ -66,7 +72,9 @@ public class ActionCard : MonoBehaviour
         description.text = inform.description;
         Sprite t_sprite = CardManager.instance.illustrationAtlas.GetSprite(inform.illusteName);
         if (t_sprite != null)
+        {
             illustration.sprite = t_sprite;
+        }
     }
 
     public IEnumerator SlideCo(Vector2 p_dest)

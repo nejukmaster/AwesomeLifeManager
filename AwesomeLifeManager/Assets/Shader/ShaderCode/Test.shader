@@ -5,6 +5,7 @@ Shader "Custom/Test"
 		_MainTex("Base (RGB) Trans (A)", 2D) = "white" {}
 		_CellSize("Cell Size", Range(0, 2000)) = 2000
 		_AlphaCut("Alpha Cut", Range(0,1)) = 0
+		_GlowColor("Glow Color", Color) = (0,0,0,1)
 
 			// required for UI.Mask
 		 _StencilComp("Stencil Comparison", Float) = 8
@@ -44,6 +45,7 @@ Shader "Custom/Test"
 			float4 _MainTex_ST;
 			float _CellSize;
 			float _AlphaCut;
+			float4 _GlowColor;
 
 			struct vin_vct
 			{
@@ -93,7 +95,8 @@ Shader "Custom/Test"
 				float2 value = i.vertex.xy / _CellSize;
 				fixed4 col = tex2D(_MainTex, i.texcoord) * i.color;
 				col.a = voronoiNoise(value);
-				if (col.a <= _AlphaCut) col.a = 0;
+				if (col.a < _AlphaCut-0.1f) col.a = 0;
+				else if (col.a >= _AlphaCut - 0.1f && col.a < _AlphaCut) col.rgba = _GlowColor;
 				else col.a = 1;
 				return col;
 			}
