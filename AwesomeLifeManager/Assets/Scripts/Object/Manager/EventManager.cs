@@ -19,13 +19,5 @@ public class EventManager : MonoBehaviour
     }
 
     public void CheckEvent(){
-        eventsNum = Events.Count;
-        List<Event> t_events = new List<Event>();
-        foreach(Event e in Events)
-            if(e.conditionFunc()){
-                t_events.Add(e);
-            }
-        if(t_events.Count > 0)
-            Event.FindTopPriorityEvent(t_events).eventFunc();
     }
 }

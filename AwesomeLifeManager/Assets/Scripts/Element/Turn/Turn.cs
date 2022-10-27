@@ -8,6 +8,7 @@ public class Turn
     public int turnNum;
     public List<Plan> settedPlan = new List<Plan>();
     TurnManager theTurnManager;
+    bool eventFire = false;
 
     public Turn(int p_num)
     {
@@ -15,15 +16,15 @@ public class Turn
         theTurnManager = TurnManager.instance;
     }
 
-    public void OnTurnStart(){
+    public virtual void OnTurnStart(){
 
     }
 
-    public void OnTurnRun(){
+    public virtual void OnTurnRun(){
 
     }
 
-    public void OnTurnEnd(){
+    public virtual void OnTurnEnd(){
         
     }
 

@@ -5,7 +5,8 @@ Shader "Custom/Test"
 		_MainTex("Base (RGB) Trans (A)", 2D) = "white" {}
 		_CellSize("Cell Size", Range(0, 2000)) = 2000
 		_AlphaCut("Alpha Cut", Range(0,1)) = 0
-		_GlowColor("Glow Color", Color) = (0,0,0,1)
+		_BurnSize("Burn Size",Range(0,1)) = 0
+		_RampTex("Burning Ramp", 2D) = "white" {}
 
 			// required for UI.Mask
 		 _StencilComp("Stencil Comparison", Float) = 8
@@ -45,7 +46,8 @@ Shader "Custom/Test"
 			float4 _MainTex_ST;
 			float _CellSize;
 			float _AlphaCut;
-			float4 _GlowColor;
+			float _BurnSize;
+			sampler2D _RampTex;
 
 			struct vin_vct
 			{
@@ -94,9 +96,11 @@ Shader "Custom/Test"
 			{
 				float2 value = i.vertex.xy / _CellSize;
 				fixed4 col = tex2D(_MainTex, i.texcoord) * i.color;
+				float t_alphacut = _AlphaCut - _BurnSize;
 				col.a = voronoiNoise(value);
-				if (col.a < _AlphaCut-0.1f) col.a = 0;
-				else if (col.a >= _AlphaCut - 0.1f && col.a < _AlphaCut) col.rgba = _GlowColor;
+				fixed4 rmp = tex2D(_RampTex, float2(1-((col.a - t_alphacut) / _BurnSize), 0.1));
+				if (col.a < t_alphacut) col.a = 0;
+				else if (col.a >= t_alphacut && col.a < _AlphaCut) col.rgba = rmp;
 				else col.a = 1;
 				return col;
 			}

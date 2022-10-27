@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Event
+public class Choice
 {
     public string name;
-    public Texture2D mainTex;
-    public Choice[] choices = new Choice[3];
+    public string text;
 }
