@@ -6,11 +6,18 @@ using UnityEngine;
     여기서는 이벤트를 새로 만들거나 하는게 아니라 이미 만들어진 이벤트를 
     이곳에서 게임에 적용시켜 줘요.  */
 
+public class EventItem
+{
+    public int number;
+    public Event @event;
+    public string num;
+}
+
 public class EventManager : MonoBehaviour
 {
     public static EventManager instance;
 
-    public List<Event> Events = new List<Event>();
+    public List<EventItem> Events = new List<EventItem>();
     public int eventsNum;
 
     void Awake()
@@ -19,5 +26,6 @@ public class EventManager : MonoBehaviour
     }
 
     public void CheckEvent(){
+
     }
 }
