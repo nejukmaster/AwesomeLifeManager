@@ -11,18 +11,32 @@ public class EventItem
     public int number;
     public Event @event;
     public string num;
+
+    public EventItem()
+    {
+
+    }
 }
 
 public class EventManager : MonoBehaviour
 {
     public static EventManager instance;
 
-    public List<EventItem> Events = new List<EventItem>();
+    public List<EventItem> EventDic = new List<EventItem>();
     public int eventsNum;
 
     void Awake()
     {
         instance = this;
+    }
+
+    void RegisterEvent()
+    {
+        List<Dictionary<string, object>> event_data = CSVReader.Read("DataSheet/Event");
+        for (int i = 0; i < event_data.Count; i ++)
+        {
+            Event e = new Event(event_data[i]["name"].ToString(),new Choice[3] { null,null,null});
+        }
     }
 
     public void CheckEvent(){
