@@ -114,8 +114,11 @@ public class Hand : UI
                         selectedCardIndex = -1;
                         return true;
                     }
-                    cards[selectedCardIndex].inform.actioin.actionDel(cards[selectedCardIndex].currentCell);
-                    cards[selectedCardIndex].currentCell.HoldOut();
+                    if (cards[selectedCardIndex].inform.type == CardType.Action)
+                    {
+                        cards[selectedCardIndex].inform.actioin.actionDel(cards[selectedCardIndex].currentCell, cards[selectedCardIndex].inform);
+                        cards[selectedCardIndex].currentCell.HoldOut();
+                    }
                     cards[selectedCardIndex].Burn();
                     ObjectPool.instance.actionCardQueue.Enqueue(cards[selectedCardIndex].gameObject);
                     cards[selectedCardIndex] = null;
@@ -143,9 +146,12 @@ public class Hand : UI
                 if (t_cell != null)
                     t_cell.HoldOut();
                 t_cell = cards[selectedCardIndex].CheckHolding();
-                if (t_cell.insertedPlan == null)
+                if (t_cell.insertedPlan == null || cards[selectedCardIndex].inform.type != CardType.Action)
                 {
-                    t_cell.HoldeOn();
+                    if (cards[selectedCardIndex].inform.type == CardType.Action)
+                    {
+                        t_cell.HoldeOn();
+                    }
                     cards[selectedCardIndex].currentCell = t_cell;
                 }
                 else

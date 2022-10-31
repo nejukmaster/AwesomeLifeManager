@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.U2D;
 
 public class Action{
-    public delegate void ActionDel(MonoBehaviour obj);
+    public delegate void ActionDel(MonoBehaviour obj, CardInform inform);
 
     public ActionDel actionDel;
 
@@ -25,6 +25,7 @@ public enum CardType
 [System.Serializable]
 public class CardInform
 {
+    public Queue<object> dataQueue = new Queue<object>();
     public string name;
     public CardType type;
     public string description;
