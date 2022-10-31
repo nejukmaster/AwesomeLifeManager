@@ -28,7 +28,7 @@ public class Turn
         
     }
 
-    public IEnumerator RunningCo(TurnProcessPopup t_popup)
+    public IEnumerator RunningCo(TurnProcessPopup t_popup, EventPopup e_popup)
     {
         IEnumerator<Plan> e1 = settedPlan.GetEnumerator();
         int date = 1;
@@ -52,6 +52,14 @@ public class Turn
             else
             {
                 Debug.Log("Free Act.");
+            }
+            if(date == 1)
+            {
+                e_popup.EventEncounter();
+                while (e_popup.gameObject.activeInHierarchy)
+                {
+                    yield return new WaitForSeconds(2f);
+                }
             }
             date++;
             //Event Fire
