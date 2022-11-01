@@ -103,7 +103,6 @@ public class WeekCard : Scroll
     {
         thePlanContainer.dropShadow.SetActive(false);
         thePlanContainer.active = false;
-        Debug.Log(this.GetComponent<RectTransform>().localScale.x);
         while (this.GetComponent<RectTransform>().localScale.x > 0.1 && isActivatedAnime)
         {
             this.GetComponent<RectTransform>().localScale = Vector2.Lerp(this.GetComponent<RectTransform>().localScale,

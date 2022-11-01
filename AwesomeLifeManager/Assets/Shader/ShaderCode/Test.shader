@@ -2,7 +2,7 @@ Shader "Custom/Test"
 {
 	Properties
 	{
-		_MainTex("Base (RGB) Trans (A)", 2D) = "white" {}
+		[PerRendererData] _MainTex("Base (RGB) Trans (A)", 2D) = "white" {}
 		_CellSize("Cell Size", Range(0, 2000)) = 2000
 		_AlphaCut("Alpha Cut", Range(0,1)) = 0
 		_BurnSize("Burn Size",Range(0,1)) = 0
@@ -19,11 +19,11 @@ Shader "Custom/Test"
 
 		SubShader
 	{
-		Tags {"Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent"}
-		ZWrite Off Lighting Off Cull Off Fog { Mode Off } Blend SrcAlpha OneMinusSrcAlpha
+		Tags {"Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" "PreviewType" = "Plane" "CanUseSpriteAtlas" = "True"}
+		ZWrite Off ZTest[unity_GUIZTestMode] Lighting Off Cull Off Fog { Mode Off } Blend SrcAlpha OneMinusSrcAlpha
 		LOD 110
 
-			Stencil
+				Stencil
 		 {
 			 Ref[_Stencil]
 			 Comp[_StencilComp]

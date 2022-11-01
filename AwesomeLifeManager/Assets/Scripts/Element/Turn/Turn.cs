@@ -55,6 +55,8 @@ public class Turn
             }
             if(date == 1)
             {
+                UI.ToggleSubUI(t_popup.gameObject, false);
+                e_popup.gameObject.SetActive(true);
                 e_popup.EventEncounter();
                 while (e_popup.gameObject.activeInHierarchy)
                 {

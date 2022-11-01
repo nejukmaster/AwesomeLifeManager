@@ -2953,6 +2953,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e6f224dd82a60459cac0bbf60a8baa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  theUIManager: {fileID: 0}
+  active: 1
+  clickedDelay: 0
   eventPopup: {fileID: 943703529}
 --- !u!1 &255351701
 GameObject:
@@ -8974,7 +8977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &943703528
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9647,6 +9650,7 @@ MonoBehaviour:
   - {fileID: 483229072}
   - {fileID: 483229074}
   - {fileID: 577046221}
+  - {fileID: 255257575}
   uiEnabled: 1
   canSwipe: 1
   keyDown: 0
