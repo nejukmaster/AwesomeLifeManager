@@ -22,8 +22,8 @@ public class EventManager : MonoBehaviour
 {
     public static EventManager instance;
 
-    public List<EventItem> EventDic = new List<EventItem>();
-    public int eventsNum;
+    public Dictionary<string,EventItem> EventDic = new Dictionary<string,EventItem>();
+    public List<EventItem> EventEnabled = new List<EventItem>();
 
     void Awake()
     {

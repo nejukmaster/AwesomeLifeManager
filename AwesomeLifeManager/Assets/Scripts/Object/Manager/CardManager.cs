@@ -25,7 +25,7 @@ public enum CardType
 [System.Serializable]
 public class CardInform
 {
-    public Queue<object> dataQueue = new Queue<object>();
+    public List<object> dataList = new List<object>();
     public string name;
     public CardType type;
     public string description;

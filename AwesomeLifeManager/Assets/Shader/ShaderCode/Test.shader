@@ -100,7 +100,7 @@ Shader "Custom/Test"
 				col.a = voronoiNoise(value);
 				fixed4 rmp = tex2D(_RampTex, float2(1-((col.a - t_alphacut) / _BurnSize), 0.1));
 				if (col.a < t_alphacut) col.a = 0;
-				else if (col.a >= t_alphacut && col.a < _AlphaCut) col.rgba = rmp;
+				else if (col.a >= t_alphacut && col.a < _AlphaCut) col.rgba = col.rgba * 0.4 + rmp * 0.6;
 				else col.a = 1;
 				return col;
 			}

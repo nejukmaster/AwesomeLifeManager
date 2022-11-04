@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PersonalityViewer : Scroll,Viewer
 {
+    ObjectPool theObjectPool;
+    PersonalityManager thePersonalityManager;
+
+    public void Awake()
+    {
+        theObjectPool = ObjectPool.instance;
+        thePersonalityManager = PersonalityManager.instance;
+    }
+
     void Viewer.DeclareBox()
     {
         return;

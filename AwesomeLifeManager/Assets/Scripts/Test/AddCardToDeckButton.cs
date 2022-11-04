@@ -13,8 +13,8 @@ public class AddCardToDeckButton : MonoBehaviour
     public string planCode;
     public void OnClick()
     {
-        CardInform t_inform = new CardInform(name, type, des, illusteName, resultDes, new Action((cell,t_inform) => { ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic[(string)t_inform.dataQueue.Dequeue()]); }));
-        t_inform.dataQueue.Enqueue(planCode.Clone());
+        CardInform t_inform = new CardInform(name, type, des, illusteName, resultDes, new Action((cell,t_inform) => { ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic[(string)t_inform.dataList[0]]); }));
+        t_inform.dataList.Add(planCode.Clone());
         deck.AddCard(t_inform);
     }
 }

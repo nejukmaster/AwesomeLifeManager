@@ -31,6 +31,7 @@ public class ObjectPool : MonoBehaviour
     public Queue<GameObject> weekPlanQueue = new Queue<GameObject>();
     public Queue<GameObject> statusBoxQueue = new Queue<GameObject>();
     public Queue<GameObject> logTextQueue = new Queue<GameObject>();
+    public Queue<GameObject> personalityBoxQueue = new Queue<GameObject>();
 
     void Start()
     {
@@ -40,7 +41,7 @@ public class ObjectPool : MonoBehaviour
         weekPlanQueue = InsertQueue(objectInfo[2]);
         statusBoxQueue = InsertQueue(objectInfo[3]);
         logTextQueue = InsertQueue(objectInfo[4]);
-
+        personalityBoxQueue = InsertQueue(objectInfo[5]);
     }
 
     Queue<GameObject> InsertQueue(ObjectInfo p_objectInfo){

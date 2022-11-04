@@ -13,22 +13,31 @@ using TMPro;
     조건과 이름등을 이 클래스에 담아서 등록하죠.    */
 public class Personality : Variable{
     public string name;
-
-    /*//변경할 스테이터스의 이름에 해당 변동식을 매핑
-    public Dictionary<string, EquationDel> equaMap = new Dictionary<string,EquationDel>();
-    */
-    //해금 조건 함수의 대리자들을 저장하는 리스트 생성
-    public ConditionDel[] conditions = new ConditionDel[0];
+    public string description;
+    public ConditionDel conditions;
+    public PersonalityType type;
 
     //컨스트럭터 1
-    public Personality(string name, /*Dictionary<string, EquationDel> equaMap*/params ConditionDel[] conditions){
+    public Personality(string name, string description, PersonalityType type, ConditionDel conditionDel){
         this.name = name;
-        this.conditions = conditions;
+        this.description = description;
+        this.conditions = conditionDel;
+        this.type = type;
     }
 
     public bool equal(Personality other){
         return other.name == this.name;
     }
+}
+
+public enum PersonalityType
+{
+    Humanity,
+    Sociality,
+    Ability,
+    Emotionality,
+    Mind,
+    Vitality
 }
 
 /*  성격이 등록되고 관리될 매니져 클래스를 선언해요. 
@@ -37,8 +46,9 @@ public class Personality : Variable{
     성격의 조건 체크등을 확인할 수 있게 도와줘요.   */
 public class PersonalityManager : MonoBehaviour
 {
+    public static PersonalityManager instance;
 
-    public Dictionary<string, Personality> personalityMap = new Dictionary<string,Personality>();
+    public Dictionary<string, Personality> personalityDic = new Dictionary<string,Personality>();
 
     public List<Personality> personalities = new List<Personality>();
     //StatusManager를 참조
@@ -48,9 +58,14 @@ public class PersonalityManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mapping();
+        instance = this;
         theStatus = FindObjectOfType<StatusManager>();
         theConviction = FindObjectOfType<ConvictionManager>();
+        List<Dictionary<string, object>> personality_data = CSVReader.Read("DataSheet/Personality");
+        for (int i = 0; i < personality_data.Count; i++)
+        {
+
+        }
     }
 
     // Update is called once per frame
@@ -62,10 +77,7 @@ public class PersonalityManager : MonoBehaviour
     //성격 리스트를 파싱하여 Dictionary에 매핑할 함수 정의
     //이 부분에서 성격 등록을 처리
     void mapping(){
-        personalityMap.Add("0_basic",new Personality("기본성격1", 
-                ()=>theStatus.GetStatus("str").value > 20));
-        personalityMap.Add("1_basic",new Personality("기본성격2",
-                ()=>theStatus.GetStatus("mp").value >= 40 && theStatus.GetStatus("str").value >= 22));
+
     }
 
     bool contains_ignore_cases(List<Personality> list, Personality other){
@@ -80,29 +92,22 @@ public class PersonalityManager : MonoBehaviour
     }
 
     public void AddPersonality(string p_code){
-        personalities.Add(personalityMap[p_code]);
+        personalities.Add(personalityDic[p_code]);
     }
 
     public bool CheckPersonality(string[] p_code_list){
         for(int i = 0; i < p_code_list.Length; i ++){
-            if(!contains_ignore_cases(personalities,personalityMap[p_code_list[i]]))
+            if(!contains_ignore_cases(personalities,personalityDic[p_code_list[i]]))
                 return false;
         }
         return true;
     }
 
     public void CheckCondition(){
-        foreach(var pair in personalityMap){
+        foreach(var pair in personalityDic){
             bool check = false;
-            Variable.ConditionDel[] t_conditions = pair.Value.conditions;
-            for(int i = 0; i < t_conditions.Length; i ++){
-                if(t_conditions[i]())
-                    check = true;
-                else{
-                    check = false;
-                    break;
-                }
-            }
+            Variable.ConditionDel t_conditions = pair.Value.conditions;
+            check = t_conditions();
             if(check && !CheckPersonality(new string[] {pair.Key})){
                 AddPersonality(pair.Key);
             }
