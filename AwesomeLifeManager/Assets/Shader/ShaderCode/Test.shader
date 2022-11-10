@@ -26,8 +26,8 @@ Shader "Custom/Test"
 				Stencil
 		 {
 			 Ref[_Stencil]
-			 Comp[_StencilComp]
-			 Pass[_StencilOp]
+			 Comp always
+			 Pass replace
 			 ReadMask[_StencilReadMask]
 			 WriteMask[_StencilWriteMask]
 		 }
@@ -96,12 +96,13 @@ Shader "Custom/Test"
 			{
 				float2 value = i.vertex.xy / _CellSize;
 				fixed4 col = tex2D(_MainTex, i.texcoord) * i.color;
+				float origineAlpha = col.a;
 				float t_alphacut = _AlphaCut - _BurnSize;
-				col.a = voronoiNoise(value);
+				if(!(col.a <= 0.05)) col.a = voronoiNoise(value);
 				fixed4 rmp = tex2D(_RampTex, float2(1-((col.a - t_alphacut) / _BurnSize), 0.1));
 				if (col.a < t_alphacut) col.a = 0;
 				else if (col.a >= t_alphacut && col.a < _AlphaCut) col.rgba = col.rgba * 0.4 + rmp * 0.6;
-				else col.a = 1;
+				else col.a = origineAlpha;
 				return col;
 			}
 

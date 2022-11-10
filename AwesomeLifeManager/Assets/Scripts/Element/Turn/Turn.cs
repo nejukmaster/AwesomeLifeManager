@@ -8,12 +8,14 @@ public class Turn
     public int turnNum;
     public List<Plan> settedPlan = new List<Plan>();
     TurnManager theTurnManager;
+    EventManager theEventManager;
     bool eventFire = false;
 
     public Turn(int p_num)
     {
         this.turnNum = p_num;
         theTurnManager = TurnManager.instance;
+        theEventManager = EventManager.instance;
     }
 
     public virtual void OnTurnStart(){
@@ -53,10 +55,10 @@ public class Turn
             {
                 Debug.Log("Free Act.");
             }
-            if(date == 1)
+            if (date == 1 && theEventManager.EventEnabled.Count > 0)
             {
                 UI.ToggleSubUI(t_popup.gameObject, false);
-                e_popup.gameObject.SetActive(true);
+                e_popup.SetActive(true, theEventManager.EventEnabled[0].@event);
                 e_popup.EventEncounter();
                 while (e_popup.gameObject.activeInHierarchy)
                 {

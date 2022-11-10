@@ -22,7 +22,7 @@ public class EventManager : MonoBehaviour
 {
     public static EventManager instance;
 
-    public Dictionary<string,EventItem> EventDic = new Dictionary<string,EventItem>();
+    public Dictionary<int,Event> EventDic = new Dictionary<int,Event>();
     public List<EventItem> EventEnabled = new List<EventItem>();
 
     void Awake()
@@ -36,6 +36,7 @@ public class EventManager : MonoBehaviour
         for (int i = 0; i < event_data.Count; i ++)
         {
             Event e = new Event(event_data[i]["name"].ToString(),new Choice[3] { null,null,null});
+            EventDic.Add(i,e);
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 //구현한 UI를 작동시킬 UIManager클래스
 public class UIManager : MonoBehaviour
@@ -10,6 +11,8 @@ public class UIManager : MonoBehaviour
     //구현한 UI의 리스트를 받습니다.
     //UI를 구현한후 반드시 하이어라키창에 끌어서 추가해주어야합니다.
     [SerializeField] public List<UI> UI_List = new List<UI>();
+    public SpriteAtlas UIAtlas;
+    public SpriteAtlas IconAtlas;
     //UI의 작동여부, false일경우 모든 UI가 작동을 하지 않습니다.
     public bool uiEnabled = true;
     //Swipe기능의 작동여부.

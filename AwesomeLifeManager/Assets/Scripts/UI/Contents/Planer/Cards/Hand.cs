@@ -108,9 +108,13 @@ public class Hand : UI
                 if (draging)
                 {
                     draging = false;
-                    if (cards[selectedCardIndex].currentCell == null)
+                    if (cards[selectedCardIndex].currentCell == null || dragDis <= 10f)
                     {
                         cards[selectedCardIndex].Slide(handSlot[selectedCardIndex].anchoredPosition);
+                        if (cards[selectedCardIndex].currentCell != null)
+                        {
+                            cards[selectedCardIndex].currentCell.HoldOut();
+                        }
                         selectedCardIndex = -1;
                         return true;
                     }

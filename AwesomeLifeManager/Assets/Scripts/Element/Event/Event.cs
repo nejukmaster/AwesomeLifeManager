@@ -6,7 +6,7 @@ using UnityEngine;
 public class Event
 {
     public string name;
-    public Texture2D mainTex;
+    public Sprite mainTex;
     public Choice[] choices = new Choice[3];
 
     public Event(string name, Choice[] choices)
