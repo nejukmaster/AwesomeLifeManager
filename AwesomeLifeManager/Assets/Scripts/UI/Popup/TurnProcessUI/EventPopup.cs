@@ -18,9 +18,10 @@ public class EventPopup : MonoBehaviour
         this.gameObject.SetActive(p_bool);
         currentEvent = p_event;
         name.text = p_event.name;
-        eventIllustration.sprite = p_event.mainTex;
+        if(p_event.mainTex != null)
+            eventIllustration.sprite = p_event.mainTex;
         for (int i = 0; i < choices.Length; i++)
-            choices[i].text = p_event.choices[i].text;
+            choices[i].text = p_event.choices[i].name;
     }
     public void EventEncounter()
     {
