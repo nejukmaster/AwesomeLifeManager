@@ -34,12 +34,12 @@ public class EventChoiceButton : MonoBehaviour
     {
         Choice t_choice = popup.currentEvent.choices[choiceIndex];
         GameObject t_gameObj = popup.choices[choiceIndex];
-        TextMeshProUGUI t_tmp = t_gameObj.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI t_tmp = t_gameObj.GetComponentInChildren<TextMeshProUGUI>();
         Vector2 bottom = t_gameObj.GetComponent<RectTransform>().anchoredPosition;
         for(int i = 0; i < popup.choices.Length; i++)
         {
             if (popup.choices[i].GetComponent<RectTransform>().anchoredPosition.y < bottom.y) bottom = popup.choices[i].GetComponent<RectTransform>().anchoredPosition;
-            if (popup.choices[i] != t_tmp) popup.choices[i].SetActive(false);
+            if (popup.choices[i].GetComponentInChildren<TextMeshProUGUI>() != t_tmp) popup.choices[i].SetActive(false);
         }
         Image t_cont = t_gameObj.GetComponent<Image>();
         RectTransform t_rect = t_cont.GetComponent<RectTransform>();
