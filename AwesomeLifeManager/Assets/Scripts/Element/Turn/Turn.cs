@@ -55,15 +55,16 @@ public class Turn
             {
                 Debug.Log("Free Act.");
             }
-            if (date == 1 /*&& theEventManager.EventEnabled.Count > 0*/)
-            {
-                UI.ToggleSubUI(t_popup.gameObject, false);
-                e_popup.SetActive(true, new Event("Test Event",
-                                new Choice[] {new Choice("00","test choice first!"), new Choice("01","test choice second!"), new Choice("02","test choice third")}));
-                e_popup.EventEncounter();
-                while (e_popup.gameObject.activeInHierarchy)
+            if (Random.Range(0, 100) < (int)(theEventManager.eventEncounterPercent * 100)) {
+                if (theEventManager.EventEnabled.Count > 0)
                 {
-                    yield return new WaitForSeconds(2f);
+                    UI.ToggleSubUI(t_popup.gameObject, false);
+                    e_popup.SetActive(true,theEventManager.GetRandomEvent(true));
+                    e_popup.EventEncounter();
+                    while (e_popup.gameObject.activeInHierarchy)
+                    {
+                        yield return new WaitForSeconds(2f);
+                    }
                 }
             }
             date++;
