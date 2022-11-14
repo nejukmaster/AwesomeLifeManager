@@ -21,9 +21,10 @@ public class AddCardToDeckButton : MonoBehaviour
         }
         else if(type == CardType.Event)
         {
-            CardInform inform = new CardInform(name, type, des, illusteName, resultDes, new Action((eventManager, t_inform) => {
+            CardInform t_inform = new CardInform(name, type, des, illusteName, resultDes, new Action((eventManager, t_inform) => {
                                                                                                                                  ((EventManager)eventManager).EventEnabled.Add(new EventItem((new Event(name,
                                                                                                                                     new Choice[] { new Choice("00", "test choice first!"), new Choice("01", "test choice second!"), new Choice("02", "test choice third") })))); }));
+            deck.AddCard(t_inform);
         }
     }
 }

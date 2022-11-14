@@ -92,4 +92,9 @@ public static class Utility
         }
         return r;
     }
+
+    public static T StringToEnum<T>(string p_str) where T : Enum
+    {
+        return (T)Enum.Parse(typeof(T), p_str);
+    }
 }

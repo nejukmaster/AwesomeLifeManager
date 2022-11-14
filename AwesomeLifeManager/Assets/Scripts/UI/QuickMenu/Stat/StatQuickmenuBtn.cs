@@ -16,7 +16,8 @@ public class StatQuickmenuBtn : QuickMenuButton
         {
             if (b.setActivatedButtonThis)
             {
-                b.OnClick();
+                b.Active(false);
+                StatChangeButton.activatedButton = b;
                 break;
             }
         }

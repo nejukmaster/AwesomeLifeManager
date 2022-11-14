@@ -25,6 +25,22 @@ public class Personality : Variable{
         this.type = type;
     }
 
+    public Personality(string name, PersonalityType type)
+    {
+        this.name = name;
+        this.type = type;
+        this.description = "";
+        this.conditions = () => { return false; };
+    }
+
+    public Personality(string name, string description, PersonalityType type)
+    {
+        this.name = name;
+        this.type = type;
+        this.description= description;
+        this.conditions = () => { return false; };
+    }
+
     public bool equal(Personality other){
         return other.name == this.name;
     }
@@ -64,7 +80,7 @@ public class PersonalityManager : MonoBehaviour
         List<Dictionary<string, object>> personality_data = CSVReader.Read("DataSheet/Personality");
         for (int i = 0; i < personality_data.Count; i++)
         {
-
+            personalityDic.Add(i.ToString("000"), new Personality(personality_data[i]["name"].ToString(), "test", Utility.StringToEnum<PersonalityType>(personality_data[i]["classify"].ToString())));
         }
     }
 

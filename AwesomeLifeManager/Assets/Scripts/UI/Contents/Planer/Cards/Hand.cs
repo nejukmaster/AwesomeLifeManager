@@ -9,6 +9,7 @@ public class Hand : UI
 {
     public Vector2 anchoredPos;
     RectTransform uiCanvas;
+    EventManager theEventManager;
     ActionCard[] cards = new ActionCard[4];
     int selectedCardIndex;
     bool draging = false;
@@ -21,6 +22,7 @@ public class Hand : UI
     void Awake()
     {
         uiCanvas = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+        theEventManager = EventManager.instance;
         Vector2 t_pos = this.GetComponent<RectTransform>().anchoredPosition;
         t_pos = new Vector2(uiCanvas.rect.width / 2, this.GetComponent<RectTransform>().anchoredPosition.y);
         anchoredPos = t_pos;
@@ -120,8 +122,12 @@ public class Hand : UI
                     }
                     if (cards[selectedCardIndex].inform.type == CardType.Action)
                     {
-                        cards[selectedCardIndex].inform.actioin.actionDel(cards[selectedCardIndex].currentCell, cards[selectedCardIndex].inform);
+                        cards[selectedCardIndex].inform.action.actionDel(cards[selectedCardIndex].currentCell, cards[selectedCardIndex].inform);
                         cards[selectedCardIndex].currentCell.HoldOut();
+                    }
+                    else if(cards[selectedCardIndex].inform.type == CardType.Event)
+                    {
+                        cards[selectedCardIndex].inform.action.actionDel(theEventManager, cards[selectedCardIndex].inform);
                     }
                     cards[selectedCardIndex].Burn();
                     ObjectPool.instance.actionCardQueue.Enqueue(cards[selectedCardIndex].gameObject);

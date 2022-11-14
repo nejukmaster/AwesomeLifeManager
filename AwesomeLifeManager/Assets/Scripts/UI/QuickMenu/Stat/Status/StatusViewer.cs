@@ -23,7 +23,7 @@ public class StatusViewer : Scroll,Viewer
                 GameObject t_box = theObjectPool.statusBoxQueue.Dequeue();
                 t_box.SetActive(true);
                 StatusBox t_status = t_box.GetComponent<StatusBox>();
-                t_status.Setting(theStatusManager.status[_i]);
+                t_status.Setting(theStatusManager.status[i]);
                 RectTransform t_rect = t_box.GetComponent<RectTransform>();
                 t_rect.anchoredPosition = new Vector2(t_rect.anchoredPosition.x, -1 * t_rect.rect.height * _i);
                 _i++;

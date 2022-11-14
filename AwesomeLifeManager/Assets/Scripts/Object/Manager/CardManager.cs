@@ -31,16 +31,16 @@ public class CardInform
     public string description;
     public string illusteName;
     public string resultDescription;
-    public Action actioin;
+    public Action action;
 
-    public CardInform(string name, CardType type, string description, string illusteName, string resultDescription, Action actioin)
+    public CardInform(string name, CardType type, string description, string illusteName, string resultDescription, Action action)
     {
         this.name = name;
         this.type = type;
         this.description = description;
         this.illusteName = illusteName;
         this.resultDescription = resultDescription;
-        this.actioin = actioin;
+        this.action = action;
     }
 
     public string GetIllustePath()
