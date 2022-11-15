@@ -82,6 +82,10 @@ public class PersonalityManager : MonoBehaviour
         {
             personalityDic.Add(i.ToString("000"), new Personality(personality_data[i]["name"].ToString(), "test", Utility.StringToEnum<PersonalityType>(personality_data[i]["classify"].ToString())));
         }
+        for(int i = 0; i < 5; i++)
+        {
+            personalities.Add(personalityDic[i.ToString("000")]);
+        }
     }
 
     // Update is called once per frame
