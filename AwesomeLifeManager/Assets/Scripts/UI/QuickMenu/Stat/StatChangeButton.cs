@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,11 +12,11 @@ public class StatChangeButton : MonoBehaviour
     public float speed = 15f;
     public float downYPosRate = -50/1600;
     public bool setActivatedButtonThis = false;
-    public ViewerContainer viewerContainer;
     public int viewerNum = 0;
 
     [SerializeField] Color deactiveColor;
     [SerializeField] Color activeColor;
+    [SerializeField] GameObject viewer;
     RectTransform UI_rect;
     float downYPos;
     Coroutine co;
@@ -24,7 +25,6 @@ public class StatChangeButton : MonoBehaviour
     {
         UI_rect = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
         downYPos = UI_rect.rect.height * downYPosRate;
-        viewerContainer.Init();
     }
 
     public void OnClick()
@@ -59,13 +59,15 @@ public class StatChangeButton : MonoBehaviour
         }
         else
         {
-            viewerContainer.viewer[viewerNum].DeclareBox();
+            viewer.GetComponent<Viewer>().DeclareBox();
+            viewer.SetActive(false);
         }
     }
 
     IEnumerator DeactiveCo(bool p_bool)
     {
-        viewerContainer.viewer[viewerNum].DeclareBox();
+        viewer.GetComponent<Viewer>().DeclareBox();
+        viewer.SetActive(false);
         this.GetComponent<Image>().color = deactiveColor;
         RectTransform t_rect = this.GetComponent<RectTransform>();
         while(t_rect.anchoredPosition.y > downYPos && p_bool)
@@ -86,6 +88,7 @@ public class StatChangeButton : MonoBehaviour
             yield return null;
         }
         t_rect.anchoredPosition = new Vector2(t_rect.anchoredPosition.x, 0);
-        viewerContainer.viewer[viewerNum].GenBox();
+        viewer.SetActive(true);
+        viewer.GetComponent<Viewer>().GenBox();
     }
 }
