@@ -38,7 +38,7 @@ public class EventManager : MonoBehaviour
         for(int i = 0; i < 5; i++)
         {
             EventEnabled.Add(new EventItem(new Event("Test Event"+i,
-                                new Choice[] { new Choice("00", "test choice first!"), new Choice("01", "test choice second!"), new Choice("02", "test choice third") })));
+                                new Choice[] { new Choice("00", "test choice first!"), new Choice("01", "test choice second!"), new Choice("02", "test choice third") }, 0)));
         }
     }
 
@@ -47,7 +47,7 @@ public class EventManager : MonoBehaviour
         List<Dictionary<string, object>> event_data = CSVReader.Read("DataSheet/Event");
         for (int i = 0; i < event_data.Count; i ++)
         {
-            Event e = new Event(event_data[i]["name"].ToString(),new Choice[3] { null,null,null});
+            Event e = new Event(event_data[i]["name"].ToString(),new Choice[3] { null,null,null}, 0);
             EventDic.Add(i,e);
         }
     }
