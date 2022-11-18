@@ -11,6 +11,7 @@ public class CardInfoPopup : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameBlank;
     [SerializeField] Image illustration;
     [SerializeField] Image categoryImg;
+    [SerializeField] TextMeshProUGUI cost;
 
     public void SetActive(bool p_bool, CardInform? p_info)
     {
@@ -19,6 +20,7 @@ public class CardInfoPopup : MonoBehaviour
         {
             nameBlank.text = p_info.name;
             description.text = p_info.description;
+            cost.text = p_info.cost.ToString();
             Sprite t_sprite = CardManager.instance.illustrationAtlas.GetSprite(p_info.illusteName);
             if (t_sprite != null)
                 illustration.sprite = t_sprite;

@@ -19,6 +19,7 @@ public class ActionCard : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameBlank;
     [SerializeField] Image illustration;
     [SerializeField] Image categoryImg;
+    [SerializeField] TextMeshProUGUI cost;
     
     public Calender calender;
     public bool activated = false;
@@ -72,6 +73,7 @@ public class ActionCard : MonoBehaviour
     {
         nameBlank.text = inform.name;
         description.text = inform.description;
+        cost.text = inform.cost.ToString();
         Sprite t_sprite = CardManager.instance.illustrationAtlas.GetSprite(inform.illusteName);
         if (t_sprite != null)
         {

@@ -17,6 +17,7 @@ public class Hand : UI
     [SerializeField] Calender calender;
     [SerializeField] MyDeck myDeck;
     [SerializeField] CardInfoPopup cardInfoPopup;
+    [SerializeField] FatiguePreview fatiguePreview;
 
     // Start is called before the first frame update
     void Awake()
@@ -122,8 +123,9 @@ public class Hand : UI
                     }
                     if (cards[selectedCardIndex].inform.type == CardType.Action)
                     {
-                        cards[selectedCardIndex].inform.action.actionDel(cards[selectedCardIndex].currentCell, cards[selectedCardIndex].inform);
-                        cards[selectedCardIndex].currentCell.HoldOut();
+                            cards[selectedCardIndex].inform.action.actionDel(cards[selectedCardIndex].currentCell, cards[selectedCardIndex].inform);
+                            cards[selectedCardIndex].currentCell.HoldOut();
+                            fatiguePreview.Setting();
                     }
                     else if(cards[selectedCardIndex].inform.type == CardType.Event)
                     {

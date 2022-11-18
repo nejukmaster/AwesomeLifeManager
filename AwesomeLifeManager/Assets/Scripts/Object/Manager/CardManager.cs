@@ -32,8 +32,9 @@ public class CardInform
     public string illusteName;
     public string resultDescription;
     public Action action;
+    public int cost;
 
-    public CardInform(string name, CardType type, string description, string illusteName, string resultDescription, Action action)
+    public CardInform(string name, CardType type, string description, string illusteName, string resultDescription, Action action, int cost)
     {
         this.name = name;
         this.type = type;
@@ -41,6 +42,7 @@ public class CardInform
         this.illusteName = illusteName;
         this.resultDescription = resultDescription;
         this.action = action;
+        this.cost = cost;
     }
 
     public string GetIllustePath()

@@ -11,11 +11,12 @@ public class AddCardToDeckButton : MonoBehaviour
     public string illusteName;
     public string resultDes;
     public string planCode;
+    public int cost;
     public void OnClick()
     {
         if (type == CardType.Action)
         {
-            CardInform t_inform = new CardInform(name, type, des, illusteName, resultDes, new Action((cell, t_inform) => { ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic[(string)t_inform.dataList[0]]); }));
+            CardInform t_inform = new CardInform(name, type, des, illusteName, resultDes, new Action((cell, t_inform) => { ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic[(string)t_inform.dataList[0]]); }),cost);
             t_inform.dataList.Add(planCode.Clone());
             deck.AddCard(t_inform);
         }
@@ -23,7 +24,7 @@ public class AddCardToDeckButton : MonoBehaviour
         {
             CardInform t_inform = new CardInform(name, type, des, illusteName, resultDes, new Action((eventManager, t_inform) => {
                                                                                                                                  ((EventManager)eventManager).EventEnabled.Add(new EventItem((new Event(name,
-                                                                                                                                    new Choice[] { new Choice("00", "test choice first!"), new Choice("01", "test choice second!"), new Choice("02", "test choice third") })))); }));
+                                                                                                                                    new Choice[] { new Choice("00", "test choice first!"), new Choice("01", "test choice second!"), new Choice("02", "test choice third") },0)))); }),cost);
             deck.AddCard(t_inform);
         }
     }

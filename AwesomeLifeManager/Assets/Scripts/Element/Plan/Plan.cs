@@ -8,23 +8,20 @@ public class Plan
     public delegate bool conditionDel();
 
     public string name;
-    public int costFatigue;
     public int costAP;
     public rewardDel reward;
     public conditionDel condition;
 
-    public Plan(string name, int costFatigue, int costAP){
+    public Plan(string name, int costAP){
         this.name = name;
-        this.costFatigue = costFatigue;
         this.costAP = costAP;
         this.reward = () => { return true; };
         this.condition = () => {return true;};
     }
 
     #nullable enable
-    public Plan(string name, int costFatigue, int costAP, rewardDel? reward, conditionDel? condition){
+    public Plan(string name, int costAP, rewardDel? reward, conditionDel? condition){
         this.name = name;
-        this.costFatigue = costFatigue;
         this.costAP = costAP;
         if (reward != null)
             this.reward = reward;
