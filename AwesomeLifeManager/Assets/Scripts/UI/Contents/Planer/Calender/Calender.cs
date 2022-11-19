@@ -13,10 +13,9 @@ public class Calender : UI
     //캘린더 날짜 하나하나를 저장해놓은 리스트
     public CalenderCell[] cells = new CalenderCell[28];
     public List<int> checkedPlanIndexes = new List<int> ();
+    public FatiguePreview fatiguePreview;
     //초기화시 이 클래스의 anchoredPosition을 저장해놓습니다. 이 클래스는 왠만해선 위치가 바뀌지 않으므로 RectTransform을 매번 참조하는 일을 방지하기위한 처리입니다.
     public Vector2 anchoredPos;
-    public int accumFatigue = 0;
-    public int accumAP = 0;
     //이 캘린더를 담고있는 오브젝트를 저장합니다. 마우스클릭이나 터치를 정규화하고 이를 캘린더 각 위치에 매핑하기 위해서 사용됩니다. 
     public CalenderContainer container;
     public bool cellsSetted;

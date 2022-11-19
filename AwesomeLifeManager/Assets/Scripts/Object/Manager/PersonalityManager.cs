@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Newtonsoft.Json.Linq;
 
 /*  이 클래스에서는 성격을 담당해요. 
     성격을 만들고 등록하는 일을 하죠. 또한 성격을 게임에 적용하는 일도 한답니다. 
@@ -78,11 +79,15 @@ public class PersonalityManager : MonoBehaviour
         theStatus = FindObjectOfType<StatusManager>();
         theConviction = FindObjectOfType<ConvictionManager>();
         List<Dictionary<string, object>> personality_data = CSVReader.Read("DataSheet/Personality");
+        
         for (int i = 0; i < personality_data.Count; i++)
         {
-            personalityDic.Add(i.ToString("000"), new Personality(personality_data[i]["name"].ToString(), "test", Utility.StringToEnum<PersonalityType>(personality_data[i]["classify"].ToString())));
+            if (personality_data[i].ContainsKey("description"))
+                personalityDic.Add(i.ToString("000"), new Personality(personality_data[i]["name"].ToString(), personality_data[i]["description"].ToString(), Utility.StringToEnum<PersonalityType>(personality_data[i]["classify"].ToString())));
+            else
+                personalityDic.Add(i.ToString("000"), new Personality(personality_data[i]["name"].ToString(), "test personality", Utility.StringToEnum<PersonalityType>(personality_data[i]["classify"].ToString())));
         }
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 3; i++)
         {
             personalities.Add(personalityDic[i.ToString("000")]);
         }

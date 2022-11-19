@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PersonalityViewer : Scroll,Viewer
 {
+    public PersonalityInfoPopup personalityInfoPopup;
+
     ObjectPool theObjectPool;
     PersonalityManager thePersonalityManager;
 

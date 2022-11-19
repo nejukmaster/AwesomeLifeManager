@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class EventPopup : MonoBehaviour
 {
     public Animator eventEncounterAnime;
+    public TurnProcessPopup turnProcessPopup;
     public TextMeshProUGUI name;
     public Image eventIllustration;
     public GameObject[] choices;
@@ -20,10 +21,12 @@ public class EventPopup : MonoBehaviour
         {
             for (int i = 0; i < choices.Length; i++)
                 choices[i].GetComponent<EventChoiceButton>().Initialize();
+            UI.ToggleSubUI(turnProcessPopup.gameObject, true);
         }
         else
         {
             eventEncounterAnime.gameObject.SetActive(true);
+            UI.ToggleSubUI(turnProcessPopup.gameObject, false);
             currentEvent = p_event;
             name.text = p_event.name;
             if (p_event.mainTex != null)

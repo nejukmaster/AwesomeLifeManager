@@ -53,6 +53,7 @@ public class PlanDeletePopup : MonoBehaviour
                     }
                 }
             }
+            calender.fatiguePreview.Setting();
         }
         this.SetActive(false, null);
     }
