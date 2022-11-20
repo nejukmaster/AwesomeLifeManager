@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Newtonsoft.Json.Linq;
+using System;
 
 /*  이 클래스에서는 성격을 담당해요. 
     성격을 만들고 등록하는 일을 하죠. 또한 성격을 게임에 적용하는 일도 한답니다. 
@@ -15,14 +16,13 @@ using Newtonsoft.Json.Linq;
 public class Personality : Variable{
     public string name;
     public string description;
-    public ConditionDel conditions;
     public PersonalityType type;
 
     //컨스트럭터 1
-    public Personality(string name, string description, PersonalityType type, ConditionDel conditionDel){
+    public Personality(string name, string description, PersonalityType type, List<string> conditions){
         this.name = name;
         this.description = description;
-        this.conditions = conditionDel;
+        this.conditions = conditions;
         this.type = type;
     }
 
@@ -31,7 +31,6 @@ public class Personality : Variable{
         this.name = name;
         this.type = type;
         this.description = "";
-        this.conditions = () => { return false; };
     }
 
     public Personality(string name, string description, PersonalityType type)
@@ -39,7 +38,44 @@ public class Personality : Variable{
         this.name = name;
         this.type = type;
         this.description= description;
-        this.conditions = () => { return false; };
+        Personality personality = this;
+    }
+
+    public bool CheckCondition()
+    {
+        bool r = false;
+        foreach(string str in conditions)
+        {
+            string[] e = str.Split('|');
+            int i1 = 0;
+            int i2 = 0;
+            Int32.TryParse(e[0], out i1);
+            Int32.TryParse(e[2], out i2);
+            switch (e[1])
+            {
+                case ">" :
+                    if (i1 > i2) r = true;
+                    else r = false;
+                    break;
+                case "<" :
+                    if (i1 < i2) r = true;
+                    else r = false;
+                    break;
+                case ">=":
+                    if (i1 >= i2) r = true;
+                    else r = false;
+                    break;
+                case "<=":
+                    if (i1 <= i2) r = true;
+                    else r = false;
+                    break;
+                case "==":
+                    if (i1 == i2) r = true;
+                    else r = false;
+                    break;
+            }
+        }
+        return r;
     }
 
     public bool equal(Personality other){
@@ -80,16 +116,15 @@ public class PersonalityManager : MonoBehaviour
         theConviction = FindObjectOfType<ConvictionManager>();
         List<Dictionary<string, object>> personality_data = CSVReader.Read("DataSheet/Personality");
         
-        for (int i = 0; i < personality_data.Count; i++)
+        for (int i = 0; i < 3; i++)
         {
-            if (personality_data[i].ContainsKey("description"))
-                personalityDic.Add(i.ToString("000"), new Personality(personality_data[i]["name"].ToString(), personality_data[i]["description"].ToString(), Utility.StringToEnum<PersonalityType>(personality_data[i]["classify"].ToString())));
-            else
-                personalityDic.Add(i.ToString("000"), new Personality(personality_data[i]["name"].ToString(), "test personality", Utility.StringToEnum<PersonalityType>(personality_data[i]["classify"].ToString())));
-        }
-        for(int i = 0; i < 3; i++)
-        {
-            personalities.Add(personalityDic[i.ToString("000")]);
+            List<string> t_list = new List<string>();
+            string[] conditions = personality_data[i]["condition"].ToString().Split("/");
+            foreach(string str in conditions)
+            {
+                t_list.Add(str);
+            }
+            personalityDic.Add(i.ToString("000"), new Personality(personality_data[i]["name"].ToString(), personality_data[i]["description"].ToString(), Utility.StringToEnum<PersonalityType>(personality_data[i]["classify"].ToString()),t_list));
         }
     }
 
@@ -120,15 +155,22 @@ public class PersonalityManager : MonoBehaviour
         personalities.Add(personalityDic[p_code]);
     }
 
-    public bool CheckPersonality(string[] p_code_list){
-        for(int i = 0; i < p_code_list.Length; i ++){
-            if(!contains_ignore_cases(personalities,personalityDic[p_code_list[i]]))
-                return false;
-        }
-        return true;
+    public void AddPersonality(Personality p_person)
+    {
+        personalities.Add(p_person);
     }
 
-    public void CheckCondition(){
+    public List<Personality> CheckPersonality(){
+        List<Personality> r = new List<Personality>();
+        foreach(var pair in personalityDic)
+        {
+            if (pair.Value.CheckCondition())
+                r.Add(pair.Value);
+        }
+        return r;
+    }
+
+    /*public void CheckCondition(){
         foreach(var pair in personalityDic){
             bool check = false;
             Variable.ConditionDel t_conditions = pair.Value.conditions;
@@ -137,5 +179,5 @@ public class PersonalityManager : MonoBehaviour
                 AddPersonality(pair.Key);
             }
         }
-    }
+    }*/
 }

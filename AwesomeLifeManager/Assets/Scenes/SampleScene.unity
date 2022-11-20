@@ -4038,7 +4038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e564d3a742f16148bb47672064ac9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventEncounterPercent: 0.5
+  eventEncounterPercent: 0
 --- !u!1 &391639475
 GameObject:
   m_ObjectHideFlags: 0
@@ -9101,7 +9101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventEncounterAnime: {fileID: 255257571}
-  turnProcessPopup: {fileID: 0}
+  turnProcessPopup: {fileID: 629913813}
   name: {fileID: 1293543429}
   eventIllustration: {fileID: 968108887}
   choices:

@@ -9,13 +9,12 @@ public class Turn
     public List<Plan> settedPlan = new List<Plan>();
     TurnManager theTurnManager;
     EventManager theEventManager;
+    PersonalityManager thePersonalityManager;
     bool eventFire = false;
 
     public Turn(int p_num)
     {
         this.turnNum = p_num;
-        theTurnManager = TurnManager.instance;
-        theEventManager = EventManager.instance;
     }
 
     public virtual void OnTurnStart(){
@@ -32,6 +31,12 @@ public class Turn
 
     public IEnumerator RunningCo(TurnProcessPopup t_popup, EventPopup e_popup)
     {
+        if (theTurnManager == null || theEventManager == null || thePersonalityManager == null)
+        {
+            theTurnManager = TurnManager.instance;
+            theEventManager = EventManager.instance;
+            thePersonalityManager = PersonalityManager.instance;
+        }
         IEnumerator<Plan> e1 = settedPlan.GetEnumerator();
         int date = 1;
         UI.ToggleSubUI(theTurnManager.MainUI, false);
@@ -66,6 +71,12 @@ public class Turn
                         yield return new WaitForSeconds(2f);
                     }
                 }
+            }
+            List<Personality> t_list = thePersonalityManager.CheckPersonality();
+            for(int i = 0; i < t_list.Count; i ++)
+            {
+                thePersonalityManager.AddPersonality(t_list[i]);
+                t_popup.AddLog(t_list[i].name + "가 활성화 되었습니다.");
             }
             date++;
             //Event Fire

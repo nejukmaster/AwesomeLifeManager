@@ -15,14 +15,7 @@ using TMPro;
 public class Conviction : Variable{
 
     public string name;
-    //해금 조건 함수의 대리자들을 저장하는 리스트 생성
-    public ConditionDel[] conditions = new ConditionDel[0];
     //컨스트럭터 1
-    public Conviction(string name, params ConditionDel[] conditions){
-        this.name = name;
-        this.conditions = conditions;
-    }
-    //컨스트럭터2
     public Conviction(string name){
         this.name = name;
     }
@@ -65,9 +58,7 @@ public class ConvictionManager : MonoBehaviour
     //가치관 리스트를 파싱하여 Dictionary에 매핑할 함수 정의
     //이 부분에서 가치관 등록을 처리
     void mapping(){
-        convictionMap.Add("test", new Conviction("테스트",
-         ()=>theStatus.GetStatus("int").value > 11,
-         ()=>thePersonality.CheckPersonality(new string[]{"0_basic","1_basic"})));
+        convictionMap.Add("test", new Conviction("테스트"));
     }
 
     bool contains_ignore_cases(List<Conviction> list, Conviction other){
@@ -91,22 +82,5 @@ public class ConvictionManager : MonoBehaviour
                 return false;
         }
         return true;
-    }
-
-    public void CheckCondition(){
-        foreach(var pair in convictionMap){
-            bool check = false;
-            Variable.ConditionDel[] t_conditions = pair.Value.conditions;
-            for(int i = 0; i < t_conditions.Length; i ++){
-                if(t_conditions[i]())
-                    check = true;
-                else{
-                    check = false;
-                    break;
-                }
-            }
-            if(check && !CheckConviction(new string[]{pair.Key}))
-                AddConviction(pair.Key);
-        }
     }
 }

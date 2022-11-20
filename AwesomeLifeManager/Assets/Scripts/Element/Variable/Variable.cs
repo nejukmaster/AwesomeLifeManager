@@ -6,5 +6,5 @@ using UnityEngine;
 public class Variable
 {
     public delegate float EquationDel(float x);
-    public delegate bool ConditionDel();
+    public List<string> conditions = new List<string>();
 }
