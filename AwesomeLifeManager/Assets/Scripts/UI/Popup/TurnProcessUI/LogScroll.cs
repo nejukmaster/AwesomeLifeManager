@@ -18,7 +18,7 @@ public class LogScroll : Scroll
     public IEnumerator ScrollCo(float t_y)
     {
         RectTransform t_rect = objGroup.GetComponent<RectTransform>();
-        float t_destY = t_rect.anchoredPosition.y + t_y;
+        float t_destY = t_y - t_rect.rect.height;
         while(t_destY - t_rect.anchoredPosition.y >= 1)
         {
             t_rect.anchoredPosition = Vector2.Lerp(t_rect.anchoredPosition,

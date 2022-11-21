@@ -31,7 +31,7 @@ public class TurnProcessPopup : MonoBehaviour
         {
             if (co != null)
                 StopCoroutine(co);
-            co = StartCoroutine(logScroll.ScrollCo(t_rect.rect.height));
+            co = StartCoroutine(logScroll.ScrollCo(-1 * logScroll.GetEndPos().y));
         }
         logScroll.updateObjs<TextMeshProUGUI>();
         pibot++;

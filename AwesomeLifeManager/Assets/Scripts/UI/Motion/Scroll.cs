@@ -79,6 +79,16 @@ public abstract class Scroll :UI
         else return false;
     }
 
+    public Vector2 GetEndPos()
+    {
+        Vector2 pos = new Vector2();
+        for(int i = 0; i < objs.Length; i++)
+        {
+            if (objs[i].anchoredPosition.y < pos.y) pos = objs[i].anchoredPosition;
+        }
+        return pos;
+    }
+
     //스크롤 시작시에 실행될 함수
     public abstract void onStartSwipe();
 

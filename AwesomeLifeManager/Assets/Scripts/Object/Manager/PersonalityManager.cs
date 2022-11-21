@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Newtonsoft.Json.Linq;
 using System;
+using UnityEditor.XR;
 
 /*  이 클래스에서는 성격을 담당해요. 
     성격을 만들고 등록하는 일을 하죠. 또한 성격을 게임에 적용하는 일도 한답니다. 
@@ -47,9 +48,8 @@ public class Personality : Variable{
         foreach(string str in conditions)
         {
             string[] e = str.Split('|');
-            int i1 = 0;
+            int i1 = StatusManager.instance.GetStatus(e[0]).value;
             int i2 = 0;
-            Int32.TryParse(e[0], out i1);
             Int32.TryParse(e[2], out i2);
             switch (e[1])
             {
@@ -165,7 +165,15 @@ public class PersonalityManager : MonoBehaviour
         foreach(var pair in personalityDic)
         {
             if (pair.Value.CheckCondition())
+            {
+                bool _r = false;
+                for(int i = 0; i < personalities.Count; i++)
+                {
+                    if (personalities[i].equal(pair.Value)) _r = true;
+                }
+                if (_r) continue;
                 r.Add(pair.Value);
+            }
         }
         return r;
     }

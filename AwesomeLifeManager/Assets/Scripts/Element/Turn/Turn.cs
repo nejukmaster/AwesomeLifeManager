@@ -59,6 +59,7 @@ public class Turn
             else
             {
                 Debug.Log("Free Act.");
+                t_popup.AddLog("Free Act.");
             }
             if (Random.Range(0, 100) < (int)(theEventManager.eventEncounterPercent * 100)) {
                 if (theEventManager.EventEnabled.Count > 0)
@@ -76,7 +77,7 @@ public class Turn
             for(int i = 0; i < t_list.Count; i ++)
             {
                 thePersonalityManager.AddPersonality(t_list[i]);
-                t_popup.AddLog(t_list[i].name + "가 활성화 되었습니다.");
+                t_popup.AddLog(t_list[i].name + "(이)가 활성화 되었습니다.");
             }
             date++;
             //Event Fire
