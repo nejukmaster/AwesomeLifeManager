@@ -12,6 +12,8 @@ public class WeekCard : Scroll
     public bool fliped = false;
 
     [SerializeField] Button flipButton;
+    [SerializeField] Sprite frontImage;
+    [SerializeField] Sprite backImage;
     TurnManager theTurnManager;
     ObjectPool theObjectPool;
     PlanContainer thePlanContainer;
@@ -110,6 +112,7 @@ public class WeekCard : Scroll
                                                                          3f * Time.deltaTime);
             yield return null;
         }
+        this.GetComponent<Image>().sprite = backImage;
         while (this.GetComponent<RectTransform>().localScale.x < 0.9 && isActivatedAnime)
         {
             this.GetComponent<RectTransform>().localScale = Vector2.Lerp(this.GetComponent<RectTransform>().localScale,
@@ -140,6 +143,7 @@ public class WeekCard : Scroll
         declarePlanBox();
         objGroup.anchoredPosition = new Vector2(objGroup.anchoredPosition.x, 0);
         this.active = false;
+        this.GetComponent<Image>().sprite = frontImage;
         while (this.GetComponent<RectTransform>().localScale.x < 0.9 && isActivatedAnime)
         {
             this.GetComponent<RectTransform>().localScale = Vector2.Lerp(this.GetComponent<RectTransform>().localScale,

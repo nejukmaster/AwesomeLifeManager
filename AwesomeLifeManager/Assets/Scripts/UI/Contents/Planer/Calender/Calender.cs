@@ -31,7 +31,7 @@ public class Calender : UI
     public WeekPlanPopup weekPlanPopup;
 
     // Start is called before the first frame update
-    void Awake()
+    public void Awake()
     {
         uiCanvas = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
         anchoredPos = this.GetComponent<RectTransform>().anchoredPosition;

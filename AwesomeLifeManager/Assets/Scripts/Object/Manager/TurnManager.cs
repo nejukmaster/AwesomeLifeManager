@@ -13,6 +13,7 @@ public class TurnManager : MonoBehaviour
     public Calender calender;
     public TurnProcessPopup turnProcessPopup;
     [SerializeField] EventPopup eventPopup;
+    [SerializeField] WarningPopup warningPopup;
     PlanManager planManager;
 
     // Start is called before the first frame update
@@ -38,6 +39,10 @@ public class TurnManager : MonoBehaviour
 
     public void RunCurrentTurn()
     {
+        if(currentTurn.settedPlan[0] == null){
+            warningPopup.SetActive(true, "먼저 일정을 설계한 뒤 진행해주세요!");
+            return;
+        }
         turnProcessPopup.gameObject.SetActive(true);
         StartCoroutine(currentTurn.RunningCo(turnProcessPopup,eventPopup));
     }

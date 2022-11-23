@@ -64,11 +64,17 @@ public class CardManager : MonoBehaviour
 
     public static CardManager instance;
 
+    public Dictionary<string, CardInform> cardInformDic = new Dictionary<string, CardInform>();
+    public List<Action.ActionDel> actionDelList = new List<Action.ActionDel>();
     public SpriteAtlas illustrationAtlas;
 
     private void Start()
     {
         instance = this;
+        Mapping();
+    }
+
+    public void Mapping(){
     }
 
 }

@@ -6,6 +6,7 @@ public class RunTurnButton : MonoBehaviour
 {
     QuickMenuManager theQuickMenuManager;
     TurnManager theTurnManager;
+
     private void Start()
     {
         theQuickMenuManager = QuickMenuManager.instance;
