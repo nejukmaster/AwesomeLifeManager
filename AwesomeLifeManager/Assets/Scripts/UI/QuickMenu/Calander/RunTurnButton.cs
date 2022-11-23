@@ -6,6 +6,7 @@ public class RunTurnButton : MonoBehaviour
 {
     QuickMenuManager theQuickMenuManager;
     TurnManager theTurnManager;
+    [SerializeField] PlanContainer planContainer;
 
     private void Start()
     {
@@ -14,6 +15,10 @@ public class RunTurnButton : MonoBehaviour
     }
     public void OnClick()
     {
+        if (planContainer.weekCards[planContainer.frontCardIndex].fliped)
+        {
+            planContainer.weekCards[planContainer.frontCardIndex].Unflip(false);
+        }
         theQuickMenuManager.activatedButton.OnClick();
         theTurnManager.RunCurrentTurn();
     }

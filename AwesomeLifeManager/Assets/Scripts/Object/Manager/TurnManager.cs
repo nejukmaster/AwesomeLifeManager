@@ -39,7 +39,7 @@ public class TurnManager : MonoBehaviour
 
     public void RunCurrentTurn()
     {
-        if(currentTurn.settedPlan[0] == null){
+        if(currentTurn.settedPlan.Count == 0){
             warningPopup.SetActive(true, "먼저 일정을 설계한 뒤 진행해주세요!");
             return;
         }
