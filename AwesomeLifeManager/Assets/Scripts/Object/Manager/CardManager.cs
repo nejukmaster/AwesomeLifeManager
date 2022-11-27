@@ -20,7 +20,8 @@ public enum CardType
     Action,
     Project,
     Event,
-    Angel
+    Angel,
+    Job
 }
 [System.Serializable]
 public class CardInform
@@ -55,6 +56,8 @@ public class CardInform
             return "Event/" + illusteName;
         else if (type == CardType.Angel)
             return "Angel/" + illusteName;
+        else if (type == CardType.Angel)
+            return "Job/" + illusteName;
         else
             return "Etc/" + illusteName;
     }

@@ -8,12 +8,11 @@ public class CardViewer : Scroll
     [SerializeField] CardType containType;
     [SerializeField] MyDeck myDeck;
     ObjectPool theObjectPool;
-    RectTransform containerRect;
+    [SerializeField] RectTransform containerRect;
     // Start is called before the first frame update
     void Awake()
     {
         theObjectPool = ObjectPool.instance;
-        containerRect = GetComponentInParent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -29,14 +28,27 @@ public class CardViewer : Scroll
         {
             if(card.inform.type == containType)
             {
+                Debug.Log(card.inform.type.ToString()+","+containType);
                 GameObject obj = theObjectPool.cardIconQueue.Dequeue();
+                obj.SetActive(true);
                 obj.transform.SetParent(objGroup, false);
                 CardIcon icon = obj.GetComponent<CardIcon>();
                 icon.SettingCard(card.inform);
                 RectTransform t_rect = icon.GetComponent<RectTransform>();
-                t_rect.anchoredPosition = new Vector2((i % 3) * (containerRect.rect.width / 3), Mathf.Floor(i / 3) * t_rect.rect.height + 25f);
+                t_rect.anchoredPosition = new Vector2((i % 3) * (containerRect.rect.width / 3), -1 * Mathf.Floor(i / 3) * t_rect.rect.height + 25f);
                 i++;
             }
+        }
+        updateObjs<CardIcon>();
+    }
+
+    public void DeleteIcons()
+    {
+        foreach(RectTransform r in objs)
+        {
+            theObjectPool.cardIconQueue.Enqueue(r.gameObject);
+            r.gameObject.SetActive(false);
+            updateObjs<CardIcon>();
         }
     }
 

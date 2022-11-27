@@ -1,18 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CategoryChangeButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static CategoryChangeButton activatedButton;
+
+    public bool isActivated = false;
+
+    [SerializeField] CardViewer cardViewer;
+    [SerializeField] Color activeColor;
+    [SerializeField] Color deactiveColor;
+
+    public void OnClick()
     {
-        
+        if (activatedButton != this)
+        {
+            if(activatedButton != null)
+                activatedButton.Deactive();
+            Active();
+            activatedButton = this;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Active()
     {
-        
+        cardViewer.gameObject.SetActive(true);
+        cardViewer.GenIcons();
+        this.GetComponent<Image>().color = activeColor;
+    }
+
+    public void Deactive()
+    {
+        cardViewer.DeleteIcons();
+        cardViewer.gameObject.SetActive(false);
+        this.GetComponent<Image>().color = deactiveColor;
     }
 }
