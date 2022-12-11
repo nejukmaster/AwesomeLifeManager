@@ -13,6 +13,7 @@ public class CardIcon : MonoBehaviour
     [SerializeField] Image illustration;
     [SerializeField] Image categoryImg;
     [SerializeField] TextMeshProUGUI cost;
+    [SerializeField] CardWindow cardWindow;
 
     public void SettingCard(CardInform inform)
     {
@@ -40,5 +41,10 @@ public class CardIcon : MonoBehaviour
                 categoryImg.sprite = t_atlas.GetSprite("Angel");
                 break;
         }
+    }
+
+    public void OnClick()
+    {
+
     }
 }

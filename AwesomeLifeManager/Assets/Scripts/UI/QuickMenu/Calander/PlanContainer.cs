@@ -61,8 +61,10 @@ public class PlanContainer : UI
             if(GetFrontCard() != frontCardIndex)
             {
                 frontCardIndex = GetFrontCard();
+                weekCards[(frontCardIndex + 2) % 4].transform.SetAsFirstSibling();
                 weekCards[frontCardIndex].transform.SetAsLastSibling();
                 weekView.GetComponentInChildren<TextMeshProUGUI>().text = (theTurnManager.currentTurn.turnNum % 12 +1).ToString()+"월 "+(weekCards[frontCardIndex].weekNum+1).ToString()+"주차";
+
             }
         }
         return true;
