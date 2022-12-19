@@ -17,6 +17,16 @@ public class CardWindow : MonoBehaviour
     [SerializeField] GameObject back;
     [SerializeField] Vector2 destSize;
     Coroutine coroutine;
+    bool fliped = false;
+    bool canClick = false;
+
+    public void OnClick()
+    {
+        if (canClick)
+        {
+            SetActive(false, null);
+        }
+    }
 
     public void SetActive(bool p_bool, CardInform p_inform)
     {
@@ -24,6 +34,8 @@ public class CardWindow : MonoBehaviour
 
         if (p_bool)
         {
+            front.SetActive(false);
+            back.SetActive(true);
             nameBlank.text = p_inform.name;
             description.text = p_inform.description;
             cost.text = p_inform.cost.ToString();
@@ -48,11 +60,18 @@ public class CardWindow : MonoBehaviour
                     categoryImg.sprite = t_atlas.GetSprite("Angel");
                     break;
             }
+            while (FlipCo().MoveNext());
+        }
+        else
+        {
+            while (UnflipCo().MoveNext());
+            gameObject.SetActive(false);
         }
     }
 
     IEnumerator FlipCo()
     {
+        canClick = false;
         RectTransform t_rect = (RectTransform)this.transform;
         while(t_rect.localScale.x >= 0.1)
         {
@@ -61,6 +80,7 @@ public class CardWindow : MonoBehaviour
                                             3f * Time.deltaTime);
             yield return null;
         }
+        t_rect.localScale = new Vector2(0, t_rect.localScale.y);
         back.SetActive(false);
         front.SetActive(true);
         while (destSize.x - t_rect.localScale.x >= 0.1)
@@ -70,5 +90,34 @@ public class CardWindow : MonoBehaviour
                                             3f * Time.deltaTime);
             yield return null;
         }
+        t_rect.localScale = destSize;
+        fliped = true;
+        canClick = true;
+    }
+
+    IEnumerator UnflipCo()
+    {
+        canClick = false;
+        RectTransform t_rect = (RectTransform)this.transform;
+        while (t_rect.localScale.x >= 0.1)
+        {
+            t_rect.localScale = Vector2.Lerp(t_rect.localScale,
+                                            new Vector2(0, t_rect.localScale.y),
+                                            3f * Time.deltaTime);
+            yield return null;
+        }
+        t_rect.localScale = new Vector2(0, t_rect.localScale.y);
+        back.SetActive(true);
+        front.SetActive(false);
+        while (destSize.x - t_rect.localScale.x >= 0.1)
+        {
+            t_rect.localScale = Vector2.Lerp(t_rect.localScale,
+                                            destSize,
+                                            3f * Time.deltaTime);
+            yield return null;
+        }
+        t_rect.localScale = destSize;
+        fliped = false;
+        canClick = true;
     }
 }

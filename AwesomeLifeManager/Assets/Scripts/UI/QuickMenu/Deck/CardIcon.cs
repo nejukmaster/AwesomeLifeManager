@@ -14,9 +14,11 @@ public class CardIcon : MonoBehaviour
     [SerializeField] Image categoryImg;
     [SerializeField] TextMeshProUGUI cost;
     [SerializeField] CardWindow cardWindow;
+    CardInform cardInform;
 
     public void SettingCard(CardInform inform)
     {
+        cardInform = inform;
         nameBlank.text = inform.name;
         description.text = inform.description;
         cost.text = inform.cost.ToString();
@@ -45,6 +47,6 @@ public class CardIcon : MonoBehaviour
 
     public void OnClick()
     {
-
+        cardWindow.SetActive(true, cardInform);
     }
 }
