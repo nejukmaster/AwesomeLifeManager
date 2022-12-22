@@ -28,7 +28,6 @@ public class CardViewer : Scroll
         {
             if(card.inform.type == containType)
             {
-                Debug.Log(card.inform.type.ToString()+","+containType);
                 GameObject obj = theObjectPool.cardIconQueue.Dequeue();
                 obj.SetActive(true);
                 obj.transform.SetParent(objGroup, false);

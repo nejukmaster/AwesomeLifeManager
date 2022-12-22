@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class CardWindow : MonoBehaviour
 {
-
+    [SerializeField] GameObject disableUI;
     [SerializeField] TextMeshProUGUI description;
     [SerializeField] TextMeshProUGUI nameBlank;
     [SerializeField] Image illustration;
@@ -30,10 +30,10 @@ public class CardWindow : MonoBehaviour
 
     public void SetActive(bool p_bool, CardInform p_inform)
     {
-        this.gameObject.SetActive(p_bool);
-
+        
         if (p_bool)
         {
+            this.gameObject.SetActive(p_bool);
             front.SetActive(false);
             back.SetActive(true);
             nameBlank.text = p_inform.name;
@@ -60,13 +60,24 @@ public class CardWindow : MonoBehaviour
                     categoryImg.sprite = t_atlas.GetSprite("Angel");
                     break;
             }
-            while (FlipCo().MoveNext());
+            Flip();
         }
         else
         {
-            while (UnflipCo().MoveNext());
-            gameObject.SetActive(false);
+            Unflip();
         }
+    }
+
+    public void Flip()
+    {
+        UI.ToggleSubUI(disableUI, false);
+        StartCoroutine(FlipCo());
+    }
+
+    public void Unflip()
+    {
+        UI.ToggleSubUI(disableUI, true);
+        StartCoroutine(UnflipCo());
     }
 
     IEnumerator FlipCo()
@@ -93,6 +104,7 @@ public class CardWindow : MonoBehaviour
         t_rect.localScale = destSize;
         fliped = true;
         canClick = true;
+        yield return null;
     }
 
     IEnumerator UnflipCo()
@@ -119,5 +131,6 @@ public class CardWindow : MonoBehaviour
         t_rect.localScale = destSize;
         fliped = false;
         canClick = true;
+        gameObject.SetActive(false);
     }
 }

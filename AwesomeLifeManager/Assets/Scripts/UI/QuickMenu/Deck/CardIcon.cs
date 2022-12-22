@@ -13,11 +13,12 @@ public class CardIcon : MonoBehaviour
     [SerializeField] Image illustration;
     [SerializeField] Image categoryImg;
     [SerializeField] TextMeshProUGUI cost;
-    [SerializeField] CardWindow cardWindow;
+    CardWindow cardWindow;
     CardInform cardInform;
 
     public void SettingCard(CardInform inform)
     {
+        cardWindow = GetComponentInParent<IconContainer>().cardWindow;
         cardInform = inform;
         nameBlank.text = inform.name;
         description.text = inform.description;
