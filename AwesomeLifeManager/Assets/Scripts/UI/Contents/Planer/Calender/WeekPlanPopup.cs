@@ -38,25 +38,26 @@ public class WeekPlanPopup : Scroll
     public void genPlanBox(int p_weekNum, RectTransform p_parent)
     {
         int pibot = 0;
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < 4; i++)
         {
-            int _i = p_weekNum * 7 + i;
-            if (calender.cells[_i].insertedPlan != null)
+            if (calender.cells[i].insertedPlan != null)
             {
-                GameObject t_box = theObjectPool.weekPlanQueue.Dequeue();
-                t_box.SetActive(true);
-                t_box.transform.SetParent(p_parent.transform, false);
-                t_box.GetComponentInChildren<TextMeshProUGUI>().text = (i + 1) + "일차: " + calender.cells[_i].insertedPlan.name;
-                RectTransform t_rect = t_box.GetComponent<RectTransform>();
-                t_rect.localScale = Vector2.one;
-                t_rect.anchoredPosition = new Vector2(0, -1 * t_rect.rect.height * pibot);
-                t_box.GetComponent<PlanBox>().planNum = _i;
-                t_box.GetComponentInChildren<Toggle>().gameObject.SetActive(true);
-                if (calender.checkedPlanIndexes.IndexOf(_i) != -1)
-                    t_box.GetComponentInChildren<Toggle>().isOn = true;
-                else
-                    t_box.GetComponentInChildren<Toggle>().isOn = false;
-                pibot++;
+                for (int j = 0; j < calender.cells[i].insertedPlan.Count; j ++) {
+                    GameObject t_box = theObjectPool.weekPlanQueue.Dequeue();
+                    t_box.SetActive(true);
+                    t_box.transform.SetParent(p_parent.transform, false);
+                    t_box.GetComponentInChildren<TextMeshProUGUI>().text = (i + 1) + "일차: " + calender.cells[i].insertedPlan[j].name;
+                    RectTransform t_rect = t_box.GetComponent<RectTransform>();
+                    t_rect.localScale = Vector2.one;
+                    t_rect.anchoredPosition = new Vector2(0, -1 * t_rect.rect.height * pibot);
+                    t_box.GetComponent<PlanBox>().planNum = j;
+                    t_box.GetComponentInChildren<Toggle>().gameObject.SetActive(true);
+                    if (calender.checkedPlanIndexes.IndexOf(j) != -1)
+                        t_box.GetComponentInChildren<Toggle>().isOn = true;
+                    else
+                        t_box.GetComponentInChildren<Toggle>().isOn = false;
+                    pibot++;
+                }
             }
         }
         updateObjs<PlanBox>();

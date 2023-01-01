@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MyDeck : MonoBehaviour
 {
-
+    public List<CardInform> cardInformList = new List<CardInform>();
     public Queue<ActionCard> cardQueue = new Queue<ActionCard>();
 
     public void AddCard(CardInform p_inform)
@@ -13,6 +13,7 @@ public class MyDeck : MonoBehaviour
         GameObject t_obj = ObjectPool.instance.actionCardQueue.Dequeue();
         cardQueue.Enqueue(t_obj.GetComponent<ActionCard>());
         t_obj.GetComponent<ActionCard>().inform = p_inform;
+        cardInformList.Add(p_inform);
     }
 
     public void ShuffleDeck()

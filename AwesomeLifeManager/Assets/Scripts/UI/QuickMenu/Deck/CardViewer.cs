@@ -24,15 +24,15 @@ public class CardViewer : Scroll
     public void GenIcons()
     {
         int i = 0;
-        foreach(ActionCard card in myDeck.cardQueue)
+        foreach(CardInform inform in myDeck.cardInformList)
         {
-            if(card.inform.type == containType)
+            if(inform.type == containType)
             {
                 GameObject obj = theObjectPool.cardIconQueue.Dequeue();
                 obj.SetActive(true);
                 obj.transform.SetParent(objGroup, false);
                 CardIcon icon = obj.GetComponent<CardIcon>();
-                icon.SettingCard(card.inform);
+                icon.SettingCard(inform);
                 RectTransform t_rect = icon.GetComponent<RectTransform>();
                 t_rect.anchoredPosition = new Vector2((i % 3) * (containerRect.rect.width / 3), -1 * Mathf.Floor(i / 3) * t_rect.rect.height + 25f);
                 i++;

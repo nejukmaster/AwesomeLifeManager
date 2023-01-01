@@ -6,7 +6,7 @@ using TMPro;
 
 public class CalenderCell : MonoBehaviour
 {
-    public Plan insertedPlan;
+    public List<Plan> insertedPlan = new List<Plan>();
     public Calender calender;
     public TextMeshProUGUI tmp;
     [SerializeField] GameObject holdMarker;
@@ -29,12 +29,10 @@ public class CalenderCell : MonoBehaviour
 
     public bool InsertPlan(Plan p_plan)
     {
-        if (insertedPlan == null)
+        if (insertedPlan.Count < 7)
         {
             planMarker.enabled = true;
-            insertedPlan = p_plan;
-            //calender.accumAP += p_plan.costAP;
-            //calender.accumFatigue += p_plan.costFatigue;
+            insertedPlan.Add(p_plan);
             return true;
         }
         else

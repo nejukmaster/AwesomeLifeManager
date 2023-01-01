@@ -11,7 +11,7 @@ using UnityEditor.SearchService;
 public class Calender : UI
 {
     //캘린더 날짜 하나하나를 저장해놓은 리스트
-    public CalenderCell[] cells = new CalenderCell[28];
+    public CalenderCell[] cells = new CalenderCell[4];
     public List<int> checkedPlanIndexes = new List<int> ();
     public FatiguePreview fatiguePreview;
     //초기화시 이 클래스의 anchoredPosition을 저장해놓습니다. 이 클래스는 왠만해선 위치가 바뀌지 않으므로 RectTransform을 매번 참조하는 일을 방지하기위한 처리입니다.
@@ -38,29 +38,6 @@ public class Calender : UI
         container = GetComponentInParent<CalenderContainer>();
         theObjectPool = ObjectPool.instance;
         weekY = new float[4] { 2f * frame.rect.height / 4, frame.rect.height / 4, -1f * frame.rect.height / 4, -2f * frame.rect.height / 4 };
-    }
-
-    //CalenderCell을 세팅하는 함수입니다.
-    public void SettingCells()
-    {
-        if (!cellsSetted)
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                for (int j = 0; j < 7; j++)
-                {
-                    GameObject t_cell = theObjectPool.calenderCellQueue.Dequeue();
-                    t_cell.GetComponent<RectTransform>().sizeDelta = new Vector2(frame.rect.width / 7, frame.rect.height / 4);
-                    t_cell.GetComponent<RectTransform>().anchoredPosition = new Vector2(j * t_cell.GetComponent<RectTransform>().rect.width,
-                                                                                        -1 * i * t_cell.GetComponent<RectTransform>().rect.height);
-                    t_cell.GetComponentInChildren<TextMeshProUGUI>().text = (i * 7 + j + 1).ToString();
-                    cells[i * 7 + j] = t_cell.GetComponent<CalenderCell>();
-                    cells[i * 7 + j].calender = cells[i * 7 + j].GetComponentInParent<Calender>();
-                    t_cell.SetActive(true);
-                }
-            }
-            cellsSetted = true;
-        }
     }
 
     public void InitialCells()

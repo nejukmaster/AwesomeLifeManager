@@ -30,7 +30,8 @@ public class TurnManager : MonoBehaviour
         for(int i = 0; i < p_calender.cells.Length; i++)
         {
             if (p_calender.cells[i].insertedPlan != null)
-                t_planList.Add(p_calender.cells[i].insertedPlan);
+                for(int j = 0; j < p_calender.cells[i].insertedPlan.Count; j ++)
+                    t_planList.Add(p_calender.cells[i].insertedPlan[j]);
             else
                 t_planList.Add(null);
         }
