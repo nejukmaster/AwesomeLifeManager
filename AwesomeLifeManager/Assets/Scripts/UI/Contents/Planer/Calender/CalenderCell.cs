@@ -31,23 +31,24 @@ public class CalenderCell : MonoBehaviour
     {
         if (insertedPlan.Count < 7)
         {
-            planMarker.enabled = true;
             insertedPlan.Add(p_plan);
+            planMarker.GetComponent<RectTransform>().localScale = new Vector3(insertedPlan.Count / 7f, 1f, 0f);
             return true;
         }
         else
             return false;
     }
 
-    public void DeletePlan()
+    public void DeletePlan(Plan p_plan)
     {
-        planMarker.enabled = false;
-        insertedPlan = null;
+        insertedPlan.Remove(p_plan);
+        planMarker.GetComponent<RectTransform>().localScale = new Vector3(insertedPlan.Count / 7f, 1f, 0f);
     }
 
     public void Init()
     {
-        DeletePlan();
+        insertedPlan = new List<Plan>();
+        planMarker.GetComponent<RectTransform>().localScale = new Vector3(insertedPlan.Count / 7f, 1f, 0f);
         HoldOut();
     }
 }

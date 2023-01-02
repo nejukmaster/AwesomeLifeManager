@@ -30,7 +30,7 @@ public class PlanDeletePopup : MonoBehaviour
         {
             foreach (int i in calender.checkedPlanIndexes)
             {
-                calender.cells[i].DeletePlan();
+                //calender.cells[i].DeletePlan();
             }
             if (calender.weekPlanPopup.gameObject.activeInHierarchy)
             {
