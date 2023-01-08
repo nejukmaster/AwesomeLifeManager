@@ -6,7 +6,7 @@ using TMPro;
 
 public class CalenderCell : MonoBehaviour
 {
-    public List<Plan> insertedPlan = new List<Plan>();
+    public Plan[] insertedPlan = new Plan[7];
     public Calender calender;
     public TextMeshProUGUI tmp;
     [SerializeField] GameObject holdMarker;
@@ -29,26 +29,33 @@ public class CalenderCell : MonoBehaviour
 
     public bool InsertPlan(Plan p_plan)
     {
-        if (insertedPlan.Count < 7)
+        int t_index = Utility.GetEmptyIndex<Plan>(insertedPlan);
+        if (t_index < 7)
         {
-            insertedPlan.Add(p_plan);
-            planMarker.GetComponent<RectTransform>().localScale = new Vector3(insertedPlan.Count / 7f, 1f, 0f);
+            insertedPlan[t_index] = p_plan;
+            SetPlanMarker();
             return true;
         }
         else
             return false;
     }
 
-    public void DeletePlan(Plan p_plan)
+    public void SetPlanMarker()
     {
-        insertedPlan.Remove(p_plan);
-        planMarker.GetComponent<RectTransform>().localScale = new Vector3(insertedPlan.Count / 7f, 1f, 0f);
+        planMarker.GetComponent<RectTransform>().localScale = new Vector3(Utility.GetNullArrayLength<Plan>(insertedPlan) / 7f, 1f, 0f);
+    }
+
+    public void DeletePlan(int planNum)
+    {
+        insertedPlan[planNum%4] = null;
+        calender.checkedPlanIndexes[planNum] = false;
+        SetPlanMarker();
     }
 
     public void Init()
     {
-        insertedPlan = new List<Plan>();
-        planMarker.GetComponent<RectTransform>().localScale = new Vector3(insertedPlan.Count / 7f, 1f, 0f);
+        insertedPlan = new Plan[7];
+        SetPlanMarker();
         HoldOut();
     }
 }

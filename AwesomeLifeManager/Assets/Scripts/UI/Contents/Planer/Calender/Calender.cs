@@ -12,7 +12,7 @@ public class Calender : UI
 {
     //캘린더 날짜 하나하나를 저장해놓은 리스트
     public CalenderCell[] cells = new CalenderCell[4];
-    public List<int> checkedPlanIndexes = new List<int> ();
+    public bool[] checkedPlanIndexes = new bool[28];
     public FatiguePreview fatiguePreview;
     //초기화시 이 클래스의 anchoredPosition을 저장해놓습니다. 이 클래스는 왠만해선 위치가 바뀌지 않으므로 RectTransform을 매번 참조하는 일을 방지하기위한 처리입니다.
     public Vector2 anchoredPos;
@@ -92,13 +92,20 @@ public class Calender : UI
     public void Check(PlanBox p_planBox, bool p_bool)
     {
         if (p_bool)
-            checkedPlanIndexes.Add(p_planBox.planNum);
+        {
+            checkedPlanIndexes[p_planBox.planNum] = true;
+        }
         else
-            checkedPlanIndexes.Remove(p_planBox.planNum);
+            checkedPlanIndexes[p_planBox.planNum] = false;
     }
 
     public void PlanDeleteButtonClick()
     {
-        planDeletePopup.SetActive(true, checkedPlanIndexes.Count + "개의 일정을 삭제하시겠습니까?");
+        int _p = 0;
+        for(int i = 0; i < checkedPlanIndexes.Length; i++)
+        {
+            if (checkedPlanIndexes[i]) _p++;
+        }
+        planDeletePopup.SetActive(true, _p + "개의 일정을 삭제하시겠습니까?");
     }
 }

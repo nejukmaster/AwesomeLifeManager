@@ -26,32 +26,34 @@ public class PlanDeletePopup : MonoBehaviour
     }
     public void Yes()
     {
-        if (calender.checkedPlanIndexes.Count > 0)
+        for (int i  = 0; i < calender.checkedPlanIndexes.Length; i ++)
         {
-            foreach (int i in calender.checkedPlanIndexes)
+            if (calender.checkedPlanIndexes[i])
+                calender.cells[i / 4].DeletePlan(i);
+        }
+        if (calender.weekPlanPopup.gameObject.activeInHierarchy)
+        {
+            if (calender.weekPlanPopup.objs.Length > 0)
             {
-                //calender.cells[i].DeletePlan();
-            }
-            if (calender.weekPlanPopup.gameObject.activeInHierarchy)
-            {
-                if (calender.weekPlanPopup.objs.Length > 0)
+                for (int i = 0; i < calender.weekPlanPopup.objs.Length; i++)
                 {
-                    for (int i = 0; i < calender.weekPlanPopup.objs.Length; i++)
+                    GameObject obj = calender.weekPlanPopup.objs[i].gameObject;
+                    if (obj.GetComponentInChildren<Toggle>().isOn)
                     {
-                        GameObject obj = calender.weekPlanPopup.objs[i].gameObject;
-                        if (obj.GetComponentInChildren<Toggle>().isOn)
+                        obj.GetComponentInChildren<Toggle>().isOn = false;
+                        obj.SetActive(false);
+                        for (int j = i + 1; j < calender.weekPlanPopup.objs.Length; j++)
                         {
-                            obj.GetComponentInChildren<Toggle>().isOn = false;
-                            obj.SetActive(false);
-                            for (int j = i + 1; j < calender.weekPlanPopup.objs.Length; j++)
-                            {
-                                RectTransform t_rect = calender.weekPlanPopup.objs[j].GetComponent<RectTransform>();
-                                t_rect.anchoredPosition += new Vector2(0, calender.weekPlanPopup.objs[i].rect.height);
-                            }
-                            theObjectPool.weekPlanQueue.Enqueue(obj.gameObject);
+                            RectTransform t_rect = calender.weekPlanPopup.objs[j].GetComponent<RectTransform>();
+                            t_rect.anchoredPosition += new Vector2(0, calender.weekPlanPopup.objs[i].rect.height);
                         }
+                        theObjectPool.weekPlanQueue.Enqueue(obj.gameObject);
                     }
                 }
+            }
+            for(int i = 0; i < calender.cells.Length; i++)
+            {
+                calender.cells[i].SetPlanMarker();
             }
             calender.fatiguePreview.Setting();
         }

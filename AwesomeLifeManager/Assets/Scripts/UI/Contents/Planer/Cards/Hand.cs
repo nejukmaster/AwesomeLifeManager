@@ -157,7 +157,7 @@ public class Hand : UI
                 if (t_cell != null)
                     t_cell.HoldOut();
                 t_cell = cards[selectedCardIndex].CheckHolding();
-                if (t_cell.insertedPlan.Count < 7 || cards[selectedCardIndex].inform.type != CardType.Action)
+                if (Utility.GetNullArrayLength(t_cell.insertedPlan) < 7 || cards[selectedCardIndex].inform.type != CardType.Action)
                 {
                     if (cards[selectedCardIndex].inform.type == CardType.Action)
                     {

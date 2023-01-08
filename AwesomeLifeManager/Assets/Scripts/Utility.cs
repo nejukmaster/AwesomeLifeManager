@@ -97,4 +97,23 @@ public static class Utility
     {
         return (T)Enum.Parse(typeof(T), p_str);
     }
+
+    public static int GetEmptyIndex<T>(T[] p_array)
+    {
+        for(int i = 0; i < p_array.Length; i++)
+        {
+            if (p_array[i] == null)
+                return i;
+        }
+        return -1;
+    }
+    
+    public static int GetNullArrayLength<T>(T[] p_array)
+    {
+        int r = 0;
+        for(int i = 0; i < p_array.Length; i ++)
+            if (p_array[i] != null)
+                r ++;
+        return r;
+    }
 }

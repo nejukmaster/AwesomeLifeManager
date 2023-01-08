@@ -21,8 +21,9 @@ public class FatiguePreview : MonoBehaviour
         foreach(CalenderCell cell in calender.cells)
         {
             if(cell.insertedPlan != null)
-                for(int i = 0; i < cell.insertedPlan.Count; i ++)
-                    t_fat += cell.insertedPlan[i].costAP;
+                for(int i = 0; i < cell.insertedPlan.Length; i ++)
+                    if (cell.insertedPlan[i] != null)
+                        t_fat += cell.insertedPlan[i].costAP;
         }
         tmp.text = (fatigue-t_fat) + "/" + 100;
     }

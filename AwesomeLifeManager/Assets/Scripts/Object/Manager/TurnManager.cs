@@ -29,11 +29,8 @@ public class TurnManager : MonoBehaviour
         List<Plan> t_planList = new List<Plan>();
         for(int i = 0; i < p_calender.cells.Length; i++)
         {
-            if (p_calender.cells[i].insertedPlan != null)
-                for(int j = 0; j < p_calender.cells[i].insertedPlan.Count; j ++)
-                    t_planList.Add(p_calender.cells[i].insertedPlan[j]);
-            else
-                t_planList.Add(null);
+            for(int j = 0; j < p_calender.cells[i].insertedPlan.Length; j ++)
+                t_planList.Add(p_calender.cells[i].insertedPlan[j]);
         }
         currentTurn.settedPlan = t_planList;
     }

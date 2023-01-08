@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47bef0c76661b4348946e2b6a394ec48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  calender: {fileID: 0}
+  calender: {fileID: 1772837599}
   tmp: {fileID: 0}
   holdMarker: {fileID: 1547839639}
   planMarker: {fileID: 1081483824}
@@ -4370,7 +4370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47bef0c76661b4348946e2b6a394ec48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  calender: {fileID: 0}
+  calender: {fileID: 1772837599}
   tmp: {fileID: 0}
   holdMarker: {fileID: 409659783}
   planMarker: {fileID: 133401705}
@@ -8243,7 +8243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47bef0c76661b4348946e2b6a394ec48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  calender: {fileID: 0}
+  calender: {fileID: 1772837599}
   tmp: {fileID: 0}
   holdMarker: {fileID: 1710692855}
   planMarker: {fileID: 2130467469}
@@ -18722,7 +18722,7 @@ MonoBehaviour:
   - {fileID: 27765322}
   - {fileID: 706667040}
   - {fileID: 364902309}
-  checkedPlanIndexes: 
+  checkedPlanIndexes: 00000000000000000000000000000000000000000000000000000000
   fatiguePreview: {fileID: 1963530808}
   anchoredPos: {x: 0, y: 0}
   container: {fileID: 0}
@@ -19666,7 +19666,7 @@ MonoBehaviour:
   m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 27ff795b5d6d32340804c036a3a1ee9c, type: 2}
-  m_sharedMaterial: {fileID: 6256763637470791787, guid: 8ecb1117207c9cd4b91a0942db1bfa10, type: 2}
+  m_sharedMaterial: {fileID: -6514859456929672840, guid: 27ff795b5d6d32340804c036a3a1ee9c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -19729,7 +19729,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1910387749
@@ -23266,7 +23266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47bef0c76661b4348946e2b6a394ec48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  calender: {fileID: 0}
+  calender: {fileID: 1772837599}
   tmp: {fileID: 0}
   holdMarker: {fileID: 4953137008536364684}
   planMarker: {fileID: 8147552488336915441}

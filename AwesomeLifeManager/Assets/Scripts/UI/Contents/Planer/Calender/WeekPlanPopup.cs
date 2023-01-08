@@ -38,21 +38,21 @@ public class WeekPlanPopup : Scroll
     public void genPlanBox(int p_weekNum, RectTransform p_parent)
     {
         int pibot = 0;
-        for (int i = 0; i < 4; i++)
+        if (calender.cells[p_weekNum].insertedPlan != null)
         {
-            if (calender.cells[i].insertedPlan != null)
-            {
-                for (int j = 0; j < calender.cells[i].insertedPlan.Count; j ++) {
+            for (int j = 0; j < calender.cells[p_weekNum].insertedPlan.Length; j ++) {
+                if (calender.cells[p_weekNum].insertedPlan[j] != null)
+                {
                     GameObject t_box = theObjectPool.weekPlanQueue.Dequeue();
                     t_box.SetActive(true);
                     t_box.transform.SetParent(p_parent.transform, false);
-                    t_box.GetComponentInChildren<TextMeshProUGUI>().text = (i + 1) + "일차: " + calender.cells[i].insertedPlan[j].name;
+                    t_box.GetComponentInChildren<TextMeshProUGUI>().text = calender.cells[p_weekNum].insertedPlan[j].name;
                     RectTransform t_rect = t_box.GetComponent<RectTransform>();
                     t_rect.localScale = Vector2.one;
                     t_rect.anchoredPosition = new Vector2(0, -1 * t_rect.rect.height * pibot);
-                    t_box.GetComponent<PlanBox>().planNum = j;
+                    t_box.GetComponent<PlanBox>().planNum = p_weekNum * 4 + j;
                     t_box.GetComponentInChildren<Toggle>().gameObject.SetActive(true);
-                    if (calender.checkedPlanIndexes.IndexOf(j) != -1)
+                    if (calender.checkedPlanIndexes[p_weekNum * 4 + j])
                         t_box.GetComponentInChildren<Toggle>().isOn = true;
                     else
                         t_box.GetComponentInChildren<Toggle>().isOn = false;
