@@ -14143,10 +14143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectInfo:
-  - goPrefab: {fileID: 6358751615694110403, guid: 242907b9229a1fa4f98f12d556b8c58a, type: 3}
-    count: 28
-    tfPoolParent: {fileID: 1699058846}
-    restore_world_position: 0
   - goPrefab: {fileID: 5429408416476126725, guid: 0321513676bba034d9b07d25ccdc60a9, type: 3}
     count: 60
     tfPoolParent: {fileID: 309409413}
@@ -14170,6 +14166,10 @@ MonoBehaviour:
   - goPrefab: {fileID: 4030026528245115364, guid: ffee5b6e33934cf4bae026e7e61632fe, type: 3}
     count: 70
     tfPoolParent: {fileID: 220864695}
+    restore_world_position: 0
+  - goPrefab: {fileID: 506280921067650972, guid: b4a9b9869219ac34a85bb361554acb65, type: 3}
+    count: 28
+    tfPoolParent: {fileID: 7507078392127450648}
     restore_world_position: 0
 --- !u!4 &1271838466
 Transform:

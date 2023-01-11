@@ -12,9 +12,11 @@ public class CalenderCell : MonoBehaviour
     [SerializeField] GameObject holdMarker;
     [SerializeField] Image planMarker;
 
-    private void Update()
+    ObjectPool theObjectPool;
+
+    private void Awake()
     {
-        
+        theObjectPool = FindObjectOfType<ObjectPool>();
     }
 
     public void HoldeOn()
@@ -42,7 +44,37 @@ public class CalenderCell : MonoBehaviour
 
     public void SetPlanMarker()
     {
-        planMarker.GetComponent<RectTransform>().localScale = new Vector3(Utility.GetNullArrayLength<Plan>(insertedPlan) / 7f, 1f, 0f);
+        DelPlanMarker();
+        GenPlanMarker();
+    }
+
+    private void GenPlanMarker()
+    {
+        int pibot = 0;
+        for(int i = 0; i < insertedPlan.Length; i++)
+        {
+            if (insertedPlan[i] != null)
+            {
+                PlanIcon t_icon = theObjectPool.planIconQueue.Dequeue().GetComponent<PlanIcon>();
+                Debug.Log(t_icon);
+                t_icon.transform.SetParent(this.transform);
+                CardType t_type = CardType.Action;
+                if (!insertedPlan[i].canDelete)
+                    t_type = CardType.Job;
+                t_icon.SetAcitve(true, t_type);
+                t_icon.SetPibot(pibot);
+                pibot++;
+            }
+        }
+    }
+
+    private void DelPlanMarker()
+    {
+        foreach(PlanIcon icon in GetComponentsInChildren<PlanIcon>())
+        {
+            theObjectPool.planIconQueue.Enqueue(icon.gameObject);
+            icon.gameObject.SetActive(false);
+        }
     }
 
     public void DeletePlan(int planNum)

@@ -9,6 +9,7 @@ public class Plan
 
     public string name;
     public int costAP;
+    public bool canDelete;
     public rewardDel reward;
     public conditionDel condition;
 
@@ -17,10 +18,20 @@ public class Plan
         this.costAP = costAP;
         this.reward = () => { return true; };
         this.condition = () => {return true;};
+        canDelete = true;
     }
 
-    #nullable enable
-    public Plan(string name, int costAP, rewardDel? reward, conditionDel? condition){
+    public Plan(string name, int costAP, bool canDelete)
+    {
+        this.name = name;
+        this.costAP = costAP;
+        this.reward = () => { return true; };
+        this.condition = () => { return true; };
+        this.canDelete = canDelete;
+    }
+
+#nullable enable
+    public Plan(string name, int costAP, rewardDel? reward, conditionDel? condition, bool canDelete){
         this.name = name;
         this.costAP = costAP;
         if (reward != null)
@@ -31,6 +42,7 @@ public class Plan
             this.condition = condition;
         else
             this.condition = () => { return true; };
+        this.canDelete = canDelete;
     }
 
     public bool Run()

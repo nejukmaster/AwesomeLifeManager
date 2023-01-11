@@ -26,24 +26,24 @@ public class ObjectPool : MonoBehaviour
 
     public static ObjectPool instance;
 
-    public Queue<GameObject> calenderCellQueue = new Queue<GameObject>();
     public Queue<GameObject> actionCardQueue = new Queue<GameObject>();
     public Queue<GameObject> weekPlanQueue = new Queue<GameObject>();
     public Queue<GameObject> statusBoxQueue = new Queue<GameObject>();
     public Queue<GameObject> logTextQueue = new Queue<GameObject>();
     public Queue<GameObject> personalityBoxQueue = new Queue<GameObject>();
     public Queue<GameObject> cardIconQueue = new Queue<GameObject>();
+    public Queue<GameObject> planIconQueue = new Queue<GameObject>();
 
     void Start()
     {
         instance = this;
-        calenderCellQueue = InsertQueue(objectInfo[0]);
-        actionCardQueue = InsertQueue(objectInfo[1]);
-        weekPlanQueue = InsertQueue(objectInfo[2]);
-        statusBoxQueue = InsertQueue(objectInfo[3]);
-        logTextQueue = InsertQueue(objectInfo[4]);
-        personalityBoxQueue = InsertQueue(objectInfo[5]);
-        cardIconQueue = InsertQueue(objectInfo[6]);
+        actionCardQueue = InsertQueue(objectInfo[0]);
+        weekPlanQueue = InsertQueue(objectInfo[1]);
+        statusBoxQueue = InsertQueue(objectInfo[2]);
+        logTextQueue = InsertQueue(objectInfo[3]);
+        personalityBoxQueue = InsertQueue(objectInfo[4]);
+        cardIconQueue = InsertQueue(objectInfo[5]);
+        planIconQueue = InsertQueue(objectInfo[6]);
     }
 
     Queue<GameObject> InsertQueue(ObjectInfo p_objectInfo){

@@ -7,13 +7,13 @@ public class Job
 {
     public string name;
     public float wage;
-    List<int> jobEventsList;
+    public int jobAction;
 
-    public Job(string name, float wage, List<int> jobEventsList)
+    public Job(string name, float wage, int jobAction)
     {
         this.name = name;
         this.wage = wage;
-        this.jobEventsList = jobEventsList;
+        this.jobAction = jobAction;
     }
 }
 
@@ -36,7 +36,7 @@ public class JobItem
     {
         this.job = job;
         this.annual = annual;
-    }   
+    }
 }
 public class JobManager : MonoBehaviour
 {
