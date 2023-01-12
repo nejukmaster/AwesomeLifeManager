@@ -53,6 +53,12 @@ public class JobManager : MonoBehaviour
     {
         instance = this;
         theEventManager = EventManager.instance;
+        List<Dictionary<string, object>> timetable_data = CSVReader.Read("DataSheet/JobTimeTable");
+        for(int i = 0; i < timetable_data.Count; i++)
+        {
+            foreach(string k in timetable_data[i].Keys)
+                    Debug.Log(i.ToString()+""+k + ":"+timetable_data[i][k].ToString());
+        }
     }
 
     // Update is called once per frame
