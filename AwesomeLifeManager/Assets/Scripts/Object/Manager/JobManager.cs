@@ -7,13 +7,13 @@ public class Job
 {
     public string name;
     public float wage;
-    public int jobAction;
+    public string jobPlan;
 
-    public Job(string name, float wage, int jobAction)
+    public Job(string name, float wage, string jobPlan)
     {
         this.name = name;
         this.wage = wage;
-        this.jobAction = jobAction;
+        this.jobPlan = jobPlan;
     }
 }
 
@@ -45,6 +45,7 @@ public class JobManager : MonoBehaviour
     public Dictionary<int, Job> jobDic = new Dictionary<int, Job>();
     public JobItem myJob;
     public JobBuff onBuff = null;
+    public bool[,] timeTable = new bool[12, 28];
 
     EventManager theEventManager;
 
@@ -57,8 +58,49 @@ public class JobManager : MonoBehaviour
         for(int i = 0; i < timetable_data.Count; i++)
         {
             foreach(string k in timetable_data[i].Keys)
-                    Debug.Log(i.ToString()+""+k + ":"+timetable_data[i][k].ToString());
+            {
+                switch (k)
+                {
+                    case "Jan.":
+                        timeTable[0,i] = !(timetable_data[i][k].ToString() == "");
+                        break;
+                    case "Fab.":
+                        timeTable[1, i] = !(timetable_data[i][k].ToString() == "");
+                        break;
+                    case "Mar.":
+                        timeTable[2, i] = !(timetable_data[i][k].ToString() == "");
+                        break;
+                    case "Apr.":
+                        timeTable[3, i] = !(timetable_data[i][k].ToString() == "");
+                        break;
+                    case "May.":
+                        timeTable[4, i] = !(timetable_data[i][k].ToString() == "");
+                        break;
+                    case "Jun.":
+                        timeTable[5, i] = !(timetable_data[i][k].ToString() == "");
+                        break;
+                    case "Jul.":
+                        timeTable[6, i] = !(timetable_data[i][k].ToString() == "");
+                        break;
+                    case "Aug.":
+                        timeTable[7, i] = !(timetable_data[i][k].ToString() == "");
+                        break;
+                    case "Sep.":
+                        timeTable[8, i] = !(timetable_data[i][k].ToString() == "");
+                        break;
+                    case "Oct.":
+                        timeTable[9, i] = !(timetable_data[i][k].ToString() == "");
+                        break;
+                    case "Nov.":
+                        timeTable[10, i] = !(timetable_data[i][k].ToString() == "");
+                        break;
+                    case "Dec.":
+                        timeTable[11, i] = !(timetable_data[i][k].ToString() == "");
+                        break;
+                }
+            }
         }
+        Debug.Log(timeTable[2, 0]);
     }
 
     // Update is called once per frame

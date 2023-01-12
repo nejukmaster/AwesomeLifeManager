@@ -27,6 +27,9 @@ public class Calender : UI
     //각 주의 y위치를 저장합니다.
     float[] weekY;
     ObjectPool theObjectPool;
+    JobManager theJobManager;
+    TurnManager theTurnManager;
+    PlanManager thePlanManager;
     //각 주를 더블클릭시 나올 팝업창을 설정합니다.
     public WeekPlanPopup weekPlanPopup;
 
@@ -37,6 +40,9 @@ public class Calender : UI
         anchoredPos = this.GetComponent<RectTransform>().anchoredPosition;
         container = GetComponentInParent<CalenderContainer>();
         theObjectPool = ObjectPool.instance;
+        theJobManager = JobManager.instance;
+        theTurnManager = TurnManager.instance;
+        thePlanManager = PlanManager.instance;
         weekY = new float[4] { 2f * frame.rect.height / 4, frame.rect.height / 4, -1f * frame.rect.height / 4, -2f * frame.rect.height / 4 };
     }
 
@@ -45,6 +51,9 @@ public class Calender : UI
         for(int i = 0; i < cells.Length; i++)
         {
             cells[i].Init();
+            for (int j = 0; j < 28; j++)
+                if (theJobManager.timeTable[theTurnManager.currentTurn.turnNum, j])
+                    cells[i].InsertPlan(thePlanManager.planDic[theJobManager.myJob.job.jobPlan]);
         }
     }
 
