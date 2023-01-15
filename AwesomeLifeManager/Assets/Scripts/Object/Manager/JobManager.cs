@@ -100,7 +100,6 @@ public class JobManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log(timeTable[2, 0]);
     }
 
     // Update is called once per frame
