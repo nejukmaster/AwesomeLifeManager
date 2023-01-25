@@ -24,7 +24,7 @@ public class EventItem
     }
 }
 
-public class EventManager : MonoBehaviour
+public class EventManager : Manager
 {
     public static EventManager instance;
 
@@ -75,5 +75,10 @@ public class EventManager : MonoBehaviour
             EventEnabled.RemoveAt(r_event.weight);
         }
         return r_event.@event;
+    }
+
+    public override void Init()
+    {
+        EventEnabled = new List<EventItem>();
     }
 }

@@ -62,7 +62,7 @@ public class CardInform
             return "Etc/" + illusteName;
     }
 }
-public class CardManager : MonoBehaviour
+public class CardManager : Manager
 {
 
     public static CardManager instance;
@@ -80,4 +80,8 @@ public class CardManager : MonoBehaviour
     public void Mapping(){
     }
 
+    public override void Init()
+    {
+
+    }
 }

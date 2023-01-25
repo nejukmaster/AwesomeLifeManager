@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class TurnManager : MonoBehaviour
+public class TurnManager : Manager
 {
     public static TurnManager instance;
 
@@ -43,5 +43,11 @@ public class TurnManager : MonoBehaviour
         }
         turnProcessPopup.gameObject.SetActive(true);
         StartCoroutine(currentTurn.RunningCo(turnProcessPopup,eventPopup));
+    }
+
+    public override void Init()
+    {
+        currentTurn = new Turn(0);
+        calender.InitialCells();
     }
 }

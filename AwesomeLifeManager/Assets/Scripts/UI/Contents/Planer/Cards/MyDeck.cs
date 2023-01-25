@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MyDeck : MonoBehaviour
+public class MyDeck : Manager
 {
     public List<CardInform> cardInformList = new List<CardInform>();
     public Queue<ActionCard> cardQueue = new Queue<ActionCard>();
@@ -14,6 +14,12 @@ public class MyDeck : MonoBehaviour
         cardQueue.Enqueue(t_obj.GetComponent<ActionCard>());
         t_obj.GetComponent<ActionCard>().inform = p_inform;
         cardInformList.Add(p_inform);
+    }
+
+    public override void Init()
+    {
+        cardInformList = new List<CardInform>();
+        cardQueue = new Queue<ActionCard>();
     }
 
     public void ShuffleDeck()

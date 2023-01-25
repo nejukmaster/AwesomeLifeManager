@@ -42,7 +42,7 @@ public class Status : Variable{
 /*  스테이터스가 등록되고 관리될 매니져 클래스를 선언해요. 
     여기서는 스테이터스의 증감을 계산하거나, 
     등록된 스테이터스의 값을 다른 클래스가 참조할 수 있게 도와줘요. */
-public class StatusManager : MonoBehaviour
+public class StatusManager : Manager
 {
     public static StatusManager instance;
     //스테이터스 목록을 저장할 배열 생성
@@ -80,5 +80,15 @@ public class StatusManager : MonoBehaviour
             if(status[i].name == p_name)
                 return status[i];
         return null;
+    }
+
+    public override void Init()
+    {
+        List<Dictionary<string, object>> status_data = CSVReader.Read("DataSheet/Status");
+        status = new Status[status_data.Count];
+        for (int i = 0; i < status_data.Count; i++)
+        {
+            status[i] = new Status(status_data[i]["name"].ToString(), 0, status_data[i]["description"].ToString(), (status_data[i]["is reveal"].ToString().Equals("o")));
+        }
     }
 }
