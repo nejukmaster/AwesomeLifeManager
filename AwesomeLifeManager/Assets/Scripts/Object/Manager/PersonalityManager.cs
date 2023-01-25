@@ -97,7 +97,7 @@ public enum PersonalityType
     이곳에선 성격의 활성화/비활성화를 담당하고, 
     다른 클래스에서 성격의 활성/비활성 여부 및 
     성격의 조건 체크등을 확인할 수 있게 도와줘요.   */
-public class PersonalityManager : MonoBehaviour
+public class PersonalityManager : Manager
 {
     public static PersonalityManager instance;
 
@@ -176,6 +176,11 @@ public class PersonalityManager : MonoBehaviour
             }
         }
         return r;
+    }
+
+    public override void Init()
+    {
+        personalities = new List<Personality>();
     }
 
     /*public void CheckCondition(){
