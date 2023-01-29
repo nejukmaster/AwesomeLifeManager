@@ -78,6 +78,7 @@ public class CardManager : Manager
     }
 
     public void Mapping(){
+        mapping_action();
         cardInformList.Add(new CardInform("재능 찾기",CardType.Action,"","","",actionDelList["Action_01"],5));
         cardInformList.Add(new CardInform("일과 업무",CardType.Action,"","","",actionDelList["Action_02"],10));
         cardInformList.Add(new CardInform("야근",CardType.Action,"","","",actionDelList["Action_03"],10));
@@ -96,9 +97,11 @@ public class CardManager : Manager
     }
 
     private void mapping_action(){
-        actionDelList.Add("Action_01",new Action((cell,t_inform)=>{
-            ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic["01"]);
-        }));
+        for(int i = 0; i < 15; i ++){
+            actionDelList.Add("Action_"+(i+1).ToString("D2"),new Action((cell,t_inform)=>{
+                ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic["Action_"+(i+1).ToString("D2")]);
+            }));
+        }
     }
 
     public override void Init()
