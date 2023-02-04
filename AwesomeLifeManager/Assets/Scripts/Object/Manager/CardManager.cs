@@ -79,7 +79,7 @@ public class CardManager : Manager
 
     public void Mapping(){
         mapping_action();
-        cardInformList.Add(new CardInform("재능 찾기",CardType.Action,"","","",actionDelList["Action_01"],5));
+        cardInformList.Add(new CardInform("재능 찾기",CardType.Action,"랜덤한 \"능력\"타입의 스테이터스 10~15퍼센트 증가(최소증값 1, 최대증가값 10) ","","",actionDelList["Action_01"],5));
         cardInformList.Add(new CardInform("일과 업무",CardType.Action,"","","",actionDelList["Action_02"],10));
         cardInformList.Add(new CardInform("야근",CardType.Action,"","","",actionDelList["Action_03"],10));
         cardInformList.Add(new CardInform("퇴사",CardType.Action,"","","",actionDelList["Action_04"],5));

@@ -10,7 +10,15 @@ using System.Data;
     단 스테이터스의 이름과 이를 나타낼 디스플레이 창을 지정할 순 있어요. 
     디스플레이는 비워두면 알아서 비공개 스테이터스로 정의된답니다.  */
 
-
+public enum StatusType{
+    Health,
+    Ability,
+    Tought,
+    Sociality,
+    Belief,
+    Emotional,
+    Etc
+}
 /*  이 클래스는 스테이터스가 어떤 구조로 만들어지는지 정의해요. 
     이름과 표시될 디스플레이등을 이 클래스에 담아서 등록하죠.   */
 //스테이터스 클래스 선언
@@ -20,21 +28,24 @@ public class Status : Variable{
     public string name;
     public int value;
     public string description;
+    public StatusType type;
     public bool reveal = true;
 
-    public Status(string name, int value, string description, bool reveal)
+    public Status(string name, int value, string description, StatusType type, bool reveal)
     {
         this.name = name;
         this.value = value;
         this.description = description;
+        this.type = type;
         this.reveal = reveal;
     }
 
-    public Status(string name, int value, string description)
+    public Status(string name, int value, string description, StatusType type)
     {
         this.name = name;
         this.value = value;
         this.description = description;
+        this.type = type;
         this.reveal = true;
     }
 }
@@ -60,7 +71,14 @@ public class StatusManager : Manager
         status = new Status[status_data.Count];
         for(int i = 0; i < status_data.Count; i++)
         {
-            status[i] = new Status(status_data[i]["name"].ToString(), 0, status_data[i]["description"].ToString(), (status_data[i]["is reveal"].ToString().Equals("o")));
+            StatusType t = StatusType.Health;
+            for( StatusType j = StatusType.Health; j < StatusType.Etc; j ++){
+                if(status_data[i]["type"] == j.ToString()){
+                    t = j;
+                    break;
+                }
+            }
+            status[i] = new Status(status_data[i]["name"].ToString(), 0, status_data[i]["description"].ToString(), t, (status_data[i]["is reveal"].ToString().Equals("o")));
         }
     }
 
@@ -88,7 +106,14 @@ public class StatusManager : Manager
         status = new Status[status_data.Count];
         for (int i = 0; i < status_data.Count; i++)
         {
-            status[i] = new Status(status_data[i]["name"].ToString(), 0, status_data[i]["description"].ToString(), (status_data[i]["is reveal"].ToString().Equals("o")));
+            StatusType t = StatusType.Health;
+            for( StatusType j = StatusType.Health; j < StatusType.Etc; j ++){
+                if(status_data[i]["type"] == j.ToString()){
+                    t = j;
+                    break;
+                }
+            }
+            status[i] = new Status(status_data[i]["name"].ToString(), 0, status_data[i]["description"].ToString(), t, (status_data[i]["is reveal"].ToString().Equals("o")));
         }
     }
 }
