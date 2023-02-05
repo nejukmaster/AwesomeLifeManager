@@ -71,12 +71,26 @@ public class StatusManager : Manager
         status = new Status[status_data.Count];
         for(int i = 0; i < status_data.Count; i++)
         {
-            StatusType t = StatusType.Health;
-            for( StatusType j = StatusType.Health; j < StatusType.Etc; j ++){
-                if(status_data[i]["type"] == j.ToString()){
-                    t = j;
+            StatusType t = StatusType.Etc;
+            switch(status_data[i]["type"]){
+                case "Health":
+                    t = StatusType.Health;
                     break;
-                }
+                case "Ability":
+                    t = StatusType.Ability;
+                    break;
+                case "Tought":
+                    t = StatusType.Tought;
+                    break;
+                case "Sociality":
+                    t = StatusType.Sociality;
+                    break;
+                case "Belief":
+                    t = StatusType.Belief;
+                    break;
+                case "Emotional":
+                    t = StatusType.Emotional;
+                    break;
             }
             status[i] = new Status(status_data[i]["name"].ToString(), 0, status_data[i]["description"].ToString(), t, (status_data[i]["is reveal"].ToString().Equals("o")));
         }
@@ -104,14 +118,28 @@ public class StatusManager : Manager
     {
         List<Dictionary<string, object>> status_data = CSVReader.Read("DataSheet/Status");
         status = new Status[status_data.Count];
-        for (int i = 0; i < status_data.Count; i++)
+        for(int i = 0; i < status_data.Count; i++)
         {
-            StatusType t = StatusType.Health;
-            for( StatusType j = StatusType.Health; j < StatusType.Etc; j ++){
-                if(status_data[i]["type"] == j.ToString()){
-                    t = j;
+            StatusType t = StatusType.Etc;
+            switch(status_data[i]["type"]){
+                case "Health":
+                    t = StatusType.Health;
                     break;
-                }
+                case "Ability":
+                    t = StatusType.Ability;
+                    break;
+                case "Tought":
+                    t = StatusType.Tought;
+                    break;
+                case "Sociality":
+                    t = StatusType.Sociality;
+                    break;
+                case "Belief":
+                    t = StatusType.Belief;
+                    break;
+                case "Emotional":
+                    t = StatusType.Emotional;
+                    break;
             }
             status[i] = new Status(status_data[i]["name"].ToString(), 0, status_data[i]["description"].ToString(), t, (status_data[i]["is reveal"].ToString().Equals("o")));
         }

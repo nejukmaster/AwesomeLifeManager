@@ -30,7 +30,17 @@ public class PlanManager : Manager
                     t_status.Add(i);
                 }
             }
-            theStatusManager.status[t_status[Random.Range(0,t_status.Count)]].value += theStatusManager.status[t_status[Random.Range(0,t_status.Count)]].value * (Random.Range(10,16)/100);
+            string t_stName = theStatusManager.status[t_status[Random.Range(0,t_status.Count)]].name;
+            int d_status = Utility.Step(1,10,(int)theStatusManager.GetStatus(t_stName).value * (Random.Range(10,16)/100));
+            theStatusManager.IncreaseStatus(t_stName,d_status);
+            turnProcessPopup.AddLog(t_stName+" +"+d_status);
+            return true; 
+        }, null,true));
+        planDic.Add("Action_02", new Plan("일과 업무",10, () => {
+            int t_jobPro = 2 + (int)(theStatusManager.GetStatus("성실성").value/theStatusManager.GetStatus("집중력").value*0.7f);
+            theStatusManager.IncreaseStatus("직업 숙련도",t_jobPro);
+            turnProcessPopup.AddLog("스트레스 +3");
+            turnProcessPopup.AddLog("직업 숙련도 +"+t_jobPro);
             return true; 
         }, null,true));
         planDic.Add("02", new Plan("basic02",10, () => { turnProcessPopup.AddLog("외향성 +50"); theStatusManager.IncreaseStatus("외향성", 51); return true; }, null,false));

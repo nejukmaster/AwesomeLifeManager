@@ -18,6 +18,7 @@ public class Personality : Variable{
     public string name;
     public string description;
     public PersonalityType type;
+    List<string> conditions = new List<string>();
 
     //컨스트럭터 1
     public Personality(string name, string description, PersonalityType type, List<string> conditions){

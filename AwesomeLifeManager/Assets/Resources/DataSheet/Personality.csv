@@ -1,6 +1,6 @@
 classify,code,name,description,condition
 Humanity,hum_01,겸손한,겸손한 사람,도덕성|>|80/외향성|>|50/명성|>|40
-Humanity,hum_02,공정한,공정한 사람,도덕성|>|70/친화력|>|40/지능|>|45
+Humanity,hum_02,공정한,공정한 사람,도덕성|>|70/지능|>|45
 Humanity,hum_03,믿음직한,믿음직한 사람,도덕성|>|60/외향성|>|35
 Humanity,hum_04,선량한,,,
 Humanity,hum_05,소박한,,,

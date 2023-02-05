@@ -116,4 +116,12 @@ public static class Utility
                 r ++;
         return r;
     }
+
+    public static int Step(int min, int max, int p_num){
+        if(min <= p_num && max >= p_num)
+            return p_num;
+        else if(p_num < min)
+            return min;
+        else    return max;
+    }
 }
