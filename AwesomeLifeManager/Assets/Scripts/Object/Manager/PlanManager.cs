@@ -11,12 +11,14 @@ public class PlanManager : Manager
     [SerializeField] TurnProcessPopup turnProcessPopup;
 
     StatusManager theStatusManager;
+    JobManager theJobManager;
 
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         theStatusManager = StatusManager.instance;
+        theJobManager = JobManager.instance;
         mapping();
     }
 
@@ -39,8 +41,38 @@ public class PlanManager : Manager
         planDic.Add("Action_02", new Plan("일과 업무",10, () => {
             int t_jobPro = 2 + (int)(theStatusManager.GetStatus("성실성").value/theStatusManager.GetStatus("집중력").value*0.7f);
             theStatusManager.IncreaseStatus("직업 숙련도",t_jobPro);
+            theStatusManager.IncreaseStatus("스트레스",3);
             turnProcessPopup.AddLog("스트레스 +3");
             turnProcessPopup.AddLog("직업 숙련도 +"+t_jobPro);
+            return true; 
+        }, null,true));
+        planDic.Add("Action_03", new Plan("야근",10, () => {
+            int t_jobPro = 3 + (int)(theStatusManager.GetStatus("성실성").value/theStatusManager.GetStatus("집중력").value*0.7f);
+            theStatusManager.IncreaseStatus("직업 숙련도",t_jobPro);
+            theStatusManager.IncreaseStatus("스트레스",5);
+            turnProcessPopup.AddLog("스트레스 +5");
+            turnProcessPopup.AddLog("직업 숙련도 +"+t_jobPro);
+            return true; 
+        }, null,true));
+        planDic.Add("Action_04", new Plan("해외 출장",10, () => {
+            int t_jobPro = 3 + (int)(theStatusManager.GetStatus("성실성").value/theStatusManager.GetStatus("화술").value*0.7f);
+            theStatusManager.IncreaseStatus("직업 숙련도",t_jobPro);
+            theStatusManager.IncreaseStatus("화술",5);
+            theStatusManager.IncreaseStatus("스트레스",-3);
+            turnProcessPopup.AddLog("스트레스 -3");
+            turnProcessPopup.AddLog("화술 +5");
+            turnProcessPopup.AddLog("직업 숙련도 +"+t_jobPro);
+            return true; 
+        }, null,true));
+        planDic.Add("Action_05", new Plan("퇴사",5, () => {
+            theStatusManager.GetStatus("직업 숙련도").value = 0;
+            theStatusManager.IncreaseStatus("건강",10);
+            theStatusManager.IncreaseStatus("스트레스",-10);
+            turnProcessPopup.AddLog("스트레스 -10");
+            turnProcessPopup.AddLog("건강 +10");
+            turnProcessPopup.AddLog("직업 숙련도 초기화");
+            theJobManager.InitJob(0);
+            turnProcessPopup.AddLog("\"무직\" 획득");
             return true; 
         }, null,true));
         planDic.Add("02", new Plan("basic02",10, () => { turnProcessPopup.AddLog("외향성 +50"); theStatusManager.IncreaseStatus("외향성", 51); return true; }, null,false));

@@ -38,7 +38,7 @@ public class JobItem
         this.annual = annual;
     }
 }
-public class JobManager : MonoBehaviour
+public class JobManager : Manager
 {
     public static JobManager instance;
 
@@ -102,9 +102,22 @@ public class JobManager : MonoBehaviour
         }
     }
 
+    public void Mapping(){
+
+    }
+
+    public void InitJob(int p_jobCode){
+        myJob = new JobItem(jobDic[p_jobCode],0);
+    }
+
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public override void Init()
+    {
+        InitJob(1);
     }
 }

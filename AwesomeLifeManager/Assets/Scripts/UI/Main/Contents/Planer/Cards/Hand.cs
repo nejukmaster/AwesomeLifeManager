@@ -112,7 +112,6 @@ public class Hand : UI
                     draging = false;
                     if (cards[selectedCardIndex].currentCell == null || dragDis <= 10f)
                     {
-                        cards[selectedCardIndex].Slide(handSlot[selectedCardIndex].anchoredPosition);
                         if (cards[selectedCardIndex].currentCell != null)
                         {
                             cards[selectedCardIndex].currentCell.HoldOut();
@@ -122,19 +121,30 @@ public class Hand : UI
                     }
                     if (cards[selectedCardIndex].inform.type == CardType.Action)
                     {
-                            cards[selectedCardIndex].inform.action.actionDel(cards[selectedCardIndex].currentCell, cards[selectedCardIndex].inform);
-                            cards[selectedCardIndex].currentCell.HoldOut();
+                        if (cards[selectedCardIndex].inform.action.actionDel(cards[selectedCardIndex].currentCell, cards[selectedCardIndex].inform))
+                        {
+                            cards[selectedCardIndex].Burn();
                             calender.fatiguePreview.Setting();
+                            ObjectPool.instance.actionCardQueue.Enqueue(cards[selectedCardIndex].gameObject);
+                            cards[selectedCardIndex].currentCell.HoldOut();
+                            cards[selectedCardIndex] = null;
+                            Draw();
+                        }
+                        else
+                        {
+                            cards[selectedCardIndex].Slide(handSlot[selectedCardIndex].anchoredPosition);
+                            cards[selectedCardIndex].currentCell.HoldOut();
+                        }
                     }
                     else if(cards[selectedCardIndex].inform.type == CardType.Event)
                     {
                         cards[selectedCardIndex].inform.action.actionDel(theEventManager, cards[selectedCardIndex].inform);
+                        cards[selectedCardIndex].Burn();
+                        ObjectPool.instance.actionCardQueue.Enqueue(cards[selectedCardIndex].gameObject);
+                        cards[selectedCardIndex] = null;
+                        Draw();
                     }
-                    cards[selectedCardIndex].Burn();
-                    ObjectPool.instance.actionCardQueue.Enqueue(cards[selectedCardIndex].gameObject);
-                    cards[selectedCardIndex] = null;
                     selectedCardIndex = -1;
-                    Draw();
                     return true;
                 }
                 else
