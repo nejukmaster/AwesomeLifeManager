@@ -71,9 +71,14 @@ public class CardManager : Manager
     public Dictionary<string, Action> actionDelList = new Dictionary<string, Action>();
     public SpriteAtlas illustrationAtlas;
 
+    [SerializeField] Calender calender;
+
+    TurnManager theTurnManager;
+
     private void Start()
     {
         instance = this;
+        theTurnManager = TurnManager.instance;
         Mapping();
     }
 
@@ -85,7 +90,7 @@ public class CardManager : Manager
         cardInformList.Add(new CardInform("해외 출장",CardType.Action,"[직업 행동 카드]\n[스트레스] 스탯 하락, [화술] 스탯 상승\n해외 출장을 다녀옵니다.\n아래 스탯에 따라 보상이 달라집니다.\n[화술], [성실성]","","",actionDelList["Action_04"],5));
         cardInformList.Add(new CardInform("퇴사",CardType.Action,"[자유 행동 카드]\n[성실성] 스탯 상승, [계획성] 스탯 상승, [재력] 스탯 상승\n이번 달 진행한 당신의 일정을 정산합니다.\n매 월 마지막 주에만 정산할 수 있습니다.","","",actionDelList["Action_05"],10));
         cardInformList.Add(new CardInform("월말 정산",CardType.Action,"[자유 행동 카드]\n[성실성] 스탯 상승, [계획성] 스탯 상승, [재력] 스탯 상승\n이번 달 진행한 당신의 일정을 정산합니다.\n매 월 마지막 주에만 정산할 수 있습니다.","","",actionDelList["Action_06"],10));
-        //cardInformList.Add(new CardInform("연말 정산",CardType.Action,"","","",actionDelList["Action_07"],10));
+        cardInformList.Add(new CardInform("연말 정산",CardType.Action,"[자유 행동 카드]\n[성실성] 스탯 상승, [계획성] 스탯 상승, [재력] 스탯 상승\n올해 진행한 당신의 일정을 정산합니다.\n매년 마지막 월에만 정산할 수 있습니다.","","",actionDelList["Action_07"],10));
         //cardInformList.Add(new CardInform("식재료 구매",CardType.Action,"","","",actionDelList["Action_08"],5));
         //cardInformList.Add(new CardInform("건강 검진",CardType.Action,"","","",actionDelList["Action_09"],5));
         //cardInformList.Add(new CardInform("당일치기 여행",CardType.Action,"","","",actionDelList["Action_10"],15));
@@ -119,8 +124,38 @@ public class CardManager : Manager
             return true;
         }));
         actionDelList.Add("Action_06",new Action((cell,t_inform)=>{
-            ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic["Action_06"]);
-            return true;
+            int t = 0;
+            for (int i = 0; i < calender.cells.Length; i++)
+            {
+                if ((CalenderCell)cell == calender.cells[i])
+                {
+                    t = i;
+                    break;
+                }
+            }
+            if (t == calender.cells.Length - 1)
+            {
+                ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic["Action_06"]);
+                return true;
+            }
+            else return false;
+        }));
+        actionDelList.Add("Action_07",new Action((cell,t_inform)=>{
+            int t = 0;
+            for (int i = 0; i < calender.cells.Length; i++)
+            {
+                if ((CalenderCell)cell == calender.cells[i])
+                {
+                    t = i;
+                    break;
+                }
+            }
+            if (t == calender.cells.Length - 1 && theTurnManager.currentTurn.turnNum % 12 == 11)
+            {
+                ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic["Action_07"]);
+                return true;
+            }
+            else return false;
         }));
     }
 

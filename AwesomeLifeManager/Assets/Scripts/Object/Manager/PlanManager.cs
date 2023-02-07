@@ -75,6 +75,24 @@ public class PlanManager : Manager
             turnProcessPopup.AddLog("\"무직\" 획득");
             return true; 
         }, null,true));
+        planDic.Add("Action_06", new Plan("퇴사",5, () => {
+            theStatusManager.IncreaseStatus("성실성",2);
+            theStatusManager.IncreaseStatus("계획성",3);
+            theStatusManager.IncreaseStatus("재력",4);
+            turnProcessPopup.AddLog("성실성 +2");
+            turnProcessPopup.AddLog("계획성 +3");
+            turnProcessPopup.AddLog("재력 +4");
+            return true; 
+        }, null,true));
+        planDic.Add("Action_07", new Plan("퇴사",5, () => {
+            theStatusManager.IncreaseStatus("성실성",3);
+            theStatusManager.IncreaseStatus("계획성",4);
+            theStatusManager.IncreaseStatus("재력",5);
+            turnProcessPopup.AddLog("성실성 +3");
+            turnProcessPopup.AddLog("계획성 +4");
+            turnProcessPopup.AddLog("재력 +5");
+            return true; 
+        }, null,true));
         planDic.Add("02", new Plan("basic02",10, () => { turnProcessPopup.AddLog("외향성 +50"); theStatusManager.IncreaseStatus("외향성", 51); return true; }, null,false));
     }
 
