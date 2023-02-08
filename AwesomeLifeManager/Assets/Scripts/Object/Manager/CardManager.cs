@@ -91,7 +91,7 @@ public class CardManager : Manager
         cardInformList.Add(new CardInform("퇴사",CardType.Action,"[자유 행동 카드]\n[성실성] 스탯 상승, [계획성] 스탯 상승, [재력] 스탯 상승\n이번 달 진행한 당신의 일정을 정산합니다.\n매 월 마지막 주에만 정산할 수 있습니다.","","",actionDelList["Action_05"],10));
         cardInformList.Add(new CardInform("월말 정산",CardType.Action,"[자유 행동 카드]\n[성실성] 스탯 상승, [계획성] 스탯 상승, [재력] 스탯 상승\n이번 달 진행한 당신의 일정을 정산합니다.\n매 월 마지막 주에만 정산할 수 있습니다.","","",actionDelList["Action_06"],10));
         cardInformList.Add(new CardInform("연말 정산",CardType.Action,"[자유 행동 카드]\n[성실성] 스탯 상승, [계획성] 스탯 상승, [재력] 스탯 상승\n올해 진행한 당신의 일정을 정산합니다.\n매년 마지막 월에만 정산할 수 있습니다.","","",actionDelList["Action_07"],10));
-        //cardInformList.Add(new CardInform("식재료 구매",CardType.Action,"","","",actionDelList["Action_08"],5));
+        cardInformList.Add(new CardInform("식재료 구매",CardType.Action,"","","",actionDelList["Action_08"],5));
         //cardInformList.Add(new CardInform("건강 검진",CardType.Action,"","","",actionDelList["Action_09"],5));
         //cardInformList.Add(new CardInform("당일치기 여행",CardType.Action,"","","",actionDelList["Action_10"],15));
         //cardInformList.Add(new CardInform("국내 여행",CardType.Action,"","","",actionDelList["Action_11"],20));
@@ -156,6 +156,10 @@ public class CardManager : Manager
                 return true;
             }
             else return false;
+        }));
+        actionDelList.Add("Action_08",new Action((cell,t_inform)=>{
+            ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic["Action_08"]);
+            return true;
         }));
     }
 

@@ -61,17 +61,34 @@ public class Turn
                 Debug.Log("Free Act.");
                 t_popup.AddLog("Free Act.");
             }
-            if (Random.Range(0, 100) < (int)(theEventManager.eventEncounterPercent * 100)) {
-                if (theEventManager.EventEnabled.Count > 0)
+            if(theEventManager.priorityEvent != null){
+                UI.ToggleSubUI(t_popup.gameObject, false);
+                e_popup.SetActive(true,theEventManager.priorityEvent);
+                e_popup.EventEncounter();
+                theEventManager.priorityEvent = null;
+                while (e_popup.gameObject.activeInHierarchy)
                 {
-                    UI.ToggleSubUI(t_popup.gameObject, false);
-                    e_popup.SetActive(true,theEventManager.GetRandomEvent(true));
-                    e_popup.EventEncounter();
-                    while (e_popup.gameObject.activeInHierarchy)
+                    yield return new WaitForSeconds(2f);
+                }
+            }
+            else{
+                if (Random.Range(0, 100) < (int)(theEventManager.eventEncounterPercent * 100)) {
+                    if (theEventManager.EventEnabled.Count > 0)
                     {
-                        yield return new WaitForSeconds(2f);
+                        UI.ToggleSubUI(t_popup.gameObject, false);
+                        e_popup.SetActive(true,theEventManager.GetRandomEvent(true));
+                        e_popup.EventEncounter();
+                        while (e_popup.gameObject.activeInHierarchy)
+                        {
+                            yield return new WaitForSeconds(2f);
+                        }
                     }
                 }
+            }
+            foreach(string s in theTurnManager.actionCool.Keys){
+                
+                if(theTurnManager.actionCool[s] > 0)
+                    theTurnManager.actionCool[s] --;
             }
             List<Personality> t_list = thePersonalityManager.CheckPersonality();
             for(int i = 0; i < t_list.Count; i ++)

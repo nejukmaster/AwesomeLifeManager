@@ -12,6 +12,8 @@ public class PlanManager : Manager
 
     StatusManager theStatusManager;
     JobManager theJobManager;
+    MoneyManager theMoneyManager;
+    TurnManager theTurnManager;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,8 @@ public class PlanManager : Manager
         instance = this;
         theStatusManager = StatusManager.instance;
         theJobManager = JobManager.instance;
+        theMoneyManager = MoneyManager.instance;
+        theTurnManager = TurnManager.instance;
         mapping();
     }
 
@@ -91,6 +95,17 @@ public class PlanManager : Manager
             turnProcessPopup.AddLog("성실성 +3");
             turnProcessPopup.AddLog("계획성 +4");
             turnProcessPopup.AddLog("재력 +5");
+            return true; 
+        }, null,true));
+        planDic.Add("Action_08", new Plan("식재료 구매",5, () => {
+            if(theMoneyManager.money - theStatusManager.GetStatus("재력").value*100*0.7 < 0){
+                
+            }
+            else{
+               theMoneyManager.AddMoney((int)(-theStatusManager.GetStatus("재력").value*100*0.7f));
+               theStatusManager.IncreaseStatus("재력",-1);
+               theTurnManager.actionCool["식재료 구매"] = 14;
+            }
             return true; 
         }, null,true));
         planDic.Add("02", new Plan("basic02",10, () => { turnProcessPopup.AddLog("외향성 +50"); theStatusManager.IncreaseStatus("외향성", 51); return true; }, null,false));

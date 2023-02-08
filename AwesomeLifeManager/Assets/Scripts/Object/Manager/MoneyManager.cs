@@ -6,7 +6,10 @@ public class MoneyManager : Manager
 {
     public static MoneyManager instance;
 
-    int money = 0;
+    public int money = 0;
+    void Start(){
+        instance = this;
+    }
     public override void Init()
     {
         money = 0;

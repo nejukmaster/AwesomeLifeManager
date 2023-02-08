@@ -29,6 +29,7 @@ public class EventManager : Manager
     public static EventManager instance;
 
     public Dictionary<int,Event> EventDic = new Dictionary<int,Event>();
+    public Event priorityEvent = null;
     public List<EventItem> EventEnabled = new List<EventItem>();
     public float eventEncounterPercent;
 

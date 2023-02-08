@@ -12,6 +12,7 @@ public class TurnManager : Manager
     public GameObject MainUI;
     public Calender calender;
     public TurnProcessPopup turnProcessPopup;
+    public Dictionary<string,int> actionCool = new Dictionary<string,int>();
     [SerializeField] EventPopup eventPopup;
     [SerializeField] WarningPopup warningPopup;
     PlanManager planManager;
@@ -22,6 +23,7 @@ public class TurnManager : Manager
         instance = this;
         planManager = PlanManager.instance;
         currentTurn = new Turn(0);
+        actionCool.Add("식재료 구매",-1);
     }
 
     public void ReadCalender(Calender p_calender)
@@ -49,5 +51,6 @@ public class TurnManager : Manager
     {
         currentTurn = new Turn(0);
         calender.InitialCells();
+        actionCool["식재료 구매"] = -1;
     }
 }
