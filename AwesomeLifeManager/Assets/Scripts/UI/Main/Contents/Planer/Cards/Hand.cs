@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR;
@@ -10,9 +11,10 @@ public class Hand : UI
     public Vector2 anchoredPos;
     RectTransform uiCanvas;
     EventManager theEventManager;
-    ActionCard[] cards = new ActionCard[4];
+    ActionCard[] cards = new ActionCard[7];
     int selectedCardIndex;
     bool draging = false;
+    int handAmount = 4;
     [SerializeField] RectTransform[] handSlot;
     [SerializeField] Calender calender;
     [SerializeField] MyDeck myDeck;
@@ -26,11 +28,36 @@ public class Hand : UI
         Vector2 t_pos = this.GetComponent<RectTransform>().anchoredPosition;
         t_pos = new Vector2(uiCanvas.rect.width / 2, this.GetComponent<RectTransform>().anchoredPosition.y);
         anchoredPos = t_pos;
-        for(int i = 0; i < cards.Length; i++)
-        {
-            Draw();
-        }
         selectedCardIndex = -1;
+    }
+
+    public void SettingHand(bool p_bool)
+    {
+        if (p_bool)
+        {
+            for (int i = 0; i < handAmount; i++)
+            {
+                Draw();
+            }
+        }
+        else
+        {
+            Queue<ActionCard> t_Queue = new Queue<ActionCard>(myDeck.cardQueue.Reverse<ActionCard>());
+            int j = 0;
+            for(int i = 0; i < cards.Length; i++)
+            {
+                if (cards[i] != null)
+                {
+                    t_Queue.Enqueue(cards[i]);
+                    cards[i].gameObject.SetActive(false);
+                    cards[i].calender = null;
+                    cards[i] = null;
+                    j++;
+                }
+            }
+            myDeck.cardQueue = new Queue<ActionCard>(t_Queue.Reverse<ActionCard>());
+            handAmount = j;
+        }
     }
 
     public void AddCard(ActionCard p_card)

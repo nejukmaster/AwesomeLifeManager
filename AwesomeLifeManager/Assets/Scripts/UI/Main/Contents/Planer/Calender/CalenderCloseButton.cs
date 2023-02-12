@@ -7,7 +7,7 @@ public class CalenderCloseButton : MonoBehaviour
     public GameObject closedPopup;
 
     [SerializeField] Calender calender;
-    [SerializeField] GameObject toClosePopup;
+    [SerializeField] PlanerPopup planerPopup;
     TurnManager theTurnManager;
     // Start is called before the first frame update
     void Awake()
@@ -20,7 +20,7 @@ public class CalenderCloseButton : MonoBehaviour
         if (!calender.weekPlanPopup.gameObject.activeInHierarchy)
         {
             TurnManager.instance.ReadCalender(calender);
-            toClosePopup.SetActive(false);
+            planerPopup.SetActive(false);
             UI.ToggleSubUI(closedPopup, true);
         }
         else
