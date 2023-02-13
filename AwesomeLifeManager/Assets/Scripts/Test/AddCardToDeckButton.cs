@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AddCardToDeckButton : MonoBehaviour
@@ -17,6 +18,8 @@ public class AddCardToDeckButton : MonoBehaviour
         if (type == CardType.Action)
         {
             deck.AddCard(CardManager.instance.cardInformList[5]);
+            deck.InitDeck();
+            deck.GenerateDeck();
         }
         else if(type == CardType.Event)
         {

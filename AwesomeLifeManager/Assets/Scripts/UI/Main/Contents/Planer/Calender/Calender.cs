@@ -19,6 +19,7 @@ public class Calender : UI
     //이 캘린더를 담고있는 오브젝트를 저장합니다. 마우스클릭이나 터치를 정규화하고 이를 캘린더 각 위치에 매핑하기 위해서 사용됩니다. 
     public CalenderContainer container;
     public bool cellsSetted;
+    public Hand hand;
     //CalenderCell을 담을 테두리입니다.
     [SerializeField] RectTransform frame;
     [SerializeField] RectTransform Container;

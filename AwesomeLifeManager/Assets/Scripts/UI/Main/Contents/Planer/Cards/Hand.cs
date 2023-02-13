@@ -8,6 +8,7 @@ using UnityEngine.XR;
 
 public class Hand : UI
 {
+    public MyDeck myDeck;
     public Vector2 anchoredPos;
     RectTransform uiCanvas;
     EventManager theEventManager;
@@ -17,7 +18,6 @@ public class Hand : UI
     int handAmount = 4;
     [SerializeField] RectTransform[] handSlot;
     [SerializeField] Calender calender;
-    [SerializeField] MyDeck myDeck;
     [SerializeField] CardInfoPopup cardInfoPopup;
 
     // Start is called before the first frame update
@@ -57,7 +57,14 @@ public class Hand : UI
             }
             myDeck.cardQueue = new Queue<ActionCard>(t_Queue.Reverse<ActionCard>());
             handAmount = j;
+            selectedCardIndex = -1;
         }
+    }
+
+    public void InitHand()
+    {
+        handAmount = 4;
+        selectedCardIndex = -1;
     }
 
     public void AddCard(ActionCard p_card)
@@ -71,7 +78,7 @@ public class Hand : UI
                 return;
             }
         }
-        throw new System.Exception("Hand is FULL!");
+        p_card.gameObject.SetActive(false);
     }
 
     public void Draw()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Turn
@@ -101,6 +102,9 @@ public class Turn
             yield return new WaitForSeconds(1.5f);
         }
         //TurnManager.instance.resultUI.SetActive(true);
+        theTurnManager.calender.hand.InitHand();
+        theTurnManager.calender.hand.myDeck.InitDeck();
+        theTurnManager.calender.hand.myDeck.GenerateDeck();
         theTurnManager.currentTurnNum++;
         theTurnManager.currentTurn = new Turn(theTurnManager.currentTurnNum);
         theTurnManager.calender.InitialCells();

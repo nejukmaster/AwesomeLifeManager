@@ -10,15 +10,27 @@ public class MyDeck : Manager
 
     public void AddCard(CardInform p_inform)
     {
-        GameObject t_obj = ObjectPool.instance.actionCardQueue.Dequeue();
-        cardQueue.Enqueue(t_obj.GetComponent<ActionCard>());
-        t_obj.GetComponent<ActionCard>().inform = p_inform;
         cardInformList.Add(p_inform);
+    }
+
+    public void GenerateDeck()
+    {
+        for(int i = 0; i < cardInformList.Count; i ++)
+        {
+            GameObject t_obj = ObjectPool.instance.actionCardQueue.Dequeue();
+            t_obj.GetComponent<ActionCard>().inform = cardInformList[i];
+            cardQueue.Enqueue(t_obj.GetComponent<ActionCard>());
+        }
     }
 
     public override void Init()
     {
         cardInformList = new List<CardInform>();
+        cardQueue = new Queue<ActionCard>();
+    }
+
+    public void InitDeck()
+    {
         cardQueue = new Queue<ActionCard>();
     }
 

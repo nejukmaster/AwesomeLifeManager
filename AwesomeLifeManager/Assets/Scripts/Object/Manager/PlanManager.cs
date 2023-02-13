@@ -98,13 +98,34 @@ public class PlanManager : Manager
             return true; 
         }, null,true));
         planDic.Add("Action_08", new Plan("식재료 구매",5, () => {
-            if(theMoneyManager.money - theStatusManager.GetStatus("재력").value*100*0.7 < 0){
-                
+            int costMoney = (int)(theStatusManager.GetStatus("재력").value*100*0.7f);
+            if(theMoneyManager.money < costMoney){
+                //행동 실패 이벤트 발생
+                turnProcessPopup.AddLog("돈이 부족합니다.");
             }
             else{
-               theMoneyManager.AddMoney((int)(-theStatusManager.GetStatus("재력").value*100*0.7f));
+               theMoneyManager.AddMoney(-1 * costMoney);
                theStatusManager.IncreaseStatus("재력",-1);
                theTurnManager.actionCool["식재료 구매"] = 14;
+               turnProcessPopup.AddLog("재력 -1");
+               turnProcessPopup.AddLog("돈을 "+costMoney+"만큼 잃었습니다.");
+                turnProcessPopup.AddLog("식재료를 구매했습니다!");
+            }
+            return true; 
+        }, null,true));
+        planDic.Add("Action_09", new Plan("건강 검진",5, () => {
+            if(theMoneyManager.money < 100000){
+                //행동 실패 이벤트 발생
+                turnProcessPopup.AddLog("돈이 부족합니다.");
+            }
+            else{
+               theMoneyManager.AddMoney(-100000);
+               theStatusManager.IncreaseStatus("계획성",3);
+               theStatusManager.IncreaseStatus("건강",6);
+               turnProcessPopup.AddLog("계획성 +3");
+               turnProcessPopup.AddLog("계획성 +6");
+               turnProcessPopup.AddLog("돈을 100000만큼 잃었습니다.");
+                turnProcessPopup.AddLog("건강검진을 받았습니다!");
             }
             return true; 
         }, null,true));
