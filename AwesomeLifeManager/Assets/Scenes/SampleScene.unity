@@ -4541,7 +4541,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e564d3a742f16148bb47672064ac9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventEncounterPercent: 0
 --- !u!1 &391639475
 GameObject:
   m_ObjectHideFlags: 0
@@ -11692,6 +11691,7 @@ GameObject:
   - component: {fileID: 1051655897}
   - component: {fileID: 1051655896}
   - component: {fileID: 1051655895}
+  - component: {fileID: 1051655898}
   m_Layer: 5
   m_Name: EncounterEvent!
   m_TagString: Untagged
@@ -11770,6 +11770,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051655893}
   m_CullTransparentMesh: 1
+--- !u!114 &1051655898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051655893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e6f224dd82a60459cac0bbf60a8baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theUIManager: {fileID: 1053710829}
+  active: 1
+  clickedDelay: 0
+  eventPopup: {fileID: 943703529}
 --- !u!1 &1053710824
 GameObject:
   m_ObjectHideFlags: 0
@@ -19153,6 +19169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 255351703}
+  cardInfoPopup: {fileID: 3399694391211510748}
 --- !u!1 &1878609504
 GameObject:
   m_ObjectHideFlags: 0

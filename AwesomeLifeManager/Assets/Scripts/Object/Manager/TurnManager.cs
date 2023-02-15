@@ -3,6 +3,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public class ActionCool
+{
+    public int cool;
+    public Action action;
+
+    public ActionCool(int cool, Action action)
+    {
+        this.cool = cool;
+        this.action = action;
+    }
+}
+
 public class TurnManager : Manager
 {
     public static TurnManager instance;
@@ -12,7 +24,7 @@ public class TurnManager : Manager
     public GameObject MainUI;
     public Calender calender;
     public TurnProcessPopup turnProcessPopup;
-    public Dictionary<string,int> actionCool = new Dictionary<string,int>();
+    public Dictionary<string,ActionCool> actionCool = new Dictionary<string,ActionCool>();
     [SerializeField] EventPopup eventPopup;
     [SerializeField] WarningPopup warningPopup;
     PlanManager planManager;
@@ -23,7 +35,7 @@ public class TurnManager : Manager
         instance = this;
         planManager = PlanManager.instance;
         currentTurn = new Turn(0);
-        actionCool.Add("식재료 구매",-1);
+        actionCool.Add("식재료 구매",new ActionCool(-1,new Action((obj, inform) => { ((EventManager)obj).EnableEvent(10); return true; })));
     }
 
     public void ReadCalender(Calender p_calender)
@@ -51,6 +63,6 @@ public class TurnManager : Manager
     {
         currentTurn = new Turn(0);
         calender.InitialCells();
-        actionCool["식재료 구매"] = -1;
+        actionCool["식재료 구매"].cool = -1;
     }
 }

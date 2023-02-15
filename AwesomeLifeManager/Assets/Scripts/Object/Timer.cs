@@ -24,7 +24,6 @@ public class Timer : MonoBehaviour
         instance = this;
         theEvent = FindObjectOfType<EventManager>();
         theCharacterUI = FindObjectOfType<CharacterUIManager>();
-        theEvent.CheckEvent();
     }
 
     // Update is called once per frame

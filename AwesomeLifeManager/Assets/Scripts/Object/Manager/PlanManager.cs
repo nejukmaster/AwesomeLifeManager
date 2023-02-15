@@ -106,7 +106,7 @@ public class PlanManager : Manager
             else{
                theMoneyManager.AddMoney(-1 * costMoney);
                theStatusManager.IncreaseStatus("재력",-1);
-               theTurnManager.actionCool["식재료 구매"] = 14;
+               theTurnManager.actionCool["식재료 구매"].cool = 14;
                turnProcessPopup.AddLog("재력 -1");
                turnProcessPopup.AddLog("돈을 "+costMoney+"만큼 잃었습니다.");
                 turnProcessPopup.AddLog("식재료를 구매했습니다!");

@@ -16,17 +16,19 @@ public class EventPopup : MonoBehaviour
 
     public void SetActive(bool p_bool, Event p_event)
     {
-        this.gameObject.SetActive(p_bool);
         if (!p_bool)
         {
             for (int i = 0; i < choices.Length; i++)
                 choices[i].GetComponent<EventChoiceButton>().Initialize();
             UI.ToggleSubUI(turnProcessPopup.gameObject, true);
+            this.gameObject.SetActive(p_bool);
         }
         else
         {
+            this.gameObject.SetActive(p_bool);
             eventEncounterAnime.gameObject.SetActive(true);
             UI.ToggleSubUI(turnProcessPopup.gameObject, false);
+            UI.ToggleSubUI(gameObject, true);
             currentEvent = p_event;
             name.text = p_event.name;
             if (p_event.mainTex != null)

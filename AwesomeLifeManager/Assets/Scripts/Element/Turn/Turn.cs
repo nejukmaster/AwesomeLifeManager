@@ -61,35 +61,36 @@ public class Turn
             {
                 Debug.Log("Free Act.");
                 t_popup.AddLog("Free Act.");
-            }
-            if(theEventManager.priorityEvent != null){
-                UI.ToggleSubUI(t_popup.gameObject, false);
-                e_popup.SetActive(true,theEventManager.priorityEvent);
-                e_popup.EventEncounter();
-                theEventManager.priorityEvent = null;
-                while (e_popup.gameObject.activeInHierarchy)
+                for(int i = 0; i < 5; i++)
                 {
-                    yield return new WaitForSeconds(2f);
+                    theEventManager.EventEnabled.Add(new EventItem(new Event("Test Event"+i,
+                                new Choice[] { new Choice("00", "test choice first!"), new Choice("01", "test choice second!"), new Choice("02", "test choice third") }, 0)));
                 }
             }
-            else{
-                if (Random.Range(0, 100) < (int)(theEventManager.eventEncounterPercent * 100)) {
-                    if (theEventManager.EventEnabled.Count > 0)
+            foreach (string s in theTurnManager.actionCool.Keys)
+            {
+
+                if (theTurnManager.actionCool[s].cool > 0)
+                {
+                    theTurnManager.actionCool[s].cool--;
+                    if(theTurnManager.actionCool[s].cool == 0)
                     {
-                        UI.ToggleSubUI(t_popup.gameObject, false);
-                        e_popup.SetActive(true,theEventManager.GetRandomEvent(true));
-                        e_popup.EventEncounter();
-                        while (e_popup.gameObject.activeInHierarchy)
+                        if(s == "식재료 구매")
                         {
-                            yield return new WaitForSeconds(2f);
+                            theTurnManager.actionCool[s].action.actionDel(theEventManager, null);
                         }
                     }
                 }
             }
-            foreach(string s in theTurnManager.actionCool.Keys){
-                
-                if(theTurnManager.actionCool[s] > 0)
-                    theTurnManager.actionCool[s] --;
+            for (int i = 0; i < theEventManager.EventEnabled.Count; i ++)
+            {
+                UI.ToggleSubUI(t_popup.gameObject, false);
+                e_popup.SetActive(true, theEventManager.EventEnabled[i].@event);
+                e_popup.EventEncounter();
+                while (e_popup.gameObject.activeInHierarchy)
+                {
+                    yield return new WaitForSeconds(2f);
+                }
             }
             List<Personality> t_list = thePersonalityManager.CheckPersonality();
             for(int i = 0; i < t_list.Count; i ++)
@@ -97,6 +98,7 @@ public class Turn
                 thePersonalityManager.AddPersonality(t_list[i]);
                 t_popup.AddLog(t_list[i].name + "(이)가 활성화 되었습니다.");
             }
+            theEventManager.InitEnabledEvent();
             date++;
             //Event Fire
             yield return new WaitForSeconds(1.5f);

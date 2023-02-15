@@ -149,6 +149,8 @@ public class Hand : UI
                         if (cards[selectedCardIndex].currentCell != null)
                         {
                             cards[selectedCardIndex].currentCell.HoldOut();
+                            cards[selectedCardIndex].Slide(handSlot[selectedCardIndex].anchoredPosition);
+
                         }
                         selectedCardIndex = -1;
                         return true;

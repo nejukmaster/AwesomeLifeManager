@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlanerPopup : MonoBehaviour
 {
     [SerializeField] Hand hand;
+    [SerializeField] CardInfoPopup cardInfoPopup;
     public void SetActive(bool p_bool)
     {
         if (p_bool)
@@ -15,6 +16,7 @@ public class PlanerPopup : MonoBehaviour
         else
         {
             hand.SettingHand(p_bool);
+            cardInfoPopup.SetActive(p_bool, null);
             gameObject.SetActive(p_bool);
         }
     }

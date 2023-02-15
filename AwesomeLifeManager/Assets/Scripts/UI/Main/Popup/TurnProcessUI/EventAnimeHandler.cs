@@ -6,8 +6,6 @@ public class EventAnimeHandler : UI
 {
     [SerializeField] EventPopup eventPopup;
 
-    bool isEnd =false;
-
     public override bool onClickDown(Vector2 clickPos)
     {
         return false;
@@ -15,7 +13,7 @@ public class EventAnimeHandler : UI
 
     public override bool onClickUp(float dragDis, Vector2 clickPos)
     {
-        if (isEnd)
+        if (eventPopup.eventEncounterAnime.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             eventPopup.Container.SetActive(true);
             this.gameObject.SetActive(false);
@@ -23,11 +21,6 @@ public class EventAnimeHandler : UI
         }
         else
             return false;
-    }
-
-    public void OnEndEncounterAnime()
-    {
-            isEnd = true;
     }
 
     public override bool onSwipe(Vector2 swipeStartp, Vector2 swipeEndp)
