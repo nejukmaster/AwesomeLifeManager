@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Data;
+using System;
 
 /*  이 클래스에서는 스테이터스를 담당해요. 
     스테이터를 만들고 등록할수 있어요. 
@@ -30,14 +31,16 @@ public class Status : Variable{
     public string description;
     public StatusType type;
     public bool reveal = true;
+    public Vector2 initialRange = new Vector2(0, 0);
 
-    public Status(string name, int value, string description, StatusType type, bool reveal)
+    public Status(string name, int value, string description, StatusType type, bool reveal, Vector2 initialRange)
     {
         this.name = name;
         this.value = value;
         this.description = description;
         this.type = type;
         this.reveal = reveal;
+        this.initialRange = initialRange;
     }
 
     public Status(string name, int value, string description, StatusType type)
@@ -92,8 +95,13 @@ public class StatusManager : Manager
                     t = StatusType.Emotional;
                     break;
             }
-            status[i] = new Status(status_data[i]["name"].ToString(), 0, status_data[i]["description"].ToString(), t, (status_data[i]["is reveal"].ToString().Equals("o")));
+            status[i] = new Status(status_data[i]["name"].ToString(),
+                        0, status_data[i]["description"].ToString(),
+                        t,
+                        (status_data[i]["is reveal"].ToString().Equals("o")),
+                        new Vector2(Int32.Parse(status_data[i]["initial range"].ToString().Split("-")[0]), Int32.Parse(status_data[i]["initial range"].ToString().Split("-")[1])));
         }
+        Init();
     }
 
     //스테이터스 증가 함수
@@ -116,32 +124,9 @@ public class StatusManager : Manager
 
     public override void Init()
     {
-        List<Dictionary<string, object>> status_data = CSVReader.Read("DataSheet/Status");
-        status = new Status[status_data.Count];
-        for(int i = 0; i < status_data.Count; i++)
+        foreach(Status s in status)
         {
-            StatusType t = StatusType.Etc;
-            switch(status_data[i]["type"]){
-                case "Health":
-                    t = StatusType.Health;
-                    break;
-                case "Ability":
-                    t = StatusType.Ability;
-                    break;
-                case "Tought":
-                    t = StatusType.Tought;
-                    break;
-                case "Sociality":
-                    t = StatusType.Sociality;
-                    break;
-                case "Belief":
-                    t = StatusType.Belief;
-                    break;
-                case "Emotional":
-                    t = StatusType.Emotional;
-                    break;
-            }
-            status[i] = new Status(status_data[i]["name"].ToString(), 0, status_data[i]["description"].ToString(), t, (status_data[i]["is reveal"].ToString().Equals("o")));
+            s.value = UnityEngine.Random.Range((int)s.initialRange.x, (int)s.initialRange.y + 1);
         }
     }
 }

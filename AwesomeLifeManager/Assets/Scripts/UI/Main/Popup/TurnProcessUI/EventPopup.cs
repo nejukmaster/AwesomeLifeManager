@@ -35,8 +35,11 @@ public class EventPopup : MonoBehaviour
                 eventIllustration.sprite = p_event.mainTex;
             for (int i = 0; i < choices.Length; i++)
             {
-                choices[i].gameObject.SetActive(true);
-                choices[i].GetComponentInChildren<TextMeshProUGUI>().text = p_event.choices[i].name;
+                if (choices[i] != null)
+                {
+                    choices[i].gameObject.SetActive(true);
+                    choices[i].GetComponentInChildren<TextMeshProUGUI>().text = p_event.choices[i].name;
+                }
             }
         }
     }

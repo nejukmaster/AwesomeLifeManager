@@ -26,6 +26,8 @@ public class PlanContainer : UI
     }
     public override bool onClickDown(Vector2 clickPos)
     {
+        weekCards[(frontCardIndex +3 ) % 4].transform.SetAsFirstSibling();
+        weekCards[frontCardIndex].transform.SetAsLastSibling();
         return false;
     }
 
@@ -34,7 +36,7 @@ public class PlanContainer : UI
         Snap();
         if(dragDis < 20)
         {
-           weekCards[frontCardIndex].OnClick();
+            weekCards[frontCardIndex].OnClick();
             return true;
         }
         return false;

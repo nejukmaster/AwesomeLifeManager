@@ -17,9 +17,12 @@ public class MyDeck : Manager
     {
         for(int i = 0; i < cardInformList.Count; i ++)
         {
-            GameObject t_obj = ObjectPool.instance.actionCardQueue.Dequeue();
-            t_obj.GetComponent<ActionCard>().inform = cardInformList[i];
-            cardQueue.Enqueue(t_obj.GetComponent<ActionCard>());
+            if (cardInformList[i].type != CardType.Event)
+            {
+                GameObject t_obj = ObjectPool.instance.actionCardQueue.Dequeue();
+                t_obj.GetComponent<ActionCard>().inform = cardInformList[i];
+                cardQueue.Enqueue(t_obj.GetComponent<ActionCard>());
+            }
         }
     }
 
