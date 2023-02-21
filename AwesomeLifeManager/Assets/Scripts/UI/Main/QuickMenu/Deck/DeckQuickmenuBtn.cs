@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DeckQuickmenuBtn : QuickMenuButton
 {
+    [SerializeField] DeckPreview deckPreview;
     public override void OnExitQuickmenu()
     {
         CategoryChangeButton.activatedButton.Deactive();
@@ -21,5 +22,6 @@ public class DeckQuickmenuBtn : QuickMenuButton
                 break;
             }
         }
+        deckPreview.UpdatePreview();
     }
 }

@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class MyDeck : Manager
 {
+    public const int DECK_MAXIMUM = 20;
     public List<CardInform> cardInformList = new List<CardInform>();
     public Queue<ActionCard> cardQueue = new Queue<ActionCard>();
 
-    public void AddCard(CardInform p_inform)
+    public bool AddCard(CardInform p_inform)
     {
-        cardInformList.Add(p_inform);
+        if (cardInformList.Count < DECK_MAXIMUM)
+        {
+            cardInformList.Add(p_inform);
+            return true;
+        }
+        return false;
     }
 
     public void GenerateDeck()

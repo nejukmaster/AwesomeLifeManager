@@ -45,14 +45,20 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 2800000, guid: da4ad745cca99d440aaab8e5065c5e84, type: 3}
+    - {fileID: 2800000, guid: ff12a5db4f9fae044bba5e67c4d75b16, type: 3}
+    - {fileID: 2800000, guid: 0165d80fbb1a4b447b86b34c76d6aa0e, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: da4ad745cca99d440aaab8e5065c5e84, type: 3}
+  - {fileID: 21300000, guid: ff12a5db4f9fae044bba5e67c4d75b16, type: 3}
+  - {fileID: 21300000, guid: 0165d80fbb1a4b447b86b34c76d6aa0e, type: 3}
   m_PackedSpriteNamesToIndex:
   - ALM_Logo
+  - StartBtn-Deactivate
+  - StartBtn-Activate
   m_RenderDataMap: {}
   m_Tag: Startmenu
   m_IsVariant: 0
