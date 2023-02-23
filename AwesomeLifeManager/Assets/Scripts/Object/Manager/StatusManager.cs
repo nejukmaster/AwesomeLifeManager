@@ -105,13 +105,19 @@ public class StatusManager : Manager
     }
 
     //스테이터스 증가 함수
-    public void IncreaseStatus(string p_name, int p_num){
+    public bool IncreaseStatus(string p_name, int p_num){
         for(int i = 0; i < status.Length; i++)
-            if(p_name == status[i].name){
-                status[i].value += p_num;
+            if(p_name == status[i].name ){
+                if(status[i].value + p_num >=0){
+                    status[i].value += p_num;
+                        return true;
+                }
+                else{
+                    status[i].value = 0;
+                    return false;
+                }
             }
-        //theConviction.CheckCondition();
-        //thePersonality.CheckCondition();
+        return false;
     }
 
     //Status를 찾는 함수

@@ -129,6 +129,30 @@ public class PlanManager : Manager
             }
             return true; 
         }, null,true));
+        planDic.Add("Action_10", new Plan("당일치기 여행",15, () => {
+            int t_dis = 4 + (int)(theStatusManager.GetStatus("계획성").value * 0.08f);
+            if(theStatusManager.IncreaseStatus("스트레스",-1 * t_dis))
+                turnProcessPopup.AddLog("스트레스 -"+t_dis);
+            else
+                turnProcessPopup.AddLog("스트레스는 더이상 떨어질 수 없습니다!");
+            return true; 
+        }, null,true));
+        planDic.Add("Action_11", new Plan("국내 여행",20, () => {
+            int t_dis = 5 + (int)(theStatusManager.GetStatus("계획성").value * 0.12f);
+            if(theStatusManager.IncreaseStatus("스트레스",-1 * t_dis))
+                turnProcessPopup.AddLog("스트레스 -"+t_dis);
+            else
+                turnProcessPopup.AddLog("스트레스는 더이상 떨어질 수 없습니다!");
+            return true; 
+        }, null,true));
+        planDic.Add("Action_12", new Plan("해외 여행",30, () => {
+            int t_dis = 6 + (int)(theStatusManager.GetStatus("계획성").value * 0.15f);
+            if(theStatusManager.IncreaseStatus("스트레스",-1 * t_dis))
+                turnProcessPopup.AddLog("스트레스 -"+t_dis);
+            else
+                turnProcessPopup.AddLog("스트레스는 더이상 떨어질 수 없습니다!");
+            return true; 
+        }, null,true));
         planDic.Add("02", new Plan("basic02",10, () => { turnProcessPopup.AddLog("외향성 +50"); theStatusManager.IncreaseStatus("외향성", 51); return true; }, null,false));
     }
 
