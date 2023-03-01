@@ -1183,7 +1183,8 @@ MonoBehaviour:
   containType: 3
   myDeck: {fileID: 1470913953}
   containerRect: {fileID: 1233898018}
-  CardDeleteBtn: {fileID: 0}
+  cardDeleteBtn: {fileID: 1860653455}
+  top: {fileID: 2056030645}
 --- !u!1 &73681788
 GameObject:
   m_ObjectHideFlags: 0
@@ -2902,7 +2903,8 @@ MonoBehaviour:
   containType: 4
   myDeck: {fileID: 1470913953}
   containerRect: {fileID: 1233898018}
-  CardDeleteBtn: {fileID: 0}
+  cardDeleteBtn: {fileID: 1860653455}
+  top: {fileID: 2056030645}
 --- !u!1 &248184153
 GameObject:
   m_ObjectHideFlags: 0
@@ -6423,7 +6425,8 @@ MonoBehaviour:
   containType: 1
   myDeck: {fileID: 1470913953}
   containerRect: {fileID: 1233898018}
-  CardDeleteBtn: {fileID: 0}
+  cardDeleteBtn: {fileID: 1860653455}
+  top: {fileID: 2056030645}
 --- !u!1 &535610922
 GameObject:
   m_ObjectHideFlags: 0
@@ -6889,7 +6892,8 @@ MonoBehaviour:
   containType: 2
   myDeck: {fileID: 1470913953}
   containerRect: {fileID: 1233898018}
-  CardDeleteBtn: {fileID: 0}
+  cardDeleteBtn: {fileID: 1860653455}
+  top: {fileID: 2056030645}
 --- !u!1 &577046215
 GameObject:
   m_ObjectHideFlags: 0
@@ -8525,7 +8529,8 @@ MonoBehaviour:
   containType: 0
   myDeck: {fileID: 1470913953}
   containerRect: {fileID: 1233898018}
-  CardDeleteBtn: {fileID: 0}
+  cardDeleteBtn: {fileID: 1860653455}
+  top: {fileID: 2056030645}
 --- !u!1 &734244174
 GameObject:
   m_ObjectHideFlags: 0
@@ -11172,7 +11177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &957210352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14044,7 +14049,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1206245439
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19817,7 +19822,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1860653454
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19851,6 +19856,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de342d6dc1d62734f9840d516b1374fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openedViewer: {fileID: 0}
+  myDeck: {fileID: 1470913953}
 --- !u!114 &1860653456
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class CardIcon : MonoBehaviour
     [SerializeField] Image checkMarker;
     [SerializeField] GameObject selectUI;
     CardWindow cardWindow;
-    CardInform cardInform;
+    public CardInform cardInform;
     bool hold = false;
     public float holdTime = 0.0f;
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardViewer : Scroll
 {
@@ -10,7 +11,8 @@ public class CardViewer : Scroll
     [SerializeField] MyDeck myDeck;
     ObjectPool theObjectPool;
     [SerializeField] RectTransform containerRect;
-    [SerializeField] GameObject CardDeleteBtn;
+    [SerializeField] CardDeleteBtn cardDeleteBtn;
+    [SerializeField] GameObject top;
     // Start is called before the first frame update
     void Awake()
     {
@@ -61,7 +63,13 @@ public class CardViewer : Scroll
         {
             i.activateSelectionMode();
         }
-        CardDeleteBtn.SetActive(true);
+        cardDeleteBtn.openedViewer = this;
+        cardDeleteBtn.gameObject.SetActive(true);
+        Button[] t_btns = top.GetComponentsInChildren<Button>();
+        foreach(Button i in t_btns)
+        {
+            i.enabled = false;
+        }
     }
     public void deactivateSelectionMode()
     {
@@ -71,7 +79,12 @@ public class CardViewer : Scroll
         {
             i.deactivateSelectionMode();
         }
-        CardDeleteBtn.SetActive(false);
+        cardDeleteBtn.gameObject.SetActive(false);
+        Button[] t_btns = top.GetComponentsInChildren<Button>();
+        foreach (Button i in t_btns)
+        {
+            i.enabled = true;
+        }
     }
 
     public override void onStartSwipe()
