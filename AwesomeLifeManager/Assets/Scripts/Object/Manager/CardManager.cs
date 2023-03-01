@@ -177,6 +177,18 @@ public class CardManager : Manager
             ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic["Action_09"]);
             return true;
         }));
+        actionDelList.Add("Action_10", new Action((cell, t_inform) => {
+            ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic["Action_09"]);
+            return true;
+        }));
+        actionDelList.Add("Action_11", new Action((cell, t_inform) => {
+            ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic["Action_09"]);
+            return true;
+        }));
+        actionDelList.Add("Action_12", new Action((cell, t_inform) => {
+            ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic["Action_09"]);
+            return true;
+        }));
     }
 
     public override void Init()

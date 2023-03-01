@@ -59,7 +59,6 @@ public abstract class Scroll :UI
                 _end[1] = objs[i].sizeDelta;
             }
         }
-        Debug.Log(objGroup);
         if (objGroup.anchoredPosition.y - (swipeStartp.y - swipeEndp.y) >= 0 &&
             -1 * (objGroup.anchoredPosition.y - (swipeStartp.y - swipeEndp.y)) >= (_end[0].y + _end[1].y / 2 - 25))
         {

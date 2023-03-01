@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class CardViewer : Scroll
 {
+    public bool selectionMode = false;
 
     [SerializeField] CardType containType;
     [SerializeField] MyDeck myDeck;
     ObjectPool theObjectPool;
     [SerializeField] RectTransform containerRect;
+    [SerializeField] GameObject CardDeleteBtn;
     // Start is called before the first frame update
     void Awake()
     {
@@ -34,7 +36,7 @@ public class CardViewer : Scroll
                 CardIcon icon = obj.GetComponent<CardIcon>();
                 icon.SettingCard(inform);
                 RectTransform t_rect = icon.GetComponent<RectTransform>();
-                t_rect.anchoredPosition = new Vector2((i % 3) * (containerRect.rect.width / 3), -1 * Mathf.Floor(i / 3) * t_rect.rect.height + 25f);
+                t_rect.anchoredPosition = new Vector2((i % 3) * (containerRect.rect.width / 3), -1 * Mathf.Floor(i / 3) * t_rect.rect.height);
                 i++;
             }
         }
@@ -49,6 +51,27 @@ public class CardViewer : Scroll
             r.gameObject.SetActive(false);
             updateObjs<CardIcon>();
         }
+    }
+
+    public void activateSelectionMode()
+    {
+        selectionMode = true;
+        CardIcon[] t_icons = GetComponentsInChildren<CardIcon>();
+        foreach(CardIcon i in t_icons)
+        {
+            i.activateSelectionMode();
+        }
+        CardDeleteBtn.SetActive(true);
+    }
+    public void deactivateSelectionMode()
+    {
+        selectionMode = false;
+        CardIcon[] t_icons = GetComponentsInChildren<CardIcon>();
+        foreach (CardIcon i in t_icons)
+        {
+            i.deactivateSelectionMode();
+        }
+        CardDeleteBtn.SetActive(false);
     }
 
     public override void onStartSwipe()
