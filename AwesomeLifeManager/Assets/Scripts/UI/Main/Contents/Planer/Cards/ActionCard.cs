@@ -65,7 +65,14 @@ public class ActionCard : MonoBehaviour
     {
         if(currentCoroutine != null)
             StopCoroutine(currentCoroutine);
-        currentCoroutine = StartCoroutine(SlideCo(p_dest));
+        currentCoroutine = StartCoroutine(SlideCo(p_dest,null));
+    }
+
+    public void Slide(Vector2 p_dest, Action<int> funcFiredInEndOfSlide)
+    {
+        if (currentCoroutine != null)
+            StopCoroutine(currentCoroutine);
+        currentCoroutine = StartCoroutine(SlideCo(p_dest,funcFiredInEndOfSlide));
     }
 
     public void SettingCard()
@@ -84,19 +91,13 @@ public class ActionCard : MonoBehaviour
             case CardType.Action:
                 categoryImg.sprite = t_atlas.GetSprite("Action");
                 break;
-            case CardType.Project:
-                categoryImg.sprite = t_atlas.GetSprite("Project");
-                break;
-            case CardType.Event:
-                categoryImg.sprite = t_atlas.GetSprite("Event");
-                break;
-            case CardType.Angel:
-                categoryImg.sprite = t_atlas.GetSprite("Angel");
+            case CardType.Effect:
+                categoryImg.sprite = t_atlas.GetSprite("Effect");
                 break;
         }
     }
 
-    public IEnumerator SlideCo(Vector2 p_dest)
+    public IEnumerator SlideCo(Vector2 p_dest, Action<int> funcFiredEndOfSlide)
     {
         while(Vector2.Distance(GetComponent<RectTransform>().anchoredPosition,p_dest) >= 0.1)
         {
@@ -106,6 +107,10 @@ public class ActionCard : MonoBehaviour
                                                     p_dest,
                                                     slideSpeed * Time.deltaTime);
             yield return null;
+        }
+        if(funcFiredEndOfSlide != null)
+        {
+            funcFiredEndOfSlide(1);
         }
         GetComponent<RectTransform>().anchoredPosition = p_dest;
         canClick = true;

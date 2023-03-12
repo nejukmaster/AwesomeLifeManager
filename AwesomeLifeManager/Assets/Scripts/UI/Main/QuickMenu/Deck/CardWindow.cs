@@ -50,14 +50,8 @@ public class CardWindow : MonoBehaviour
                 case CardType.Action:
                     categoryImg.sprite = t_atlas.GetSprite("Action");
                     break;
-                case CardType.Project:
-                    categoryImg.sprite = t_atlas.GetSprite("Project");
-                    break;
-                case CardType.Event:
-                    categoryImg.sprite = t_atlas.GetSprite("Event");
-                    break;
-                case CardType.Angel:
-                    categoryImg.sprite = t_atlas.GetSprite("Angel");
+                case CardType.Effect:
+                    categoryImg.sprite = t_atlas.GetSprite("Effect");
                     break;
             }
             Flip();

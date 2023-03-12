@@ -11,7 +11,6 @@ public class PlanManager : Manager
     [SerializeField] TurnProcessPopup turnProcessPopup;
 
     StatusManager theStatusManager;
-    JobManager theJobManager;
     MoneyManager theMoneyManager;
     TurnManager theTurnManager;
 
@@ -20,7 +19,6 @@ public class PlanManager : Manager
     {
         instance = this;
         theStatusManager = StatusManager.instance;
-        theJobManager = JobManager.instance;
         theMoneyManager = MoneyManager.instance;
         theTurnManager = TurnManager.instance;
         mapping();
@@ -75,7 +73,6 @@ public class PlanManager : Manager
             turnProcessPopup.AddLog("스트레스 -10");
             turnProcessPopup.AddLog("건강 +10");
             turnProcessPopup.AddLog("직업 숙련도 초기화");
-            theJobManager.InitJob(0);
             turnProcessPopup.AddLog("\"무직\" 획득");
             return true; 
         }, null,true));

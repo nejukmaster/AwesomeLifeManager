@@ -58,6 +58,8 @@ public class Status : Variable{
     등록된 스테이터스의 값을 다른 클래스가 참조할 수 있게 도와줘요. */
 public class StatusManager : Manager
 {
+    public const int STATUS_MAX = 999;
+    public const int STATUS_MIN = 0;
     public static StatusManager instance;
     //스테이터스 목록을 저장할 배열 생성
     public Status[] status;
@@ -108,7 +110,7 @@ public class StatusManager : Manager
     public bool IncreaseStatus(string p_name, int p_num){
         for(int i = 0; i < status.Length; i++)
             if(p_name == status[i].name ){
-                if(status[i].value + p_num >=0){
+                if(status[i].value + p_num >=STATUS_MIN && status[i].value + p_num <=STATUS_MAX){
                     status[i].value += p_num;
                         return true;
                 }

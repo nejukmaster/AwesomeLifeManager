@@ -10,6 +10,7 @@ public class CardIcon : MonoBehaviour
     public const float LONG_CLICK_SEC = 1.5f;
 
     public bool isCheck = false;
+    public bool canDelete = true;
 
     [SerializeField] TextMeshProUGUI description;
     [SerializeField] TextMeshProUGUI nameBlank;
@@ -41,14 +42,8 @@ public class CardIcon : MonoBehaviour
             case CardType.Action:
                 categoryImg.sprite = t_atlas.GetSprite("Action");
                 break;
-            case CardType.Project:
-                categoryImg.sprite = t_atlas.GetSprite("Project");
-                break;
-            case CardType.Event:
-                categoryImg.sprite = t_atlas.GetSprite("Event");
-                break;
-            case CardType.Angel:
-                categoryImg.sprite = t_atlas.GetSprite("Angel");
+            case CardType.Effect:
+                categoryImg.sprite = t_atlas.GetSprite("Effect");
                 break;
         }
     }
@@ -66,7 +61,8 @@ public class CardIcon : MonoBehaviour
             isCheck = !isCheck;
             if (isCheck)
             {
-                checkMarker.enabled = true;
+                if(canDelete)
+                    checkMarker.enabled = true;
             }
             else
                 checkMarker.enabled = false;
@@ -97,7 +93,8 @@ public class CardIcon : MonoBehaviour
     {
         selectUI.SetActive(false);
         isCheck = false;
-        checkMarker.enabled = false;
+        if(canDelete)
+            checkMarker.enabled = false;
     }
 
     public void Update()

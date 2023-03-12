@@ -21,7 +21,7 @@ public class AddCardToDeckButton : MonoBehaviour
             deck.InitDeck();
             deck.GenerateDeck();
         }
-        else if(type == CardType.Event)
+        else if(type == CardType.Effect)
         {
             CardInform t_inform = new CardInform(name, type, des, illusteName, resultDes, new Action((eventManager, t_inform) => {
                                                                                                                                  ((EventManager)eventManager).EventEnabled.Add(new EventItem((new Event(name,

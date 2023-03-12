@@ -59,8 +59,6 @@ public class CalenderCell : MonoBehaviour
                 Debug.Log(t_icon);
                 t_icon.transform.SetParent(this.transform);
                 CardType t_type = CardType.Action;
-                if (!insertedPlan[i].canDelete)
-                    t_type = CardType.Job;
                 t_icon.SetAcitve(true, t_type);
                 t_icon.SetPibot(pibot);
                 pibot++;

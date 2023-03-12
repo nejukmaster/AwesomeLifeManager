@@ -19,6 +19,7 @@ public class Hand : UI
     [SerializeField] RectTransform[] handSlot;
     [SerializeField] Calender calender;
     [SerializeField] CardInfoPopup cardInfoPopup;
+    [SerializeField] RectTransform cardBurnedTransform;
 
     // Start is called before the first frame update
     void Awake()
@@ -71,14 +72,20 @@ public class Hand : UI
     {
         for(int i = 0; i < cards.Length; i++)
         {
-            if (cards[i] == null)
+            if (i < handSlot.Length && cards[i] == null)
             {
                 cards[i] = p_card;
-                p_card.Slide(handSlot[i].anchoredPosition);
+                p_card.Slide(handSlot[i].anchoredPosition,null);
                 return;
             }
         }
-        p_card.gameObject.SetActive(false);
+        if (selectedCardIndex != -1)
+        {
+            cards[selectedCardIndex].Slide(handSlot[selectedCardIndex].anchoredPosition);
+        }
+        cardInfoPopup.SetActive(false, null);
+        selectedCardIndex = -1;
+        p_card.Slide(cardBurnedTransform.anchoredPosition,(x) => { p_card.Burn(); });
     }
 
     public void Draw()
@@ -172,7 +179,7 @@ public class Hand : UI
                             cards[selectedCardIndex].currentCell.HoldOut();
                         }
                     }
-                    else if(cards[selectedCardIndex].inform.type == CardType.Event)
+                    else if(cards[selectedCardIndex].inform.type == CardType.Effect)
                     {
                         cards[selectedCardIndex].inform.action.actionDel(theEventManager, cards[selectedCardIndex].inform);
                         cards[selectedCardIndex].Burn();
