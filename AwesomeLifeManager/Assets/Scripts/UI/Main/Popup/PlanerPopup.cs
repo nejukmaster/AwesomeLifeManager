@@ -6,12 +6,15 @@ public class PlanerPopup : MonoBehaviour
 {
     [SerializeField] Hand hand;
     [SerializeField] CardInfoPopup cardInfoPopup;
+    [SerializeField] Calender calender;
     public void SetActive(bool p_bool)
     {
         if (p_bool)
         {
             gameObject.SetActive(p_bool);
             hand.SettingHand(p_bool);
+            if (!calender.cellsSetted)
+                calender.InitialCells();
         }
         else
         {

@@ -9679,7 +9679,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd21072a7d68ca46852a6fd95f774ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theEventManager: {fileID: 0}
 --- !u!1 &801321183
 GameObject:
   m_ObjectHideFlags: 0
@@ -10333,7 +10332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ef6d375c2f60341827d806e8b4c5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status: []
 --- !u!1 &888941087
 GameObject:
   m_ObjectHideFlags: 0
@@ -13204,8 +13202,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 281}
-  m_SizeDelta: {x: 980, y: 500}
+  m_AnchoredPosition: {x: 0, y: 250}
+  m_SizeDelta: {x: 968, y: 676}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1166195712
 MonoBehaviour:
@@ -13227,7 +13225,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: da4ad745cca99d440aaab8e5065c5e84, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2e607ca7ad32f0a4da23bcaeb51af729, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -19658,6 +19656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 255351703}
   cardInfoPopup: {fileID: 3399694391211510748}
+  calender: {fileID: 1772837599}
 --- !u!1 &1860653453
 GameObject:
   m_ObjectHideFlags: 0

@@ -109,7 +109,7 @@ public class Turn
         theTurnManager.calender.hand.myDeck.GenerateDeck();
         theTurnManager.currentTurnNum++;
         theTurnManager.currentTurn = new Turn(theTurnManager.currentTurnNum);
-        theTurnManager.calender.InitialCells();
+        theTurnManager.calender.cellsSetted = false;
         t_popup.exitButton.gameObject.SetActive(true);
     }
 }

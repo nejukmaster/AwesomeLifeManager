@@ -27,7 +27,43 @@ public class PlanManager : Manager
     void mapping(){
         planDic.Add("00", new Plan("basic00", 10, () => { turnProcessPopup.AddLog("도덕성 +81"); theStatusManager.IncreaseStatus("도덕성", 81); turnProcessPopup.AddLog("명성 +41"); theStatusManager.IncreaseStatus("명성", 41); turnProcessPopup.AddLog("외향성 +51"); theStatusManager.IncreaseStatus("외향성", 51); return true; }, null,true));
         planDic.Add("Job_00", new Plan("직업행동", 0, () => { return true; }, null,false));
-        planDic.Add("Action_01", new Plan("재능 찾기",5, () => {
+        planDic.Add("study", new Plan("학업", 0, () => { 
+            foreach(Status s in theStatusManager.status.Values)
+            {
+                switch (s.talentLevel)
+                {
+                    case 0:
+                        s.value += UnityEngine.Random.Range(0, 16);
+                        break;
+                    case 1:
+                        s.value += UnityEngine.Random.Range(10, 21);
+                        break;
+                    case 2:
+                        s.value += UnityEngine.Random.Range(15, 31);
+                        break;
+                }
+            }
+            return true; 
+        }, null, false));
+        planDic.Add("vacation", new Plan("방학", 0, () => {
+            foreach (Status s in theStatusManager.status.Values)
+            {
+                switch (s.talentLevel)
+                {
+                    case 0:
+                        s.value -= UnityEngine.Random.Range(15, 31);
+                        break;
+                    case 1:
+                        s.value -= UnityEngine.Random.Range(10, 21);
+                        break;
+                    case 2:
+                        s.value -= UnityEngine.Random.Range(0, 16);
+                        break;
+                }
+            }
+            return true;
+        }, null, false));
+        /*planDic.Add("Action_01", new Plan("재능 찾기",5, () => {
             List<int> t_status = new List<int>();
             for(int i = 0; i < theStatusManager.status.Length; i ++){
                 if(theStatusManager.status[i].type == StatusType.Ability){
@@ -150,7 +186,7 @@ public class PlanManager : Manager
                 turnProcessPopup.AddLog("스트레스는 더이상 떨어질 수 없습니다!");
             return true; 
         }, null,true));
-        planDic.Add("02", new Plan("basic02",10, () => { turnProcessPopup.AddLog("외향성 +50"); theStatusManager.IncreaseStatus("외향성", 51); return true; }, null,false));
+        planDic.Add("02", new Plan("basic02",10, () => { turnProcessPopup.AddLog("외향성 +50"); theStatusManager.IncreaseStatus("외향성", 51); return true; }, null,false));*/
     }
 
     public override void Init()

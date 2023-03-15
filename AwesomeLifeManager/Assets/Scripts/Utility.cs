@@ -124,4 +124,9 @@ public static class Utility
             return min;
         else    return max;
     }
+
+    public static string ToReadableByteArray(byte[] bytes)
+    {
+        return string.Join(", ", bytes);
+    }
 }

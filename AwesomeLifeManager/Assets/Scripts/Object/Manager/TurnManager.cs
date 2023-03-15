@@ -62,7 +62,6 @@ public class TurnManager : Manager
     public override void Init()
     {
         currentTurn = new Turn(0);
-        calender.InitialCells();
         actionCool["식재료 구매"].cool = -1;
     }
 }

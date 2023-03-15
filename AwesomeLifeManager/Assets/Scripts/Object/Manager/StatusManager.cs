@@ -31,9 +31,11 @@ public class Status : Variable{
     public string description;
     public StatusType type;
     public bool reveal = true;
-    public Vector2 initialRange = new Vector2(0, 0);
+    public int[] initialRange = new int[2];
+    public int[] valueRange = new int[2];
+    public int talentLevel;
 
-    public Status(string name, int value, string description, StatusType type, bool reveal, Vector2 initialRange)
+    public Status(string name, int value, string description, StatusType type, bool reveal, int[] initialRange, int[] valueRange)
     {
         this.name = name;
         this.value = value;
@@ -41,6 +43,8 @@ public class Status : Variable{
         this.type = type;
         this.reveal = reveal;
         this.initialRange = initialRange;
+        this.talentLevel = 0;
+        this.valueRange = valueRange;
     }
 
     public Status(string name, int value, string description, StatusType type)
@@ -50,6 +54,7 @@ public class Status : Variable{
         this.description = description;
         this.type = type;
         this.reveal = true;
+        talentLevel = 0;
     }
 }
 
@@ -58,11 +63,9 @@ public class Status : Variable{
     등록된 스테이터스의 값을 다른 클래스가 참조할 수 있게 도와줘요. */
 public class StatusManager : Manager
 {
-    public const int STATUS_MAX = 999;
-    public const int STATUS_MIN = 0;
     public static StatusManager instance;
     //스테이터스 목록을 저장할 배열 생성
-    public Status[] status;
+    public Dictionary<string,Status> status;
 
     ConvictionManager theConviction;
     PersonalityManager thePersonality;
@@ -73,7 +76,7 @@ public class StatusManager : Manager
         thePersonality = FindObjectOfType<PersonalityManager>();
         instance = this;
         List<Dictionary<string, object>> status_data = CSVReader.Read("DataSheet/Status");
-        status = new Status[status_data.Count];
+        status = new Dictionary<string, Status>();
         for(int i = 0; i < status_data.Count; i++)
         {
             StatusType t = StatusType.Etc;
@@ -97,25 +100,26 @@ public class StatusManager : Manager
                     t = StatusType.Emotional;
                     break;
             }
-            status[i] = new Status(status_data[i]["name"].ToString(),
+            status[status_data[i]["code"].ToString()] = new Status(status_data[i]["name"].ToString(),
                         0, status_data[i]["description"].ToString(),
                         t,
                         (status_data[i]["is reveal"].ToString().Equals("o")),
-                        new Vector2(Int32.Parse(status_data[i]["initial range"].ToString().Split("-")[0]), Int32.Parse(status_data[i]["initial range"].ToString().Split("-")[1])));
+                        new int[2] { Int32.Parse(status_data[i]["initial range"].ToString().Split("-")[0]), Int32.Parse(status_data[i]["initial range"].ToString().Split("-")[1]) },
+                        new int[2] { Int32.Parse(status_data[i]["initial range"].ToString().Split("-")[0]), Int32.Parse(status_data[i]["initial range"].ToString().Split("-")[1]) });
         }
         Init();
     }
 
     //스테이터스 증가 함수
     public bool IncreaseStatus(string p_name, int p_num){
-        for(int i = 0; i < status.Length; i++)
-            if(p_name == status[i].name ){
-                if(status[i].value + p_num >=STATUS_MIN && status[i].value + p_num <=STATUS_MAX){
-                    status[i].value += p_num;
+        foreach(string k in status.Keys)
+            if(p_name == status[k].name ){
+                if(status[k].value + p_num >= status[k].valueRange[0] && status[k].value + p_num <= status[k].valueRange[1]){
+                    status[k].value += p_num;
                         return true;
                 }
                 else{
-                    status[i].value = 0;
+                    status[k].value = 0;
                     return false;
                 }
             }
@@ -124,17 +128,17 @@ public class StatusManager : Manager
 
     //Status를 찾는 함수
     public Status GetStatus(string p_name){
-        for(int i = 0; i < status.Length; i++)
-            if(status[i].name == p_name)
-                return status[i];
+        foreach(string k in status.Keys)
+            if(status[k].name == p_name)
+                return status[k];
         return null;
     }
 
     public override void Init()
     {
-        foreach(Status s in status)
+        foreach(Status s in status.Values)
         {
-            s.value = UnityEngine.Random.Range((int)s.initialRange.x, (int)s.initialRange.y + 1);
+            s.value = UnityEngine.Random.Range(s.initialRange[0], s.initialRange[1] + 1);
         }
     }
 }

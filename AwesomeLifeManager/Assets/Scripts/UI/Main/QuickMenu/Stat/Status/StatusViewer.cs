@@ -16,14 +16,14 @@ public class StatusViewer : Scroll,Viewer
     void Viewer.GenBox()
     {
         int _i = 0;
-        for (int i = 0; i < theStatusManager.status.Length; i++)
+        foreach(string k in theStatusManager.status.Keys)
         {
-            if (theStatusManager.status[i].reveal)
+            if (theStatusManager.status[k].reveal)
             {
                 GameObject t_box = theObjectPool.statusBoxQueue.Dequeue();
                 t_box.SetActive(true);
                 StatusBox t_status = t_box.GetComponent<StatusBox>();
-                t_status.Setting(theStatusManager.status[i]);
+                t_status.Setting(theStatusManager.status[k]);
                 RectTransform t_rect = t_box.GetComponent<RectTransform>();
                 t_rect.anchoredPosition = new Vector2(t_rect.anchoredPosition.x, -1 * t_rect.rect.height * _i);
                 _i++;

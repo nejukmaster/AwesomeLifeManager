@@ -87,7 +87,7 @@ public class CardManager : Manager
 
     public void Mapping(){
         mapping_action();
-        cardInformList.Add(new CardInform("재능 찾기",CardType.Action,"랜덤한 \"능력\"타입의 스테이터스 10~15퍼센트 증가(최소증값 1, 최대증가값 10) ","","",actionDelList["Action_01"],5));
+        /*cardInformList.Add(new CardInform("재능 찾기",CardType.Action,"랜덤한 \"능력\"타입의 스테이터스 10~15퍼센트 증가(최소증값 1, 최대증가값 10) ","","",actionDelList["Action_01"],5));
         cardInformList.Add(new CardInform("일과 업무",CardType.Action,"[직업 행동 카드]\n[스트레스] 스탯 상승\n일과 업무를 진행합니다. 아래 스탯에 따라 보상이 달라집니다.\n[성실성], [집중력]","","",actionDelList["Action_02"],10));
         cardInformList.Add(new CardInform("야근",CardType.Action,"[직업 행동 카드]\n[스트레스] 스탯 상승, [건강] 스탯 하락\n일과 업무를 진행합니다. 아래 스탯에 따라 보상이 달라집니다.\n[성실성], [집중력]","","",actionDelList["Action_03"],10));
         cardInformList.Add(new CardInform("해외 출장",CardType.Action,"[직업 행동 카드]\n[스트레스] 스탯 하락, [화술] 스탯 상승\n해외 출장을 다녀옵니다.\n아래 스탯에 따라 보상이 달라집니다.\n[화술], [성실성]","","",actionDelList["Action_04"],5));
@@ -98,7 +98,7 @@ public class CardManager : Manager
         cardInformList.Add(new CardInform("건강 검진",CardType.Action,"[자유 행동 카드]\n[건강] 스탯 상승, [재력] 스탯 하락\n종합 건강 상태를 검진받습니다. 100,000원을 소모합니다.","","",actionDelList["Action_09"],5));
         cardInformList.Add(new CardInform("당일치기 여행",CardType.Action,"","","",actionDelList["Action_10"],15));
         cardInformList.Add(new CardInform("국내 여행",CardType.Action,"","","",actionDelList["Action_11"],20));
-        cardInformList.Add(new CardInform("해외 여행",CardType.Action,"","","",actionDelList["Action_12"],30));
+        cardInformList.Add(new CardInform("해외 여행",CardType.Action,"","","",actionDelList["Action_12"],30));*/
         //cardInformList.Add(new CardInform("월세 납입",CardType.Action,"","","",actionDelList["Action_13"],5));
         //cardInformList.Add(new CardInform("병원가기",CardType.Action,"","","",actionDelList["Action_14"],5));
         //cardInformList.Add(new CardInform("영어 공부",CardType.Action,"","","",actionDelList["Action_15"],10));
@@ -106,7 +106,7 @@ public class CardManager : Manager
     }
 
     private void mapping_action(){
-        actionDelList.Add("Action_01",new Action((cell,t_inform)=>{
+        /*actionDelList.Add("Action_01",new Action((cell,t_inform)=>{
             ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic["Action_01"]);
             return true;
         }));
@@ -179,7 +179,7 @@ public class CardManager : Manager
         actionDelList.Add("Action_12", new Action((cell, t_inform) => {
             ((CalenderCell)cell).InsertPlan(PlanManager.instance.planDic["Action_09"]);
             return true;
-        }));
+        }));*/
     }
 
     public override void Init()

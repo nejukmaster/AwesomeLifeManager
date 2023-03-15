@@ -47,13 +47,25 @@ public class Calender : UI
 
     public void InitialCells()
     {
+        
         for(int i = 0; i < cells.Length; i++)
         {
             cells[i].Init();
-            //for (int j = 0; j < 28; j++)
-                //if (theJobManager.timeTable[theTurnManager.currentTurn.turnNum, j])
-                    //cells[i].InsertPlan(thePlanManager.planDic[theJobManager.myJob.job.jobPlan]);
+            for (int j = 0; j < 7; j++)
+            {
+                int _a = GameManager.instance.timeTable[theTurnManager.currentTurn.turnNum % 12, i * 7 + j];
+                Debug.Log(_a);
+                if (_a == 1)
+                {
+                    cells[i].InsertPlan(thePlanManager.planDic["study"]);
+                }
+                else if (_a == 2)
+                {
+                    cells[i].InsertPlan(thePlanManager.planDic["vacation"]);
+                }
+            }
         }
+        cellsSetted = true;
     }
 
     public override bool onClickDown(Vector2 clickPos)
