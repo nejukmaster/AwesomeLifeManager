@@ -51,7 +51,42 @@ public class Personality : Variable{
             string[] e = str.Split('|');
             int i1 = StatusManager.instance.GetStatus(e[0]).value;
             int i2 = 0;
-            Int32.TryParse(e[2], out i2);
+            for (int i = 0; i < str.Length; i ++)
+            {
+                if (str[i] == '\"')
+                {
+                    for(int j = i+1; j < str.Length; j++)
+                    {
+                        if (str[j] == '\"')
+                        {
+                            string s = str.Substring(i, j+1);
+                            i = j + 1;
+                            i2 = StatusManager.instance.GetStatus(s).value;
+                            break;
+                        }
+                    }
+                }
+                if (str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/')
+                {
+                    int n = 0;
+                    Int32.TryParse(str.Substring(i + 1, str.Length).Trim(), out n);
+                    switch (str[i])
+                    {
+                        case '+':
+                            i2 = i2 + n;
+                            break;
+                        case '-':
+                            i2 = i2 - n;
+                            break;
+                        case '*':
+                            i2 = i2 * n;
+                            break;
+                        case '/':
+                            i2 = i2 / n;
+                            break;
+                    }
+                }
+            }
             switch (e[1])
             {
                 case ">" :
@@ -108,13 +143,11 @@ public class PersonalityManager : Manager
     //StatusManager를 참조
     StatusManager theStatus;
     //ConvictionManager참조
-    ConvictionManager theConviction;
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         theStatus = FindObjectOfType<StatusManager>();
-        theConviction = FindObjectOfType<ConvictionManager>();
         List<Dictionary<string, object>> personality_data = CSVReader.Read("DataSheet/Personality");
         
         for (int i = 0; i < 3; i++)

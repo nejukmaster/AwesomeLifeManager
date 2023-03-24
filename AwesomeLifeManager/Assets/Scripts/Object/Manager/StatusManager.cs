@@ -67,12 +67,10 @@ public class StatusManager : Manager
     //스테이터스 목록을 저장할 배열 생성
     public Dictionary<string,Status> status;
 
-    ConvictionManager theConviction;
     PersonalityManager thePersonality;
     // Start is called before the first frame update
     void Start()
     {
-        theConviction = FindObjectOfType<ConvictionManager>();
         thePersonality = FindObjectOfType<PersonalityManager>();
         instance = this;
         List<Dictionary<string, object>> status_data = CSVReader.Read("DataSheet/Status");
