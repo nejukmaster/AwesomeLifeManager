@@ -49,7 +49,7 @@ public class Personality : Variable{
         foreach(string str in conditions)
         {
             string[] e = str.Split('|');
-            int i1 = StatusManager.instance.GetStatus(e[0]).value;
+            int i1 = StatusManager.instance.status[e[0].Substring(1, e[0].Length-1)].value;
             int i2 = 0;
             for (int i = 0; i < str.Length; i ++)
             {
@@ -59,9 +59,9 @@ public class Personality : Variable{
                     {
                         if (str[j] == '\"')
                         {
-                            string s = str.Substring(i, j+1);
+                            string s = str.Substring(i+1, j);
                             i = j + 1;
-                            i2 = StatusManager.instance.GetStatus(s).value;
+                            i2 = StatusManager.instance.status[s].value;
                             break;
                         }
                     }

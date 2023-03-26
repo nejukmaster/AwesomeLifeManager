@@ -82,14 +82,28 @@ public class Turn
                     }
                 }
             }
-            for (int i = 0; i < theEventManager.EventEnabled.Count; i ++)
+            if (date % 7 == 0)
             {
-                UI.ToggleSubUI(t_popup.gameObject, false);
-                e_popup.SetActive(true, theEventManager.EventEnabled[i].@event);
-                e_popup.EventEncounter();
-                while (e_popup.gameObject.activeInHierarchy)
+                if(theEventManager.StaticEvent != null)
                 {
-                    yield return new WaitForSeconds(2f);
+                    UI.ToggleSubUI(t_popup.gameObject, false);
+                    e_popup.SetActive(true, theEventManager.StaticEvent.@event);
+                    e_popup.EventEncounter();
+                    while (e_popup.gameObject.activeInHierarchy)
+                    {
+                        yield return new WaitForSeconds(2f);
+                    }
+                }
+                else
+                {
+                    EventItem e = theEventManager.EventEnabled[UnityEngine.Random.Range(0, theEventManager.EventEnabled.Count)];
+                    UI.ToggleSubUI(t_popup.gameObject, false);
+                    e_popup.SetActive(true, e.@event);
+                    e_popup.EventEncounter();
+                    while (e_popup.gameObject.activeInHierarchy)
+                    {
+                        yield return new WaitForSeconds(2f);
+                    }
                 }
             }
             List<Personality> t_list = thePersonalityManager.CheckPersonality();

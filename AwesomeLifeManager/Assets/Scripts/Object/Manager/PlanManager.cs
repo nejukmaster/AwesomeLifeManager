@@ -191,6 +191,9 @@ public class PlanManager : Manager
 
     public override void Init()
     {
-
+        foreach(Plan plan in planDic.Values)
+        {
+            plan.NoR = 0;
+        }
     }
 }

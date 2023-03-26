@@ -30,6 +30,7 @@ public class EventManager : Manager
 
     public Dictionary<int,Event> EventDic = new Dictionary<int,Event>();
     public List<EventItem> EventEnabled = new List<EventItem>();
+    public EventItem StaticEvent;
 
     void Awake()
     {

@@ -12,6 +12,7 @@ public class Plan
     public bool canDelete;
     public rewardDel reward;
     public conditionDel condition;
+    public int NoR = 0;
 
     public Plan(string name, int costAP){
         this.name = name;
@@ -47,6 +48,7 @@ public class Plan
 
     public bool Run()
     {
+        NoR += 1;
         return reward();
     }
 }
