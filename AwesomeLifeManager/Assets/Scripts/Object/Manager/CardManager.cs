@@ -14,6 +14,8 @@ public class Action{
     {
         this.actionDel = actionDel;
     }
+
+
 }
 public enum CardType
 {
@@ -77,6 +79,7 @@ public class CardManager : Manager
     [SerializeField] Calender calender;
 
     TurnManager theTurnManager;
+    FatigueManager theFatigueManager;
 
     private void Start()
     {

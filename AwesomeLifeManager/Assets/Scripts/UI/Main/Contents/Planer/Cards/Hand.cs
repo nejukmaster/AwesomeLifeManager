@@ -167,6 +167,7 @@ public class Hand : UI
                         if (cards[selectedCardIndex].inform.action.actionDel(cards[selectedCardIndex].currentCell, cards[selectedCardIndex].inform))
                         {
                             cards[selectedCardIndex].Burn();
+                            calender.theFatigueManager.Fatigue -= cards[selectedCardIndex].inform.cost;
                             calender.fatiguePreview.Setting();
                             ObjectPool.instance.actionCardQueue.Enqueue(cards[selectedCardIndex].gameObject);
                             cards[selectedCardIndex].currentCell.HoldOut();

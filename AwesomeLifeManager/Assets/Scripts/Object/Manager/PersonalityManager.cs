@@ -50,27 +50,27 @@ public class Personality : Variable{
         {
             string[] e = str.Split('|');
             int i1 = StatusManager.instance.status[e[0].Substring(1, e[0].Length-1)].value;
-            int i2 = 0;
-            for (int i = 0; i < str.Length; i ++)
+            int i2 = -1;
+            for (int i = 0; i < e[1].Length; i ++)
             {
-                if (str[i] == '\"')
+                if (e[1][i] == '\"')
                 {
-                    for(int j = i+1; j < str.Length; j++)
+                    for(int j = i+1; j < e[1].Length; j++)
                     {
-                        if (str[j] == '\"')
+                        if (e[1][j] == '\"')
                         {
-                            string s = str.Substring(i+1, j);
+                            string s = e[1].Substring(i+1, j);
                             i = j + 1;
                             i2 = StatusManager.instance.status[s].value;
                             break;
                         }
                     }
                 }
-                if (str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/')
+                if (e[1][i] == '+' || e[1][i] == '-' || e[1][i] == '*' || e[1][i] == '/')
                 {
                     int n = 0;
-                    Int32.TryParse(str.Substring(i + 1, str.Length).Trim(), out n);
-                    switch (str[i])
+                    Int32.TryParse(e[1].Substring(i + 1, e[1].Length).Trim(), out n);
+                    switch (e[1][i])
                     {
                         case '+':
                             i2 = i2 + n;
@@ -85,7 +85,12 @@ public class Personality : Variable{
                             i2 = i2 / n;
                             break;
                     }
+                    break;
                 }
+            }
+            if(i2 == -1)
+            {
+                Int32.TryParse(e[1], out i2);
             }
             switch (e[1])
             {

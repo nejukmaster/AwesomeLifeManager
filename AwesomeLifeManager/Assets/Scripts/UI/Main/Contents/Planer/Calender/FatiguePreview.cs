@@ -5,26 +5,19 @@ using UnityEngine;
 
 public class FatiguePreview : MonoBehaviour
 {
-    public int fatigue;
     [SerializeField] TextMeshProUGUI tmp;
     [SerializeField] Calender calender;
 
+    FatigueManager theFatigueManager;
+
     private void Start()
     {
-        fatigue = 100;
+        theFatigueManager = FatigueManager.instance;
         Setting();
     }
 
     public void Setting()
     {
-        int t_fat = 0;
-        foreach(CalenderCell cell in calender.cells)
-        {
-            if(cell.insertedPlan != null)
-                for(int i = 0; i < cell.insertedPlan.Length; i ++)
-                    if (cell.insertedPlan[i] != null)
-                        t_fat += cell.insertedPlan[i].costAP;
-        }
-        tmp.text = (fatigue-t_fat) + "/" + 100;
+        tmp.text = theFatigueManager.Fatigue + "/" + theFatigueManager.MaxFatigue;
     }
 }

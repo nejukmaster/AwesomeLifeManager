@@ -30,6 +30,7 @@ public class Calender : UI
     ObjectPool theObjectPool;
     TurnManager theTurnManager;
     PlanManager thePlanManager;
+    public FatigueManager theFatigueManager;
     //각 주를 더블클릭시 나올 팝업창을 설정합니다.
     public WeekPlanPopup weekPlanPopup;
 
@@ -42,6 +43,7 @@ public class Calender : UI
         theObjectPool = ObjectPool.instance;
         theTurnManager = TurnManager.instance;
         thePlanManager = PlanManager.instance;
+        theFatigueManager = FatigueManager.instance;
         weekY = new float[4] { 2f * frame.rect.height / 4, frame.rect.height / 4, -1f * frame.rect.height / 4, -2f * frame.rect.height / 4 };
     }
 

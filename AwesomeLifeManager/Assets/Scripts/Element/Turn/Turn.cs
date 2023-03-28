@@ -96,13 +96,16 @@ public class Turn
                 }
                 else
                 {
-                    EventItem e = theEventManager.EventEnabled[UnityEngine.Random.Range(0, theEventManager.EventEnabled.Count)];
-                    UI.ToggleSubUI(t_popup.gameObject, false);
-                    e_popup.SetActive(true, e.@event);
-                    e_popup.EventEncounter();
-                    while (e_popup.gameObject.activeInHierarchy)
-                    {
-                        yield return new WaitForSeconds(2f);
+                    int _i = UnityEngine.Random.Range(0, theEventManager.EventEnabled.Count +1);
+                    if (_i != theEventManager.EventEnabled.Count) {
+                        EventItem e = theEventManager.EventEnabled[_i];
+                        UI.ToggleSubUI(t_popup.gameObject, false);
+                        e_popup.SetActive(true, e.@event);
+                        e_popup.EventEncounter();
+                        while (e_popup.gameObject.activeInHierarchy)
+                        {
+                            yield return new WaitForSeconds(2f);
+                        }
                     }
                 }
             }
