@@ -12,12 +12,9 @@ using System;
     디스플레이는 비워두면 알아서 비공개 스테이터스로 정의된답니다.  */
 
 public enum StatusType{
-    Health,
-    Ability,
-    Tought,
-    Sociality,
-    Belief,
-    Emotional,
+    normal,
+    age,
+    ability,
     Etc
 }
 /*  이 클래스는 스테이터스가 어떤 구조로 만들어지는지 정의해요. 
@@ -79,23 +76,17 @@ public class StatusManager : Manager
         {
             StatusType t = StatusType.Etc;
             switch(status_data[i]["type"]){
-                case "Health":
-                    t = StatusType.Health;
+                case "normal":
+                    t = StatusType.normal;
                     break;
-                case "Ability":
-                    t = StatusType.Ability;
+                case "age":
+                    t = StatusType.age;
                     break;
-                case "Tought":
-                    t = StatusType.Tought;
+                case "ability":
+                    t = StatusType.ability;
                     break;
-                case "Sociality":
-                    t = StatusType.Sociality;
-                    break;
-                case "Belief":
-                    t = StatusType.Belief;
-                    break;
-                case "Emotional":
-                    t = StatusType.Emotional;
+                default:
+                    t = StatusType.Etc;
                     break;
             }
             status[status_data[i]["code"].ToString()] = new Status(status_data[i]["name"].ToString(),

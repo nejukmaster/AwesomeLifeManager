@@ -18,7 +18,10 @@ public class BuffManager : Manager
 
     public override void Init()
     {
-
+        foreach(Buff buff in buffs.Values)
+        {
+            buff.enabled = false;
+        }
     }
 
     private void mapping()
