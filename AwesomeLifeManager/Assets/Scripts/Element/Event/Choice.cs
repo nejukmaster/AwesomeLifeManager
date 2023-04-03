@@ -9,6 +9,7 @@ public class Choice
     public string name;
     public string text;
     public Sprite texture;
+    public string parentEvent;
 
     public Choice(string name, string text)
     {

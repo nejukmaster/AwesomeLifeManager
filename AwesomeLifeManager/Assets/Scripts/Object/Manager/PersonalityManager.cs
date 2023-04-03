@@ -19,6 +19,9 @@ public class Personality : Variable{
     public string description;
     public PersonalityType type;
     List<string> conditions = new List<string>();
+    public List<string> buffs = new List<string> ();
+    public List<string> cards = new List<string> ();
+    public bool enable;
 
     //컨스트럭터 1
     public Personality(string name, string description, PersonalityType type, List<string> conditions){
@@ -26,6 +29,15 @@ public class Personality : Variable{
         this.description = description;
         this.conditions = conditions;
         this.type = type;
+    }
+    public Personality(string name, string description, PersonalityType type, List<string> conditions, List<string> buffs, List<string> cards)
+    {
+        this.name = name;
+        this.description = description;
+        this.conditions = conditions;
+        this.type = type;
+        this.buffs = buffs;
+        this.cards = cards;
     }
 
     public Personality(string name, PersonalityType type)
@@ -119,6 +131,16 @@ public class Personality : Variable{
         return r;
     }
 
+    public void Enable()
+    {
+
+    }
+
+    public void Disable()
+    {
+
+    }
+
     public bool equal(Personality other){
         return other.name == this.name;
     }
@@ -143,8 +165,6 @@ public class PersonalityManager : Manager
     public static PersonalityManager instance;
 
     public Dictionary<string, Personality> personalityDic = new Dictionary<string,Personality>();
-
-    public List<Personality> personalities = new List<Personality>();
     //StatusManager를 참조
     StatusManager theStatus;
     //ConvictionManager참조
@@ -157,13 +177,12 @@ public class PersonalityManager : Manager
         
         for (int i = 0; i < 3; i++)
         {
-            List<string> t_list = new List<string>();
-            string[] conditions = personality_data[i]["condition"].ToString().Split("/");
-            foreach(string str in conditions)
-            {
-                t_list.Add(str);
-            }
-            personalityDic.Add(i.ToString("000"), new Personality(personality_data[i]["name"].ToString(), personality_data[i]["description"].ToString(), Utility.StringToEnum<PersonalityType>(personality_data[i]["classify"].ToString()),t_list));
+            personalityDic.Add(personality_data[i]["code"].ToString(), new Personality(personality_data[i]["name"].ToString(),
+                                                                                        personality_data[i]["description"].ToString(),
+                                                                                        Utility.StringToEnum<PersonalityType>(personality_data[i]["classify"].ToString()),
+                                                                                         new List<string>(personality_data[i]["condition"].ToString().Split("/")),
+                                                                                        new List<string>(personality_data[i]["buff"].ToString().Split("/")),
+                                                                                        new List<string>(personality_data[i]["card"].ToString().Split("/"))));
         }
     }
 
@@ -190,28 +209,26 @@ public class PersonalityManager : Manager
         return r;
     }
 
-    public void AddPersonality(string p_code){
-        personalities.Add(personalityDic[p_code]);
-    }
-
-    public void AddPersonality(Personality p_person)
-    {
-        personalities.Add(p_person);
-    }
-
-    public List<Personality> CheckPersonality(){
-        List<Personality> r = new List<Personality>();
+    public List<string>[] CheckPersonality(){
+        List<string>[] r = { new List<string>(), new List<string>() };
         foreach(var pair in personalityDic)
         {
             if (pair.Value.CheckCondition())
             {
-                bool _r = false;
-                for(int i = 0; i < personalities.Count; i++)
+                if (!pair.Value.enable)
                 {
-                    if (personalities[i].equal(pair.Value)) _r = true;
+                    r[0].Add(pair.Key);
+                    pair.Value.Enable();
                 }
-                if (_r) continue;
-                r.Add(pair.Value);
+
+            }
+            else
+            {
+                if (pair.Value.enable)
+                {
+                    r[1].Add(pair.Key);
+                    pair.Value.Disable();
+                }
             }
         }
         return r;
@@ -219,7 +236,10 @@ public class PersonalityManager : Manager
 
     public override void Init()
     {
-        personalities = new List<Personality>();
+        foreach(var p in personalityDic)
+        {
+            p.Value.Disable();
+        }
     }
 
     /*public void CheckCondition(){

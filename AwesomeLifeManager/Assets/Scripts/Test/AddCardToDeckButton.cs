@@ -17,7 +17,7 @@ public class AddCardToDeckButton : MonoBehaviour
     {
         if (type == CardType.Action)
         {
-            deck.AddCard(CardManager.instance.cardInformList[5]);
+            deck.AddCard(CardManager.instance.cardInformList["action_01"]);
             deck.InitDeck();
             deck.GenerateDeck();
         }

@@ -13,6 +13,7 @@ public class PlanManager : Manager
     StatusManager theStatusManager;
     MoneyManager theMoneyManager;
     TurnManager theTurnManager;
+    EventManager theEventManager;
 
     // Start is called before the first frame update
     void Start()
@@ -21,13 +22,14 @@ public class PlanManager : Manager
         theStatusManager = StatusManager.instance;
         theMoneyManager = MoneyManager.instance;
         theTurnManager = TurnManager.instance;
+        theEventManager = EventManager.instance;
         mapping();
     }
 
     void mapping(){
-        planDic.Add("00", new Plan("basic00", 10, () => { turnProcessPopup.AddLog("도덕성 +81"); theStatusManager.IncreaseStatus("도덕성", 81); turnProcessPopup.AddLog("명성 +41"); theStatusManager.IncreaseStatus("명성", 41); turnProcessPopup.AddLog("외향성 +51"); theStatusManager.IncreaseStatus("외향성", 51); return true; }, null,true));
-        planDic.Add("Job_00", new Plan("직업행동", 0, () => { return true; }, null,false));
-        planDic.Add("study", new Plan("학업", 0, () => { 
+        planDic.Add("00", new Plan("basic00", () => { turnProcessPopup.AddLog("도덕성 +81"); theStatusManager.IncreaseStatus("도덕성", 81); turnProcessPopup.AddLog("명성 +41"); theStatusManager.IncreaseStatus("명성", 41); turnProcessPopup.AddLog("외향성 +51"); theStatusManager.IncreaseStatus("외향성", 51); return true; }, null,true));
+        planDic.Add("Job_00", new Plan("직업행동", () => { return true; }, null,false));
+        planDic.Add("study", new Plan("학업", () => { 
             foreach(Status s in theStatusManager.status.Values)
             {
                 switch (s.talentLevel)
@@ -45,7 +47,7 @@ public class PlanManager : Manager
             }
             return true; 
         }, null, false));
-        planDic.Add("vacation", new Plan("방학", 0, () => {
+        planDic.Add("vacation", new Plan("방학", () => {
             foreach (Status s in theStatusManager.status.Values)
             {
                 switch (s.talentLevel)
@@ -61,6 +63,46 @@ public class PlanManager : Manager
                         break;
                 }
             }
+            return true;
+        }, null, false));
+        planDic.Add("action_01", new Plan("병원 방문", () => {
+            theStatusManager.status["sta_health"].value += 5;
+            return true;
+        }, null, false));
+        planDic.Add("action_02", new Plan("전문 상담", () => {
+            theStatusManager.status["sta_mental"].value += 5;
+            return true;
+        }, null, false));
+        planDic.Add("action_03", new Plan("인성 교육", () => {
+            theStatusManager.status["sta_conscience"].value += 5;
+            return true;
+        }, null, false));
+        planDic.Add("action_04", new Plan("신춘문예", () => {
+
+            return true;
+        }, null, false));
+        planDic.Add("action_05", new Plan("과학탐구 대회", () => {
+
+            return true;
+        }, null, false));
+        planDic.Add("action_06", new Plan("오디션", () => {
+
+            return true;
+        }, null, false));
+        planDic.Add("action_07", new Plan("사생대회", () => {
+
+            return true;
+        }, null, false));
+        planDic.Add("action_08", new Plan("육상 대회", () => {
+
+            return true;
+        }, null, false));
+        planDic.Add("action_09", new Plan("수학경시대회", () => {
+
+            return true;
+        }, null, false));
+        planDic.Add("action_10", new Plan("체육 대회", () => {
+
             return true;
         }, null, false));
         /*planDic.Add("Action_01", new Plan("재능 찾기",5, () => {

@@ -27,14 +27,19 @@ public class PersonalityViewer : Scroll,Viewer
 
     void Viewer.GenBox()
     {
-        for (int i = 0; i < thePersonalityManager.personalities.Count; i++)
+        int i = 0;
+        foreach(var pair in thePersonalityManager.personalityDic)
         {
-            GameObject t_box = theObjectPool.personalityBoxQueue.Dequeue();
-            t_box.SetActive(true);
-            PersonalityBox t_personaltiy = t_box.GetComponent<PersonalityBox>();
-            t_personaltiy.Setting(thePersonalityManager.personalities[i]);
-            RectTransform t_rect = t_box.GetComponent<RectTransform>();
-            t_rect.anchoredPosition = new Vector2(t_rect.rect.width * (i % 2), -1 * t_rect.rect.height * (i/2));
+            if (pair.Value.enable)
+            {
+                GameObject t_box = theObjectPool.personalityBoxQueue.Dequeue();
+                t_box.SetActive(true);
+                PersonalityBox t_personaltiy = t_box.GetComponent<PersonalityBox>();
+                t_personaltiy.Setting(pair.Value);
+                RectTransform t_rect = t_box.GetComponent<RectTransform>();
+                t_rect.anchoredPosition = new Vector2(t_rect.rect.width * (i % 2), -1 * t_rect.rect.height * (i / 2));
+                i++;
+            }
         }
         updateObjs<PersonalityBox>();
     }

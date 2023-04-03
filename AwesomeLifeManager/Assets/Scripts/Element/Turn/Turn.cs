@@ -109,11 +109,14 @@ public class Turn
                     }
                 }
             }
-            List<Personality> t_list = thePersonalityManager.CheckPersonality();
-            for(int i = 0; i < t_list.Count; i ++)
+            List<string>[] t_list = thePersonalityManager.CheckPersonality();
+            for(int i = 0; i < t_list[0].Count; i ++)
             {
-                thePersonalityManager.AddPersonality(t_list[i]);
-                t_popup.AddLog(t_list[i].name + "(이)가 활성화 되었습니다.");
+                t_popup.AddLog(thePersonalityManager.personalityDic[t_list[0][i]].name + "(이)가 활성화 되었습니다.");
+            }
+            for (int i = 0; i < t_list[1].Count; i++)
+            {
+                t_popup.AddLog(thePersonalityManager.personalityDic[t_list[1][i]].name + "(이)가 비활성화 되었습니다.");
             }
             theEventManager.InitEnabledEvent();
             date++;
