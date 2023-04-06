@@ -11,6 +11,7 @@ public class Turn
     TurnManager theTurnManager;
     EventManager theEventManager;
     PersonalityManager thePersonalityManager;
+    BuffManager theBuffManager;
     bool eventFire = false;
 
     public Turn(int p_num)
@@ -32,11 +33,12 @@ public class Turn
 
     public IEnumerator RunningCo(TurnProcessPopup t_popup, EventPopup e_popup)
     {
-        if (theTurnManager == null || theEventManager == null || thePersonalityManager == null)
+        if (theTurnManager == null || theEventManager == null || thePersonalityManager == null || theBuffManager == null)
         {
             theTurnManager = TurnManager.instance;
             theEventManager = EventManager.instance;
             thePersonalityManager = PersonalityManager.instance;
+            theBuffManager = BuffManager.instance;
         }
         IEnumerator<Plan> e1 = settedPlan.GetEnumerator();
         int date = 1;
@@ -112,11 +114,20 @@ public class Turn
             List<string>[] t_list = thePersonalityManager.CheckPersonality();
             for(int i = 0; i < t_list[0].Count; i ++)
             {
-                t_popup.AddLog(thePersonalityManager.personalityDic[t_list[0][i]].name + "(이)가 활성화 되었습니다.");
+                t_popup.AddLog("[특성]  "+thePersonalityManager.personalityDic[t_list[0][i]].name + "(이)가 활성화 되었습니다.");
             }
             for (int i = 0; i < t_list[1].Count; i++)
             {
-                t_popup.AddLog(thePersonalityManager.personalityDic[t_list[1][i]].name + "(이)가 비활성화 되었습니다.");
+                t_popup.AddLog("[특성]  "+thePersonalityManager.personalityDic[t_list[1][i]].name + "(이)가 비활성화 되었습니다.");
+            }
+            t_list = theBuffManager.CheckBuff();
+            for(int i = 0; i <t_list[0].Count; i++)
+            {
+                t_popup.AddLog("[버프]  "+theBuffManager.buffs[t_list[0][i]].name + "(이)가 활성화 되었습니다.");
+            }
+            for (int i = 0; i < t_list[0].Count; i++)
+            {
+                t_popup.AddLog("[버프]  "+theBuffManager.buffs[t_list[0][i]].name + "(이)가 활성화 되었습니다.");
             }
             theEventManager.InitEnabledEvent();
             date++;

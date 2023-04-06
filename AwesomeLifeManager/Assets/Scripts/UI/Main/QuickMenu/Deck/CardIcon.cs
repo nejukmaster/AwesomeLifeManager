@@ -17,8 +17,6 @@ public class CardIcon : MonoBehaviour
     [SerializeField] Image illustration;
     [SerializeField] Image categoryImg;
     [SerializeField] TextMeshProUGUI cost;
-    [SerializeField] Image checkMarker;
-    [SerializeField] GameObject selectUI;
     CardWindow cardWindow;
     public CardInform cardInform;
     bool hold = false;
@@ -50,51 +48,12 @@ public class CardIcon : MonoBehaviour
 
     public void OnClick()
     {
-        if(GetComponentInParent<CardViewer>().selectionMode == false)
-        {
-            if (holdTime <= 0.2)
-            {
-                cardWindow.SetActive(true, cardInform);
-            }
-        }
-        else{
-            isCheck = !isCheck;
-            if (isCheck)
-            {
-                if(canDelete)
-                    checkMarker.enabled = true;
-            }
-            else
-                checkMarker.enabled = false;
-        }
+           cardWindow.SetActive(true, cardInform);
     }
 
     public void OnClickDown()
     {
         hold = true;
-    }
-
-    public void OnClickUp()
-    {
-        if(holdTime >= LONG_CLICK_SEC)
-        {
-            GetComponentInParent<CardViewer>().activateSelectionMode();
-        }
-        holdTime = 0.0f;
-        hold = false;
-    }
-
-    public void activateSelectionMode()
-    {
-        selectUI.SetActive(true);
-    }
-
-    public void deactivateSelectionMode()
-    {
-        selectUI.SetActive(false);
-        isCheck = false;
-        if(canDelete)
-            checkMarker.enabled = false;
     }
 
     public void Update()

@@ -11,7 +11,6 @@ public class CardViewer : Scroll
     [SerializeField] MyDeck myDeck;
     ObjectPool theObjectPool;
     [SerializeField] RectTransform containerRect;
-    [SerializeField] CardDeleteBtn cardDeleteBtn;
     [SerializeField] GameObject top;
     // Start is called before the first frame update
     void Awake()
@@ -59,12 +58,6 @@ public class CardViewer : Scroll
     {
         selectionMode = true;
         CardIcon[] t_icons = GetComponentsInChildren<CardIcon>();
-        foreach(CardIcon i in t_icons)
-        {
-            i.activateSelectionMode();
-        }
-        cardDeleteBtn.openedViewer = this;
-        cardDeleteBtn.gameObject.SetActive(true);
         Button[] t_btns = top.GetComponentsInChildren<Button>();
         foreach(Button i in t_btns)
         {
@@ -75,11 +68,6 @@ public class CardViewer : Scroll
     {
         selectionMode = false;
         CardIcon[] t_icons = GetComponentsInChildren<CardIcon>();
-        foreach (CardIcon i in t_icons)
-        {
-            i.deactivateSelectionMode();
-        }
-        cardDeleteBtn.gameObject.SetActive(false);
         Button[] t_btns = top.GetComponentsInChildren<Button>();
         foreach (Button i in t_btns)
         {

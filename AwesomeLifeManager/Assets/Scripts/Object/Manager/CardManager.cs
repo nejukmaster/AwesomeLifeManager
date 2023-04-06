@@ -104,8 +104,11 @@ public class CardManager : Manager
         cardInformList["action_06"] = (new CardInform("오디션", CardType.Action, "* 아래 경우에 따라 진행\r\n[예술 능력 스탯 수치 75 이상일 때 일정확률로] \"입상\" 이벤트 발생\r\n[위 확률 외 경우] \"탈락\" 이벤트 발생 가능", "", "", actionDelList["action_06"], 30));
         cardInformList["action_07"] = (new CardInform("사생대회", CardType.Action, "* 아래 경우에 따라 진행\r\n[예술 능력 스탯 수치 75 이상일 때 일정확률로] \"입상\" 이벤트 발생\r\n[위 확률 외 경우] \"탈락\" 이벤트 발생 가능", "", "", actionDelList["action_07"], 30));
         cardInformList["action_08"] = (new CardInform("육상 대회", CardType.Action, "* 아래 경우에 따라 진행\r\n[운동 능력 스탯 수치 75 이상일 때 일정확률로] \"입상\" 이벤트 발생\r\n[위 확률 외 경우] \"탈락\" 이벤트 발생 가능", "", "", actionDelList["action_08"], 30));
-        cardInformList["action_09"] = (new CardInform("수학경시대회", CardType.Action, "* 아래 경우에 따라 진행\r\n[탐구 능력 스탯 수치 75 이상일 때 일정확률로] \"입상\" 이벤트 발생\r\n[위 확률 외 경우] \"탈락\" 이벤트 발생 가능", "", "", actionDelList["action_08"], 30));
-        cardInformList["action_10"] = (new CardInform("체육 대회", CardType.Action, "* 아래 경우에 따라 진행\r\n[탐구 능력 스탯 수치 75 이상일 때 일정확률로] \"입상\" 이벤트 발생\r\n[위 확률 외 경우] \"탈락\" 이벤트 발생 가능", "", "", actionDelList["action_08"], 30));
+        cardInformList["action_09"] = (new CardInform("수학경시대회", CardType.Action, "* 아래 경우에 따라 진행\r\n[탐구 능력 스탯 수치 75 이상일 때 일정확률로] \"입상\" 이벤트 발생\r\n[위 확률 외 경우] \"탈락\" 이벤트 발생 가능", "", "", actionDelList["action_09"], 30));
+        cardInformList["action_10"] = (new CardInform("체육 대회", CardType.Action, "* 아래 경우에 따라 진행\r\n[탐구 능력 스탯 수치 75 이상일 때 일정확률로] \"입상\" 이벤트 발생\r\n[위 확률 외 경우] \"탈락\" 이벤트 발생 가능", "", "", actionDelList["action_10"], 30));
+        cardInformList["action_11"] = (new CardInform("외출", CardType.Action, "* 아래 경우에 따라 진행\r\n해당 행동 진행 시 무조건 이벤트 발생.\r\n[(장소 n개)이벤트 중 랜덤 발생. 장소 선택 확률은 100/n%]", "", "", actionDelList["action_11"], 20));
+        cardInformList["action_12"] = (new CardInform("학원", CardType.Action, "이벤트 \"학원 등록\" 을 통해 획득 가능.\r\n가장 낮은 능력 스탯을 [2] 상승시킨다.", "", "", actionDelList["action_12"], 35));
+        cardInformList["action_13"] = (new CardInform("동아리 활동", CardType.Action, "교내 동아리 활동을 진행한다. 진행 시점 가장 높은 능력 스탯을 상승", "", "", actionDelList["action_13"], 30));
     }
 
     private void mapping_action(){
@@ -226,6 +229,42 @@ public class CardManager : Manager
             else
             {
                 ((CalenderCell)cell).InsertPlan(thePlanManager.planDic["action_10"]);
+                return true;
+            }
+        }));
+        actionDelList.Add("action_11", new Action((cell, t_inform) =>
+        {
+            if (theFatigueManager.Fatigue < t_inform.cost)
+            {
+                return false;
+            }
+            else
+            {
+                ((CalenderCell)cell).InsertPlan(thePlanManager.planDic["action_11"]);
+                return true;
+            }
+        }));
+        actionDelList.Add("action_12", new Action((cell, t_inform) =>
+        {
+            if (theFatigueManager.Fatigue < t_inform.cost)
+            {
+                return false;
+            }
+            else
+            {
+                ((CalenderCell)cell).InsertPlan(thePlanManager.planDic["action_12"]);
+                return true;
+            }
+        }));
+        actionDelList.Add("action_13", new Action((cell, t_inform) =>
+        {
+            if (theFatigueManager.Fatigue < t_inform.cost)
+            {
+                return false;
+            }
+            else
+            {
+                ((CalenderCell)cell).InsertPlan(thePlanManager.planDic["action_12"]);
                 return true;
             }
         }));

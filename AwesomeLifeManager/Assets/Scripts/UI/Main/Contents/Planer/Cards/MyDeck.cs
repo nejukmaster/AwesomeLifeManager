@@ -5,9 +5,16 @@ using UnityEngine;
 
 public class MyDeck : Manager
 {
+    public static MyDeck instance;
+
     public const int DECK_MAXIMUM = 20;
     public List<CardInform> cardInformList = new List<CardInform>();
     public Queue<ActionCard> cardQueue = new Queue<ActionCard>();
+
+    private void Start()
+    {
+        instance = this;
+    }
 
     public bool AddCard(CardInform p_inform)
     {

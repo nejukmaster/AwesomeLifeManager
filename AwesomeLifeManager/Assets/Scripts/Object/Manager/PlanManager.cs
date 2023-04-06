@@ -105,6 +105,56 @@ public class PlanManager : Manager
 
             return true;
         }, null, false));
+        planDic.Add("action_11", new Plan("외출", () => {
+
+            return true;
+        }, null, false));
+        planDic.Add("action_12", new Plan("학원", () => {
+            string t_stat = null;
+            foreach (var pair in theStatusManager.status)
+            {
+                if (pair.Value.type == StatusType.ability)
+                {
+                    if (t_stat == null)
+                    {
+                        t_stat = pair.Key;
+                    }
+                    else
+                    {
+                        if (theStatusManager.status[t_stat].value > pair.Value.value)
+                        {
+                            t_stat = pair.Key;
+                        }
+                    }
+                }
+            }
+            if (t_stat != null)
+                theStatusManager.status[t_stat].value += 2;
+            return true;
+        }, null, false));
+        planDic.Add("action_13", new Plan("동아리 활동", () => {
+            string t_stat = null;
+            foreach (var pair in theStatusManager.status)
+            {
+                if (pair.Value.type == StatusType.ability)
+                {
+                    if (t_stat == null)
+                    {
+                        t_stat = pair.Key;
+                    }
+                    else
+                    {
+                        if (theStatusManager.status[t_stat].value < pair.Value.value)
+                        {
+                            t_stat = pair.Key;
+                        }
+                    }
+                }
+            }
+            if (t_stat != null)
+                theStatusManager.status[t_stat].value += 2;
+            return true;
+        }, null, false));
         /*planDic.Add("Action_01", new Plan("재능 찾기",5, () => {
             List<int> t_status = new List<int>();
             for(int i = 0; i < theStatusManager.status.Length; i ++){
