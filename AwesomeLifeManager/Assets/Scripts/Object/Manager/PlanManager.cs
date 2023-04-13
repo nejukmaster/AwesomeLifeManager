@@ -27,9 +27,9 @@ public class PlanManager : Manager
     }
 
     void mapping(){
-        planDic.Add("00", new Plan("basic00", () => { turnProcessPopup.AddLog("도덕성 +81"); theStatusManager.IncreaseStatus("도덕성", 81); turnProcessPopup.AddLog("명성 +41"); theStatusManager.IncreaseStatus("명성", 41); turnProcessPopup.AddLog("외향성 +51"); theStatusManager.IncreaseStatus("외향성", 51); return true; }, null,true));
-        planDic.Add("Job_00", new Plan("직업행동", () => { return true; }, null,false));
-        planDic.Add("study", new Plan("학업", () => { 
+        planDic.Add("00", new Plan("basic00", (p) => { turnProcessPopup.AddLog("도덕성 +81"); theStatusManager.IncreaseStatus("도덕성", 81); turnProcessPopup.AddLog("명성 +41"); theStatusManager.IncreaseStatus("명성", 41); turnProcessPopup.AddLog("외향성 +51"); theStatusManager.IncreaseStatus("외향성", 51); return true; }, null,true));
+        planDic.Add("Job_00", new Plan("직업행동", (p) => { return true; }, null,false));
+        planDic.Add("study", new Plan("학업", (p) => { 
             foreach(Status s in theStatusManager.status.Values)
             {
                 switch (s.talentLevel)
@@ -47,7 +47,7 @@ public class PlanManager : Manager
             }
             return true; 
         }, null, false));
-        planDic.Add("vacation", new Plan("방학", () => {
+        planDic.Add("vacation", new Plan("방학", (p) => {
             foreach (Status s in theStatusManager.status.Values)
             {
                 switch (s.talentLevel)
@@ -65,51 +65,51 @@ public class PlanManager : Manager
             }
             return true;
         }, null, false));
-        planDic.Add("action_01", new Plan("병원 방문", () => {
+        planDic.Add("action_01", new Plan("병원 방문", (p) => {
             theStatusManager.status["sta_health"].value += 5;
             return true;
         }, null, false));
-        planDic.Add("action_02", new Plan("전문 상담", () => {
+        planDic.Add("action_02", new Plan("전문 상담", (p) => {
             theStatusManager.status["sta_mental"].value += 5;
             return true;
         }, null, false));
-        planDic.Add("action_03", new Plan("인성 교육", () => {
+        planDic.Add("action_03", new Plan("인성 교육", (p) => {
             theStatusManager.status["sta_conscience"].value += 5;
             return true;
         }, null, false));
-        planDic.Add("action_04", new Plan("신춘문예", () => {
+        planDic.Add("action_04", new Plan("신춘문예", (p) => {
 
             return true;
         }, null, false));
-        planDic.Add("action_05", new Plan("과학탐구 대회", () => {
+        planDic.Add("action_05", new Plan("과학탐구 대회", (p) => {
 
             return true;
         }, null, false));
-        planDic.Add("action_06", new Plan("오디션", () => {
+        planDic.Add("action_06", new Plan("오디션", (p) => {
 
             return true;
         }, null, false));
-        planDic.Add("action_07", new Plan("사생대회", () => {
+        planDic.Add("action_07", new Plan("사생대회", (p) => {
 
             return true;
         }, null, false));
-        planDic.Add("action_08", new Plan("육상 대회", () => {
+        planDic.Add("action_08", new Plan("육상 대회", (p) => {
 
             return true;
         }, null, false));
-        planDic.Add("action_09", new Plan("수학경시대회", () => {
+        planDic.Add("action_09", new Plan("수학경시대회", (p) => {
 
             return true;
         }, null, false));
-        planDic.Add("action_10", new Plan("체육 대회", () => {
+        planDic.Add("action_10", new Plan("체육 대회", (p) => {
 
             return true;
         }, null, false));
-        planDic.Add("action_11", new Plan("외출", () => {
+        planDic.Add("action_11", new Plan("외출", (p) => {
 
             return true;
         }, null, false));
-        planDic.Add("action_12", new Plan("학원", () => {
+        planDic.Add("action_12", new Plan("학원", (p) => {
             string t_stat = null;
             foreach (var pair in theStatusManager.status)
             {
@@ -132,7 +132,7 @@ public class PlanManager : Manager
                 theStatusManager.status[t_stat].value += 2;
             return true;
         }, null, false));
-        planDic.Add("action_13", new Plan("동아리 활동", () => {
+        planDic.Add("action_13", new Plan("동아리 활동", (p) => {
             string t_stat = null;
             foreach (var pair in theStatusManager.status)
             {
@@ -153,6 +153,16 @@ public class PlanManager : Manager
             }
             if (t_stat != null)
                 theStatusManager.status[t_stat].value += 2;
+            return true;
+        }, null, false));
+        planDic.Add("action_14", new Plan("조깅", (p) => {
+            theStatusManager.status["sta_mental"].value += 3;
+            theStatusManager.status["sta_health"].value += (int)(p.NoR/3);
+            return true;
+        }, null, false));
+        planDic.Add("action_15", new Plan("독서", (p) => {
+            theStatusManager.status["abi_research"].value += 3;
+            theStatusManager.status["abi_humanity"].value += (int)(p.NoR/3);
             return true;
         }, null, false));
         /*planDic.Add("Action_01", new Plan("재능 찾기",5, () => {

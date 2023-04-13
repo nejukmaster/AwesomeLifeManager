@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Plan
 {
-    public delegate bool rewardDel();
+    public delegate bool rewardDel(Plan p);
     public delegate bool conditionDel();
 
     public string name;
@@ -15,7 +15,7 @@ public class Plan
 
     public Plan(string name){
         this.name = name;
-        this.reward = () => { return true; };
+        this.reward = (p) => { return true; };
         this.condition = () => {return true;};
         canDelete = true;
     }
@@ -23,7 +23,7 @@ public class Plan
     public Plan(string name, bool canDelete)
     {
         this.name = name;
-        this.reward = () => { return true; };
+        this.reward = (p) => { return true; };
         this.condition = () => { return true; };
         this.canDelete = canDelete;
     }
@@ -34,7 +34,7 @@ public class Plan
         if (reward != null)
             this.reward = reward;
         else
-            this.reward = () => { return true; };
+            this.reward = (p) => { return true; };
         if (condition != null)
             this.condition = condition;
         else
@@ -45,6 +45,6 @@ public class Plan
     public bool Run()
     {
         NoR += 1;
-        return reward();
+        return reward(this);
     }
 }

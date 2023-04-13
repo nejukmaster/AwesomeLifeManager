@@ -109,6 +109,10 @@ public class CardManager : Manager
         cardInformList["action_11"] = (new CardInform("외출", CardType.Action, "* 아래 경우에 따라 진행\r\n해당 행동 진행 시 무조건 이벤트 발생.\r\n[(장소 n개)이벤트 중 랜덤 발생. 장소 선택 확률은 100/n%]", "", "", actionDelList["action_11"], 20));
         cardInformList["action_12"] = (new CardInform("학원", CardType.Action, "이벤트 \"학원 등록\" 을 통해 획득 가능.\r\n가장 낮은 능력 스탯을 [2] 상승시킨다.", "", "", actionDelList["action_12"], 35));
         cardInformList["action_13"] = (new CardInform("동아리 활동", CardType.Action, "교내 동아리 활동을 진행한다. 진행 시점 가장 높은 능력 스탯을 상승", "", "", actionDelList["action_13"], 30));
+        cardInformList["action_14"] = (new CardInform("조깅", CardType.Action, "\"운동\" 스테이터스 수치가 [65] 이상이거나, 이벤트 \"새해 목표\" 를 통해 획득 가능.\r\n진행 횟수 3회 당 \"체력\" 스테이터스 [1] 상승, \"정신력\" 스테이터스 [1] 상승", "", "", actionDelList["action_14"], 40));
+        cardInformList["action_15"] = (new CardInform("독서", CardType.Action, "\"인문\" / \"탐구\" 스테이터스 수치가 [65] 이상이거나, 이벤트 \"새해 목표\" 를 통해 획득 가능.\r\n진행 횟수 3회 당 \"인문\" 스테이터스 [3] 상승, \"탐구\" 스테이터스 [3] 상승", "", "", actionDelList["action_15"], 30));
+        cardInformList["action_16"] = (new CardInform("동아리 활동", CardType.Action, "교내 동아리 활동을 진행한다. 진행 시점 가장 높은 능력 스탯을 상승", "", "", actionDelList["action_16"], 30));
+        cardInformList["action_17"] = (new CardInform("시험 공부", CardType.Action, "이벤트 \"시험 기간\" 을 통해 획득 가능. 4턴 뒤 이벤트 \"중간고사\", \"기말고사\" 발생 이후 소멸\r\n4턴 간 진행 횟수에 따라 결과 달라짐.\r\n이벤트 \"중간고사\", \"기말고사\" 발생 1주 전 진행 횟수가 0일 경우 이벤트 \"벼락치기\" 발생", "", "", actionDelList["action_17"], 30));
     }
 
     private void mapping_action(){
@@ -264,7 +268,55 @@ public class CardManager : Manager
             }
             else
             {
-                ((CalenderCell)cell).InsertPlan(thePlanManager.planDic["action_12"]);
+                ((CalenderCell)cell).InsertPlan(thePlanManager.planDic["action_13"]);
+                return true;
+            }
+        }));
+        actionDelList.Add("action_14", new Action((cell, t_inform) =>
+        {
+            if (theFatigueManager.Fatigue < t_inform.cost)
+            {
+                return false;
+            }
+            else
+            {
+                ((CalenderCell)cell).InsertPlan(thePlanManager.planDic["action_14"]);
+                return true;
+            }
+        }));
+        actionDelList.Add("action_15", new Action((cell, t_inform) =>
+        {
+            if (theFatigueManager.Fatigue < t_inform.cost)
+            {
+                return false;
+            }
+            else
+            {
+                ((CalenderCell)cell).InsertPlan(thePlanManager.planDic["action_15"]);
+                return true;
+            }
+        }));
+        actionDelList.Add("action_16", new Action((cell, t_inform) =>
+        {
+            if (theFatigueManager.Fatigue < t_inform.cost)
+            {
+                return false;
+            }
+            else
+            {
+                ((CalenderCell)cell).InsertPlan(thePlanManager.planDic["action_16"]);
+                return true;
+            }
+        }));
+        actionDelList.Add("action_17", new Action((cell, t_inform) =>
+        {
+            if (theFatigueManager.Fatigue < t_inform.cost)
+            {
+                return false;
+            }
+            else
+            {
+                ((CalenderCell)cell).InsertPlan(thePlanManager.planDic["action_17"]);
                 return true;
             }
         }));
