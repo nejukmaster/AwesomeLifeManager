@@ -35,7 +35,7 @@ public class TurnManager : Manager
         instance = this;
         planManager = PlanManager.instance;
         currentTurn = new Turn(0);
-        actionCool.Add("식재료 구매",new ActionCool(-1,new Action((obj, inform) => { ((EventManager)obj).EnableEvent(10); return true; })));
+        //actionCool.Add("식재료 구매",new ActionCool(-1,new Action((obj, inform) => { ((EventManager)obj).EnableEvent(10); return true; })));
     }
 
     public void ReadCalender(Calender p_calender)

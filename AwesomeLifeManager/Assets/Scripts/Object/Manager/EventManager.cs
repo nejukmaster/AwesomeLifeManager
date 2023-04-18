@@ -28,7 +28,7 @@ public class EventManager : Manager
 {
     public static EventManager instance;
 
-    public Dictionary<int,Event> EventDic = new Dictionary<int,Event>();
+    public Dictionary<string,Event> EventDic = new Dictionary<string,Event>();
     public List<EventItem> EventEnabled = new List<EventItem>();
     public EventItem StaticEvent;
 
@@ -42,14 +42,16 @@ public class EventManager : Manager
         List<Dictionary<string, object>> event_data = CSVReader.Read("DataSheet/Event");
         for (int i = 0; i < event_data.Count; i ++)
         {
+            Choice[] t_choices = new Choice[3] { null, null, null };
             Event e = new Event(event_data[i]["name"].ToString(),new Choice[3] { null,null,null}, 0);
-            EventDic.Add(i,e);
+            EventDic.Add(event_data[i]["code"].ToString(),e);
         }
+        Debug.Log(event_data.Count);
     }
 
-    public void EnableEvent(int p_num)
+    public void EnableEvent(string p_str)
     {
-        EventEnabled.Add(new EventItem(EventDic[p_num]));
+        EventEnabled.Add(new EventItem(EventDic[p_str]));
     }
 
     public void InitEnabledEvent()

@@ -3617,9 +3617,6 @@ MonoBehaviour:
   - {fileID: 1772837600}
   - {fileID: 220864696}
   - {fileID: 411946221}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   uiReplacers: []
 --- !u!4 &295479894
 Transform:
@@ -18564,8 +18561,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de342d6dc1d62734f9840d516b1374fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openedViewer: {fileID: 0}
-  myDeck: {fileID: 1470913953}
 --- !u!114 &1860653456
 MonoBehaviour:
   m_ObjectHideFlags: 0

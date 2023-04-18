@@ -9,37 +9,32 @@ using UnityEditor.XR;
 public class Personality : Variable{
     public string name;
     public string description;
-    public PersonalityType type;
     List<string> conditions = new List<string>();
     public List<string> cards = new List<string> ();
     public bool enable;
 
-    public Personality(string name, string description, PersonalityType type, List<string> conditions){
+    public Personality(string name, string description, List<string> conditions){
         this.name = name;
         this.description = description;
         this.conditions = conditions;
-        this.type = type;
     }
-    public Personality(string name, string description, PersonalityType type, List<string> conditions, List<string> cards)
+    public Personality(string name, string description, List<string> conditions, List<string> cards)
     {
         this.name = name;
         this.description = description;
         this.conditions = conditions;
-        this.type = type;
         this.cards = cards;
     }
 
-    public Personality(string name, PersonalityType type)
+    public Personality(string name)
     {
         this.name = name;
-        this.type = type;
         this.description = "";
     }
 
-    public Personality(string name, string description, PersonalityType type)
+    public Personality(string name, string description)
     {
         this.name = name;
-        this.type = type;
         this.description= description;
         Personality personality = this;
     }
@@ -141,16 +136,6 @@ public class Personality : Variable{
     }
 }
 
-public enum PersonalityType
-{
-    Humanity,
-    Sociality,
-    Ability,
-    Emotionality,
-    Mind,
-    Vitality
-}
-
 public class PersonalityManager : Manager
 {
     public static PersonalityManager instance;
@@ -169,8 +154,7 @@ public class PersonalityManager : Manager
         for (int i = 0; i < 3; i++)
         {
             personalityDic.Add(personality_data[i]["code"].ToString(), new Personality(personality_data[i]["name"].ToString(),
-                                                                                        personality_data[i]["description"].ToString(),
-                                                                                        Utility.StringToEnum<PersonalityType>(personality_data[i]["classify"].ToString()),
+                                                                                        personality_data[i]["des"].ToString(),
                                                                                          new List<string>(personality_data[i]["condition"].ToString().Split("/")),
                                                                                         new List<string>(personality_data[i]["card"].ToString().Split("/"))));
         }

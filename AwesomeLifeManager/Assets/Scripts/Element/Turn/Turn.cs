@@ -54,7 +54,7 @@ public class Turn
             yield return new WaitForSeconds(2.0f);
             if (e1.Current != null )
             {
-                if (e1.Current.reward())
+                if (e1.Current.reward(e1.Current))
                     Debug.Log(e1.Current.name + " Success!");
                 else
                     Debug.Log("Fail...");
@@ -77,10 +77,7 @@ public class Turn
                     theTurnManager.actionCool[s].cool--;
                     if(theTurnManager.actionCool[s].cool == 0)
                     {
-                        if(s == "식재료 구매")
-                        {
-                            theTurnManager.actionCool[s].action.actionDel(theEventManager, null);
-                        }
+
                     }
                 }
             }
@@ -95,19 +92,17 @@ public class Turn
                     {
                         yield return new WaitForSeconds(2f);
                     }
+                    theEventManager.StaticEvent = null;
                 }
-                else
-                {
-                    int _i = UnityEngine.Random.Range(0, theEventManager.EventEnabled.Count +1);
-                    if (_i != theEventManager.EventEnabled.Count) {
-                        EventItem e = theEventManager.EventEnabled[_i];
-                        UI.ToggleSubUI(t_popup.gameObject, false);
-                        e_popup.SetActive(true, e.@event);
-                        e_popup.EventEncounter();
-                        while (e_popup.gameObject.activeInHierarchy)
-                        {
-                            yield return new WaitForSeconds(2f);
-                        }
+                int _i = UnityEngine.Random.Range(0, theEventManager.EventEnabled.Count +1);
+                if (_i != theEventManager.EventEnabled.Count) {
+                    EventItem e = theEventManager.EventEnabled[_i];
+                    UI.ToggleSubUI(t_popup.gameObject, false);
+                    e_popup.SetActive(true, e.@event);
+                    e_popup.EventEncounter();
+                    while (e_popup.gameObject.activeInHierarchy)
+                    {
+                        yield return new WaitForSeconds(2f);
                     }
                 }
             }

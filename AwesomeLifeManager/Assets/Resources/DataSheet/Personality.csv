@@ -1,126 +1,13 @@
-classify,code,name,description,condition
-Humanity,hum_01,겸손한,겸손한 사람,도덕성|>|80/외향성|>|50/명성|>|40
-Humanity,hum_02,공정한,공정한 사람,도덕성|>|70/지능|>|45
-Humanity,hum_03,믿음직한,믿음직한 사람,도덕성|>|60/외향성|>|35
-Humanity,hum_04,선량한,,,
-Humanity,hum_05,소박한,,,
-Humanity,hum_06,솔직한,,,
-Humanity,hum_07,순수한,,,도덕성,,,,도덕성
-Humanity,hum_08,예의 바른,,,"도덕성, 친화력",,,,외향성
-Humanity,hum_09,청렴한,,,"도덕성, 명성",,,,친화력
-Humanity,hum_10,품위 있는,,,"외향성, 명성",,,,명성
-Humanity,hum_11,건방진,,,"명성, 업",,,,스트레스
-Humanity,hum_12,편파적인,,,"도덕성, 친화력",,,,행복도
-Humanity,hum_13,비겁한,,,"도덕성, 감수성",,,,건강
-Humanity,hum_14,사악한,,,"도덕성, 신앙",,,,우울/불안
-Humanity,hum_15,사치스러운,,,재력,,,,재력
-Humanity,hum_16,알랑거리는,,,,,,,체력
-Humanity,hum_17,음란한,,,,,,,신체능력
-Humanity,hum_18,경박한,,,,,,,음악
-Humanity,hum_19,탐욕스러운,,,,,,,감수성
-Humanity,hum_20,천박한,,,,,,,매력
-Humanity,hum_21,잔인한,,,,,,,예술 
-Humanity,hum_22,간사한,,,,,,,성실도
-Humanity,hum_23,가식적인,,,,,,,신앙
-Sociality,soc_01,관대한,,,,,,,집중력
-Sociality,soc_02,눈치 빠른,,,,,,,정신력
-Sociality,soc_03,다정한,,,,,,,지능
-Sociality,soc_04,단정한,,,,,,,화술
-Sociality,soc_05,온유한,,,,,,,행운
-Sociality,soc_06,우호적인,,,,,,,업
-Sociality,soc_07,원만한,,,,,,,
-Sociality,soc_08,융통성 있는,,,,,,,
-Sociality,soc_09,참을성 있는,,,,,,,
-Sociality,soc_10,친화적인,,,,,,,
-Sociality,soc_11,헌신적인,,,,,,,
-Sociality,soc_12,엄격한,,,,,,,
-Sociality,soc_13,눈치 없는,,,,,,,
-Sociality,soc_14,냉정한,,,,,,,
-Sociality,soc_15,극성스러운,,,,,,,
-Sociality,soc_16,괴팍한,,,,,,,
-Sociality,soc_17,험악한,,,,,,,
-Sociality,soc_18,인색한,,,,,,,
-Sociality,soc_19,고지식한,,,,,,,
-Sociality,soc_20,옹졸한,,,,,,,
-Sociality,soc_21,도도한,,,,,,,
-Sociality,soc_22,이기적인,,,,,,,
-Sociality,soc_23,능글맞은,,,,,,,
-Sociality,soc_24,심술궃은,,,,,,,
-Sociality,soc_25,직설적인,,,,,,,
-Ability,abi_01,계획적인,,,,,,,
-Ability,abi_02,꼼꼼한,,,,,,,
-Ability,abi_03,끈기 있는,,,,,,,
-Ability,abi_04,논리적인,,,,,,,
-Ability,abi_05,부지런한,,,,,,,
-Ability,abi_06,섬세한,,,,,,,
-Ability,abi_07,신중한,,,,,,,
-Ability,abi_08,완벽한,,,,,,,
-Ability,abi_09,유능한,,,,,,,
-Ability,abi_10,정확한,,,,,,,
-Ability,abi_11,책임감 있는,,,,,,,
-Ability,abi_12,대충대충인,,,,,,,
-Ability,abi_13,무모한,,,,,,,
-Ability,abi_14,무식한,,,,,,,
-Ability,abi_15,게으른,,,,,,,
-Ability,abi_16,산만한,,,,,,,
-Ability,abi_17,경솔한,,,,,,,
-Ability,abi_18,서투른,,,,,,,
-Ability,abi_19,무능한,,,,,,,
-Ability,abi_20,흐리멍텅한,,,,,,,
-Ability,abi_21,무책임한,,,,,,,
-Emotionality,emo_01,감수성 풍부한,,,,,,,
-Emotionality,emo_02,낙천적인,,,,,,,
-Emotionality,emo_03,낭만적인,,,,,,,
-Emotionality,emo_04,느긋한,,,,,,,
-Emotionality,emo_05,명랑한,,,,,,,
-Emotionality,emo_06,열정적인,,,,,,,
-Emotionality,emo_07,유머러스한,,,,,,,
-Emotionality,emo_08,자신만만한,,,,,,,
-Emotionality,emo_09,둔감한,,,,,,,
-Emotionality,emo_10,비관적인,,,,,,,
-Emotionality,emo_11,무미건조한,,,,,,,
-Emotionality,emo_12,불안한,,,,,,,
-Emotionality,emo_13,기죽은,,,,,,,
-Emotionality,emo_14,신경질적인,,,,,,,
-Emotionality,emo_15,연약한,,,,,,,
-Emotionality,emo_16,열등감 있는,,,,,,,
-Emotionality,emo_17,예민한,,,,,,,
-Emotionality,emo_18,우울한,,,,,,,
-Emotionality,emo_19,질투하는,,,,,,,
-Mind,min_01,개방적인,,,,,,,
-Mind,min_02,세련된,,,,,,,
-Mind,min_03,엉뚱한,,,,,,,
-Mind,min_04,지혜로운,,,,,,,
-Mind,min_05,진보적인,,,,,,,
-Mind,min_06,창의적인,,,,,,,
-Mind,min_07,통찰력 있는,,,,,,,
-Mind,min_08,학구적인,,,,,,,
-Mind,min_09,호기심 많은,,,,,,,
-Mind,min_10,틀에 박힌,,,,,,,
-Mind,min_11,촌스러운,,,,,,,
-Mind,min_12,의심 많은,,,,,,,
-Mind,min_13,철이 없는,,,,,,,
-Mind,min_14,보수적인,,,,,,,
-Mind,min_15,흔해빠진,,,,,,,
-Mind,min_16,고집스러운,,,,,,,
-Mind,min_17,권위적인,,,,,,,
-Mind,min_18,무관심한,,,,,,,
-Mind,min_19,고리타분한,,,,,,,
-Mind,min_20,편협한,,,,,,,
-Vitality,vit_01,강인한,,,,,,,
-Vitality,vit_02,대범한,,,,,,,
-Vitality,vit_03,독립적인,,,,,,,
-Vitality,vit_04,자유분방한,,,,,,,
-Vitality,vit_05,적극적인,,,,,,,
-Vitality,vit_06,주도적인,,,,,,,
-Vitality,vit_07,주목받기 좋아하는,,,,,,,
-Vitality,vit_08,줏대 있는,,,,,,,
-Vitality,vit_09,호탕한,,,,,,,
-Vitality,vit_10,어눌한,,,,,,,
-Vitality,vit_11,회피하는,,,,,,,
-Vitality,vit_12,의존적인,,,,,,,
-Vitality,vit_13,고분고분한,,,,,,,
-Vitality,vit_14,소극적인,,,,,,,
-Vitality,vit_15,내성적인,,,,,,,
-Vitality,vit_16,소심한,,,,,,,
-Vitality,vit_17,무뚝뚝한,,,,,,,
+code,name,condition,card,buff,des
+character_001,건강함,"""sta_health""|>=|75",effect_01,,
+character_002,병약함,"""sta_health""|<|20",action_01,buff_01,
+character_003,강한 정신력,"""sta_mental""|>=|75",effect_02,,
+character_004,유리 멘탈,"""sta_mental""|<|20",action_02,buff_02,
+character_005,착한 아이,"""sta_conscience""|>=|75",,buff_10,
+character_006,비행 청소년,"""sta_conscience""|<|20",action_03,buff_03,
+character_007,인문학자,"""abi_humanity""|>=|140",action_04,buff_04,
+character_008,과학자,"""abi_research""|>=|140",action_05/action_10,buff_05,
+character_009,예술가,"""abi_art""|>=|140",action_06/action_07,buff_06,
+character_010,운동 선수,"""abi_exercise""|>=|140",action_08,buff_07,
+character_011,사회인,"""abi_social""|>=|140",action_09,buff_08,
+character_012,엄친아,"""abi_humanity""|>=|100/""abi_research""|>=|100/""abi_art""|>=|100/""abi_exercise""|>=|100/""abi_social""|>=|100",,buff_09
