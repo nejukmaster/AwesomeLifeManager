@@ -63,11 +63,6 @@ public class Turn
             {
                 Debug.Log("Free Act.");
                 t_popup.AddLog("Free Act.");
-                for(int i = 0; i < 5; i++)
-                {
-                    theEventManager.EventEnabled.Add(new EventItem(new Event("Test Event"+i,
-                                new Choice[] { new Choice("00", "test choice first!"), new Choice("01", "test choice second!"), new Choice("02", "test choice third") }, 0)));
-                }
             }
             foreach (string s in theTurnManager.actionCool.Keys)
             {

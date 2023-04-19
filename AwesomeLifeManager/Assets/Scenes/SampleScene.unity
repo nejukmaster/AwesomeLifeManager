@@ -10474,7 +10474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a43d40593f8754ab04b30bdb68cf75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originSizeRaitio: {x: 0.19444445, y: 0.09375}
+  originSizeRaitio: {x: 0.48555556, y: 0.09375}
   standardRect: {fileID: 1053710828}
   scaleScaling: 0
 --- !u!114 &941294519
@@ -19752,7 +19752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a43d40593f8754ab04b30bdb68cf75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originSizeRaitio: {x: 0.19444445, y: 0.09375}
+  originSizeRaitio: {x: 0.48555556, y: 0.09375}
   standardRect: {fileID: 1053710828}
   scaleScaling: 0
 --- !u!114 &2022038674

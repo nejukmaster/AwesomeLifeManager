@@ -9,18 +9,10 @@ using UnityEngine;
 public class EventItem
 {
     public Event @event;
-    public int weight;
-
-    public EventItem(Event @event, int weight)
-    {
-        this.@event = @event;
-        this.weight = weight;
-    }
 
     public EventItem(Event @event)
     {
         this.@event = @event;
-        this.weight = 1;
     }
 }
 
@@ -32,9 +24,12 @@ public class EventManager : Manager
     public List<EventItem> EventEnabled = new List<EventItem>();
     public EventItem StaticEvent;
 
+    ChoiceManager theChoiceManager;
+
     void Awake()
     {
         instance = this;
+        theChoiceManager = ChoiceManager.instance;
     }
 
     void RegisterEvent()
@@ -42,16 +37,26 @@ public class EventManager : Manager
         List<Dictionary<string, object>> event_data = CSVReader.Read("DataSheet/Event");
         for (int i = 0; i < event_data.Count; i ++)
         {
-            Choice[] t_choices = new Choice[3] { null, null, null };
-            Event e = new Event(event_data[i]["name"].ToString(),new Choice[3] { null,null,null}, 0);
+            Choice[] t_choices = new Choice[3] { theChoiceManager.choices[event_data[i]["choose1"].ToString()], null, null };
+            if (theChoiceManager.choices.ContainsKey(event_data[i]["choose2"].ToString()))
+            {
+                t_choices[1] = theChoiceManager.choices[event_data[i]["choose2"].ToString()];
+            }
+            if (theChoiceManager.choices.ContainsKey(event_data[i]["choose3"].ToString()))
+            {
+                t_choices[2] = theChoiceManager.choices[event_data[i]["choose3"].ToString()];
+            }
+            Event e = new Event(event_data[i]["name"].ToString(), t_choices, event_data[i]["static"].ToString() == "o");
             EventDic.Add(event_data[i]["code"].ToString(),e);
         }
-        Debug.Log(event_data.Count);
     }
 
     public void EnableEvent(string p_str)
     {
-        EventEnabled.Add(new EventItem(EventDic[p_str]));
+        if (!EventDic[p_str].isStatic)
+            EventEnabled.Add(new EventItem(EventDic[p_str]));
+        else
+            StaticEvent = new EventItem(EventDic[p_str]);
     }
 
     public void InitEnabledEvent()

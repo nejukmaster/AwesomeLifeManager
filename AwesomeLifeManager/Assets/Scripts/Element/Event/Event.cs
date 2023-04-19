@@ -8,12 +8,11 @@ public class Event
     public string name;
     public Sprite mainTex;
     public Choice[] choices = new Choice[3];
-    public int exp;
-
-    public Event(string name, Choice[] choices, int exp)
+    public bool isStatic;
+    public Event(string name, Choice[] choices, bool isStatic)
     {
         this.name = name;
         this.choices = choices;
-        this.exp = exp;
+        this.isStatic = isStatic;
     }
 }
