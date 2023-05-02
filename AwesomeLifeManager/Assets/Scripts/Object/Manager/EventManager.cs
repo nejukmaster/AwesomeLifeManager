@@ -1,10 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
-/*  이벤트를 관리하는 역할을 하는 매니져 클래스입니다. 
-    여기서는 이벤트를 새로 만들거나 하는게 아니라 이미 만들어진 이벤트를 
-    이곳에서 게임에 적용시켜 줘요.  */
 
 public class EventItem
 {
@@ -25,11 +23,13 @@ public class EventManager : Manager
     public EventItem StaticEvent;
 
     ChoiceManager theChoiceManager;
+    TurnManager theTurnManager;
 
     void Awake()
     {
         instance = this;
         theChoiceManager = ChoiceManager.instance;
+        theTurnManager = TurnManager.instance;
     }
 
     void RegisterEvent()
@@ -49,6 +49,15 @@ public class EventManager : Manager
             Event e = new Event(event_data[i]["name"].ToString(), t_choices, event_data[i]["static"].ToString() == "o");
             EventDic.Add(event_data[i]["code"].ToString(),e);
         }
+
+        EventDic["event_1"].condition = (date) =>
+        {
+            if (theTurnManager.currentTurnNum == 3 || theTurnManager.currentTurnNum == 74 || theTurnManager.currentTurnNum == 110)
+            {
+                return true;
+            }
+            return false;
+        };
     }
 
     public void EnableEvent(string p_str)
@@ -57,6 +66,17 @@ public class EventManager : Manager
             EventEnabled.Add(new EventItem(EventDic[p_str]));
         else
             StaticEvent = new EventItem(EventDic[p_str]);
+    }
+
+    public void CheckEvent(int p_date)
+    {
+        foreach(var pair in EventDic)
+        {
+            if (pair.Value.condition(p_date))
+            {
+                EventEnabled.Add(new EventItem(pair.Value));
+            }
+        }
     }
 
     public void InitEnabledEvent()

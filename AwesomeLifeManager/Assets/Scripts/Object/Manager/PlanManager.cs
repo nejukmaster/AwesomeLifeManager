@@ -105,11 +105,7 @@ public class PlanManager : Manager
 
             return true;
         }, null, false));
-        planDic.Add("action_11", new Plan("외출", (p) => {
-
-            return true;
-        }, null, false));
-        planDic.Add("action_12", new Plan("학원", (p) => {
+        planDic.Add("action_11", new Plan("학원", (p) => {
             string t_stat = null;
             foreach (var pair in theStatusManager.status)
             {
@@ -132,7 +128,7 @@ public class PlanManager : Manager
                 theStatusManager.status[t_stat].value += 2;
             return true;
         }, null, false));
-        planDic.Add("action_13", new Plan("동아리 활동", (p) => {
+        planDic.Add("action_12", new Plan("동아리 활동", (p) => {
             string t_stat = null;
             foreach (var pair in theStatusManager.status)
             {
@@ -155,14 +151,26 @@ public class PlanManager : Manager
                 theStatusManager.status[t_stat].value += 2;
             return true;
         }, null, false));
-        planDic.Add("action_14", new Plan("조깅", (p) => {
+        planDic.Add("action_13", new Plan("조깅", (p) => {
             theStatusManager.status["sta_mental"].value += 3;
             theStatusManager.status["sta_health"].value += (int)(p.NoR/3);
             return true;
         }, null, false));
-        planDic.Add("action_15", new Plan("독서", (p) => {
+        planDic.Add("action_14", new Plan("독서", (p) => {
             theStatusManager.status["abi_research"].value += 3;
             theStatusManager.status["abi_humanity"].value += (int)(p.NoR/3);
+            return true;
+        }, null, false));
+        planDic.Add("action_16", new Plan("시험 공부", (p) => {
+
+            return true;
+        }, null, false));
+        planDic.Add("action_17", new Plan("심부름", (p) => {
+
+            return true;
+        }, null, false));
+        planDic.Add("action_18", new Plan("숙제하기", (p) => {
+
             return true;
         }, null, false));
         /*planDic.Add("Action_01", new Plan("재능 찾기",5, () => {

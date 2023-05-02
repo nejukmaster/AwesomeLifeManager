@@ -78,6 +78,7 @@ public class Turn
             }
             if (date % 7 == 0)
             {
+                theEventManager.CheckEvent(date);
                 if(theEventManager.StaticEvent != null)
                 {
                     UI.ToggleSubUI(t_popup.gameObject, false);

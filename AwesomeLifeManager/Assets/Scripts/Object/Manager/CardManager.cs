@@ -105,14 +105,19 @@ public class CardManager : Manager
         cardInformList["action_07"] = (new CardInform("사생대회", CardType.Action, "* 아래 경우에 따라 진행\r\n[예술 능력 스탯 수치 75 이상일 때 일정확률로] \"입상\" 이벤트 발생\r\n[위 확률 외 경우] \"탈락\" 이벤트 발생 가능", "", "", actionDelList["action_07"], 30));
         cardInformList["action_08"] = (new CardInform("육상 대회", CardType.Action, "* 아래 경우에 따라 진행\r\n[운동 능력 스탯 수치 75 이상일 때 일정확률로] \"입상\" 이벤트 발생\r\n[위 확률 외 경우] \"탈락\" 이벤트 발생 가능", "", "", actionDelList["action_08"], 30));
         cardInformList["action_09"] = (new CardInform("수학경시대회", CardType.Action, "* 아래 경우에 따라 진행\r\n[탐구 능력 스탯 수치 75 이상일 때 일정확률로] \"입상\" 이벤트 발생\r\n[위 확률 외 경우] \"탈락\" 이벤트 발생 가능", "", "", actionDelList["action_09"], 30));
-        cardInformList["action_10"] = (new CardInform("체육 대회", CardType.Action, "* 아래 경우에 따라 진행\r\n[탐구 능력 스탯 수치 75 이상일 때 일정확률로] \"입상\" 이벤트 발생\r\n[위 확률 외 경우] \"탈락\" 이벤트 발생 가능", "", "", actionDelList["action_10"], 30));
-        cardInformList["action_11"] = (new CardInform("외출", CardType.Action, "* 아래 경우에 따라 진행\r\n해당 행동 진행 시 무조건 이벤트 발생.\r\n[(장소 n개)이벤트 중 랜덤 발생. 장소 선택 확률은 100/n%]", "", "", actionDelList["action_11"], 20));
-        cardInformList["action_12"] = (new CardInform("학원", CardType.Action, "이벤트 \"학원 등록\" 을 통해 획득 가능.\r\n가장 낮은 능력 스탯을 [2] 상승시킨다.", "", "", actionDelList["action_12"], 35));
-        cardInformList["action_13"] = (new CardInform("동아리 활동", CardType.Action, "교내 동아리 활동을 진행한다. 진행 시점 가장 높은 능력 스탯을 상승", "", "", actionDelList["action_13"], 30));
-        cardInformList["action_14"] = (new CardInform("조깅", CardType.Action, "\"운동\" 스테이터스 수치가 [65] 이상이거나, 이벤트 \"새해 목표\" 를 통해 획득 가능.\r\n진행 횟수 3회 당 \"체력\" 스테이터스 [1] 상승, \"정신력\" 스테이터스 [1] 상승", "", "", actionDelList["action_14"], 40));
-        cardInformList["action_15"] = (new CardInform("독서", CardType.Action, "\"인문\" / \"탐구\" 스테이터스 수치가 [65] 이상이거나, 이벤트 \"새해 목표\" 를 통해 획득 가능.\r\n진행 횟수 3회 당 \"인문\" 스테이터스 [3] 상승, \"탐구\" 스테이터스 [3] 상승", "", "", actionDelList["action_15"], 30));
-        cardInformList["action_16"] = (new CardInform("동아리 활동", CardType.Action, "교내 동아리 활동을 진행한다. 진행 시점 가장 높은 능력 스탯을 상승", "", "", actionDelList["action_16"], 30));
-        cardInformList["action_17"] = (new CardInform("시험 공부", CardType.Action, "이벤트 \"시험 기간\" 을 통해 획득 가능. 4턴 뒤 이벤트 \"중간고사\", \"기말고사\" 발생 이후 소멸\r\n4턴 간 진행 횟수에 따라 결과 달라짐.\r\n이벤트 \"중간고사\", \"기말고사\" 발생 1주 전 진행 횟수가 0일 경우 이벤트 \"벼락치기\" 발생", "", "", actionDelList["action_17"], 30));
+        cardInformList["action_10"] = (new CardInform("체육 대회", CardType.Action, "* 아래 경우에 따라 진행\r\n[탐구 능력 스탯 수치 75 이상일 때 일정확률로] \"입상\" 이벤트 발생\r\n[위 확률 외 경우] \"탈락\" 이벤트 발생 가능", "", "", actionDelList["action_10"], 30));        
+        cardInformList["action_11"] = (new CardInform("학원", CardType.Action, "이벤트 \"학원 등록\" 을 통해 획득 가능.\r\n가장 낮은 능력 스탯을 [2] 상승시킨다.", "", "", actionDelList["action_11"], 35));
+        cardInformList["action_12"] = (new CardInform("동아리 활동", CardType.Action, "교내 동아리 활동을 진행한다. 진행 시점 가장 높은 능력 스탯을 상승", "", "", actionDelList["action_12"], 30));
+        cardInformList["action_13"] = (new CardInform("조깅", CardType.Action, "\"운동\" 스테이터스 수치가 [65] 이상이거나, 이벤트 \"새해 목표\" 를 통해 획득 가능.\r\n진행 횟수 3회 당 \"체력\" 스테이터스 [1] 상승, \"정신력\" 스테이터스 [1] 상승", "", "", actionDelList["action_13"], 40));
+        cardInformList["action_14"] = (new CardInform("독서", CardType.Action, "\"인문\" / \"탐구\" 스테이터스 수치가 [65] 이상이거나, 이벤트 \"새해 목표\" 를 통해 획득 가능.\r\n진행 횟수 3회 당 \"인문\" 스테이터스 [3] 상승, \"탐구\" 스테이터스 [3] 상승", "", "", actionDelList["action_14"], 30));
+        cardInformList["action_15"] = (new CardInform("동아리 활동", CardType.Action, "교내 동아리 활동을 진행한다. 진행 시점 가장 높은 능력 스탯을 상승", "", "", actionDelList["action_15"], 30));
+        cardInformList["action_16"] = (new CardInform("시험 공부", CardType.Action, "이벤트 \"시험 기간\" 을 통해 획득 가능. 4턴 뒤 이벤트 \"중간고사\", \"기말고사\" 발생 이후 소멸\r\n4턴 간 진행 횟수에 따라 결과 달라짐.\r\n이벤트 \"중간고사\", \"기말고사\" 발생 1주 전 진행 횟수가 0일 경우 이벤트 \"벼락치기\" 발생", "", "", actionDelList["action_16"], 50));
+        cardInformList["action_17"] = (new CardInform("심부름", CardType.Action, "이벤트 \"엄마의 부탁\" 을 통해 획득 가능.\r\n진행 시 용돈 획득", "", "", actionDelList["action_17"], 20));
+        cardInformList["action_18"] = (new CardInform("숙제하기", CardType.Action, "이벤트 \"숙제\" 를 통해 획득 가능.\r\n진행 시 숙제 완료 판정.", "", "", actionDelList["action_18"], 35));
+        
+        cardInformList["action_20"] = (new CardInform("자습하기", CardType.Action, "학업 일정 직후 배치 시 학업 일정으로 인해 얻는 스테이터스 수치 상승", "", "", actionDelList["action_20"], 25));
+        cardInformList["action_21"] = (new CardInform("아르바이트", CardType.Action, "고등학생 부터 사용 가능. 재화 획득, 조직 스테이터스 상승", "", "", actionDelList["action_21"], 35));
+    
     }
 
     private void mapping_action(){
@@ -317,6 +322,43 @@ public class CardManager : Manager
             else
             {
                 ((CalenderCell)cell).InsertPlan(thePlanManager.planDic["action_17"]);
+                return true;
+            }
+        }));
+        actionDelList.Add("action_18", new Action((cell, t_inform) =>
+        {
+            if (theFatigueManager.Fatigue < t_inform.cost)
+            {
+                return false;
+            }
+            else
+            {
+                ((CalenderCell)cell).InsertPlan(thePlanManager.planDic["action_18"]);
+                return true;
+            }
+        }));
+
+        actionDelList.Add("action_20", new Action((cell, t_inform) =>
+        {
+            if (theFatigueManager.Fatigue < t_inform.cost || Utility.GetEmptyIndex<Plan>(((CalenderCell)cell).insertedPlan) < 1 || ((CalenderCell)cell).insertedPlan[Utility.GetEmptyIndex<Plan>(((CalenderCell)cell).insertedPlan)-1].name != thePlanManager.planDic["study"].name)
+            {
+                return false;
+            }
+            else
+            {
+                ((CalenderCell)cell).InsertPlan(thePlanManager.planDic["action_20"]);
+                return true;
+            }
+        }));
+        actionDelList.Add("action_20", new Action((cell, t_inform) =>
+        {
+            if (theFatigueManager.Fatigue < t_inform.cost)
+            {
+                return false;
+            }
+            else
+            {
+                ((CalenderCell)cell).InsertPlan(thePlanManager.planDic["action_20"]);
                 return true;
             }
         }));
